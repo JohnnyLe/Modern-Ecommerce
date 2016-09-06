@@ -37,8 +37,8 @@
         <!--<property name="hbm2ddl.auto">update</property>-->
   
         <!-- Mappings table in database-->
-        <mapping class="com.hogo.model.User"/>
-        <mapping class="com.hogo.model.Session"/>
+        <mapping class="com.nitsoft.ecommerce.model.User"/>
+<!--        <mapping class="com.hogo.model.Session"/>-->
         
     </session-factory>
 </hibernate-configuration>

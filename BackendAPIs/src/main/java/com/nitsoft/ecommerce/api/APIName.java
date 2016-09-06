@@ -17,9 +17,12 @@ public class APIName {
     public static final String LOGIN = VERSION + "user/login";
     public static final String LOGOUT = VERSION + "user/logout";
 
+    //Get user
+    public static final String GETUSER = VERSION + "user/getall";
     // SSO
     public static final String OAUTH_LOGIN = VERSION + "oauth/login";
     public static final String OAUTH_IMPLICIT_LOGIN = VERSION + "oauth/implicit/login";
     public static final String CHECK_API_KEY = VERSION + "oauth";    
+    
 
 }

@@ -29,13 +29,7 @@ public class AuthResponse {
     public AuthResponse(User user, String token) {
         this.authToken=token;
         this.userId=user.getUserId();
-        this.teamId=user.getTeamId();
-        this.roleId=user.getRoleId();
-        this.mailAddress=user.getMailAddress();
-        this.status=user.getStatus();
-        this.firstName=user.getFirstName();
-        this.lastName=user.getLastName();
-        this.sessionTimeOut=user.getSessionTimeOut();
+     
     }
 
     public String getAuthToken() {
