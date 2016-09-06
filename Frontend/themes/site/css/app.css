@@ -1,0 +1,239 @@
+/* app css stylesheet */
+
+.navbar-default a.sign-out {
+    cursor: pointer;
+}
+
+.btn.btn-transparent-success {
+    background: transparent;
+    color: #1FB856;
+    border-color: #1FB856;
+}
+
+.login-box {
+    float: none !important;
+    margin: 10% auto 0 auto;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.login-box input {
+    font-size: 18px;
+}
+
+.login-box .btn-login {
+    width: 100%;
+}
+
+.link {
+    cursor: pointer;
+}
+
+/* Navi */
+.narisup .navbar-default {
+    background-color: #F8F8F8;
+}
+
+.narisup .btn.btn-success {
+    background-color: #1FB856;
+    border-color: #1FB856;
+}
+
+.narisup label {
+    font-weight: normal;
+    color: #aaa;
+}
+
+.narisup .navbar-default .navbar-nav>li>a {
+    color: #1FB856;
+    text-align: center;
+}
+
+/* Override panel */
+.narisup .panel {
+    margin-bottom: 15px;
+}
+.narisup .panel-primary>.panel-heading {
+    background-color: #1A1A1A;
+    border-color: #1A1A1A;
+}
+
+/* Override datatable */
+.narisup table.table>thead>tr>th {
+    border-top: 1px solid #ddd !important;
+    background-color: #EDEDEB;
+    color: #1FB856;
+}
+
+/* Modal */
+.narisup .modal-content {
+    border: 0;
+}
+
+.modal-content .close {
+    color: #fff;
+    opacity: 0.6;
+}
+.modal-content .modal-header {
+    background-color: #1A1A1A;
+    color: #fff;
+    border-radius: 6px 6px 0 0;
+}
+
+.narisup table.dataTable>thead th.sorting_asc:after {
+    content: "\e252";
+}
+.narisup table.dataTable>thead th.sorting_desc:after {
+    content: "\e253";
+}
+
+/* Override boostrap paging */
+
+.paginate_button:not(.active) > a {
+    color: #1FB856 !important;
+}
+
+.paginate_button > a {
+    border-color: #1FB856 !important;
+}
+
+.dataTables_paginate .pagination>.active>a {
+    background-color: #1FB856;
+    border-color: #1FB856;
+    color: #fff;
+}
+.dataTables_paginate .pagination>.active>a, 
+.dataTables_paginate .pagination>.active>a:focus, 
+.dataTables_paginate .pagination>.active>a:hover, 
+.dataTables_paginate .pagination>.active>span, 
+.dataTables_paginate .pagination>.active>span:focus, 
+.dataTables_paginate .pagination>.active>span:hover {
+    background-color: #1FB856;
+    border-color: #1FB856;
+}
+
+.dataTables_paginate .pagination>li>a, 
+.dataTables_paginate .pagination>li>span {
+    color: #1FB856;
+}
+
+.dataTables_paginate .pagination>.disabled>a, 
+.dataTables_paginate .pagination>.disabled>a:focus, 
+.dataTables_paginate .pagination>.disabled>a:hover,
+.dataTables_paginate .pagination>.disabled>span,
+.dataTables_paginate .pagination>.disabled>span:focus,
+.dataTables_paginate .pagination>.disabled>span:hover {
+    color: #777;
+}
+
+.dt-table-info {
+    position: absolute;
+    margin-top: -30px;
+}
+
+/* Override datatable paging */
+.text-center .dataTables_paginate {
+    text-align: center;
+}
+
+.condition-footer {
+    text-align: right;
+}
+
+.action-wrapper {
+    padding: 0 15px;
+    margin-bottom: 15px;
+}
+
+.table td:first-child, .table th:first-child {
+    text-align: center;
+}
+
+/* Small devices */
+@media screen and (max-width: 767px) {
+    
+    .condition-footer {
+        margin-top: 15px;
+    }
+    
+    .action-wrapper {
+        margin-bottom: 15px;
+    }
+}
+
+/* At least tablet devices */
+@media screen and (min-width: 768px) {
+    
+    /* Login box */
+    .narisup .login-box {
+        width: 420px;
+    }
+    
+    .login-box .form-group, .login-box .alert {
+        width: 352px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .login-box .form-group:first-child {
+        margin-bottom: 9px;
+    }
+    
+    /* Panel on list page */
+    .narisup .panel form .row .row > div:first-child {
+        width: 124px;
+        text-align: right;
+        margin-right: -15px;
+        padding-right: 28px;
+    }
+    
+    .narisup .panel form .row .row div:last-child > input {
+        width: 350px;
+    }
+    
+    /* Modal */
+    .narisup .modal-dialog {
+        width: 660px; /* 570px + 45px x 2 */
+    }
+    .narisup .modal-body {
+        padding: 20px 45px;
+    }
+    
+    .narisup .modal-footer {
+        padding: 20px 45px 20px;
+    }
+    .narisup .modal-footer .btn {
+        width: 120px;
+    }
+    
+    .narisup .modal-footer .btn:not(:last-child):not(:first-child):not(.ng-hide) {
+        margin-left: 15px
+    }
+    
+    .modal-body input {
+        width: 358px;
+    }
+    
+    .modal-body textarea {
+        width: 570px;
+        resize: vertical;
+    }
+    
+    .condition-footer .btn:not(:last-child), .action-wrapper .btn:not(:last-child) {
+        margin-right: 11px;
+    }
+    
+    .action-wrapper .btn {
+        min-width: 86px;
+    }
+    
+    .panel .btn-success, .panel .btn-transparent-success {
+        width: 140px;
+    }
+    
+    /* Modal backdrop */
+    .modal-backdrop {
+        bottom: 0;
+    }
+}

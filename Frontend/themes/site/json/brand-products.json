@@ -1,0 +1,32 @@
+{
+    "results": [
+        {
+            "name": "Acne",
+            "amount": 50
+        },
+        {
+            "name": "Grüne Erde",
+            "amount": 56
+        },
+        {
+            "name": "Albiro",
+            "amount": 27
+        },
+        {
+            "name": "Ronhill",
+            "amount": 32
+        },
+        {
+            "name": "Oddmolly",
+            "amount": 5
+        },
+        {
+            "name": "Boudestijn",
+            "amount": 9
+        },
+        {
+            "name": "Rösch creative culture",
+            "amount": 4
+        }
+    ]
+}

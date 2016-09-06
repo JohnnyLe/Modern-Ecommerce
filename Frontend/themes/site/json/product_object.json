@@ -1,0 +1,162 @@
+{
+    "results": {
+        "features": [{
+                "image": "images/home/product1.jpg",
+                "name": "Easy Polo Black Edition",
+                "price": "$70"
+            },
+            {
+                "image": "images/home/product2.jpg",
+                "name": "Easy Polo Black Edition",
+                "price": "$59"
+            },
+            {
+                "image": "images/home/product3.jpg",
+                "name": "Easy Polo Black Edition",
+                "price": "$500"
+            },
+            {
+                "image": "images/home/product4.jpg",
+                "name": "Easy Polo Black Edition",
+                "price": "$56"
+            },
+            {
+                "image": "images/home/product5.jpg",
+                "name": "Easy Edition",
+                "price": "$56"
+            },
+            {
+                "image": "images/home/product6.jpg",
+                "name": "Easy Polo Black Edition",
+                "price": "$96"
+            }],
+        "tshirts": [
+            {
+                "image": "images/home/gallery1.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$96"
+            },
+            {
+                "image": "images/home/gallery2.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            },
+            {
+                "image": "images/home/gallery3.jpg",
+                "describe": "Polo Black Edition",
+                "price": "$56"
+            },
+            {
+                "image": "images/home/gallery4.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            }
+        ],
+        "blazers": [
+            {
+                "image": "images/home/gallery3.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$06"
+            },
+            {
+                "image": "images/home/gallery2.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$96"
+            },
+            {
+                "image": "images/home/gallery4.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$596"
+            },
+            {
+                "image": "images/home/gallery1.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            }
+        ],
+        "sunglass": [
+            {
+                "image": "images/home/gallery3.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            },
+            {
+                "image": "images/home/gallery4.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            },
+            {
+                "image": "images/home/gallery1.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            },
+            {
+                "image": "images/home/gallery2.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            }
+        ],
+        "kids": [
+            {
+                "image": "images/home/gallery4.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            },
+            {
+                "image": "images/home/gallery2.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            },
+            {
+                "image": "images/home/gallery1.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            },
+            {
+                "image": "images/home/gallery3.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            }
+        ],
+        "poloshirts": [
+            {
+                "image": "images/home/gallery2.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$50"
+            },
+            {
+                "image": "images/home/gallery3.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            },
+            {
+                "image": "images/home/gallery1.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            },
+            {
+                "image": "images/home/gallery4.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            }
+        ],
+        "recommends": [
+            {
+                "image": "images/home/recommend1.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$06"
+            },
+            {
+                "image": "images/home/recommend2.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            },
+            {
+                "image": "images/home/recommend3.jpg",
+                "describe": "Easy Polo Black Edition",
+                "price": "$56"
+            }
+        ]
+    }
+
+}

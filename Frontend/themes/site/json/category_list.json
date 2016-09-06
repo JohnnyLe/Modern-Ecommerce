@@ -1,0 +1,21 @@
+{
+    "JSon": {
+            "Result":[
+                {
+                    "id": "12", 
+                    "name": "cate 1",
+                    "parent_id" : "1"
+                },
+                {
+                    "id": "123", 
+                    "name": "cate 2",
+                    "parent_id" : "2"
+                },
+                {
+                    "id": "1234", 
+                    "name": "cate 4",
+                    "parent_id" : "3"
+                }
+            ]
+        }
+}

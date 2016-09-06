@@ -1,0 +1,36 @@
+{
+    "results": [
+        {
+            "header": "<span>E</span>-SHOPPER",
+            "title": "Free E-Commerce Template",
+            "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "images": [
+                "images/home/girl1.jpg", "images/home/pricing.png"
+            ]
+        },
+        {
+            "header": "<span>E</span>-SHOPPER 2",
+            "title": "Free E-Commerce Template",
+            "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "images": [
+                "images/home/girl2.jpg", "images/home/pricing.png"
+            ]
+        },
+        {
+            "header": "<span>E</span>-SHOPPER 3",
+            "title": "Free E-Commerce Template",
+            "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "images": [
+                "images/home/girl3.jpg", "images/home/pricing.png"
+            ]
+        },
+        {
+            "header": "<span>E</span>-SHOPPER 4",
+            "title": "Free E-Commerce Template",
+            "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+            "images": [
+                "images/home/girl2.jpg", "images/home/pricing.png"
+            ]
+        }
+    ]
+}

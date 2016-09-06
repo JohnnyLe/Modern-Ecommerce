@@ -1,0 +1,36 @@
+<section id="slider"><!--slider-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#slider-carousel" data-slide-to="{{ $index }}" ng-class="{ active: $index == 0 }" ng-repeat="item in items"></li>
+                    </ol>
+
+                    <div class="carousel-inner">
+                        <div class="item" ng-class="{ active: $index == 0 }" ng-repeat="item in items">
+                            <div class="col-sm-6">
+                                <h1 ng-bind-html="item.header"></h1>
+                                <h2 ng-bind-html="item.title"></h2>
+                                <p ng-bind-html="item.desc"></p>
+                                <button type="button" class="btn btn-default get">Get it now</button>
+                            </div>
+                            <div class="col-sm-6">
+                                <img ng-src="{{ item.images[0] }}" class="girl img-responsive" alt="" />
+                                <img ng-src="{{ item.images[1] }}"  class="pricing" alt="" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev" ng-non-bindable>
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next" ng-non-bindable>
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section><!--/slider-->

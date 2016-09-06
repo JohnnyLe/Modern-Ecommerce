@@ -1,0 +1,127 @@
+{
+    "results": [
+        {
+            "name": "Sportswear",
+            "child": [
+                {
+                    "name": "Nike",
+                    "child": []
+                },
+                {
+                    "name": "Under Armour",
+                    "child": []
+                },
+                {
+                    "name": "Adidas",
+                    "child": []
+                },
+                {
+                    "name": "Puma",
+                    "child": []
+                },
+                {
+                    "name": "ASICS",
+                    "child": []
+                }
+            ]
+        },
+        {
+            "name": "Mens",
+            "child": [
+                {
+                    "name": "Fendi",
+                    "child": []
+                },
+                {
+                    "name": "Guess",
+                    "child": []
+                },
+                {
+                    "name": "Valentino",
+                    "child": []
+                },
+                {
+                    "name": "Dior",
+                    "child": []
+                },
+                {
+                    "name": "Versace",
+                    "child": []
+                },
+                {
+                    "name": "Armani",
+                    "child": []
+                },
+                {
+                    "name": "Prada",
+                    "child": []
+                },
+                {
+                    "name": "Dolce and Gabbana",
+                    "child": []
+                },
+                {
+                    "name": "Chanel",
+                    "child": []
+                },
+                {
+                    "name": "Gucci",
+                    "child": []
+                }
+            ]
+        },
+        {
+            "name": "Womens",
+            "child": [
+                {
+                    "name": "Fendi",
+                    "child": []
+                },
+                {
+                    "name": "Guess",
+                    "child": []
+                },
+                {
+                    "name": "Valentino",
+                    "child": []
+                },
+                {
+                    "name": "Dior",
+                    "child": []
+                },
+                {
+                    "name": "Versace",
+                    "child": []
+                }
+            ]
+        },
+        {
+            "name": "Kids",
+            "child": []
+        },
+        {
+            "name": "Fashion",
+            "child": []
+        },
+        {
+            "name": "Households",
+            "child": []
+        },
+        {
+            "name": "Interiors",
+            "child": []
+        },
+        {
+            "name": "Clothing",
+            "child": []
+        },
+        {
+            "name": "Bags",
+            "child": []
+        },
+        {
+            "name": "Shoes",
+            "child": []
+        }
+    ]
+}

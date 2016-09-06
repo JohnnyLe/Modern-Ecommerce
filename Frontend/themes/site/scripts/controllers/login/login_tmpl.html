@@ -1,0 +1,51 @@
+
+<div class="row">
+
+    <div class="col-md-6 login-box">
+
+
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+
+        <form name="user" ng-submit="submit(user.id.$valid)" novalidate>
+
+            <div class="form-group" ng-class="{ 'has-error' : user.id.$invalid && !user.id.$pristine, 'has-success': user.id.$valid }">
+                <div class="input-group">
+
+                    <span class="input-group-addon" id="sizing-addon2">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    </span>
+                    <input type="text" class="form-control" placeholder="ID" name="id" ng-model="id" required/>
+
+                    <i ng-show="user.id.$valid" class="form-control-feedback fv-icon-no-label glyphicon glyphicon-ok"></i>
+                    <i ng-show="user.id.$invalid && user.id.$dirty" class="form-control-feedback fv-icon-no-label glyphicon glyphicon-remove"></i>
+
+                </div>
+                <div class="errors" ng-show="user.id.$invalid && user.id.$dirty">
+                    <small class="help-block"ng-show="user.id.$error.required">Please input ID</small>
+                    <small class="help-block"ng-show="user.id.$error.minlength">Please enter a min length of 3</small>
+                    <small class="help-block"ng-show="user.id.$error.maxlength">Please enter a max length of 10</small>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error' : user.pass.$invalid && !user.pass.$pristine, 'has-success': user.pass.$valid }">
+                <div class="input-group">
+                    <span class="input-group-addon" id="sizing-addon2">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                    </span>
+                    <input type="password" class="form-control" placeholder="Password" name="pass" ng-model="pass" required>
+                    
+                    <i ng-show="user.pass.$valid" class="form-control-feedback fv-icon-no-label glyphicon glyphicon-ok"></i>
+                    <i ng-show="user.pass.$invalid && user.pass.$dirty" class="form-control-feedback fv-icon-no-label glyphicon glyphicon-remove"></i>
+                </div>
+                <div class="errors" ng-show="user.pass.$invalid && user.pass.$dirty">
+                    <small class="help-block"ng-show="user.pass.$error.required">Please input password</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" ng-show="!submitting" class="btn btn-success btn-login" value="LOGIN"/>
+                <input ng-show="submitting" disabled class="btn btn-success btn-login" value="LOGGING IN.."/>
+            </div>
+        </form>
+
+    </div>
+
+</div>

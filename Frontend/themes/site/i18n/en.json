@@ -1,0 +1,31 @@
+{
+    "app": {
+        "name": "CAN Reader",
+        "author": "Johnny"
+    },
+    "nav": {
+        "sniff": "Sniff/Write",
+        "experiments": "Experiments",
+        "IDinformation": "ID Information"
+    },
+    "button": {
+        
+        "search": "Search",
+        "register": "Register",
+        "save": "Save",
+        "clear": "Clear",
+        "close": "Close",
+        "delete": "Delete"
+        
+    },
+    "header": {
+        
+        "search": "Search condition"
+    },
+    "form": {
+        
+        "id": "ID",
+        "name": "Name"
+        
+    }
+}
