@@ -18,6 +18,7 @@ public class APIName {
     // action user
     public static final String LOGIN = VERSION + "user/login";
     public static final String LOGOUT = VERSION + "user/logout";
+    public static final String GETUSER = VERSION + "user/getAll";
 
     // categories
     public static final String PRODUCTS = VERSION + "products";
