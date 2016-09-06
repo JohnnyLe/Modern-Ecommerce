@@ -11,18 +11,20 @@ public class APIName {
 
     // version
     public static final String VERSION = "api/";
+
     // charset
     public static final String CHARSET = "application/json;charset=utf-8";
+
     // action user
     public static final String LOGIN = VERSION + "user/login";
     public static final String LOGOUT = VERSION + "user/logout";
 
-    //Get user
-    public static final String GETUSER = VERSION + "user/getall";
+    // categories
+    public static final String PRODUCTS = VERSION + "products";
+
     // SSO
     public static final String OAUTH_LOGIN = VERSION + "oauth/login";
     public static final String OAUTH_IMPLICIT_LOGIN = VERSION + "oauth/implicit/login";
-    public static final String CHECK_API_KEY = VERSION + "oauth";    
-    
+    public static final String CHECK_API_KEY = VERSION + "oauth";
 
 }

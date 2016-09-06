@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.nitsoft.ecommerce.model;
 
 import java.io.Serializable;
@@ -21,19 +20,47 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author vkloan
+ * @author VS9 X64Bit
  */
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
+    @NamedQuery(name = "User.findByCompanyId", query = "SELECT u FROM User u WHERE u.companyId = :companyId"),
+    @NamedQuery(name = "User.findByGroupId", query = "SELECT u FROM User u WHERE u.groupId = :groupId"),
+    @NamedQuery(name = "User.findByRoleId", query = "SELECT u FROM User u WHERE u.roleId = :roleId"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
+    @NamedQuery(name = "User.findByPasswordHash", query = "SELECT u FROM User u WHERE u.passwordHash = :passwordHash"),
+    @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
+    @NamedQuery(name = "User.findByMiddleName", query = "SELECT u FROM User u WHERE u.middleName = :middleName"),
+    @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
+    @NamedQuery(name = "User.findByStatus", query = "SELECT u FROM User u WHERE u.status = :status"),
+    @NamedQuery(name = "User.findByCreateDate", query = "SELECT u FROM User u WHERE u.createDate = :createDate"),
+    @NamedQuery(name = "User.findBySalt", query = "SELECT u FROM User u WHERE u.salt = :salt")})
 public class User implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "user_id")
     private String userId;
+    @Basic(optional = false)
+    @Column(name = "company_id")
+    private int companyId;
+    @Basic(optional = false)
+    @Column(name = "group_id")
+    private int groupId;
+    @Basic(optional = false)
+    @Column(name = "role_id")
+    private int roleId;
+    @Basic(optional = false)
+    @Column(name = "email")
+    private String email;
+    @Basic(optional = false)
+    @Column(name = "password_hash")
+    private String passwordHash;
     @Basic(optional = false)
     @Column(name = "first_name")
     private String firstName;
@@ -42,6 +69,16 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "last_name")
     private String lastName;
+    @Basic(optional = false)
+    @Column(name = "status")
+    private int status;
+    @Basic(optional = false)
+    @Column(name = "create_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createDate;
+    @Basic(optional = false)
+    @Column(name = "salt")
+    private String salt;
 
     public User() {
     }
@@ -50,11 +87,18 @@ public class User implements Serializable {
         this.userId = userId;
     }
 
-    public User(String userId, String firstName, String middleName, String lastName) {
+    public User(String userId, int companyId, int groupId, int roleId, String email, String passwordHash, String firstName, String lastName, int status, Date createDate, String salt) {
         this.userId = userId;
+        this.companyId = companyId;
+        this.groupId = groupId;
+        this.roleId = roleId;
+        this.email = email;
+        this.passwordHash = passwordHash;
         this.firstName = firstName;
-        this.middleName = middleName;
         this.lastName = lastName;
+        this.status = status;
+        this.createDate = createDate;
+        this.salt = salt;
     }
 
     public String getUserId() {
@@ -65,6 +109,45 @@ public class User implements Serializable {
         this.userId = userId;
     }
 
+    public int getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -90,8 +173,30 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    
-    
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -114,7 +219,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "";
+        return "com.nitsoft.ecommerce.model.User[ userId=" + userId + " ]";
     }
     
 }

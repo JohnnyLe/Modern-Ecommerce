@@ -6,11 +6,9 @@
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/modern_ecommerce?useUnicode=true&amp;characterEncoding=UTF-8</property>
-        <!--        <property name="connection.url">jdbc:mysql://hogodev.cwcq1pagkewz.us-west-2.rds.amazonaws.com:3306/hogopro?useUnicode=true&amp;characterEncoding=UTF-8</property>-->
+        <!--<property name="connection.url">jdbc:mysql://hogodev.cwcq1pagkewz.us-west-2.rds.amazonaws.com:3306/hogopro?useUnicode=true&amp;characterEncoding=UTF-8</property>-->
         <property name="connection.username">root</property>
-<!--        <property name="connection.password">root</property>-->
-        
-        
+        <!--<property name="connection.password">root</property>-->
 
         <property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>           
         <property name="connection.autoReconnect"> true</property>
@@ -37,8 +35,29 @@
         <!--<property name="hbm2ddl.auto">update</property>-->
   
         <!-- Mappings table in database-->
+        <mapping class="com.nitsoft.ecommerce.model.Address"/>
+        <mapping class="com.nitsoft.ecommerce.model.App"/>
+        <mapping class="com.nitsoft.ecommerce.model.Category"/>
+        <mapping class="com.nitsoft.ecommerce.model.Company"/>
+        <mapping class="com.nitsoft.ecommerce.model.History"/>
+        <mapping class="com.nitsoft.ecommerce.model.OrderAddress"/>
+        <mapping class="com.nitsoft.ecommerce.model.OrderDetail"/>
+        <mapping class="com.nitsoft.ecommerce.model.OrderPayment"/>
+        <mapping class="com.nitsoft.ecommerce.model.OrderReport"/>
+        <mapping class="com.nitsoft.ecommerce.model.Orders"/>
+        <mapping class="com.nitsoft.ecommerce.model.Payment"/>
+        <mapping class="com.nitsoft.ecommerce.model.Product"/>
+        <mapping class="com.nitsoft.ecommerce.model.ProductAttribute"/>
+        <mapping class="com.nitsoft.ecommerce.model.ProductAttributeDetail"/>
+        <mapping class="com.nitsoft.ecommerce.model.ProductCategory"/>
+        <mapping class="com.nitsoft.ecommerce.model.Review"/>
+        <mapping class="com.nitsoft.ecommerce.model.Role"/>
+        <mapping class="com.nitsoft.ecommerce.model.Supplier"/>
+        <mapping class="com.nitsoft.ecommerce.model.SupplierProduct"/>
+        <mapping class="com.nitsoft.ecommerce.model.Theme"/>
+        <mapping class="com.nitsoft.ecommerce.model.UserToken"/>
         <mapping class="com.nitsoft.ecommerce.model.User"/>
-<!--        <mapping class="com.hogo.model.Session"/>-->
+        <!--<mapping class="com.nitsoft.ecommerce.model.Session"/>-->
         
     </session-factory>
 </hibernate-configuration>
