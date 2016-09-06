@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2016 at 09:30 AM
+-- Generation Time: Sep 06, 2016 at 10:44 AM
 -- Server version: 5.7.9
 -- PHP Version: 5.6.16
 
@@ -252,25 +252,24 @@ CREATE TABLE IF NOT EXISTS `payments` (
 
 DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
-  `product_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `product_id` int(10) UNSIGNED NOT NULL,
   `company_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `browsing_name` varchar(255) NOT NULL,
+  `sale_price` double NOT NULL,
+  `list_price` double NOT NULL,
+  `default_image` varchar(255) NOT NULL,
+  `overview` varchar(255) NOT NULL,
+  `quantity` int(10) UNSIGNED NOT NULL,
+  `is_stock_controlled` tinyint(1) DEFAULT NULL,
+  `status` int(11) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `rank` int(11) NOT NULL,
+  `sku` varchar(100) NOT NULL,
   `created_on` datetime NOT NULL,
   `updated_on` datetime DEFAULT CURRENT_TIMESTAMP,
-  `sku` varchar(100) NOT NULL,
-  `type` varchar(100) NOT NULL,
-  `has_options` int(11) NOT NULL,
-  `required_options` int(11) NOT NULL,
   PRIMARY KEY (`product_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`product_id`, `company_id`, `rank`, `created_on`, `updated_on`, `sku`, `type`, `has_options`, `required_options`) VALUES
-(1, 1, 5, '2016-09-06 00:00:00', '2016-09-06 15:32:21', 'SkuTestProduct1', 'Product', 1, 1),
-(2, 2, 2, '2016-09-06 00:00:00', '2016-09-06 15:32:36', 'SkuTestProduct2', 'Product', 1, 1);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
