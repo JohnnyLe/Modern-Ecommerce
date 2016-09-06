@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.nitsoft.ecommerce.model;
 
 import java.io.Serializable;
@@ -21,33 +20,47 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author vkloan
+ * @author VS9 X64Bit
  */
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
+    @NamedQuery(name = "User.findByCompanyId", query = "SELECT u FROM User u WHERE u.companyId = :companyId"),
+    @NamedQuery(name = "User.findByGroupId", query = "SELECT u FROM User u WHERE u.groupId = :groupId"),
+    @NamedQuery(name = "User.findByRoleId", query = "SELECT u FROM User u WHERE u.roleId = :roleId"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
+    @NamedQuery(name = "User.findByPasswordHash", query = "SELECT u FROM User u WHERE u.passwordHash = :passwordHash"),
+    @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
+    @NamedQuery(name = "User.findByMiddleName", query = "SELECT u FROM User u WHERE u.middleName = :middleName"),
+    @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
+    @NamedQuery(name = "User.findByStatus", query = "SELECT u FROM User u WHERE u.status = :status"),
+    @NamedQuery(name = "User.findByCreateDate", query = "SELECT u FROM User u WHERE u.createDate = :createDate"),
+    @NamedQuery(name = "User.findBySalt", query = "SELECT u FROM User u WHERE u.salt = :salt")})
 public class User implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "user_id")
-    private String userId;    
-    @Column(name = "team_id")
-    private String teamId;
+    private String userId;
+    @Basic(optional = false)
+    @Column(name = "company_id")
+    private int companyId;
+    @Basic(optional = false)
+    @Column(name = "group_id")
+    private int groupId;
     @Basic(optional = false)
     @Column(name = "role_id")
     private int roleId;
     @Basic(optional = false)
-    @Column(name = "mail_address")
-    private String mailAddress;
+    @Column(name = "email")
+    private String email;
     @Basic(optional = false)
     @Column(name = "password_hash")
     private String passwordHash;
-    @Basic(optional = false)
-    @Column(name = "status")
-    private int status;
     @Basic(optional = false)
     @Column(name = "first_name")
     private String firstName;
@@ -57,47 +70,15 @@ public class User implements Serializable {
     @Column(name = "last_name")
     private String lastName;
     @Basic(optional = false)
-    @Column(name = "session_time_out")
-    private int sessionTimeOut;
+    @Column(name = "status")
+    private int status;
     @Basic(optional = false)
-    @Column(name = "activation_code")
-    private String activationCode;
-    @Basic(optional = false)
-    @Column(name = "activation_date")
+    @Column(name = "create_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date activationDate;
+    private Date createDate;
     @Basic(optional = false)
-    @Column(name = "num_of_disp_notify")
-    private String numOfDispNotify;
-    @Basic(optional = false)
-    @Column(name = "piriod_of_disp_notify")
-    private int piriodOfDispNotify;
-    @Basic(optional = false)
-    @Column(name = "time_zone")
-    private int timeZone;
-    @Basic(optional = false)
-    @Column(name = "signup_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date signupDate;
-    @Column(name = "last_activity")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastActivity;
-    @Basic(optional = false)
-    @Column(name = "status_notify")
-    private String statusNotify;
-    @Basic(optional = false)
-    @Column(name = "notification_flag")
-    private String notificationFlag;
-    @Column(name = "card_info_id")
-    private String cardInfoId;
-    @Column(name = "landing_page")
-    private Integer landingPage;
-    @Basic(optional = false)
-    @Column(name = "lang")
-    private String lang;
-    @Basic(optional = false)
-    @Column(name = "bookend_user_id")
-    private String bookendUserId;
+    @Column(name = "salt")
+    private String salt;
 
     public User() {
     }
@@ -106,25 +87,18 @@ public class User implements Serializable {
         this.userId = userId;
     }
 
-    public User(String userId, String teamId, int roleId, String mailAddress, String passwordHash, int status, String firstName, String lastName, int sessionTimeOut, String activationCode, Date activationDate, String numOfDispNotify, int piriodOfDispNotify, int timeZone, Date signupDate, String statusNotify, String notificationFlag, String lang) {
+    public User(String userId, int companyId, int groupId, int roleId, String email, String passwordHash, String firstName, String lastName, int status, Date createDate, String salt) {
         this.userId = userId;
-        this.teamId = teamId;
+        this.companyId = companyId;
+        this.groupId = groupId;
         this.roleId = roleId;
-        this.mailAddress = mailAddress;
+        this.email = email;
         this.passwordHash = passwordHash;
-        this.status = status;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.sessionTimeOut = sessionTimeOut;
-        this.activationCode = activationCode;
-        this.activationDate = activationDate;
-        this.numOfDispNotify = numOfDispNotify;
-        this.piriodOfDispNotify = piriodOfDispNotify;
-        this.timeZone = timeZone;
-        this.signupDate = signupDate;
-        this.statusNotify = statusNotify;
-        this.notificationFlag = notificationFlag;
-        this.lang = lang;
+        this.status = status;
+        this.createDate = createDate;
+        this.salt = salt;
     }
 
     public String getUserId() {
@@ -135,12 +109,20 @@ public class User implements Serializable {
         this.userId = userId;
     }
 
-    public String getTeamId() {
-        return teamId;
+    public int getCompanyId() {
+        return companyId;
     }
 
-    public void setTeamId(String teamId) {
-        this.teamId = teamId;
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
+    }
+
+    public int getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
     }
 
     public int getRoleId() {
@@ -151,12 +133,12 @@ public class User implements Serializable {
         this.roleId = roleId;
     }
 
-    public String getMailAddress() {
-        return mailAddress;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMailAddress(String mailAddress) {
-        this.mailAddress = mailAddress;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPasswordHash() {
@@ -165,14 +147,6 @@ public class User implements Serializable {
 
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
     public String getFirstName() {
@@ -199,120 +173,30 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public int getSessionTimeOut() {
-        return sessionTimeOut;
+    public int getStatus() {
+        return status;
     }
 
-    public void setSessionTimeOut(int sessionTimeOut) {
-        this.sessionTimeOut = sessionTimeOut;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public String getActivationCode() {
-        return activationCode;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setActivationCode(String activationCode) {
-        this.activationCode = activationCode;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Date getActivationDate() {
-        return activationDate;
+    public String getSalt() {
+        return salt;
     }
 
-    public void setActivationDate(Date activationDate) {
-        this.activationDate = activationDate;
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
-    public String getNumOfDispNotify() {
-        return numOfDispNotify;
-    }
-
-    public void setNumOfDispNotify(String numOfDispNotify) {
-        this.numOfDispNotify = numOfDispNotify;
-    }
-
-    public int getPiriodOfDispNotify() {
-        return piriodOfDispNotify;
-    }
-
-    public void setPiriodOfDispNotify(int piriodOfDispNotify) {
-        this.piriodOfDispNotify = piriodOfDispNotify;
-    }
-
-    public int getTimeZone() {
-        return timeZone;
-    }
-
-    public void setTimeZone(int timeZone) {
-        this.timeZone = timeZone;
-    }
-
-    public Date getSignupDate() {
-        return signupDate;
-    }
-
-    public void setSignupDate(Date signupDate) {
-        this.signupDate = signupDate;
-    }
-
-    public Date getLastActivity() {
-        return lastActivity;
-    }
-
-    public void setLastActivity(Date lastActivity) {
-        this.lastActivity = lastActivity;
-    }
-
-    public String getStatusNotify() {
-        return statusNotify;
-    }
-
-    public void setStatusNotify(String statusNotify) {
-        this.statusNotify = statusNotify;
-    }
-
-    public String getNotificationFlag() {
-        return notificationFlag;
-    }
-
-    public void setNotificationFlag(String notificationFlag) {
-        this.notificationFlag = notificationFlag;
-    }
-
-    public String getCardInfoId() {
-        return cardInfoId;
-    }
-
-    public void setCardInfoId(String cardInfoId) {
-        this.cardInfoId = cardInfoId;
-    }
-
-    public Integer getLandingPage() {
-        return landingPage;
-    }
-
-    public void setLandingPage(Integer landingPage) {
-        this.landingPage = landingPage;
-    }
-
-    public String getLang() {
-        return lang;
-    }
-
-    public void setLang(String lang) {
-        this.lang = lang;
-    }
-
-    public String getBookendUserId() {
-        return bookendUserId;
-    }
-
-    public void setBookendUserId(String bookendUserId) {
-        this.bookendUserId = bookendUserId;
-    }
-
-    
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -335,7 +219,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "";
+        return "com.nitsoft.ecommerce.model.User[ userId=" + userId + " ]";
     }
     
 }

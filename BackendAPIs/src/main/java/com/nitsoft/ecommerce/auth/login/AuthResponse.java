@@ -6,12 +6,11 @@ package com.nitsoft.ecommerce.auth.login;
 
 import com.nitsoft.ecommerce.model.User;
 
-
 public class AuthResponse {
 
     private String authToken;
     private String userId;
-    private String teamId;
+    private int companyId;
     private int roleId;
     private String mailAddress;
     private int status;
@@ -19,23 +18,20 @@ public class AuthResponse {
     private String middleName;
     private String lastName;
     private int sessionTimeOut;
-    
-    // Customer pros
-    // TODO
 
     public AuthResponse() {
     }
-    
+
     public AuthResponse(User user, String token) {
-        this.authToken=token;
-        this.userId=user.getUserId();
-        this.teamId=user.getTeamId();
-        this.roleId=user.getRoleId();
-        this.mailAddress=user.getMailAddress();
-        this.status=user.getStatus();
-        this.firstName=user.getFirstName();
-        this.lastName=user.getLastName();
-        this.sessionTimeOut=user.getSessionTimeOut();
+        this.authToken = token;
+        this.userId = user.getUserId();
+        this.companyId = user.getCompanyId();
+        this.roleId = user.getRoleId();
+        this.mailAddress = user.getEmail();
+        this.status = user.getStatus();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+//        this.sessionTimeOut=user.getSessionTimeOut();
     }
 
     public String getAuthToken() {
@@ -46,8 +42,8 @@ public class AuthResponse {
         return userId;
     }
 
-    public String getTeamId() {
-        return teamId;
+    public int getTeamId() {
+        return companyId;
     }
 
     public int getRoleId() {
@@ -86,8 +82,8 @@ public class AuthResponse {
         this.userId = userId;
     }
 
-    public void setTeamId(String teamId) {
-        this.teamId = teamId;
+    public void setTeamId(int teamId) {
+        this.companyId = teamId;
     }
 
     public void setRoleId(int roleId) {
@@ -117,4 +113,5 @@ public class AuthResponse {
     public void setSessionTimeOut(int sessionTimeOut) {
         this.sessionTimeOut = sessionTimeOut;
     }
+    
 }

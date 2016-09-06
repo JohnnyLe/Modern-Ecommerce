@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 /**
  * Response object
  *
+ * @param <T>
  */
 public class StatusResponse<T> {
 
