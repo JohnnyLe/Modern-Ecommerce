@@ -16,7 +16,7 @@ public class ProductAtrributeDetaiImpl extends AbstractImpl<ProductAttributeDeta
         List T = null;
         try {
             session = this.getSession();
-            Query query = session.createQuery("FROM ProductAttributeDetail p WHERE p.productId = :productId");
+            Query query = session.createQuery("FROM " + ProductAttributeDetail.class.getName() + " p WHERE p.productId = :productId");
             query.setParameter("productId", productId);
 
             T = query.list();

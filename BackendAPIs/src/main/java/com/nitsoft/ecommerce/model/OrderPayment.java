@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.nitsoft.ecommerce.model;
 
 import java.io.Serializable;
@@ -5,10 +10,24 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author VS9 X64Bit
+ */
 @Entity
 @Table(name = "order_payments")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "OrderPayment.findAll", query = "SELECT o FROM OrderPayment o"),
+    @NamedQuery(name = "OrderPayment.findByOrderId", query = "SELECT o FROM OrderPayment o WHERE o.orderId = :orderId"),
+    @NamedQuery(name = "OrderPayment.findByPaymentId", query = "SELECT o FROM OrderPayment o WHERE o.paymentId = :paymentId"),
+    @NamedQuery(name = "OrderPayment.findByTransactionId", query = "SELECT o FROM OrderPayment o WHERE o.transactionId = :transactionId"),
+    @NamedQuery(name = "OrderPayment.findByStatus", query = "SELECT o FROM OrderPayment o WHERE o.status = :status")})
 public class OrderPayment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,11 +52,15 @@ public class OrderPayment implements Serializable {
     public OrderPayment() {
     }
 
-    public OrderPayment(int orderId, int paymentId, String transactionId, int status) {
-        this.orderId = orderId;
-        this.paymentId = paymentId;
+    public OrderPayment(String transactionId, int status) {
         this.transactionId = transactionId;
         this.status = status;
+    }
+
+    public OrderPayment(int orderId, int paymentId) {
+        this.orderId = orderId;
+        this.paymentId
+                = paymentId;
     }
 
     public int getOrderId() {

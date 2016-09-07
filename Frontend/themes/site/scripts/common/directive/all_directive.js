@@ -343,7 +343,7 @@ angular.module('marketplace.directive', [ 'components' ])
             $scope.items = [];
             
             $scope.loadData = function () {
-                util.callRequest('http://localhost:8383/jVoidTheme/json/slider.json', "GET", null, true).then(function (data) {
+                util.callRequest('http://localhost:8383/eCommereTheme/json/slider.json', "GET", null, true).then(function (data) {
                     $scope.items = data.results;
                 });
             };
@@ -384,10 +384,13 @@ angular.module('marketplace.directive', [ 'components' ])
                 // load categories                
                 util.callRequest('api/category/list', 'GET').then( function( data ) {
                     $scope.categories = sortOutAllCategories(data.result, 0);
+                    
+//                    console.debug(data.result);
+//                    console.debug($scope.categories);
                 });
                 
                 // load brands
-                util.callRequest('http://localhost:8383/jVoidTheme/json/brand-products.json', "GET", null, true).then(function (data) {
+                util.callRequest('http://localhost:8383/eCommereTheme/json/brand-products.json', "GET", null, true).then(function (data) {
                     $scope.brands = data.results;
                 });
             };
@@ -410,11 +413,11 @@ angular.module('marketplace.directive', [ 'components' ])
                         outJson.id = cat.category_id;
                         outJson.child = out;
                         cats.push(outJson);
-                        if (cats.length > cat.position) {
-                            var temp = cats[cat.position - 1];
-                            cats[cat.position - 1] = outJson;
-                            cats[cats.length - 1] = temp;
-                        }
+//                        if (cats.length > cat.position) {
+//                            var temp = cats[cat.position - 1];
+//                            cats[cat.position - 1] = outJson;
+//                            cats[cats.length - 1] = temp;
+//                        }
                     }
                 });
 
