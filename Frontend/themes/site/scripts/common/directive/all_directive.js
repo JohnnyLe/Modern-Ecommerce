@@ -382,8 +382,8 @@ angular.module('marketplace.directive', [ 'components' ])
             
             $scope.loadData = function () {
                 // load categories                
-                util.callRequest('jvoid-categories', 'GET').then( function( data ) {
-                    $scope.categories = sortOutAllCategories(data.categories, 0);
+                util.callRequest('api/category/list', 'GET').then( function( data ) {
+                    $scope.categories = sortOutAllCategories(data.result, 0);
                 });
                 
                 // load brands
@@ -403,11 +403,11 @@ angular.module('marketplace.directive', [ 'components' ])
                 var cats = [];
                 catArray.forEach(function (cat)
                 {
-                    if (cat.parentId === parentID) {
-                        var out = sortOutAllCategories(catArray, cat.id);
+                    if (cat.parent_id === parentID) {
+                        var out = sortOutAllCategories(catArray, cat.category_id);
                         var outJson = {};
-                        outJson.name = cat.categoryName;
-                        outJson.id = cat.id;
+                        outJson.name = cat.name;
+                        outJson.id = cat.category_id;
                         outJson.child = out;
                         cats.push(outJson);
                         if (cats.length > cat.position) {
