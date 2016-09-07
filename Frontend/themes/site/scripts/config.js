@@ -11,7 +11,7 @@ angular.module( 'marketplace' )
 .constant( 'server',  {
 
     // Local
-    URL: 'http://localhost:9080/jvoidcore'
+    URL: 'http://localhost:8080/modern-ecommerce'
     // Server
     //URL: 'http://52.196.33.166/marketplace-rest-api'
 })

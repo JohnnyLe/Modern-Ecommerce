@@ -343,7 +343,7 @@ angular.module('marketplace.directive', [ 'components' ])
             $scope.items = [];
             
             $scope.loadData = function () {
-                util.callRequest('http://localhost:8383/jVoidTheme/json/slider.json', "GET", null, true).then(function (data) {
+                util.callRequest('http://localhost:8383/eCommereTheme/json/slider.json', "GET", null, true).then(function (data) {
                     $scope.items = data.results;
                 });
             };
@@ -387,7 +387,7 @@ angular.module('marketplace.directive', [ 'components' ])
                 });
                 
                 // load brands
-                util.callRequest('http://localhost:8383/jVoidTheme/json/brand-products.json', "GET", null, true).then(function (data) {
+                util.callRequest('http://localhost:8383/eCommereTheme/json/brand-products.json', "GET", null, true).then(function (data) {
                     $scope.brands = data.results;
                 });
             };

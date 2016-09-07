@@ -21,6 +21,7 @@ public class APIName {
 
     // categories
     public static final String PRODUCTS = VERSION + "products";
+    public static final String PRODUCTS_BY_CATEGORY = PRODUCTS + "/category";
 
     // SSO
     public static final String OAUTH_LOGIN = VERSION + "oauth/login";

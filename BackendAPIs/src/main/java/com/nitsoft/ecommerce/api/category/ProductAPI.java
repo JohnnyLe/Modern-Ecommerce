@@ -13,6 +13,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -34,10 +35,18 @@ public class ProductAPI extends APIUtil {
             Map<String, Object> mapObj = new HashMap<>();
             mapObj.put("product", product);
             mapObj.put("attributes", productDetais);
-            
+
             results.add(mapObj);
         }
 
         return writeObjectToJson(new StatusResponse(200, results));
+    }
+
+    @RequestMapping(value = APIName.PRODUCTS_BY_CATEGORY, method = RequestMethod.GET, produces = APIName.CHARSET)
+    public String getProductByCategoryId(@RequestParam int categoryId) {
+
+        List<Product> products = productsImpl.findAllByCategoryId(categoryId);
+
+        return writeObjectToJson(new StatusResponse(200, products));
     }
 }

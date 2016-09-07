@@ -1,24 +1,40 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.nitsoft.ecommerce.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ *
+ * @author VS9 X64Bit
+ */
 @Entity
 @Table(name = "product_attribute_details")
-@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "ProductAttributeDetail.findAll", query = "SELECT p FROM ProductAttributeDetail p"),
+    @NamedQuery(name = "ProductAttributeDetail.findByProductId", query = "SELECT p FROM ProductAttributeDetail p WHERE p.productId = :productId"),
+    @NamedQuery(name = "ProductAttributeDetail.findByAttributeId", query = "SELECT p FROM ProductAttributeDetail p WHERE p.attributeId = :attributeId"),
+    @NamedQuery(name = "ProductAttributeDetail.findByValueString", query = "SELECT p FROM ProductAttributeDetail p WHERE p.valueString = :valueString"),
+    @NamedQuery(name = "ProductAttributeDetail.findByValueNumberic", query = "SELECT p FROM ProductAttributeDetail p WHERE p.valueNumberic = :valueNumberic")})
 public class ProductAttributeDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @Basic(optional = false)
     @Column(name = "product_id")
-    @JsonIgnore
     private int productId;
 
     @Id
@@ -28,7 +44,7 @@ public class ProductAttributeDetail implements Serializable {
 
     @Column(name = "value_string")
     private String valueString;
-
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "value_numberic")
     private Double valueNumberic;
 
@@ -36,7 +52,8 @@ public class ProductAttributeDetail implements Serializable {
     }
 
     public ProductAttributeDetail(int productId, int attributeId) {
-        this.productId = productId;
+        this.productId
+                = productId;
         this.attributeId = attributeId;
     }
 

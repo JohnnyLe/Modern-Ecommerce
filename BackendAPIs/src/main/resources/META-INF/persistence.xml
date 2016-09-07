@@ -24,6 +24,7 @@
     <class>com.nitsoft.ecommerce.model.ProductAttributeDetail</class>
     <class>com.nitsoft.ecommerce.model.User</class>
     <class>com.nitsoft.ecommerce.model.Address</class>
+    <class>com.nitsoft.ecommerce.api.Product</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ecommerce_platform?zeroDateTimeBehavior=convertToNull"/>
