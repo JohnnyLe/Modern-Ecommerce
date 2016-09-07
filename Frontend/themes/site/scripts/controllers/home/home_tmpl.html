@@ -10,19 +10,19 @@
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
                     <h2 class="title text-center">Features Items</h2>
-                    <div class="col-sm-4" ng-repeat="product_feature in product_features">
+                    <div class="col-sm-4" ng-repeat="pObject in products" ng-init="p = pObject.product">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img ng-src="{{ 'images/' + product_feature.image}}" alt="" />
-                                    <h2>{{product_feature.price}}</h2>
-                                    <p>{{product_feature.name}}</p>
+                                    <img ng-src="{{ 'images/' + p.default_image}}" alt="" />
+                                    <h2>{{p.list_price}}</h2>
+                                    <p>{{p.name}}</p>
                                     <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </div>
                                 <div class="product-overlay">
                                     <div class="overlay-content">
-                                        <h2>{{product_feature.price}}</h2>
-                                        <p>{{product_feature.name}}</p>
+                                        <h2>{{p.list_price}}</h2>
+                                        <p>{{p.name}}</p>
                                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>
                                 </div>
@@ -35,10 +35,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
-                    
-                  
                 </div><!--features_items-->
 
                 <div class="category-tab"><!--category-tab-->
