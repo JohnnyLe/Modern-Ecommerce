@@ -19,9 +19,12 @@ public class APIName {
     public static final String LOGIN = VERSION + "user/login";
     public static final String LOGOUT = VERSION + "user/logout";
 
-    // categories
+    // product api links
     public static final String PRODUCTS = VERSION + "products";
-	public static final String PRODUCTS_BY_CATEGORY = PRODUCTS + "/category";
+    public static final String PRODUCTS_BY_CATEGORY = PRODUCTS + "/category";
+    public static final String PRODUCTS_FILTER_LIST = PRODUCTS + "/filter";
+
+    // categories api links
     public static final String GET_LIST = VERSION + "category/list";
 
     // SSO
