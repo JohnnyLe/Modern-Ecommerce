@@ -1,0 +1,98 @@
+package com.nitsoft.ecommerce.api.rest;
+
+import com.nitsoft.ecommerce.api.response.UtilsResponse;
+import com.nitsoft.ecommerce.exception.ApplicationException;
+import com.nitsoft.ecommerce.model.RestErrorInfo;
+import com.nitsoft.ecommerce.exception.DataFormatException;
+import com.nitsoft.ecommerce.exception.ResourceNotFoundException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import java.text.SimpleDateFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.context.request.WebRequest;
+
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+
+/**
+ * This class is meant to be extended by all REST resource "controllers".
+ * It contains exception mapping and other common REST API functionality
+ */
+//@ControllerAdvice?
+public abstract class AbstractRestHandler implements ApplicationEventPublisherAware {
+
+    @Autowired
+    public UtilsResponse utilsResponse;
+    
+    protected final Logger log = LoggerFactory.getLogger(this.getClass());
+    protected ApplicationEventPublisher eventPublisher;
+
+    protected static final String  DEFAULT_PAGE_SIZE = "100";
+    protected static final String DEFAULT_PAGE_NUM = "0";
+    
+    // Mapper object is used to convert object and etc...
+    public final static ObjectMapper mapper = new ObjectMapper();
+    // Set format
+    static {
+        mapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES)
+                // Set setting remove NULL property
+                .setSerializationInclusion(JsonInclude.Include.NON_NULL);
+                //.setSerializationInclusion(JsonInclude.Include.ALWAYS)
+                //.setDateFormat(new SimpleDateFormat(Constant.API_FORMAT_DATE));
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DataFormatException.class)
+    public
+    @ResponseBody
+    RestErrorInfo handleDataStoreException(DataFormatException ex, WebRequest request, HttpServletResponse response) {
+        log.info("Converting Data Store exception to RestResponse : " + ex.getMessage());
+
+        return new RestErrorInfo(ex, "You messed up.");
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public
+    @ResponseBody
+    RestErrorInfo handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request, HttpServletResponse response) {
+        log.info("ResourceNotFoundException handler:" + ex.getMessage());
+
+        return new RestErrorInfo(ex, "Sorry I couldn't find it.");
+    }
+
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        this.eventPublisher = applicationEventPublisher;
+    }
+
+    //todo: replace with exception mapping
+    public static <T> T checkResourceFound(final T resource) {
+        if (resource == null) {
+            throw new ResourceNotFoundException("resource not found");
+        }
+        return resource;
+    }
+    
+    //
+    // Write object as string using mapper
+    //
+    protected String writeObjectToJson(Object obj) {
+        try {
+            return mapper.writeValueAsString(obj);
+        } catch (JsonProcessingException ex) {
+            // Throw our exception
+            throw new ApplicationException(ex.getCause());
+        }
+    }
+
+}
