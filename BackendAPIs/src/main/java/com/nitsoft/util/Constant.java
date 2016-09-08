@@ -83,4 +83,11 @@ public class Constant {
     public static final long ONE_MINUTE_IN_MILLIS = 60000;
     public static final long ONE_SECOND_IN_MILLIS = 1000;
 
+    // define paging results
+    public static final int DEFAULT_PAGE_SIZE = 25;
+    public static final int DEFAULT_PAGE_NUMBER = 1;
+    
+    // define sort key value
+    public static final int SORT_BY_PRODUCT_NAME = 1;
+    public static final int SORT_BY_PRODUCT_PRICE = 2;
 }

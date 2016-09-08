@@ -29,7 +29,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findByUserId", query = "SELECT u FROM User u WHERE u.userId = :userId"),
     @NamedQuery(name = "User.findByCompanyId", query = "SELECT u FROM User u WHERE u.companyId = :companyId"),
-    @NamedQuery(name = "User.findByGroupId", query = "SELECT u FROM User u WHERE u.groupId = :groupId"),
     @NamedQuery(name = "User.findByRoleId", query = "SELECT u FROM User u WHERE u.roleId = :roleId"),
     @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
     @NamedQuery(name = "User.findByPasswordHash", query = "SELECT u FROM User u WHERE u.passwordHash = :passwordHash"),
@@ -49,9 +48,6 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "company_id")
     private int companyId;
-    @Basic(optional = false)
-    @Column(name = "group_id")
-    private int groupId;
     @Basic(optional = false)
     @Column(name = "role_id")
     private int roleId;
@@ -87,10 +83,9 @@ public class User implements Serializable {
         this.userId = userId;
     }
 
-    public User(String userId, int companyId, int groupId, int roleId, String email, String passwordHash, String firstName, String lastName, int status, Date createDate, String salt) {
+    public User(String userId, int companyId, int roleId, String email, String passwordHash, String firstName, String lastName, int status, Date createDate, String salt) {
         this.userId = userId;
         this.companyId = companyId;
-        this.groupId = groupId;
         this.roleId = roleId;
         this.email = email;
         this.passwordHash = passwordHash;
@@ -115,14 +110,6 @@ public class User implements Serializable {
 
     public void setCompanyId(int companyId) {
         this.companyId = companyId;
-    }
-
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
     }
 
     public int getRoleId() {
