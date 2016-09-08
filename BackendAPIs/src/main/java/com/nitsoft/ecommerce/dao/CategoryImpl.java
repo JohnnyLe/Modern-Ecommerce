@@ -28,7 +28,7 @@ public class CategoryImpl extends AbstractImpl<Session> {
         try {
             Query query;
             List<Session> l = new ArrayList<Session>();
-            query = session.createQuery("from Session where userId = :userId").setParameter("userId", categoryId);
+            query = session.createQuery("from Session where categoryId = :categoryId").setParameter("userId", categoryId);
             l = query.list();
             Session s = (l.size() > 0) ? l.get(0) : null;
             return s;

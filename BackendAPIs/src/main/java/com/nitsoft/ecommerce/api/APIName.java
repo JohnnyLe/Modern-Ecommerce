@@ -28,5 +28,8 @@ public class APIName {
     public static final String OAUTH_LOGIN = VERSION + "oauth/login";
     public static final String OAUTH_IMPLICIT_LOGIN = VERSION + "oauth/implicit/login";
     public static final String CHECK_API_KEY = VERSION + "oauth";
-
+    //Orders
+    public static final String ADD_ORDERS = VERSION + "orders/add";
+    public static final String GETALL_ORDERS = VERSION + "orders/list";
+    public static final String DELETE_OEDERS = VERSION + "orders/delete";
 }
