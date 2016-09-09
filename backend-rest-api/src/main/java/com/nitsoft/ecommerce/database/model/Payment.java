@@ -19,23 +19,23 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p"),
     @NamedQuery(name = "Payment.findByPaymentId", query = "SELECT p FROM Payment p WHERE p.paymentId = :paymentId"),
     @NamedQuery(name = "Payment.findByName", query = "SELECT p FROM Payment p WHERE p.name = :name"),
-    @NamedQuery(name = "Payment.findByDesc", query = "SELECT p FROM Payment p WHERE p.desc = :desc")})
+    @NamedQuery(name = "Payment.findByDesc", query = "SELECT p FROM Payment p WHERE p.description = :desc")})
 public class Payment implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "payment_id")
     private Integer paymentId;
-    
+
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    
-    @Column(name = "desc")
-    private String desc;
+
+    @Column(name = "description")
+    private String description;
 
     public Payment() {
     }
@@ -66,11 +66,11 @@ public class Payment implements Serializable {
     }
 
     public String getDesc() {
-        return desc;
+        return description;
     }
 
     public void setDesc(String desc) {
-        this.desc = desc;
+        this.description = desc;
     }
 
     @Override
@@ -97,5 +97,5 @@ public class Payment implements Serializable {
     public String toString() {
         return "com.nitsoft.ecommerce.model.Payment[ paymentId=" + paymentId + " ]";
     }
-    
+
 }
