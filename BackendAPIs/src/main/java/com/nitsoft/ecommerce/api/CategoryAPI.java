@@ -10,13 +10,19 @@ import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.api.response.UtilsResponse;
 import com.nitsoft.ecommerce.dao.CategoryImpl;
 import com.nitsoft.ecommerce.model.Category;
+import com.nitsoftware.ecommerce.repository.CategoryRepository;
+import com.reus.SpringBootDemo;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
@@ -38,4 +44,21 @@ public class CategoryAPI extends APIUtil {
         
         return writeObjectToJson(new StatusResponse<List<Category>>(200,category));
     }
+//@ComponentScan
+//@RestController
+//@EnableAutoConfiguration
+//public class CategoryAPI 
+//{
+////    public static void main( String[] args )
+////    {
+////    	SpringApplication.run(SpringBootDemo.class, args);
+////    }
+//    @Autowired
+//	CategoryRepository repository;
+//
+//	@RequestMapping(value= "api/category/list" ,method=RequestMethod.GET)
+//	
+//	public List<Category> get(){
+//		return (List<Category>) repository.findAll();
+//	}
 }
