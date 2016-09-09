@@ -1,5 +1,7 @@
-package com.nitsoft.ecommerce.api;
+package com.nitsoft.ecommerce.api.category;
 
+import com.nitsoft.ecommerce.api.APIName;
+import com.nitsoft.ecommerce.api.APIUtil;
 import com.nitsoft.ecommerce.api.response.APIStatus;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Category;
@@ -54,7 +56,7 @@ public class CategoryAPI extends APIUtil {
 
     }
 
-    @RequestMapping(value = "api/test/{id}", method = RequestMethod.DELETE, produces = APIName.CHARSET)
+    @RequestMapping(value = APIName.CATEGORIES_ID, method = RequestMethod.DELETE, produces = APIName.CHARSET)
     public String deleteCategory(@PathVariable(value = "id") Long categoryId) {
         System.out.println("category " + categoryId);
         Category category = repository.findByCategoryId(categoryId);
