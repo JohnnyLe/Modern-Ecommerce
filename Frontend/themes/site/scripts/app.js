@@ -9,7 +9,8 @@ angular.module('marketplace', [
   'marketplace.directive',
   'marketplace.authen',
   'marketplace.login',
-  'marketplace.home'
+  'marketplace.home',
+  'marketplace.products.details'
 ]).
 
 // Define all route of our app
@@ -37,7 +38,8 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
             .state('product-details', {
                 url: '/product-details',
                 parent: 'master',
-                templateUrl: 'pages/product-details.html'
+                templateUrl: 'scripts/controllers/products/details/product-details.html',
+                controller: 'ProductDetailsCtrl'
             })
             .state('checkout', {
                 url: '/checkout',

@@ -1,0 +1,24 @@
+{
+    "result": {
+        "product_id": 12245,
+        "company_id": 1,
+        "name": "Anne Klein Sleeveless Colorblock Scuba",
+        "browsing_name": "",
+        "sale_price": 9000.0,
+        "list_price": 99000.0,
+        "default_image": "p2.jpg",
+        "detail_images": [
+            "similar1.jpg", "similar2.jpg", "similar3.jpg"
+        ],
+        "overview": "cZXc",
+        "quantity": 12,
+        "is_stock_controlled": true,
+        "status": 1,
+        "description": null,
+        "rank": 5,
+        "sku": "asdf",
+        "created_on": "2016/09/07 00:00:00",
+        "updated_on": "2016/09/07 11:12:51"
+    }
+
+}
