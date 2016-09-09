@@ -19,24 +19,23 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /*
  * This is the main Spring Boot application class. It configures Spring Boot, JPA, Swagger
  */
-
 @EnableAutoConfiguration  // Sprint Boot Auto Configuration
 @ComponentScan(basePackages = "com.nitsoft.ecommerce")
 @EnableSwagger2 // auto generation of API docs
 public class Application extends SpringBootServletInitializer {
 
-    private static final Class<Application> applicationClass = Application.class;
-    private static final Logger log = LoggerFactory.getLogger(applicationClass);
+    private static final Class<Application> APPLICATION_NAME = Application.class;
+    private final Logger logger = LoggerFactory.getLogger(APPLICATION_NAME);
 
-	public static void main(String[] args) {
-		SpringApplication.run(applicationClass, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(APPLICATION_NAME, args);
+    }
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(applicationClass);
+        return application.sources(APPLICATION_NAME);
     }
-    
+
     @Bean
     public Docket newsApi() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -46,7 +45,7 @@ public class Application extends SpringBootServletInitializer {
                 .paths(regex("/api.*"))
                 .build();
     }
-     
+
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Ecommerce Platform REST API Documents")

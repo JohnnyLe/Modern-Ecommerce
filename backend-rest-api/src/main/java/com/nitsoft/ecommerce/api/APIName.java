@@ -32,6 +32,6 @@ public class APIName {
     public static final String OAUTH_IMPLICIT_LOGIN = VERSION + "oauth/implicit/login";
     public static final String CHECK_API_KEY = VERSION + "oauth";
     //Category
-    public static final String GET_CATEGORY = VERSION + "category/list";
-
+    public static final String CATEGORIES = VERSION + "categories";
+    public static final String CATEGORIES_ID = VERSION + "categories/{id}";
 }

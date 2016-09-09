@@ -384,9 +384,6 @@ angular.module('marketplace.directive', [ 'components' ])
                 // load categories                
                 util.callRequest('api/category/list', 'GET').then( function( data ) {
                     $scope.categories = sortOutAllCategories(data.result, 0);
-                    
-//                    console.debug(data.result);
-//                    console.debug($scope.categories);
                 });
                 
                 // load brands
@@ -404,23 +401,24 @@ angular.module('marketplace.directive', [ 'components' ])
             
             function sortOutAllCategories(catArray, parentID) {
                 var cats = [];
-                catArray.forEach(function (cat)
-                {
-                    if (cat.parent_id === parentID) {
-                        var out = sortOutAllCategories(catArray, cat.category_id);
-                        var outJson = {};
-                        outJson.name = cat.name;
-                        outJson.id = cat.category_id;
-                        outJson.child = out;
-                        cats.push(outJson);
-//                        if (cats.length > cat.position) {
-//                            var temp = cats[cat.position - 1];
-//                            cats[cat.position - 1] = outJson;
-//                            cats[cats.length - 1] = temp;
-//                        }
-                    }
-                });
-
+                if (typeof catArray !== 'undefined') {
+                    catArray.forEach(function (cat)
+                    {
+                        if (cat.parent_id === parentID) {
+                            var out = sortOutAllCategories(catArray, cat.category_id);
+                            var outJson = {};
+                            outJson.name = cat.name;
+                            outJson.id = cat.category_id;
+                            outJson.child = out;
+                            cats.push(outJson);
+                            if (cats.length > cat.position) {
+                                var temp = cats[cat.position - 1];
+                                cats[cat.position - 1] = outJson;
+                                cats[cats.length - 1] = temp;
+                            }
+                        }
+                    });
+                }
                 return cats;
             }
         }]
