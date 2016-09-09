@@ -31,14 +31,14 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "category_id")
-    private Integer categoryId;
+    private Long categoryId;
 
     @Basic(optional = false)
     @Column(name = "company_id")
     private int companyId;
 
     @Column(name = "parent_id")
-    private int parentId;
+    private Long parentId;
 
     @Basic(optional = false)
     @Column(name = "name")
@@ -49,7 +49,7 @@ public class Category implements Serializable {
     private int status;
 
     @Column(name = "position")
-    private int position;
+    private Integer position;
 
     @Column(name = "description")
     private String description;
@@ -57,11 +57,11 @@ public class Category implements Serializable {
     public Category() {
     }
 
-    public Category(Integer categoryId) {
+    public Category(Long categoryId) {
         this.categoryId = categoryId;
     }
 
-    public Category(Integer categoryId, int companyId, int parentId, String name, int status, int position, String description) {
+    public Category(Long categoryId, int companyId, Long parentId, String name, int status, int position, String description) {
         this.categoryId = categoryId;
         this.companyId = companyId;
         this.parentId = parentId;
@@ -71,11 +71,11 @@ public class Category implements Serializable {
         this.description = description;
     }
 
-    public Integer getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -87,11 +87,11 @@ public class Category implements Serializable {
         this.companyId = companyId;
     }
 
-    public int getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(int parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 
@@ -107,11 +107,11 @@ public class Category implements Serializable {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 
