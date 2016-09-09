@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.database.model;
 
 import java.io.Serializable;
@@ -20,10 +15,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author VS9 X64Bit
- */
 @Entity
 @Table(name = "products")
 @XmlRootElement
@@ -48,52 +39,67 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "product_id")
     private Long productId;
+    
     @Basic(optional = false)
     @Column(name = "company_id")
     private int companyId;
+    
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    @Basic(optional = false)
+    
     @Column(name = "browsing_name")
     private String browsingName;
+    
     @Basic(optional = false)
     @Column(name = "sale_price")
     private double salePrice;
+    
     @Basic(optional = false)
     @Column(name = "list_price")
     private double listPrice;
+    
     @Basic(optional = false)
     @Column(name = "default_image")
     private String defaultImage;
+    
     @Basic(optional = false)
     @Column(name = "overview")
     private String overview;
+    
     @Basic(optional = false)
     @Column(name = "quantity")
     private int quantity;
+    
     @Column(name = "is_stock_controlled")
     private Boolean isStockControlled;
+    
     @Basic(optional = false)
     @Column(name = "status")
     private int status;
+    
     @Column(name = "description")
     private String description;
+    
     @Basic(optional = false)
     @Column(name = "rank")
     private int rank;
+    
     @Basic(optional = false)
     @Column(name = "sku")
     private String sku;
+    
     @Basic(optional = false)
     @Column(name = "created_on")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdOn;
+    
     @Column(name = "updated_on")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedOn;

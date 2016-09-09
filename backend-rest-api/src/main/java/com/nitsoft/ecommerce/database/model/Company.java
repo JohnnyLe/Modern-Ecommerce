@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.database.model;
 
 import java.io.Serializable;
@@ -20,10 +15,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author VS9 X64Bit
- */
 @Entity
 @Table(name = "companies")
 @XmlRootElement
@@ -36,17 +27,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Company implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "company_id")
     private Integer companyId;
+    
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
+    
     @Basic(optional = false)
     @Column(name = "status")
     private int status;
+    
     @Basic(optional = false)
     @Column(name = "create_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -122,5 +117,5 @@ public class Company implements Serializable {
     public String toString() {
         return "com.nitsoft.ecommerce.model.Company[ companyId=" + companyId + " ]";
     }
-    
+
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.database.model;
 
 import java.io.Serializable;
@@ -17,10 +12,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author VS9 X64Bit
- */
 @Entity
 @Table(name = "order_reports")
 @XmlRootElement
@@ -33,18 +24,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class OrderReport implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "report_id")
     private Integer reportId;
+    
     @Basic(optional = false)
     @Column(name = "order_id")
     private int orderId;
+    
     @Basic(optional = false)
     @Column(name = "status")
     private boolean status;
-    @Basic(optional = false)
+    
     @Column(name = "note")
     private String note;
 

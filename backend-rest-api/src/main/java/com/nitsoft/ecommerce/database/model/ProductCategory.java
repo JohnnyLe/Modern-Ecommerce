@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.database.model;
 
 import java.io.Serializable;
@@ -15,10 +10,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author VS9 X64Bit
- */
 @Entity
 @Table(name = "product_categories")
 @XmlRootElement
@@ -33,34 +24,34 @@ public class ProductCategory implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "product_id")
-    private int productId;
+    private Long productId;
 
     @Id
     @Basic(optional = false)
     @Column(name = "category_id")
-    private int categoryId;
+    private Long categoryId;
 
     public ProductCategory() {
     }
 
-    public ProductCategory(int productId, int categoryId) {
+    public ProductCategory(Long productId, Long categoryId) {
         this.productId = productId;
         this.categoryId = categoryId;
     }
 
-    public int getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
-    public int getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 

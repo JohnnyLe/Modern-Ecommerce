@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.database.model;
 
 import java.io.Serializable;
@@ -22,12 +17,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author VS9 X64Bit
- */
 @Entity
-@Table(name = "order_detail")
+@Table(name = "order_details")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OrderDetail.findAll", query = "SELECT o FROM OrderDetail o"),
@@ -52,53 +43,70 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class OrderDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+
     @Column(name = "parent_id")
     private Integer parentId;
+
     @Basic(optional = false)
     @Column(name = "order_id")
     private int orderId;
+
     @Basic(optional = false)
     @Column(name = "product_id")
     private int productId;
+
     @Basic(optional = false)
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    @Basic(optional = false)
+
     @Column(name = "updated_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
     @Column(name = "is_virtual")
     private Short isVirtual;
+
     @Column(name = "sku")
     private String sku;
+
     @Column(name = "name")
     private String name;
-    @Lob
+
     @Column(name = "description")
     private String description;
+
     @Column(name = "free_shipping")
-    private Short freeShipping;
+    private boolean freeShipping;
+
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "weight")
     private BigDecimal weight;
+
     @Column(name = "quantity")
     private BigDecimal quantity;
+
     @Column(name = "price")
     private BigDecimal price;
+
     @Column(name = "base_price")
     private BigDecimal basePrice;
+
     @Column(name = "row_total")
     private BigDecimal rowTotal;
+
     @Column(name = "base_row_total")
     private BigDecimal baseRowTotal;
+
     @Column(name = "row_weight")
     private BigDecimal rowWeight;
+
     @Column(name = "product_type")
     private String productType;
 
@@ -197,11 +205,11 @@ public class OrderDetail implements Serializable {
         this.description = description;
     }
 
-    public Short getFreeShipping() {
+    public boolean isFreeShipping() {
         return freeShipping;
     }
 
-    public void setFreeShipping(Short freeShipping) {
+    public void setFreeShipping(boolean freeShipping) {
         this.freeShipping = freeShipping;
     }
 
@@ -293,5 +301,5 @@ public class OrderDetail implements Serializable {
     public String toString() {
         return "com.nitsoft.ecommerce.model.OrderDetail[ id=" + id + " ]";
     }
-    
+
 }

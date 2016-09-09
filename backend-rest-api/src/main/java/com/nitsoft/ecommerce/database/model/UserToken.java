@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.database.model;
 
 import java.io.Serializable;
@@ -18,10 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author VS9 X64Bit
- */
 @Entity
 @Table(name = "user_tokens")
 @XmlRootElement
@@ -35,20 +26,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserToken implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @Basic(optional = false)
     @Column(name = "token")
     private String token;
+    
     @Basic(optional = false)
     @Column(name = "company_id")
     private int companyId;
+    
     @Basic(optional = false)
     @Column(name = "user_id")
     private String userId;
+    
     @Basic(optional = false)
     @Column(name = "login_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date loginDate;
+    
     @Basic(optional = false)
     @Column(name = "expiration_date")
     @Temporal(TemporalType.TIMESTAMP)

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.database.model;
 
 import java.io.Serializable;
@@ -17,10 +12,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author VS9 X64Bit
- */
 @Entity
 @Table(name = "categories")
 @XmlRootElement
@@ -35,24 +26,31 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "category_id")
     private Integer categoryId;
+
     @Basic(optional = false)
     @Column(name = "company_id")
     private int companyId;
-    @Basic(optional = false)
+
     @Column(name = "parent_id")
     private int parentId;
+
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
+
     @Basic(optional = false)
     @Column(name = "status")
     private int status;
-    @Basic(optional = false)
+
+    @Column(name = "position")
+    private int position;
+
     @Column(name = "description")
     private String description;
 
@@ -63,12 +61,13 @@ public class Category implements Serializable {
         this.categoryId = categoryId;
     }
 
-    public Category(Integer categoryId, int companyId, int parentId, String name, int status, String description) {
+    public Category(Integer categoryId, int companyId, int parentId, String name, int status, int position, String description) {
         this.categoryId = categoryId;
         this.companyId = companyId;
         this.parentId = parentId;
         this.name = name;
         this.status = status;
+        this.position = position;
         this.description = description;
     }
 
@@ -112,6 +111,14 @@ public class Category implements Serializable {
         this.status = status;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -144,5 +151,5 @@ public class Category implements Serializable {
     public String toString() {
         return "com.nitsoft.ecommerce.model.Category[ categoryId=" + categoryId + " ]";
     }
-    
+
 }

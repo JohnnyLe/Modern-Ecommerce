@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.database.model;
 
 import java.io.Serializable;
@@ -20,12 +15,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author VS9 X64Bit
- */
 @Entity
-@Table(name = "order_address")
+@Table(name = "order_addresses")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "OrderAddress.findAll", query = "SELECT o FROM OrderAddress o"),
@@ -42,33 +33,42 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class OrderAddress implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    
     @Basic(optional = false)
     @Column(name = "order_id")
     private int orderId;
+    
     @Basic(optional = false)
     @Column(name = "adress_id")
     private int adressId;
+    
     @Basic(optional = false)
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    @Basic(optional = false)
+    
     @Column(name = "updated_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+    
     @Column(name = "region_id")
     private Integer regionId;
+    
     @Column(name = "region")
     private String region;
+    
     @Column(name = "postcode")
     private String postcode;
+    
     @Column(name = "prefix")
     private String prefix;
+    
     @Column(name = "suffix")
     private String suffix;
 

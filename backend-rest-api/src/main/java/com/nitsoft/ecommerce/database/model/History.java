@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.database.model;
 
 import java.io.Serializable;
@@ -20,12 +15,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author VS9 X64Bit
- */
 @Entity
-@Table(name = "history")
+@Table(name = "histories")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "History.findAll", query = "SELECT h FROM History h"),
@@ -37,21 +28,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class History implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "history_id")
     private Integer historyId;
+    
     @Basic(optional = false)
     @Column(name = "company_id")
     private int companyId;
+    
     @Basic(optional = false)
     @Column(name = "type")
     private int type;
+    
     @Basic(optional = false)
     @Column(name = "create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
+    
     @Basic(optional = false)
     @Column(name = "value")
     private String value;

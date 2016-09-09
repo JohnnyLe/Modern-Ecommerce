@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.database.model;
 
 import java.io.Serializable;
@@ -17,12 +12,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author VS9 X64Bit
- */
 @Entity
-@Table(name = "theme")
+@Table(name = "themes")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Theme.findAll", query = "SELECT t FROM Theme t"),
@@ -34,20 +25,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Theme implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "theme_id")
     private Integer themeId;
+    
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
+    
     @Basic(optional = false)
     @Column(name = "version")
     private String version;
+    
     @Basic(optional = false)
     @Column(name = "thumbnail")
     private String thumbnail;
+    
     @Basic(optional = false)
     @Column(name = "source_path")
     private String sourcePath;

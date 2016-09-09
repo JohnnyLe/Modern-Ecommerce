@@ -28,4 +28,5 @@ public class ProductService {
     public Iterable<Product> findAllByCategoryId(long categoryId) {
         return productRepository.findAllByCategoryId(categoryId);
     }
+    
 }

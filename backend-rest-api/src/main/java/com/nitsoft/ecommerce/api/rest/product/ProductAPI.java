@@ -53,7 +53,7 @@ public class ProductAPI extends APIUtil {
     }
 
     @RequestMapping(value = APIName.PRODUCTS_BY_CATEGORY, method = RequestMethod.GET, produces = APIName.CHARSET)
-    public String getProductByCategoryId(@RequestParam long categoryId) {
+    public String getProductByCategoryId(@RequestParam Long categoryId) {
 
         List<Product> products = (List<Product>) productService.findAllByCategoryId(categoryId);
 
