@@ -27,6 +27,13 @@ public class APIName {
     // categories api links
     public static final String GET_LIST = VERSION + "category/list";
 
+    //company api link
+    public static final String COMPANIES = VERSION + "companies";
+    public static final String COMPANIES_SEARCH_BY_ID = COMPANIES + "/{id}";
+
+    //review api link
+    public static final String REVIEWS = VERSION + "reviews";
+    public static final String REVIEWS_BY_PRODUCT_ID = "/{id}";
     // SSO
     public static final String OAUTH_LOGIN = VERSION + "oauth/login";
     public static final String OAUTH_IMPLICIT_LOGIN = VERSION + "oauth/implicit/login";
