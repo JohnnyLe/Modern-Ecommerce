@@ -5,18 +5,17 @@
  */
 package com.nitsoft.ecommerce.repository;
 
-import com.nitsoft.ecommerce.database.model.ProductAttributeDetail;
+import com.nitsoft.ecommerce.database.model.ProductAttribute;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 /**
  *
- * @author VS9 X64Bit
+ * @author NHU LINH
  */
-public interface ProductAttributeDetailRepository extends CrudRepository<ProductAttributeDetail, Long> {
-
-    @Query("SELECT pad FROM ProductAttributeDetail pad WHERE pad.productId = :productId")
-    Iterable<ProductAttributeDetail> findAllByProductId(@Param("productId") Long productId);
-
+public interface ProductAttributeRepository extends CrudRepository<ProductAttribute, Long>{
+    
+    @Query("SELECT pad FROM ProductAttribute pad WHERE pad.attributeId = :attributeId")
+    Iterable<ProductAttribute> findAllByProductAttribute(@Param("attributeId") long attributeId);
 }

@@ -45,4 +45,11 @@ public class APIName {
     //Category
     public static final String CATEGORIES = VERSION + "categories";
     public static final String CATEGORIES_ID = VERSION + "categories/{id}";
+    //ProductAttributeDetail
+    public static final String PRODUCT_DETAILS =VERSION + "productdetails/{product_id}";
+    
+    //ProductAttribute;
+    public static final String PRODUCT_ATTRIBUTES = VERSION + "productattributes";
+    //Orders
+    public static final String ORDERS = VERSION + "orders";
 }
