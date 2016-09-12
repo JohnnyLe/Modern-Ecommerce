@@ -15,6 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,11 +34,16 @@ public class ProductAttributeDetailAPI extends APIUtil {
 
     @ApiOperation(value = "getProductDetail")
     @RequestMapping(value = APIName.PRODUCT_DETAILS, method = RequestMethod.GET, produces = APIName.CHARSET)
-    public String getProductDetail() {
+    public String getProductDetail(@PathVariable(value = "product_id") Long productId) {
+        
+        List<ProductAttributeDetail> productdetails = (List<ProductAttributeDetail>) repository.findAllByProductId(productId);
+        if (productdetails != null) {
+            return writeObjectToJson(new StatusResponse(200, productdetails));   
+        } else {
+            statusResponse.setResult("not found");
+        }
 
-        List<ProductAttributeDetail> productdetail = (List<ProductAttributeDetail>) repository.findAll();
-        return writeObjectToJson(new StatusResponse<>(HttpStatus.OK.value(), productdetail));
-
+        return writeObjectToJson(statusResponse);
+        
     }
-    
 }
