@@ -48,7 +48,7 @@ public class Product implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "company_id")
-    private int companyId;
+    private Long companyId;
     
     @Basic(optional = false)
     @Column(name = "name")
@@ -111,7 +111,7 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public Product(Long productId, int companyId, String name, String browsingName, double salePrice, double listPrice, String defaultImage, String overview, int quantity, int status, int rank, String sku, Date createdOn) {
+    public Product(Long productId, Long companyId, String name, String browsingName, double salePrice, double listPrice, String defaultImage, String overview, int quantity, int status, int rank, String sku, Date createdOn) {
         this.productId = productId;
         this.companyId = companyId;
         this.name = name;
@@ -135,11 +135,11 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public int getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 

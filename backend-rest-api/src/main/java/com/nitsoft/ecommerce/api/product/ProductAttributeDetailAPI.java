@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nitsoft.ecommerce.api.category.ProductAttributeDetail;
+package com.nitsoft.ecommerce.api.product;
 
 import com.nitsoft.ecommerce.api.APIName;
 import com.nitsoft.ecommerce.api.APIUtil;
@@ -34,15 +34,15 @@ public class ProductAttributeDetailAPI extends APIUtil {
     @ApiOperation(value = "getProductDetail")
     @RequestMapping(value = APIName.PRODUCT_DETAILS, method = RequestMethod.GET, produces = APIName.CHARSET)
     public String getProductDetail(@PathVariable(value = "product_id") Long productId) {
-        
+
         List<ProductAttributeDetail> productdetails = (List<ProductAttributeDetail>) productAttributeDetailService.findAllByProductId(productId);
         if (productdetails != null) {
-            return writeObjectToJson(new StatusResponse(200, productdetails));   
+            return writeObjectToJson(new StatusResponse(200, productdetails));
         } else {
             statusResponse.setResult("not found");
         }
 
         return writeObjectToJson(statusResponse);
-        
     }
+
 }

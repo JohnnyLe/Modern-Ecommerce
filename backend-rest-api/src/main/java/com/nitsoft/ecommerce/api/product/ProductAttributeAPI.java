@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nitsoft.ecommerce.api.ProductAttribute;
+package com.nitsoft.ecommerce.api.product;
 
 import com.nitsoft.ecommerce.api.APIName;
 import com.nitsoft.ecommerce.api.APIUtil;

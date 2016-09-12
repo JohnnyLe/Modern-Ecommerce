@@ -12,4 +12,5 @@ public interface CompanyRepository extends CrudRepository<Company, Integer> {
 
     @Query("SELECT c FROM Company c WHERE c.companyId = :companyId")
     Company findByCompanyId(@Param("companyId") Integer companyId);
+    
 }

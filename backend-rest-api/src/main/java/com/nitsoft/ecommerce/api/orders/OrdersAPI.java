@@ -11,7 +11,6 @@ import com.nitsoft.ecommerce.api.response.APIStatus;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Orders;
 import com.nitsoft.ecommerce.exception.ApplicationException;
-import com.nitsoft.ecommerce.repository.OrdersRepository;
 import com.nitsoft.ecommerce.service.OrdersService;
 import io.swagger.annotations.Api;
 import java.math.BigDecimal;
@@ -36,6 +35,7 @@ public class OrdersAPI extends APIUtil {
 
     @Autowired
     OrdersService ordersService;
+
     @RequestMapping(value = APIName.ORDERS, method = RequestMethod.POST, produces = APIName.CHARSET)
     @ResponseBody
     public String addOrders(@RequestParam(name = "user_id", required = true) String userId,
@@ -63,7 +63,7 @@ public class OrdersAPI extends APIUtil {
             @RequestParam(name = "customer_gender", required = false) String customerGender,
             @RequestParam(name = "subtotal", required = false) BigDecimal subtotal,
             @RequestParam(name = "base_subtotal", required = false) BigDecimal baseSubtotal,
-            @RequestParam(name = "is_changed", required = false) Integer isChanged){
+            @RequestParam(name = "is_changed", required = false) Integer isChanged) {
         Date createday;
         Date updateday;
         Date customerbirthday;
@@ -104,10 +104,9 @@ public class OrdersAPI extends APIUtil {
         orders.setSubtotal(subtotal);
         orders.setBaseSubtotal(baseSubtotal);
         orders.setIsChanged(isChanged);
-        
+
         ordersService.save(orders);
         return writeObjectToJson(new StatusResponse<>(HttpStatus.OK.value(), orders));
 
     }
 }
-

@@ -52,7 +52,7 @@ public class UserAPI extends APIUtil {
         users.setSalt(Salt);
         users.setStatus(Status);
         users.setUserId(Salt);
-        
+
         customerService.save(users);
         statusResponse = new StatusResponse(APIStatus.OK.getCode(), "Create User successfully");
         return writeObjectToJson(statusResponse);

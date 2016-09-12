@@ -2,8 +2,10 @@ package com.nitsoft.ecommerce.service;
 
 import com.nitsoft.ecommerce.database.model.Product;
 import com.nitsoft.ecommerce.repository.ProductRepository;
-import com.nitsoft.ecommerce.repository.ProductSecification;
+import com.nitsoft.ecommerce.repository.specification.ProductSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,12 +19,12 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Iterable<Product> findAllByCategoryId(long categoryId) {
-        return productRepository.findAllByCategoryId(categoryId);
+    public Page<Product> findAllByCompanyIdAndCategoryId(long companyId, long categoryId, int pageNumber, int pageSize) {
+        return productRepository.findAllByCategoryId(companyId, categoryId, new PageRequest(pageNumber, pageSize));
     }
 
-    public Iterable<Product> doFilterSearchSortPagingProduct(long comId, long catId, long attrId, String searchKey, double mnPrice, double mxPrice, int sortKey, boolean isAscSort, int pSize, int pNumber) {
-        return productRepository.findAll(new ProductSecification(comId, catId, attrId, searchKey, mnPrice, mxPrice, sortKey, isAscSort));
+    public Page<Product> doFilterSearchSortPagingProduct(long comId, long catId, long attrId, String searchKey, double mnPrice, double mxPrice, int sortKey, boolean isAscSort, int pSize, int pNumber) {
+        return productRepository.findAll(new ProductSpecification(comId, catId, attrId, searchKey, mnPrice, mxPrice, sortKey, isAscSort), new PageRequest(pNumber, pSize));
     }
 
 }

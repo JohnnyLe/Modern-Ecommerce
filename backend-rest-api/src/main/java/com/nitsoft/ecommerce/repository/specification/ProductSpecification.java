@@ -1,4 +1,4 @@
-package com.nitsoft.ecommerce.repository;
+package com.nitsoft.ecommerce.repository.specification;
 
 import com.nitsoft.ecommerce.database.model.Product;
 import com.nitsoft.ecommerce.database.model.ProductAttributeDetail;
@@ -13,7 +13,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 
-public class ProductSecification implements Specification<Product> {
+public class ProductSpecification implements Specification<Product> {
 
     private final long companyId;
     private final long categoryId;
@@ -24,7 +24,7 @@ public class ProductSecification implements Specification<Product> {
     private final int sortCase;
     private final boolean isAscSort;
 
-    public ProductSecification(long companyId, long categoryId, long attributeId, String searchKey, double minPrice, double maxPrice, int sortCase, boolean isAscSort) {
+    public ProductSpecification(long companyId, long categoryId, long attributeId, String searchKey, double minPrice, double maxPrice, int sortCase, boolean isAscSort) {
         this.companyId = companyId;
         this.categoryId = categoryId;
         this.attributeId = attributeId;
@@ -66,8 +66,12 @@ public class ProductSecification implements Specification<Product> {
 
         if (minPrice < maxPrice) {
             predicates.add(cb.between(root.<Double>get("salePrice"), minPrice, maxPrice));
-        } else if (minPrice > 0 && minPrice == maxPrice) {
-            predicates.add(cb.equal(root.get("salePrice"), minPrice));
+        } else if (minPrice > 0) {
+            if (maxPrice == -1) {
+                predicates.add(cb.greaterThanOrEqualTo(root.<Double>get("salePrice"), minPrice));
+            } else if (minPrice == maxPrice) {
+                predicates.add(cb.equal(root.get("salePrice"), minPrice));
+            }
         }
         // sort
         Path orderClause;

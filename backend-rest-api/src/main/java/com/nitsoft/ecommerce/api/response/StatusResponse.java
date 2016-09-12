@@ -12,11 +12,10 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
  * Response object
  *
  */
+@JsonInclude(value = Include.NON_NULL)
 public class StatusResponse<T> {
 
-    @JsonInclude(value = Include.NON_NULL)
     private T result;
-    @JsonInclude(value = Include.NON_NULL)
     private String description;
     private int statusCode;
     private Long totalRecords;
@@ -35,7 +34,7 @@ public class StatusResponse<T> {
         this.result = result;
     }
 
-    public StatusResponse(int status, T result, int totalRecords) {
+    public StatusResponse(int status, T result, long totalRecords) {
         this.statusCode = status;
         this.result = result;
         this.totalRecords = new Long(totalRecords);
