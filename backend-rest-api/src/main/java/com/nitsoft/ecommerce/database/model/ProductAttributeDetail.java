@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "ProductAttributeDetail.findByValueNumberic", query = "SELECT p FROM ProductAttributeDetail p WHERE p.valueNumberic = :valueNumberic")})
 public class ProductAttributeDetail implements Serializable {
 
-    private static final Long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Basic(optional = false)

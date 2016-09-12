@@ -1,19 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.service;
 
 import com.nitsoft.ecommerce.database.model.Product;
 import com.nitsoft.ecommerce.repository.ProductRepository;
+import com.nitsoft.ecommerce.repository.ProductSecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author VS9 X64Bit
- */
 @Service
 public class ProductService {
 
@@ -28,5 +20,9 @@ public class ProductService {
     public Iterable<Product> findAllByCategoryId(long categoryId) {
         return productRepository.findAllByCategoryId(categoryId);
     }
-    
+
+    public Iterable<Product> doFilterSearchSortPagingProduct(long comId, long catId, long attrId, String searchKey, double mnPrice, double mxPrice, int sortKey, boolean isAscSort, int pSize, int pNumber) {
+        return productRepository.findAll(new ProductSecification(comId, catId, attrId, searchKey, mnPrice, mxPrice, sortKey, isAscSort));
+    }
+
 }

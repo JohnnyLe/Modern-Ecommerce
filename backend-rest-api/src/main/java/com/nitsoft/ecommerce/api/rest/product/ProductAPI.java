@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.api.rest.product;
 
 import com.nitsoft.ecommerce.api.APIName;
@@ -12,6 +7,8 @@ import com.nitsoft.ecommerce.database.model.Product;
 import com.nitsoft.ecommerce.database.model.ProductAttributeDetail;
 import com.nitsoft.ecommerce.service.ProductAttributeService;
 import com.nitsoft.ecommerce.service.ProductService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,11 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author VS9 X64Bit
- */
 @RestController
+@Api(value = "products")
 public class ProductAPI extends APIUtil {
 
     @Autowired
@@ -34,6 +28,7 @@ public class ProductAPI extends APIUtil {
     @Autowired
     private ProductAttributeService productAttributeService;
 
+    @ApiOperation(value = "get all product", notes = "")
     @RequestMapping(value = APIName.PRODUCTS, method = RequestMethod.GET, produces = APIName.CHARSET)
     public String getAllProducts() {
         List<Product> products = (List<Product>) productService.findAllProduct();
@@ -52,40 +47,31 @@ public class ProductAPI extends APIUtil {
         return writeObjectToJson(new StatusResponse(200, results));
     }
 
+    @ApiOperation(value = "get products by category id", notes = "")
     @RequestMapping(value = APIName.PRODUCTS_BY_CATEGORY, method = RequestMethod.GET, produces = APIName.CHARSET)
-    public String getProductByCategoryId(@RequestParam Long categoryId) {
+    public String getProductByCategoryId(@RequestParam int categoryId) {
 
         List<Product> products = (List<Product>) productService.findAllByCategoryId(categoryId);
 
         return writeObjectToJson(new StatusResponse(200, products));
     }
 
-//    @RequestMapping(value = APIName.PRODUCTS_FILTER_LIST, method = RequestMethod.GET, produces = APIName.CHARSET)
-//    public String getProductFilterList(
-//            @RequestParam String companyId,
-//            @RequestParam(required = false) String categoryId,
-//            @RequestParam(required = false) String attributeId,
-//            @RequestParam(required = false) String searchKey,
-//            @RequestParam(required = false) String minPrice,
-//            @RequestParam(required = false) String maxPrice,
-//            @RequestParam(required = false) String sortCase,
-//            @RequestParam(required = false) String ascSort,
-//            @RequestParam(required = false) String pageSize,
-//            @RequestParam(required = false) String pageNumber
-//    ) {
-//
-//        int comId = ValueConverter.convertStringToInt(companyId, -1);
-//        int catId = ValueConverter.convertStringToInt(categoryId, -1);
-//        int attrId = ValueConverter.convertStringToInt(attributeId, -1);
-//        double mnPrice = ValueConverter.convertStringToDouble(minPrice, -1);
-//        double mxPrice = ValueConverter.convertStringToDouble(maxPrice, -1);
-//        int sortKey = ValueConverter.convertStringToInt(sortCase, -1);
-//        boolean isAscSort = ValueConverter.convertStringToBoolean(ascSort, true);
-//        int pSize = ValueConverter.convertStringToInt(pageSize, Constant.DEFAULT_PAGE_SIZE);
-//        int pNumber = ValueConverter.convertStringToInt(pageNumber, Constant.DEFAULT_PAGE_NUMBER);
-//
-//        List<Product> products = productService.doFilterSearchSortPagingProduct(comId, catId, attrId, searchKey, mnPrice, mxPrice, sortKey, isAscSort, pSize, pNumber);
-//
-//        return writeObjectToJson(new StatusResponse(200, products));
-//    }
+    @RequestMapping(value = APIName.PRODUCTS_FILTER_LIST, method = RequestMethod.GET, produces = APIName.CHARSET)
+    public String getProductFilterList(
+            @RequestParam Long companyId,
+            @RequestParam(required = false, defaultValue = "-1") Long categoryId,
+            @RequestParam(required = false, defaultValue = "-1") Long attributeId,
+            @RequestParam(required = false) String searchKey,
+            @RequestParam(required = false, defaultValue = "0") Double minPrice,
+            @RequestParam(required = false, defaultValue = "0") Double maxPrice,
+            @RequestParam(required = false, defaultValue = "-1") Integer sortCase,
+            @RequestParam(required = false, defaultValue = "1") Boolean ascSort,
+            @RequestParam(required = false, defaultValue = "-1") Integer pageSize,
+            @RequestParam(required = false, defaultValue = "-1") Integer pageNumber
+    ) {
+
+        List<Product> products = (List<Product>) productService.doFilterSearchSortPagingProduct(companyId, categoryId, attributeId, searchKey, minPrice, maxPrice, sortCase, ascSort, pageSize, pageNumber);
+
+        return writeObjectToJson(new StatusResponse(200, products));
+    }
 }
