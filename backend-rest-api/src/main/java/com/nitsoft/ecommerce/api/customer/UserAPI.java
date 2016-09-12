@@ -39,7 +39,7 @@ public class UserAPI extends APIUtil {
             throw new ApplicationException(APIStatus.INVALID_PARAMETER);
         }
 
-        Date now = new Date();
+//        Date now = new Date();
         User users = new User();
         users.setCompanyId(company_Id);
         users.setCreateDate(createdate);
