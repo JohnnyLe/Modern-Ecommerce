@@ -9,7 +9,7 @@ import com.nitsoft.ecommerce.api.APIName;
 import com.nitsoft.ecommerce.api.APIUtil;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.ProductAttribute;
-import com.nitsoft.ecommerce.repository.ProductAttributeRepository;
+import com.nitsoft.ecommerce.service.ProductAttributeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
@@ -28,13 +28,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductAttributeAPI extends APIUtil {
 
     @Autowired
-    ProductAttributeRepository repository;
+    ProductAttributeService productAttributeService;
 
     @ApiOperation(value = "getProductAttribute")
     @RequestMapping(value = APIName.PRODUCT_ATTRIBUTES, method = RequestMethod.GET, produces = APIName.CHARSET)
     public String getProductAttribute() {
 
-        List<ProductAttribute> productattribute = (List<ProductAttribute>) repository.findAll();
+        List<ProductAttribute> productattribute = (List<ProductAttribute>) productAttributeService.findAll();
         return writeObjectToJson(new StatusResponse<>(HttpStatus.OK.value(), productattribute));
 
     }

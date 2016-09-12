@@ -9,12 +9,11 @@ import com.nitsoft.ecommerce.api.APIName;
 import com.nitsoft.ecommerce.api.APIUtil;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.ProductAttributeDetail;
-import com.nitsoft.ecommerce.repository.ProductAttributeDetailRepository;
+import com.nitsoft.ecommerce.service.ProductAttributeDetailService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,13 +29,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductAttributeDetailAPI extends APIUtil {
 
     @Autowired
-    ProductAttributeDetailRepository repository;
+    ProductAttributeDetailService productAttributeDetailService;
 
     @ApiOperation(value = "getProductDetail")
     @RequestMapping(value = APIName.PRODUCT_DETAILS, method = RequestMethod.GET, produces = APIName.CHARSET)
     public String getProductDetail(@PathVariable(value = "product_id") Long productId) {
         
-        List<ProductAttributeDetail> productdetails = (List<ProductAttributeDetail>) repository.findAllByProductId(productId);
+        List<ProductAttributeDetail> productdetails = (List<ProductAttributeDetail>) productAttributeDetailService.findAllByProductId(productId);
         if (productdetails != null) {
             return writeObjectToJson(new StatusResponse(200, productdetails));   
         } else {

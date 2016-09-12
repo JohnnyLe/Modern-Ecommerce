@@ -12,6 +12,7 @@ import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Orders;
 import com.nitsoft.ecommerce.exception.ApplicationException;
 import com.nitsoft.ecommerce.repository.OrdersRepository;
+import com.nitsoft.ecommerce.service.OrdersService;
 import io.swagger.annotations.Api;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -34,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrdersAPI extends APIUtil {
 
     @Autowired
-    OrdersRepository repository;
+    OrdersService ordersService;
     @RequestMapping(value = APIName.ORDERS, method = RequestMethod.POST, produces = APIName.CHARSET)
     @ResponseBody
     public String addOrders(@RequestParam(name = "user_id", required = true) String userId,
@@ -104,7 +105,7 @@ public class OrdersAPI extends APIUtil {
         orders.setBaseSubtotal(baseSubtotal);
         orders.setIsChanged(isChanged);
         
-        repository.save(orders);
+        ordersService.save(orders);
         return writeObjectToJson(new StatusResponse<>(HttpStatus.OK.value(), orders));
 
     }
