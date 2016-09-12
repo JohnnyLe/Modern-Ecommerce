@@ -5,7 +5,7 @@ import com.nitsoft.ecommerce.api.APIUtil;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Product;
 import com.nitsoft.ecommerce.database.model.ProductAttributeDetail;
-import com.nitsoft.ecommerce.service.ProductAttributeService;
+import com.nitsoft.ecommerce.service.ProductAttributeDetailService;
 import com.nitsoft.ecommerce.service.ProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +26,7 @@ public class ProductAPI extends APIUtil {
     @Autowired
     private ProductService productService;
     @Autowired
-    private ProductAttributeService productAttributeService;
+    private ProductAttributeDetailService productAttributeService;
 
     @ApiOperation(value = "get all product", notes = "")
     @RequestMapping(value = APIName.PRODUCTS, method = RequestMethod.GET, produces = APIName.CHARSET)

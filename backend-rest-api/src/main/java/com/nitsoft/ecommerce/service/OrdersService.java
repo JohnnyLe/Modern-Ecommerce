@@ -5,8 +5,8 @@
  */
 package com.nitsoft.ecommerce.service;
 
-import com.nitsoft.ecommerce.database.model.ProductAttribute;
-import com.nitsoft.ecommerce.repository.ProductAttributeRepository;
+import com.nitsoft.ecommerce.database.model.Orders;
+import com.nitsoft.ecommerce.repository.OrdersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +15,10 @@ import org.springframework.stereotype.Service;
  * @author NHU LINH
  */
 @Service
-public class ProductAttributeService {
+public class OrdersService {
     @Autowired
-    private ProductAttributeRepository productAttributeRepository;
-
-    public Iterable<ProductAttribute> findAll() {
-        return productAttributeRepository.findAll();
+    private OrdersRepository ordersRepository;
+    public Orders save(Orders orders){
+        return ordersRepository.save(orders);
     }
 }

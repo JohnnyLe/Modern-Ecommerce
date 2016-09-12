@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 public interface ProductAttributeDetailRepository extends CrudRepository<ProductAttributeDetail, Long> {
 
     @Query("SELECT pad FROM ProductAttributeDetail pad WHERE pad.productId = :productId")
-    Iterable<ProductAttributeDetail> findAllByProductId(@Param("productId") long productId);
+    Iterable<ProductAttributeDetail> findAllByProductId(@Param("productId") Long productId);
 
 }
