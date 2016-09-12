@@ -14,4 +14,8 @@ public class ReviewService {
     public Review findByProductId(int productId) {
         return reviewRepository.findByProductId(productId);
     }
+    
+    public Review save(Review review){
+        return reviewRepository.save(review);
+    }
 }

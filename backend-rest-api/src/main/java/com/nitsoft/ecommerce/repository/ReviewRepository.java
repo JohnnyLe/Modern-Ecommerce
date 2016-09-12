@@ -9,4 +9,5 @@ public interface ReviewRepository extends CrudRepository<Review, Integer> {
 
     @Query("SELECT r FROM Review r WHERE r.productId = :productId")
     Review findByProductId(@Param("productId") int productId);
+    
 }
