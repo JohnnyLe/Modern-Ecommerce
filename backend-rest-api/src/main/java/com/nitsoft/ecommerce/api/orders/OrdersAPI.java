@@ -10,9 +10,12 @@ import com.nitsoft.ecommerce.api.APIUtil;
 import com.nitsoft.ecommerce.api.response.APIStatus;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Orders;
+import com.nitsoft.ecommerce.database.model.User;
 import com.nitsoft.ecommerce.exception.ApplicationException;
+import com.nitsoft.ecommerce.service.CustomerService;
 import com.nitsoft.ecommerce.service.OrdersService;
 import com.nitsoft.util.Constant;
+import com.nitsoft.util.UniqueID;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.math.BigDecimal;
@@ -40,11 +43,15 @@ public class OrdersAPI extends APIUtil {
 
     @Autowired
     OrdersService ordersService;
+    @Autowired
+    CustomerService customerService;
 
     @RequestMapping(method = RequestMethod.POST, produces = APIName.CHARSET)
     @ResponseBody
-    public String addOrders(@RequestParam(name = "user_id", required = true) String userId,
-            @RequestParam(name = "company_id", required = true) int companyId,
+    public String addOrders(@RequestParam(name = "user_id", required = false) String userId,
+            @RequestParam(name = "email", required = false) String email,
+            @RequestParam(name = "create_date", required = true) String createDate,
+            @RequestParam(name = "company_id", required = true) Long companyId,
             @RequestParam(name = "created_at", required = true) String createdAt,
             @RequestParam(name = "updated_at", required = false) String updatedAt,
             @RequestParam(name = "is_active", required = false) Short isActive,
@@ -72,18 +79,30 @@ public class OrdersAPI extends APIUtil {
         Date createday;
         Date updateday;
         Date customerbirthday;
+        Date create_date;
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         try {
             createday = dateFormat.parse(createdAt);
             updateday = dateFormat.parse(updatedAt);
             customerbirthday = dateFormat.parse(customerDob);
+            create_date=dateFormat.parse(createDate);
         } catch (ParseException e) {
             throw new ApplicationException(APIStatus.INVALID_PARAMETER);
         }
 
         Orders orders = new Orders();
+        User users = new User();
 //        orders.setId(id);
-        orders.setUserId(userId);
+        if (userId == null || userId.equals("")) {
+            
+            users.setUserId(UniqueID.getUUID());
+            users.setCompanyId(companyId);
+            users.setCreateDate(createday);
+            users.setEmail(email);
+            customerService.save(users);
+        }
+        
+        orders.setUserId(users.getUserId());
         orders.setCompanyId(companyId);
         orders.setCreatedAt(createday);
         orders.setUpdatedAt(updateday);
@@ -121,10 +140,10 @@ public class OrdersAPI extends APIUtil {
             @PathVariable(value = "id") Long companyId,
             @RequestParam(defaultValue = Constant.DEFAULT_PAGE_NUMBER, required = false) int pageNumber,
             @RequestParam(defaultValue = Constant.DEFAULT_PAGE_SIZE, required = false) int pageSize) {
-        
+
         //http://localhost:8080/api/orders/1?pagenumber=1&pagesize=2
         Page<Orders> orders = ordersService.findAllByCompanyId(companyId, pageNumber, pageSize);
         return writeObjectToJson(new StatusResponse(200, orders.getContent(), orders.getTotalElements()));
-    
+
     }
 }
