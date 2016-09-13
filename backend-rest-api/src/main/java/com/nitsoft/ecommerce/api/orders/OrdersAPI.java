@@ -12,13 +12,17 @@ import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Orders;
 import com.nitsoft.ecommerce.exception.ApplicationException;
 import com.nitsoft.ecommerce.service.OrdersService;
+import com.nitsoft.util.Constant;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,13 +34,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author NHU LINH
  */
 @RestController
-@Api(value = "orders API")
+@Api(value = "create orders API")
+@RequestMapping(value = APIName.ORDERS)
 public class OrdersAPI extends APIUtil {
 
     @Autowired
     OrdersService ordersService;
 
-    @RequestMapping(value = APIName.ORDERS, method = RequestMethod.POST, produces = APIName.CHARSET)
+    @RequestMapping(method = RequestMethod.POST, produces = APIName.CHARSET)
     @ResponseBody
     public String addOrders(@RequestParam(name = "user_id", required = true) String userId,
             @RequestParam(name = "company_id", required = true) int companyId,
@@ -108,5 +113,18 @@ public class OrdersAPI extends APIUtil {
         ordersService.save(orders);
         return writeObjectToJson(new StatusResponse<>(HttpStatus.OK.value(), orders));
 
+    }
+
+    @ApiOperation(value = "get orders by company id", notes = "")
+    @RequestMapping(value = APIName.ORDERS_BY_COMPANY, method = RequestMethod.GET, produces = APIName.CHARSET)
+    public String getOrdersCompanyId(
+            @PathVariable(value = "id") Long companyId,
+            @RequestParam(defaultValue = Constant.DEFAULT_PAGE_NUMBER, required = false) int pageNumber,
+            @RequestParam(defaultValue = Constant.DEFAULT_PAGE_SIZE, required = false) int pageSize) {
+        
+        //http://localhost:8080/api/orders/1?pagenumber=1&pagesize=2
+        Page<Orders> orders = ordersService.findAllByCompanyId(companyId, pageNumber, pageSize);
+        return writeObjectToJson(new StatusResponse(200, orders.getContent(), orders.getTotalElements()));
+    
     }
 }

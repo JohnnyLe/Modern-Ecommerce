@@ -48,4 +48,5 @@ public class APIName {
 
     //Orders
     public static final String ORDERS = VERSION + "orders";
+    public static final String ORDERS_BY_COMPANY = "/{id}";
 }

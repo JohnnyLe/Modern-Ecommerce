@@ -6,17 +6,20 @@
 package com.nitsoft.ecommerce.repository;
 
 import com.nitsoft.ecommerce.database.model.Orders;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 /**
  *
  * @author NHU LINH
  */
-public interface OrdersRepository extends CrudRepository<Orders, Long> {
+public interface OrdersRepository extends PagingAndSortingRepository<Orders, Long>, JpaSpecificationExecutor<Orders> {
 
-    @Query("SELECT pad FROM Orders pad WHERE pad.id = :id")
-    Iterable<Orders> findAllByOrdersId(@Param("id") long id);
+    @Query("SELECT pad FROM Orders pad WHERE pad.companyId = :companyId")
+    Page<Orders> findAllByCompanyId(@Param("companyId") long companyId, Pageable pageable);
     
 }
