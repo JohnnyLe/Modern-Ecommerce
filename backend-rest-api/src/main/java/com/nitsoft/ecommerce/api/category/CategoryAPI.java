@@ -31,24 +31,28 @@ public class CategoryAPI extends APIUtil {
 
     @ApiOperation(value = "getCategory")
     @RequestMapping(value = APIName.CATEGORIES, method = RequestMethod.GET, produces = APIName.CHARSET)
-    public String getCategories() {
+    public String getCategories(@PathVariable(value = "companyId") Long companyId) {
 
-        List<Category> categories = (List<Category>) repository.findAll();
+        List<Category> categories = (List<Category>) repository.findByCompanyId(companyId);
         return writeObjectToJson(new StatusResponse<>(HttpStatus.OK.value(), categories));
 
     }
 
     @RequestMapping(value = APIName.CATEGORIES, method = RequestMethod.POST, produces = APIName.CHARSET)
     @ResponseBody
-    public String addCatrgory(@RequestParam(name = "company_id", required = false) int companyId,
+    public String addCatrgory(@PathVariable(value = "companyId") Long companyId,
             @RequestParam(name = "parent_id", required = false) Long ParentID,
             @RequestParam(name = "name", required = true) String name,
-            @RequestParam(name = "status", required = false) Integer Status) {
+            @RequestParam(name = "status", required = false) Integer Status,
+            @RequestParam(name = "position", required = false) Integer position,
+            @RequestParam(name = "description", required = false) String description) {
         Category category = new Category();
         category.setCompanyId(companyId);
         category.setParentId(ParentID);
         category.setName(name);
         category.setStatus(Status);
+        category.setPosition(position);
+        category.setDescription(description);
 
         repository.save(category);
         return writeObjectToJson(new StatusResponse<>(HttpStatus.OK.value(), category));
@@ -68,5 +72,49 @@ public class CategoryAPI extends APIUtil {
 
         return writeObjectToJson(statusResponse);
 
+    }
+
+    @RequestMapping(value = APIName.CATEGORIES_ID, method = RequestMethod.PUT, produces = APIName.CHARSET)
+    public String updateCategory(@PathVariable(value = "companyId") Long companyId,
+            @PathVariable(value = "id") Long categoryId,
+            @RequestParam(name = "name") String name,
+            @RequestParam(name = "status", required = false) Integer status,
+            @RequestParam(name = "parent_id", required = false) Long ParentID,
+            @RequestParam(name = "position", required = false) Integer position,
+            @RequestParam(name = "description", required = false) String description) {
+
+        Category category = repository.findByCategoryId(categoryId);
+
+        if (category != null) {
+            if (!name.equals("")) {
+                category.setName(name);
+            } else {
+                statusResponse = new StatusResponse(APIStatus.OK.getCode(), "update name no successfully");
+                return writeObjectToJson(statusResponse);
+            }
+
+            if (ParentID != null) {
+                Category parent = repository.findOne(ParentID);
+                if (parent != null && parent.getCompanyId() == category.getCompanyId()) {
+                    category.setParentId(ParentID);
+                } else {
+                    statusResponse = new StatusResponse(APIStatus.OK.getCode(), "update parent_id no successfully");
+                    return writeObjectToJson(statusResponse);
+                }
+
+            }
+            if (status != null) {
+                category.setStatus(status);
+            }
+            if (position != null) {
+                category.setPosition(position);
+            }
+            if (description != null) {
+                category.setDescription(description);
+            }
+            repository.save(category);
+            statusResponse = new StatusResponse(APIStatus.OK.getCode(), category);
+        }
+        return writeObjectToJson(statusResponse);
     }
 }
