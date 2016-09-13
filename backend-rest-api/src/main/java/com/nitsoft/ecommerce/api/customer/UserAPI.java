@@ -24,7 +24,7 @@ public class UserAPI extends APIUtil {
     private CustomerService customerService;
 
     @RequestMapping(value = APIName.USERS_ADD, method = RequestMethod.POST, produces = APIName.CHARSET)
-    private String createUser(@RequestParam(value = "company_id") int company_Id, @RequestParam(value = "create_date") String create_Date,
+    private String createUser(@RequestParam(value = "company_id") Long company_Id, @RequestParam(value = "create_date") String create_Date,
             @RequestParam(value = "email") String Email, @RequestParam(value = "first_name") String first_Name,
             @RequestParam(value = "last_name") String last_Lame, @RequestParam(value = "middle_name") String middle_Name,
             @RequestParam(value = "password_hash") String password_Hash, @RequestParam(value = "role_id") int role_Id,

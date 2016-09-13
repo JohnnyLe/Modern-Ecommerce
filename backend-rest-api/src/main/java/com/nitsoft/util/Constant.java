@@ -77,7 +77,59 @@ public class Constant {
         public String getType() {
             return type;
         }
+    }
 
+    public static enum USER_ROLE {
+        ANONYMOUS_USER(1, "Anonymous User"),
+        REGISTED_USER(2, "Registed User");
+
+        private final int roleId;
+        private final String roleName;
+
+        private USER_ROLE(int id, String name) {
+            this.roleId = id;
+            this.roleName = name;
+        }
+
+        public int getRoleId() {
+            return roleId;
+        }
+
+        public String getRoleName() {
+            return roleName;
+        }
+    }
+    
+    public static enum USER_STATUS {
+        INACTIVE(-1),
+        PENDING(0),
+        ACTIVE(1);
+        
+        private final int status;
+        
+        private USER_STATUS(int status) {
+            this.status = status;
+        }
+        
+        public int getStatus() {
+            return status;
+        }
+    }
+    
+    public static enum ORDER_STATUS {
+        PENDING(0),
+        SHIPPING(1),
+        COMPLETED(2);
+        
+        private final int status;
+        
+        private ORDER_STATUS(int status) {
+            this.status = status;
+        }
+        
+        public int getStatus() {
+            return status;
+        }
     }
 
     public static final long ONE_MINUTE_IN_MILLIS = 60000;

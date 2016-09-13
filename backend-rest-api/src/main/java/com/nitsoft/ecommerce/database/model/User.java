@@ -40,7 +40,7 @@ public class User implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "company_id")
-    private int companyId;
+    private Long companyId;
     
     @Basic(optional = false)
     @Column(name = "role_id")
@@ -85,7 +85,7 @@ public class User implements Serializable {
         this.userId = userId;
     }
 
-    public User(String userId, int companyId, int roleId, String email, String passwordHash, String firstName, String lastName, int status, Date createDate, String salt) {
+    public User(String userId, Long companyId, int roleId, String email, String passwordHash, String firstName, String lastName, int status, Date createDate, String salt) {
         this.userId = userId;
         this.companyId = companyId;
         this.roleId = roleId;
@@ -106,11 +106,11 @@ public class User implements Serializable {
         this.userId = userId;
     }
 
-    public int getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
