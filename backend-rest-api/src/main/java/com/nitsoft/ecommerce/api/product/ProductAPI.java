@@ -4,16 +4,10 @@ import com.nitsoft.ecommerce.api.APIName;
 import com.nitsoft.ecommerce.api.APIUtil;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Product;
-import com.nitsoft.ecommerce.database.model.ProductAttributeDetail;
-import com.nitsoft.ecommerce.service.ProductAttributeDetailService;
 import com.nitsoft.ecommerce.service.ProductService;
 import com.nitsoft.util.Constant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -29,26 +23,18 @@ public class ProductAPI extends APIUtil {
 
     @Autowired
     private ProductService productService;
-    @Autowired
-    private ProductAttributeDetailService productAttributeService;
 
-    @ApiOperation(value = "get all product", notes = "")
+    @ApiOperation(value = "get product by company id", notes = "")
     @RequestMapping(method = RequestMethod.GET, produces = APIName.CHARSET)
-    public String getAllProducts() {
-        Iterable<Product> products = productService.findAllProduct();
-        List<Object> results = new LinkedList<>();
-
-        for (Product product : products) {
-            List<ProductAttributeDetail> productDetais = (List<ProductAttributeDetail>) productAttributeService.findAllByProductId(product.getProductId());
-
-            Map<String, Object> mapObj = new HashMap<>();
-            mapObj.put("product", product);
-            mapObj.put("attributes", productDetais);
-
-            results.add(mapObj);
-        }
-
-        return writeObjectToJson(new StatusResponse(HttpStatus.OK.value(), results));
+    public String getAllProducts(
+            @RequestParam Long companyId,
+            @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_NUMBER) Integer pageNumber,
+            @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_SIZE) Integer pageSize
+    ) {
+        
+        Page<Product> products = productService.findByCompanyId(companyId, pageNumber, pageSize);
+        return writeObjectToJson(new StatusResponse(HttpStatus.OK.value(), products.getContent(), products.getTotalElements()));
+    
     }
 
     @ApiOperation(value = "get products by category id", notes = "")
@@ -60,7 +46,7 @@ public class ProductAPI extends APIUtil {
             @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_SIZE) Integer pageSize
     ) {
 
-        Page<Product> products = productService.findAllByCompanyIdAndCategoryId(companyId, categoryId, pageNumber, pageSize);
+        Page<Product> products = productService.findByCompanyIdAndCategoryId(companyId, categoryId, pageNumber, pageSize);
         return writeObjectToJson(new StatusResponse(HttpStatus.OK.value(), products.getContent(), products.getTotalElements()));
 
     }

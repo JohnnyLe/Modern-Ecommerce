@@ -10,7 +10,9 @@ import org.springframework.data.repository.query.Param;
 
 public interface ProductRepository extends PagingAndSortingRepository<Product, Long>, JpaSpecificationExecutor<Product> {
 
+    Page<Product> findByCompanyId(@Param("companyId") long companyId, Pageable pageable);
+
     @Query("SELECT p FROM Product p, ProductCategory pc WHERE p.companyId = :companyId AND pc.categoryId = :categoryId AND pc.productId = p.productId")
-    Page<Product> findAllByCategoryId(@Param("companyId") long companyId, @Param("categoryId") long categoryId, Pageable pageable);
+    Page<Product> findByCategoryId(@Param("companyId") long companyId, @Param("categoryId") long categoryId, Pageable pageable);
 
 }

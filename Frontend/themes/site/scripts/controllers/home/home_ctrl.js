@@ -6,7 +6,7 @@ angular.module('marketplace.home', [])
         
     // Data model biding
     $scope.loadData = function () {
-        util.callRequest('api/products', "GET").then(function (data) {
+        util.callRequest('api/products?companyId=2', "GET").then(function (data) {
             $scope.products = data.result;
         });
     };

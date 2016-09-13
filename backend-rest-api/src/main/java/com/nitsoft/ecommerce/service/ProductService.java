@@ -19,8 +19,12 @@ public class ProductService {
         return productRepository.findAll();
     }
 
-    public Page<Product> findAllByCompanyIdAndCategoryId(long companyId, long categoryId, int pageNumber, int pageSize) {
-        return productRepository.findAllByCategoryId(companyId, categoryId, new PageRequest(pageNumber, pageSize));
+    public Page<Product> findByCompanyId(long companyId, int pageNumber, int pageSize) {
+        return productRepository.findByCompanyId(companyId, new PageRequest(pageNumber, pageSize));
+    }
+
+    public Page<Product> findByCompanyIdAndCategoryId(long companyId, long categoryId, int pageNumber, int pageSize) {
+        return productRepository.findByCategoryId(companyId, categoryId, new PageRequest(pageNumber, pageSize));
     }
 
     public Page<Product> doFilterSearchSortPagingProduct(long comId, long catId, long attrId, String searchKey, double mnPrice, double mxPrice, int sortKey, boolean isAscSort, int pSize, int pNumber) {
