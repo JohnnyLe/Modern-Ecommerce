@@ -36,7 +36,7 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
                 templateUrl: 'pages/shop.html'
             })
             .state('product-details', {
-                url: '/product-details',
+                url: '/product-details/{productId}',
                 parent: 'master',
                 templateUrl: 'scripts/controllers/products/details/product-details.html',
                 controller: 'ProductDetailsCtrl'

@@ -21,16 +21,20 @@ public class ProductSpecification implements Specification<Product> {
     private final String searchKey;
     private double minPrice;
     private final double maxPrice;
+    private int minRank;
+    private final int maxRank;
     private final int sortCase;
     private final boolean isAscSort;
 
-    public ProductSpecification(long companyId, long categoryId, long attributeId, String searchKey, double minPrice, double maxPrice, int sortCase, boolean isAscSort) {
+    public ProductSpecification(long companyId, long categoryId, long attributeId, String searchKey, double minPrice, double maxPrice, int minRank, int maxRank, int sortCase, boolean isAscSort) {
         this.companyId = companyId;
         this.categoryId = categoryId;
         this.attributeId = attributeId;
         this.searchKey = searchKey;
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
+        this.minRank = minRank;
+        this.maxRank = maxRank;
         this.sortCase = sortCase;
         this.isAscSort = isAscSort;
     }
@@ -65,12 +69,29 @@ public class ProductSpecification implements Specification<Product> {
         }
 
         if (minPrice < maxPrice) {
+            // minPrice <= price <= maxPrice
             predicates.add(cb.between(root.<Double>get("salePrice"), minPrice, maxPrice));
         } else if (minPrice > 0) {
             if (maxPrice == -1) {
+                // price >= minPrice
                 predicates.add(cb.greaterThanOrEqualTo(root.<Double>get("salePrice"), minPrice));
             } else if (minPrice == maxPrice) {
+                // price == minPrice
                 predicates.add(cb.equal(root.get("salePrice"), minPrice));
+            }
+        }
+        // validate rank
+        if (minRank < 0) {
+            minRank = 0;
+        }
+
+        if (minRank < maxRank) {
+            predicates.add(cb.between(root.<Integer>get("rank"), minRank, maxRank));
+        } else if (minRank > 0) {
+            if (maxRank == -1) {
+                predicates.add(cb.greaterThanOrEqualTo(root.<Integer>get("rank"), minRank));
+            } else if (minRank == maxRank) {
+                predicates.add(cb.equal(root.get("rank"), minRank));
             }
         }
         // sort

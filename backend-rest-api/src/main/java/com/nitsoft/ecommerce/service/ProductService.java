@@ -27,8 +27,8 @@ public class ProductService {
         return productRepository.findByCategoryId(companyId, categoryId, new PageRequest(pageNumber, pageSize));
     }
 
-    public Page<Product> doFilterSearchSortPagingProduct(long comId, long catId, long attrId, String searchKey, double mnPrice, double mxPrice, int sortKey, boolean isAscSort, int pSize, int pNumber) {
-        return productRepository.findAll(new ProductSpecification(comId, catId, attrId, searchKey, mnPrice, mxPrice, sortKey, isAscSort), new PageRequest(pNumber, pSize));
+    public Page<Product> doFilterSearchSortPagingProduct(long comId, long catId, long attrId, String searchKey, double mnPrice, double mxPrice, int minRank, int maxRank, int sortKey, boolean isAscSort, int pSize, int pNumber) {
+        return productRepository.findAll(new ProductSpecification(comId, catId, attrId, searchKey, mnPrice, mxPrice, minRank, maxRank, sortKey, isAscSort), new PageRequest(pNumber, pSize));
     }
 
 }

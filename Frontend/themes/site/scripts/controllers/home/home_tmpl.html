@@ -14,16 +14,23 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img ng-src="{{ 'images/' + p.default_image}}" alt="" />
-                                    <h2>{{p.list_price}}</h2>
+                                    <img ng-src="{{p.default_image}}" alt="" />
+                                    <h2>{{'$'+p.list_price}}</h2>
                                     <p>{{p.name}}</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a href="#" class="btn btn-default add-to-cart">
+                                        <i class="fa fa-shopping-cart"></i>Add to cart
+                                    </a>
                                 </div>
                                 <div class="product-overlay">
                                     <div class="overlay-content">
-                                        <h2>{{p.list_price}}</h2>
+                                        <h2>{{'$'+p.list_price}}</h2>
                                         <p>{{p.name}}</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a href="#" class="btn btn-default add-to-cart">
+                                            <i class="fa fa-shopping-cart"></i>Add to cart
+                                        </a>
+                                        <a ui-sref="product-details({productId: p.product_id})" class="btn btn-default add-to-cart">
+                                            <i class="fa fa-plus-square"></i>View detail
+                                        </a>
                                     </div>
                                 </div>
                             </div>
