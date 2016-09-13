@@ -36,6 +36,7 @@ public class APIName {
     public static final String USERS = VERSION + "/users";
     public static final String USERS_REGISTER = "/register";
     public static final String USERS_LOGIN = "/login";
+    public static final String USERS_LOGOUT = "/logout";
 
     //review api link
     public static final String REVIEWS = VERSION + "/reviews";

@@ -13,4 +13,12 @@ public class UserTokenService {
         return userTokenRepository.save(userToken);
     }
 
+    public UserToken getTokenById(String token) {
+        return userTokenRepository.findOne(token);
+    }
+
+    public void invalidateToken(UserToken userToken) {
+        userTokenRepository.delete(userToken);
+    }
+
 }

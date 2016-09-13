@@ -12,8 +12,11 @@ import com.nitsoft.util.Constant;
 import com.nitsoft.util.DateUtil;
 import com.nitsoft.util.MD5Hash;
 import com.nitsoft.util.UniqueID;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -119,6 +122,20 @@ public class UserAPI extends APIUtil {
                 // can't find user by email address in database
                 statusResponse = new StatusResponse(APIStatus.ERR_USER_NOT_VALID);
             }
+        }
+
+        return writeObjectToJson(statusResponse);
+    }
+
+    @RequestMapping(value = APIName.USERS_LOGOUT, method = RequestMethod.POST, produces = APIName.CHARSET)
+    public String logout(@PathVariable Long companyID, @RequestParam String token) {
+
+        UserToken userToken = userTokenService.getTokenById(token);
+        if (userToken != null) {
+            userTokenService.invalidateToken(userToken);
+            statusResponse = new StatusResponse(APIStatus.OK);
+        } else {
+            statusResponse = new StatusResponse(APIStatus.INVALID_TOKEN);
         }
 
         return writeObjectToJson(statusResponse);

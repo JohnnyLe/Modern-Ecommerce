@@ -9,13 +9,17 @@ import com.nitsoft.ecommerce.repository.UserRepository;
 public class UserService {
 
     @Autowired
-    private UserRepository customerRepository;
-    
+    private UserRepository userRepository;
+
     public User getUserByEmail(String email, long companyId) {
-        return customerRepository.findByEmail(email, companyId);
+        return userRepository.findByEmail(email, companyId);
     }
 
     public User save(User users) {
-        return customerRepository.save(users);
+        return userRepository.save(users);
+    }
+
+    public User getUserById(String userId) {
+        return userRepository.findOne(userId);
     }
 }
