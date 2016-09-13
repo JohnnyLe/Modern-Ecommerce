@@ -56,7 +56,7 @@ public class Orders implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     
     @Basic(optional = false)
     @Column(name = "user_id")
@@ -64,7 +64,7 @@ public class Orders implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "company_id")
-    private int companyId;
+    private Long companyId;
     
     @Basic(optional = false)
     @Column(name = "created_at")
@@ -147,11 +147,11 @@ public class Orders implements Serializable {
     public Orders() {
     }
 
-    public Orders(Integer id) {
+    public Orders(Long id) {
         this.id = id;
     }
 
-    public Orders(Integer id, String userId, int companyId, Date createdAt, Date updatedAt, int status) {
+    public Orders(Long id, String userId, Long companyId, Date createdAt, Date updatedAt, int status) {
         this.id = id;
         this.userId = userId;
         this.companyId = companyId;
@@ -160,11 +160,11 @@ public class Orders implements Serializable {
         this.status = status;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -176,11 +176,11 @@ public class Orders implements Serializable {
         this.userId = userId;
     }
 
-    public int getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
