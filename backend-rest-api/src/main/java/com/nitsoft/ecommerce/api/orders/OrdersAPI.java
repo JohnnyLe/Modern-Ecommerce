@@ -12,7 +12,7 @@ import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Orders;
 import com.nitsoft.ecommerce.database.model.User;
 import com.nitsoft.ecommerce.exception.ApplicationException;
-import com.nitsoft.ecommerce.service.CustomerService;
+import com.nitsoft.ecommerce.service.UserService;
 import com.nitsoft.ecommerce.service.OrdersService;
 import com.nitsoft.util.Constant;
 import com.nitsoft.util.UniqueID;
@@ -43,7 +43,7 @@ public class OrdersAPI extends APIUtil {
     @Autowired
     OrdersService ordersService;
     @Autowired
-    CustomerService customerService;
+    UserService customerService;
 
     @RequestMapping(method = RequestMethod.POST, produces = APIName.CHARSET)
     @ResponseBody
