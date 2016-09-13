@@ -47,9 +47,17 @@ public class OrdersAPI extends APIUtil {
 
     @RequestMapping(method = RequestMethod.POST, produces = APIName.CHARSET)
     @ResponseBody
+<<<<<<< HEAD
+    public String addOrders(@PathVariable(value = "companyId") Long companyId,
+            @RequestParam(name = "user_id", required = true) String userId,
+            //@RequestParam(name = "company_id", required = true) Long companyId,
+            @RequestParam(name = "created_at", required = true) String createdAt,
+            @RequestParam(name = "updated_at", required = false) String updatedAt,
+=======
     public String addOrders(@RequestParam(name = "user_id", required = false) String userId,
             @RequestParam(name = "email", required = false) @Email String email,
             @RequestParam(name = "company_id", required = true) Long companyId,
+>>>>>>> 1f9135acda69acf879f0d2afcbc4213343342da6
             @RequestParam(name = "is_active", required = false) Short isActive,
             @RequestParam(name = "is_virtual", required = false) Short isVirtual,
             @RequestParam(name = "is_multi_shipping", required = false) Short isMultiShipping,

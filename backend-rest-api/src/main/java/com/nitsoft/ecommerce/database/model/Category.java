@@ -35,7 +35,7 @@ public class Category implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "company_id")
-    private int companyId;
+    private Long companyId;
 
     @Column(name = "parent_id")
     private Long parentId;
@@ -61,7 +61,7 @@ public class Category implements Serializable {
         this.categoryId = categoryId;
     }
 
-    public Category(Long categoryId, int companyId, Long parentId, String name, int status, int position, String description) {
+    public Category(Long categoryId, Long companyId, Long parentId, String name, int status, int position, String description) {
         this.categoryId = categoryId;
         this.companyId = companyId;
         this.parentId = parentId;
@@ -79,11 +79,11 @@ public class Category implements Serializable {
         this.categoryId = categoryId;
     }
 
-    public int getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
