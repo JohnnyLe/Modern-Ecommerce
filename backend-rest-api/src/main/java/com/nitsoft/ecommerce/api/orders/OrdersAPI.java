@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.api.orders;
 
 import com.nitsoft.ecommerce.api.APIName;
@@ -28,7 +23,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -46,18 +40,9 @@ public class OrdersAPI extends APIUtil {
     UserService customerService;
 
     @RequestMapping(method = RequestMethod.POST, produces = APIName.CHARSET)
-    @ResponseBody
-<<<<<<< HEAD
-    public String addOrders(@PathVariable(value = "companyId") Long companyId,
-            @RequestParam(name = "user_id", required = true) String userId,
-            //@RequestParam(name = "company_id", required = true) Long companyId,
-            @RequestParam(name = "created_at", required = true) String createdAt,
-            @RequestParam(name = "updated_at", required = false) String updatedAt,
-=======
     public String addOrders(@RequestParam(name = "user_id", required = false) String userId,
             @RequestParam(name = "email", required = false) @Email String email,
             @RequestParam(name = "company_id", required = true) Long companyId,
->>>>>>> 1f9135acda69acf879f0d2afcbc4213343342da6
             @RequestParam(name = "is_active", required = false) Short isActive,
             @RequestParam(name = "is_virtual", required = false) Short isVirtual,
             @RequestParam(name = "is_multi_shipping", required = false) Short isMultiShipping,
@@ -84,7 +69,7 @@ public class OrdersAPI extends APIUtil {
         Date createDate = new Date();
 //        Date customerbirthday;
 //        Date create_date;
-        
+
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 //        try {
 //            createday = dateFormat.parse(new String createdAt);
@@ -94,7 +79,6 @@ public class OrdersAPI extends APIUtil {
 //        } catch (ParseException e) {
 //            throw new ApplicationException(APIStatus.INVALID_PARAMETER);
 //        }
-
         Orders orders = new Orders();
         User users = new User();
 
@@ -117,7 +101,7 @@ public class OrdersAPI extends APIUtil {
                 throw new ApplicationException(APIStatus.INVALID_PARAMETER, new IllegalArgumentException("Email address is null"));
             }
         } else {
-            
+
         }
 
         orders.setUserId(users.getUserId());
