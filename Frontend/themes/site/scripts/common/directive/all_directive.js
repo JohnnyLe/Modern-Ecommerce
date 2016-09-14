@@ -382,8 +382,8 @@ angular.module('marketplace.directive', [ 'components' ])
             
             $scope.loadData = function () {
                 // load categories                
-                util.callRequest('api/categories', 'GET').then( function( data ) {
-                    $scope.categories = sortOutAllCategories(data.result, 0);
+                util.callRequest('categories', 'GET').then( function( data ) {
+                    $scope.categories = sortOutAllCategories(data.result, null);
                     console.log($scope.categories);
                 });
                 

@@ -1285,6 +1285,7 @@ h2.title {
   font-weight: 700;
   margin-right: 20px;
   margin-top: 0px;
+  width: 100%;
 }
 .product-information span input {
   border: 1px solid #DEDEDC;
