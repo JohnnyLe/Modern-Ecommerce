@@ -12,28 +12,22 @@
                             <img ng-src="{{product.default_image}}" alt="" />
                             <h3>ZOOM</h3>
                         </div>
-                        <div id="similar-product" class="carousel slide" data-ride="carousel">
+                        <div ng-if="productImgs && productImgs.length > 0" id="similar-product" class="carousel slide" data-ride="carousel">
 
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <a href="" ng-repeat="img in product.detail_images">
+                                    <a href="" ng-repeat="img in productImgs">
                                         <img ng-src="images/product-details/{{img}}" alt="">
                                     </a>
                                 </div>
-                                <div class="item">
-                                    <a href="" ng-repeat="img in product.detail_images">
-                                        <img ng-src="images/product-details/similar2.jpg" alt="">
-                                    </a>
-                                </div>
-
                             </div>
 
                             <!-- Controls -->
-                            <a href="#similar-product" ui-sref="product-details" class="left item-control" data-slide="prev" ng-non-bindable>
+                            <a href="#similar-product" target="_self" class="left item-control" data-slide="prev" ng-non-bindable>
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a href="#similar-product" class="right item-control" data-slide="next" ng-non-bindable>
+                            <a href="#similar-product" target="_self" class="right item-control" data-slide="next" ng-non-bindable>
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         </div>
@@ -63,16 +57,19 @@
                 </div><!--/product-details-->
 
                 <div class="category-tab shop-details-tab"><!--category-tab-->
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 shop-details-tab-header">
                         <ul class="nav nav-tabs">
-                            <li><a href="#details" data-toggle="tab">Details</a></li>
-                            <li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>
-                            <li><a href="#tag" data-toggle="tab">Tag</a></li>
-                            <li class="active"><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
+                            <li><a href="#details" target="_self" data-toggle="tab">Details</a></li>
+                            <li><a href="#companyprofile" target="_self" data-toggle="tab">Company Profile</a></li>
+                            <li><a href="#tag" target="_self" data-toggle="tab">Tag</a></li>
+                            <li class="active"><a href="#reviews" target="_self" data-toggle="tab">Reviews (5)</a></li>
                         </ul>
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane fade" id="details" >
+                            <div class="col-sm-12">
+                                <p>{{product.description}}</p>
+                            </div>
                             <div class="col-sm-3">
                                 <div class="product-image-wrapper">
                                     <div class="single-products">

@@ -384,7 +384,6 @@ angular.module('marketplace.directive', [ 'components' ])
                 // load categories                
                 util.callRequest('categories', 'GET').then( function( data ) {
                     $scope.categories = sortOutAllCategories(data.result, null);
-                    console.log($scope.categories);
                 });
                 
                 // load brands
@@ -412,11 +411,11 @@ angular.module('marketplace.directive', [ 'components' ])
                             outJson.id = cat.category_id;
                             outJson.child = out;
                             cats.push(outJson);
-//                            if (cats.length > cat.position) {
-//                                var temp = cats[cat.position - 1];
-//                                cats[cat.position - 1] = outJson;
-//                                cats[cats.length - 1] = temp;
-//                            }
+                            if (cat.position && cats.length > cat.position) {
+                                var temp = cats[cat.position - 1];
+                                cats[cat.position - 1] = outJson;
+                                cats[cats.length - 1] = temp;
+                            }
                         }
                     });
                 }

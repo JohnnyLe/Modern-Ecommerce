@@ -131,6 +131,26 @@ public class Constant {
             return status;
         }
     }
+    
+    public static enum PRODUCT_ATTRIBUTE {
+        DETAIL_IMAGES(1, "Detail images");
+        
+        private final int id;
+        private final String name;
+        
+        private PRODUCT_ATTRIBUTE(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+        
+        public int getId() {
+            return id;
+        }
+        
+        public String getName() {
+            return name;
+        }
+    }
 
     public static final long ONE_MINUTE_IN_MILLIS = 60000;
     public static final long ONE_SECOND_IN_MILLIS = 1000;
