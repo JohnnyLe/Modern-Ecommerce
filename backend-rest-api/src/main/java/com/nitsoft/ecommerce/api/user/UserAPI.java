@@ -14,6 +14,9 @@ import com.nitsoft.util.MD5Hash;
 import com.nitsoft.util.UniqueID;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.hibernate.validator.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +37,7 @@ public class UserAPI extends APIUtil {
     @RequestMapping(path = APIName.USERS_REGISTER, method = RequestMethod.POST, produces = APIName.CHARSET)
     public String register(
             @PathVariable Long companyId,
-            @RequestParam String email,
+            @RequestParam @Email String email,
             @RequestParam String firstName,
             @RequestParam String lastName,
             @RequestParam(required = false) String middleName,
@@ -45,29 +48,54 @@ public class UserAPI extends APIUtil {
         User existed = userService.getUserByEmail(email, companyId);
         if (existed == null) {
             // email is valid to create user
-            User user = new User();
-            user.setUserId(UniqueID.getUUID());
-            user.setCompanyId(companyId);
-            user.setCreateDate(new Date());
-            user.setEmail(email);
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setMiddleName(middleName);
-            user.setSalt(UniqueID.getUUID());
+            if (!email.equals("") && !firstName.equals("") && !lastName.equals("") && !password.equals("")) {
+                
+                
+                StringBuilder regex = new StringBuilder();
+                regex.append("^");
+                regex.append("[_a-z0-9-]+(\\.[_a-z0-9-]+)*@([a-z0-9]+\\.com)");
+                regex.append("$");
+                Pattern pattern = Pattern.compile(regex.toString());
+                Matcher matcher = pattern.matcher(email);
+                boolean valid = matcher.matches();
+                if (valid == false) {
+                    statusResponse = new StatusResponse(APIStatus.ERR_INVALID_DATA);
+                    return writeObjectToJson(statusResponse);
+                }
+            
+                if(password.length() < 6){
+                    statusResponse = new StatusResponse(APIStatus.ERR_INVALID_DATA);
+                    return writeObjectToJson(statusResponse);
+                }
+                
+                User user = new User();
+                user.setUserId(UniqueID.getUUID());
+                user.setCompanyId(companyId);
+                user.setCreateDate(new Date());
+                user.setEmail(email);
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                user.setMiddleName(middleName);
+                user.setSalt(UniqueID.getUUID());
 
-            try {
-                user.setPasswordHash(MD5Hash.MD5Encrypt(password + user.getSalt()));
-            } catch (NoSuchAlgorithmException ex) {
-                throw new RuntimeException("Encrypt user password error", ex);
+                try {
+                    user.setPasswordHash(MD5Hash.MD5Encrypt(password + user.getSalt()));
+                } catch (NoSuchAlgorithmException ex) {
+                    throw new RuntimeException("Encrypt user password error", ex);
+                }
+
+                user.setRoleId(Constant.USER_ROLE.REGISTED_USER.getRoleId());
+                user.setStatus(Constant.USER_STATUS.ACTIVE.getStatus());
+
+                userService.save(user);
+                // do send mail notify...
+                statusResponse = new StatusResponse(APIStatus.OK.getCode(), user);
+            } else {
+                statusResponse = new StatusResponse(APIStatus.ERR_INVALID_DATA);
+                return writeObjectToJson(statusResponse);
             }
-
-            user.setRoleId(Constant.USER_ROLE.REGISTED_USER.getRoleId());
-            user.setStatus(Constant.USER_STATUS.PENDING.getStatus());
-
-            userService.save(user);
-            // do send mail notify...
-
-            statusResponse = new StatusResponse(APIStatus.OK.getCode(), user);
+            
+            
         } else {
             // notify user already exists
             statusResponse = new StatusResponse(APIStatus.USER_ALREADY_EXIST);
@@ -109,7 +137,7 @@ public class UserAPI extends APIUtil {
                         Date currentDate = new Date();
                         userToken.setLoginDate(DateUtil.convertToUTC(currentDate));
 
-                        Date expirationDate = keepMeLogin ? new Date(currentDate.getTime() + Constant.DEFAULT_REMEMBER_LOGIN_MILISECONDS) : new Date();
+                        Date expirationDate = keepMeLogin ? new Date(currentDate.getTime() + Constant.DEFAULT_REMEMBER_LOGIN_MILISECONDS) : new Date(currentDate.getTime() + Constant.DEFAULT_SESSION_TIME_OUT);
                         userToken.setExpirationDate(DateUtil.convertToUTC(expirationDate));
 
                         userTokenService.save(userToken);
@@ -133,7 +161,7 @@ public class UserAPI extends APIUtil {
     }
 
     @RequestMapping(value = APIName.USERS_LOGOUT, method = RequestMethod.POST, produces = APIName.CHARSET)
-    public String logout(@PathVariable Long companyID, @RequestParam String token) {
+    public String logout(@PathVariable Long companyId, @RequestParam String token) {
 
         UserToken userToken = userTokenService.getTokenById(token);
         if (userToken != null) {
