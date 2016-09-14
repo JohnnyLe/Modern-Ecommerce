@@ -16,7 +16,7 @@ angular.module('marketplace', [
 // Define all route of our app
 config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     
-    $urlRouterProvider.otherwise("/index");
+    // $urlRouterProvider.otherwise("/index");
     // For authentication, but for now just Mock demo.
     // Will be implement in near function
     $stateProvider

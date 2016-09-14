@@ -1,4 +1,4 @@
-package com.nitsoft.ecommerce.api.customer;
+package com.nitsoft.ecommerce.api.user;
 
 import com.nitsoft.ecommerce.api.APIName;
 import com.nitsoft.ecommerce.api.APIUtil;
@@ -6,6 +6,7 @@ import com.nitsoft.ecommerce.api.response.APIStatus;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.User;
 import com.nitsoft.ecommerce.database.model.UserToken;
+import com.nitsoft.ecommerce.notification.email.EmailSender;
 import com.nitsoft.ecommerce.service.UserService;
 import com.nitsoft.ecommerce.service.UserTokenService;
 import com.nitsoft.util.Constant;
@@ -68,8 +69,9 @@ public class UserAPI extends APIUtil {
             user.setStatus(Constant.USER_STATUS.PENDING.getStatus());
 
             userService.save(user);
-            statusResponse = new StatusResponse(APIStatus.OK.getCode(), user);
+            // do send mail notify...
 
+            statusResponse = new StatusResponse(APIStatus.OK.getCode(), user);
         } else {
             // notify user already exists
             statusResponse = new StatusResponse(APIStatus.USER_ALREADY_EXIST);
@@ -100,27 +102,34 @@ public class UserAPI extends APIUtil {
                     throw new RuntimeException("User login encrypt password error", ex);
                 }
 
-                if (passwordHash.equals(userLogin.getPasswordHash())) {
-                    UserToken userToken = new UserToken();
-                    userToken.setToken(UniqueID.getUUID());
-                    userToken.setCompanyId(companyId);
-                    userToken.setUserId(userLogin.getUserId());
+                int userStatus = userLogin.getStatus();
+                if (userStatus == Constant.USER_STATUS.ACTIVE.getStatus()) {
+                    if (passwordHash.equals(userLogin.getPasswordHash())) {
+                        UserToken userToken = new UserToken();
+                        userToken.setToken(UniqueID.getUUID());
+                        userToken.setCompanyId(companyId);
+                        userToken.setUserId(userLogin.getUserId());
 
-                    Date currentDate = new Date();
-                    userToken.setLoginDate(DateUtil.convertToUTC(currentDate));
+                        Date currentDate = new Date();
+                        userToken.setLoginDate(DateUtil.convertToUTC(currentDate));
 
-                    Date expirationDate = keepMeLogin ? new Date(currentDate.getTime() + Constant.DEFAULT_REMEMBER_LOGIN_MILISECONDS) : new Date();
-                    userToken.setExpirationDate(DateUtil.convertToUTC(expirationDate));
+                        Date expirationDate = keepMeLogin ? new Date(currentDate.getTime() + Constant.DEFAULT_REMEMBER_LOGIN_MILISECONDS) : new Date();
+                        userToken.setExpirationDate(DateUtil.convertToUTC(expirationDate));
 
-                    userTokenService.save(userToken);
-                    statusResponse = new StatusResponse<>(HttpStatus.OK.value(), userToken);
+                        userTokenService.save(userToken);
+                        statusResponse = new StatusResponse<>(HttpStatus.OK.value(), userToken);
+                    } else {
+                        // wrong password
+                        statusResponse = new StatusResponse(APIStatus.ERR_USER_NOT_VALID);
+                    }
+                } else if (userStatus == Constant.USER_STATUS.PENDING.getStatus()) {
+                    statusResponse = new StatusResponse(APIStatus.USER_PENDING_STATUS);
                 } else {
-                    // wrong password
                     statusResponse = new StatusResponse(APIStatus.ERR_USER_NOT_VALID);
                 }
             } else {
                 // can't find user by email address in database
-                statusResponse = new StatusResponse(APIStatus.ERR_USER_NOT_VALID);
+                statusResponse = new StatusResponse(APIStatus.ERR_USER_NOT_EXIST);
             }
         }
 
