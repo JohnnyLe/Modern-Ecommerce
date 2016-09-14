@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.api;
 
 public class APIName {
 
     // version
-    public static final String VERSION = "api/{companyId}";
+    public static final String VERSION = "api/v1/{companyId}";
 
     // charset
     public static final String CHARSET = "application/json;charset=utf-8";
@@ -25,6 +20,7 @@ public class APIName {
     // product api links
     public static final String PRODUCTS = VERSION + "/products";
     public static final String PRODUCTS_BY_CATEGORY = "/category";
+    public static final String PRODUCT_BY_ID = "/{productId}";
     public static final String PRODUCTS_FILTER_LIST = "/filter";
     public static final String PRODUCT_DETAILS = VERSION + "/productdetails/{product_id}";
     public static final String PRODUCT_ATTRIBUTES = VERSION + "/productattributes";
@@ -39,7 +35,9 @@ public class APIName {
 
     //user api link
     public static final String USERS = VERSION + "/users";
-    public static final String USERS_ADD = USERS + "/add";
+    public static final String USERS_REGISTER = "/register";
+    public static final String USERS_LOGIN = "/login";
+    public static final String USERS_LOGOUT = "/logout";
 
     //review api link
     public static final String REVIEWS = VERSION + "/reviews";

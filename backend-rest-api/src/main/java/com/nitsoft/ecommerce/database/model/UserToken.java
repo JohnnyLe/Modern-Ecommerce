@@ -34,7 +34,7 @@ public class UserToken implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "company_id")
-    private int companyId;
+    private Long companyId;
     
     @Basic(optional = false)
     @Column(name = "user_id")
@@ -57,7 +57,7 @@ public class UserToken implements Serializable {
         this.token = token;
     }
 
-    public UserToken(String token, int companyId, String userId, Date loginDate, Date expirationDate) {
+    public UserToken(String token, Long companyId, String userId, Date loginDate, Date expirationDate) {
         this.token = token;
         this.companyId = companyId;
         this.userId = userId;
@@ -73,11 +73,11 @@ public class UserToken implements Serializable {
         this.token = token;
     }
 
-    public int getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 

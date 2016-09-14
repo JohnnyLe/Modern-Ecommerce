@@ -2,6 +2,7 @@ package com.nitsoft.ecommerce.api.product;
 
 import com.nitsoft.ecommerce.api.APIName;
 import com.nitsoft.ecommerce.api.APIUtil;
+import com.nitsoft.ecommerce.api.response.APIStatus;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Product;
 import com.nitsoft.ecommerce.service.ProductService;
@@ -10,7 +11,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,8 +34,20 @@ public class ProductAPI extends APIUtil {
     ) {
 
         Page<Product> products = productService.findByCompanyId(companyId, pageNumber, pageSize);
-        return writeObjectToJson(new StatusResponse(HttpStatus.OK.value(), products.getContent(), products.getTotalElements()));
+        statusResponse = new StatusResponse(APIStatus.OK.getCode(), products.getContent(), products.getTotalElements());
 
+        return writeObjectToJson(statusResponse);
+    }
+
+    @RequestMapping(path = APIName.PRODUCT_BY_ID, method = RequestMethod.GET, produces = APIName.CHARSET)
+    public String getProductById(
+            @PathVariable Long companyId,
+            @PathVariable Long productId) {
+
+        Product p = productService.findProductById(companyId, productId);
+        statusResponse = new StatusResponse(APIStatus.OK.getCode(), p);
+
+        return writeObjectToJson(statusResponse);
     }
 
     @ApiOperation(value = "get products by category id", notes = "")
@@ -48,7 +60,7 @@ public class ProductAPI extends APIUtil {
     ) {
 
         Page<Product> products = productService.findByCompanyIdAndCategoryId(companyId, categoryId, pageNumber, pageSize);
-        return writeObjectToJson(new StatusResponse(HttpStatus.OK.value(), products.getContent(), products.getTotalElements()));
+        return writeObjectToJson(new StatusResponse(APIStatus.OK.getCode(), products.getContent(), products.getTotalElements()));
 
     }
 
@@ -70,7 +82,7 @@ public class ProductAPI extends APIUtil {
     ) {
 
         Page<Product> products = productService.doFilterSearchSortPagingProduct(companyId, categoryId, attributeId, searchKey, minPrice, maxPrice, minRank, maxRank, sortCase, ascSort, pageSize, pageNumber);
-        return writeObjectToJson(new StatusResponse(HttpStatus.OK.value(), products.getContent(), products.getTotalElements()));
+        return writeObjectToJson(new StatusResponse(APIStatus.OK.getCode(), products.getContent(), products.getTotalElements()));
 
     }
 }

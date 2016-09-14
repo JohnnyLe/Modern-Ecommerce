@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.api.orders;
 
 import com.nitsoft.ecommerce.api.APIName;
@@ -12,7 +7,7 @@ import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Orders;
 import com.nitsoft.ecommerce.database.model.User;
 import com.nitsoft.ecommerce.exception.ApplicationException;
-import com.nitsoft.ecommerce.service.CustomerService;
+import com.nitsoft.ecommerce.service.UserService;
 import com.nitsoft.ecommerce.service.OrdersService;
 import com.nitsoft.util.Constant;
 import com.nitsoft.util.UniqueID;
@@ -43,7 +38,7 @@ public class OrdersAPI extends APIUtil {
     @Autowired
     OrdersService ordersService;
     @Autowired
-    CustomerService customerService;
+    UserService customerService;
 
     @RequestMapping(method = RequestMethod.POST, produces = APIName.CHARSET)
     @ResponseBody
@@ -76,7 +71,7 @@ public class OrdersAPI extends APIUtil {
         Date createDate = new Date();
 //        Date customerbirthday;
 //        Date create_date;
-        
+
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 //        try {
 //            createday = dateFormat.parse(new String createdAt);
@@ -86,7 +81,6 @@ public class OrdersAPI extends APIUtil {
 //        } catch (ParseException e) {
 //            throw new ApplicationException(APIStatus.INVALID_PARAMETER);
 //        }
-
         Orders orders = new Orders();
         User users = new User();
 
@@ -109,10 +103,10 @@ public class OrdersAPI extends APIUtil {
                 throw new ApplicationException(APIStatus.INVALID_PARAMETER, new IllegalArgumentException("Email address is null"));
             }
         } else {
-            
+
         }
 
-        orders.setUserId(users.getUserId());
+        orders.setUserId(users.getUserId());// get userId v?a m?i t?o v� g?n v�o order
         orders.setCompanyId(companyId);
 //        orders.setCreatedAt(createday);
 //        orders.setUpdatedAt(updateday);

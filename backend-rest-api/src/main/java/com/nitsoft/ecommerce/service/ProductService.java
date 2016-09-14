@@ -18,6 +18,10 @@ public class ProductService {
     public Iterable<Product> findAllProduct() {
         return productRepository.findAll();
     }
+    
+    public Product findProductById(long companyId, long productId) {
+        return productRepository.findOne(productId);
+    }
 
     public Page<Product> findByCompanyId(long companyId, int pageNumber, int pageSize) {
         return productRepository.findByCompanyId(companyId, new PageRequest(pageNumber, pageSize));
