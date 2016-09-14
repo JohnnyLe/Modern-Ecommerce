@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -40,11 +41,7 @@ public class OrdersAPI extends APIUtil {
     UserService customerService;
 
     @RequestMapping(method = RequestMethod.POST, produces = APIName.CHARSET)
-<<<<<<< .mine
     @ResponseBody
-=======
-
->>>>>>> .theirs
     public String addOrders(@RequestParam(name = "user_id", required = false) String userId,
             @RequestParam(name = "email", required = false) @Email String email,
             @RequestParam(name = "company_id", required = true) Long companyId,
@@ -109,7 +106,7 @@ public class OrdersAPI extends APIUtil {
 
         }
 
-        orders.setUserId(users.getUserId());// get userId v?a m?i t?o và g?n vào order
+        orders.setUserId(users.getUserId());// get userId v?a m?i t?o vï¿½ g?n vï¿½o order
         orders.setCompanyId(companyId);
 //        orders.setCreatedAt(createday);
 //        orders.setUpdatedAt(updateday);
