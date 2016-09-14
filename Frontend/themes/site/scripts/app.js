@@ -10,13 +10,13 @@ angular.module('marketplace', [
   'marketplace.authen',
   'marketplace.login',
   'marketplace.home',
-  'marketplace.products.details'
+  'marketplace.products.details',
+  'marketplace.products.filter'
 ]).
 
 // Define all route of our app
 config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-    
-    // $urlRouterProvider.otherwise("/index");
+    $urlRouterProvider.otherwise("/index");
     // For authentication, but for now just Mock demo.
     // Will be implement in near function
     $stateProvider
@@ -28,15 +28,21 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
                 url: '/index',
                 parent: 'master',
                 templateUrl: 'scripts/controllers/home/home_tmpl.html',
-                controller: "HomeCtrl"
+                controller: 'HomeCtrl'
             })
             .state('shop', {
                 url: '/shop',
                 parent: 'master',
                 templateUrl: 'pages/shop.html'
             })
+            .state('category-products', {
+                url: '/categories/{categoryId}/products',
+                parent: 'master',
+                templateUrl: 'scripts/controllers/products/filter/product-filter.html',
+                controller: 'ProductFilterCtrl'
+            })
             .state('product-details', {
-                url: '/product-details/{productId}',
+                url: '/products/{productId}',
                 parent: 'master',
                 templateUrl: 'scripts/controllers/products/details/product-details.html',
                 controller: 'ProductDetailsCtrl'

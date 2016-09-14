@@ -1,20 +1,20 @@
 <div class="left-sidebar">
     <h2>Category</h2>
     <div class="panel-group category-products" id="accordian"><!--category-product-->
-        <div class="panel panel-default" ng-repeat="catg in categories" ng-init="hasChild=catg.child && catg.child.length > 0">
+        <div class="panel panel-default" ng-repeat="catg in categories" ng-init="hasChild = catg.child && catg.child.length > 0">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a ng-if="hasChild" data-toggle="collapse" data-parent="#accordian" href="{{ '#ctg_' + $index }}">
+                    <a ng-if="hasChild" data-toggle="collapse" data-parent="#accordian" href="{{ '#ctg_' + $index}}" target="_self">
                         <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                        {{ catg.name }}
+                        {{catg.name}}
                     </a>
-                    <a ng-if="!hasChild" href="#">{{ catg.name }}</a>
+                    <a ng-if="!hasChild" ui-sref="category-products({categoryId:catg.id})">{{ catg.name}}</a>
                 </h4>
             </div>
-            <div ng-if="hasChild" id="{{ 'ctg_' + $index }}" class="panel-collapse collapse">
+            <div ng-if="hasChild" id="{{ 'ctg_' + $index}}" class="panel-collapse collapse">
                 <div class="panel-body">
                     <ul>
-                        <li ng-repeat="c in catg.child"><a>{{ c.name }}</a></li>
+                        <li ng-repeat="c in catg.child"><a ui-sref="category-products({categoryId:c.id})">{{ c.name}}</a></li>
                     </ul>
                 </div>
             </div>
@@ -25,7 +25,7 @@
         <h2>Brands</h2>
         <div class="brands-name">
             <ul class="nav nav-pills nav-stacked">
-                <li ng-repeat="b in brands"><a href="#"> <span class="pull-right">({{ b.amount }})</span>{{ b.name }}</a></li>
+                <li ng-repeat="b in brands"><a href="#"> <span class="pull-right">({{ b.amount}})</span>{{ b.name}}</a></li>
             </ul>
         </div>
     </div><!--/brands_products-->
@@ -33,8 +33,8 @@
     <div class="price-range"><!--price-range-->
         <h2>Price Range</h2>
         <div class="well text-center">
-            <input type="text" class="span2" value="" data-slider-min="{{ minPrice }}" data-slider-max="{{ maxPrice }}" data-slider-step="5" data-slider-value="[{{ minSliderValue }},{{ maxSliderValue }}]" id="sl2" ><br />
-            <b class="pull-left">${{ minPrice }}</b> <b class="pull-right">${{ maxPrice }}</b>
+            <input type="text" class="span2" value="" data-slider-min="{{ minPrice}}" data-slider-max="{{ maxPrice}}" data-slider-step="5" data-slider-value="[{{ minSliderValue}},{{ maxSliderValue}}]" id="sl2" ><br />
+            <b class="pull-left">${{ minPrice}}</b> <b class="pull-right">${{ maxPrice}}</b>
         </div>
     </div><!--/price-range-->
 
