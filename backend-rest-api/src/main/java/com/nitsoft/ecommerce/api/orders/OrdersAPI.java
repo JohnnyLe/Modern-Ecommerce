@@ -47,17 +47,9 @@ public class OrdersAPI extends APIUtil {
 
     @RequestMapping(method = RequestMethod.POST, produces = APIName.CHARSET)
     @ResponseBody
-<<<<<<< HEAD
-    public String addOrders(@PathVariable(value = "companyId") Long companyId,
-            @RequestParam(name = "user_id", required = true) String userId,
-            //@RequestParam(name = "company_id", required = true) Long companyId,
-            @RequestParam(name = "created_at", required = true) String createdAt,
-            @RequestParam(name = "updated_at", required = false) String updatedAt,
-=======
     public String addOrders(@RequestParam(name = "user_id", required = false) String userId,
             @RequestParam(name = "email", required = false) @Email String email,
             @RequestParam(name = "company_id", required = true) Long companyId,
->>>>>>> 1f9135acda69acf879f0d2afcbc4213343342da6
             @RequestParam(name = "is_active", required = false) Short isActive,
             @RequestParam(name = "is_virtual", required = false) Short isVirtual,
             @RequestParam(name = "is_multi_shipping", required = false) Short isMultiShipping,
@@ -84,7 +76,7 @@ public class OrdersAPI extends APIUtil {
         Date createDate = new Date();
 //        Date customerbirthday;
 //        Date create_date;
-        
+
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
 //        try {
 //            createday = dateFormat.parse(new String createdAt);
@@ -94,7 +86,6 @@ public class OrdersAPI extends APIUtil {
 //        } catch (ParseException e) {
 //            throw new ApplicationException(APIStatus.INVALID_PARAMETER);
 //        }
-
         Orders orders = new Orders();
         User users = new User();
 
@@ -117,10 +108,10 @@ public class OrdersAPI extends APIUtil {
                 throw new ApplicationException(APIStatus.INVALID_PARAMETER, new IllegalArgumentException("Email address is null"));
             }
         } else {
-            
+
         }
 
-        orders.setUserId(users.getUserId());
+        orders.setUserId(users.getUserId());// get userId vừa mới tạo và gắn vào order
         orders.setCompanyId(companyId);
 //        orders.setCreatedAt(createday);
 //        orders.setUpdatedAt(updateday);
