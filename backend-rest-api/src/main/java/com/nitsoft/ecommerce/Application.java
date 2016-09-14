@@ -1,7 +1,9 @@
 package com.nitsoft.ecommerce;
 
+import com.nitsoft.util.MD5Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -29,6 +31,16 @@ public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(APPLICATION_NAME, args);
+    }
+
+    @Bean
+    CommandLineRunner test() {
+        return new CommandLineRunner() {
+            @Override
+            public void run(String... strings) throws Exception {
+                System.out.println(MD5Hash.MD5Encrypt("test"));
+            }
+        };
     }
 
     @Override
