@@ -134,6 +134,8 @@ public class Constant {
 
     public static final long ONE_MINUTE_IN_MILLIS = 60000;
     public static final long ONE_SECOND_IN_MILLIS = 1000;
+    
+    public static final long DEFAULT_REMEMBER_LOGIN_MILISECONDS = 1296000000; // 15 days
 
     // define paging results, use for default value of @RequestParam, so type of data is String
     public static final String DEFAULT_PAGE_SIZE = "25";

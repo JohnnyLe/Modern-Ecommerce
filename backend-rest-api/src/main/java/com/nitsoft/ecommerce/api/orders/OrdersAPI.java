@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.nitsoft.ecommerce.api.orders;
 
 import com.nitsoft.ecommerce.api.APIName;
@@ -12,7 +7,7 @@ import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Orders;
 import com.nitsoft.ecommerce.database.model.User;
 import com.nitsoft.ecommerce.exception.ApplicationException;
-import com.nitsoft.ecommerce.service.CustomerService;
+import com.nitsoft.ecommerce.service.UserService;
 import com.nitsoft.ecommerce.service.OrdersService;
 import com.nitsoft.util.Constant;
 import com.nitsoft.util.UniqueID;
@@ -28,7 +23,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -43,10 +37,14 @@ public class OrdersAPI extends APIUtil {
     @Autowired
     OrdersService ordersService;
     @Autowired
-    CustomerService customerService;
+    UserService customerService;
 
     @RequestMapping(method = RequestMethod.POST, produces = APIName.CHARSET)
+<<<<<<< .mine
     @ResponseBody
+=======
+
+>>>>>>> .theirs
     public String addOrders(@RequestParam(name = "user_id", required = false) String userId,
             @RequestParam(name = "email", required = false) @Email String email,
             @RequestParam(name = "company_id", required = true) Long companyId,
@@ -111,7 +109,7 @@ public class OrdersAPI extends APIUtil {
 
         }
 
-        orders.setUserId(users.getUserId());// get userId vừa mới tạo và gắn vào order
+        orders.setUserId(users.getUserId());// get userId v?a m?i t?o v� g?n v�o order
         orders.setCompanyId(companyId);
 //        orders.setCreatedAt(createday);
 //        orders.setUpdatedAt(updateday);

@@ -11,7 +11,7 @@ angular.module( 'marketplace' )
 .constant( 'server',  {
 
     // Local
-    URL: 'http://localhost:8080'
+    URL: 'http://localhost:8080/api/v1/1'
     // Server
     //URL: 'http://52.196.33.166/marketplace-rest-api'
 })

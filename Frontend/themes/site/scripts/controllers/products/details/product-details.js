@@ -2,11 +2,11 @@
 
 angular.module('marketplace.products.details', [])
 
-.controller('ProductDetailsCtrl', [ '$scope', 'util', '$', '$timeout', function( $scope, util, $, $timeout) {
+.controller('ProductDetailsCtrl', [ '$scope', 'util', '$', '$timeout', '$stateParams', function( $scope, util, $, $timeout, $stateParams) {
         
     // Data model biding
     $scope.loadData = function () {
-        util.callRequest('http://localhost:8383/eCommereTheme/json/product-details.json', "GET", null, true).then(function (data) {
+            util.callRequest('products/' + $stateParams.productId, "GET").then(function (data) {
             $scope.product = data.result;
         });
     };
