@@ -2,6 +2,7 @@
 
 angular.module('marketplace.products.details', [])
 
+.controller('ProductDetailsCtrl', ['$scope', 'util', '$', '$timeout', '$stateParams', 'ShoppingCart', '$http', function ($scope, util, $, $timeout, $stateParams, cart, $http) {
 
 .controller('ProductDetailsCtrl', [ '$scope', 'util', '$', '$timeout', '$stateParams', function( $scope, util, $, $timeout, $stateParams) {
     $scope.proComment = {};
@@ -35,5 +36,12 @@ angular.module('marketplace.products.details', [])
     });
 }]);
 
+    $timeout(function () {
+        // init slider
+        $('#similar-product').carousel({
+            interval: 5000
+        });
+    });
+}]);
 
 

@@ -17,9 +17,9 @@
                                     <img ng-src="{{p.default_image}}" alt="" />
                                     <h2>{{'$'+p.list_price}}</h2>
                                     <p>{{p.name}}</p>
-                                    <a href="#" class="btn btn-default add-to-cart">
+                                    <button ng-click="addToCart(p)" class="btn btn-default add-to-cart">
                                         <i class="fa fa-shopping-cart"></i>Add to cart
-                                    </a>
+                                    </button>
                                     <a ui-sref="product-details({productId: p.product_id})" class="btn btn-default add-to-cart">
                                         <i class="fa fa-plus-square"></i>View detail
                                     </a>

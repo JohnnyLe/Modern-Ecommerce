@@ -11,7 +11,8 @@ angular.module('marketplace', [
   'marketplace.login',
   'marketplace.home',
   'marketplace.products.details',
-  'marketplace.products.filter'
+  'marketplace.products.filter',
+  'marketplace.cart'
 ]).
 
 // Define all route of our app
@@ -55,7 +56,8 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
             .state('cart', {
                 url: '/cart',
                 parent: 'master',
-                templateUrl: 'pages/cart.html'
+                templateUrl: 'scripts/controllers/cart/cart.html',
+                controller: 'CartCtrl'
             })
             .state('login', {
                 url: '/login',
@@ -215,6 +217,10 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
     // Catch event load page
     $rootScope.$on("$stateChangeSuccess", function( event, toState, toParams, fromState, fromParams, options ) {
         $rootScope.menu = toState.name;
+        // scroll to top
+        $('html, body').animate({
+            scrollTop: 0
+        }, 0);
     });
     
     $rootScope.$on("$stateChangeStart", function( event, toState, toParams, fromState, fromParams, options ) {

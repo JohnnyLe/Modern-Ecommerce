@@ -47,13 +47,19 @@ angular.module( 'marketplace' )
             
             var dfd = $q.defer();
             
-            $http( {
-               
-               url: URL,
-               method: m || 'POST',
-               data: d
-                
-            }).then( function ( result ) {
+            var callRequest = {
+                url: URL
+            };
+            
+            if ( m.toUpperCase() === 'GET' ) {
+                callRequest.method = 'GET';
+                callRequest.params = d;
+            } else {
+                callRequest.method = m || 'POST';
+                callRequest.data = d;
+            }
+            
+            $http( callRequest ).then( function ( result ) {
                 
                 // Redirect could be dismiss data
                 // It happens when a request is posting while transition is executing
@@ -140,8 +146,46 @@ angular.module( 'marketplace' )
             });
             
             return instance;
+        },
+        
+        isInt: function (value) {
+            return !isNaN(value) &&
+                    parseInt(Number(value)) == value &&
+                    !isNaN(parseInt(value, 10));
         }
         
        
+    };
+}])
+
+.factory( 'ShoppingCart', [ 'util',  function ( util ) {
+    var items = [];
+
+    return {
+        addItem: function( p, quantity ) {
+            // just add product if 'p' parameter is object
+            if ( angular.isObject( p ) ) {
+                // check product already exists in cart
+                if ( p.product_id ) {
+                    for (var i = 0; i < items.length; i++) {
+                        if ( items[i].product_id === p.product_id ) {
+                            // if there are quantity parameter then update quantity for product
+                            if ( util.isInt( quantity ) ) {
+                                items[i].quantity = quantity;
+                            }
+                            return true;
+                        }
+                    }
+                    
+                    // add product with quantity into item list
+                    p.quantity = util.isInt( quantity ) ? quantity : 1;
+                    items.push( p );
+                    // save into cookie
+                }
+            }
+        },
+        getItems: function() {
+            return items;
+        }
     };
 }]);
