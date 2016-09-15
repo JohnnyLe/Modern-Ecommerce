@@ -33,16 +33,18 @@ public class ReviewAPI extends APIUtil {
     }
 
     @RequestMapping(value = APIName.REVIEWS_ADD, method = RequestMethod.POST, produces = APIName.CHARSET)
-    private String createReview(@RequestParam(value = "comment") String comMent,
-            @RequestParam(value = "company_id") int company_Id, @RequestParam(value = "product_id") int product_Id,
-            @RequestParam(value = "rank") int Rank, @RequestParam(value = "user_id") String user_Id) throws IOException {
+    public String createReview(
+            @RequestParam String comment,
+            @RequestParam Long companyId,
+            @RequestParam Long productId,
+            @RequestParam Integer rank,
+            @RequestParam String userId) {
         Review reviews = new Review();
-        reviews.setComment(comMent);
-        reviews.setCompanyId(company_Id);
-        reviews.setProductId(product_Id);
-        reviews.setRank(Rank);
-        reviews.setReviewId(Rank);
-        reviews.setUserId(user_Id);
+        reviews.setComment(comment);
+        reviews.setCompanyId(companyId);
+        reviews.setProductId(productId);
+        reviews.setRank(rank);
+        reviews.setUserId(userId);
 
         reviewService.save(reviews);
         statusResponse = new StatusResponse(APIStatus.OK.getCode(), "Create Review successfully");

@@ -39,11 +39,11 @@ public class Review implements Serializable {
     
     @Basic(optional = false)
     @Column(name = "product_id")
-    private int productId;
+    private Long productId;
     
     @Basic(optional = false)
     @Column(name = "company_id")
-    private int companyId;
+    private Long companyId;
     
     @Basic(optional = false)
     @Column(name = "rank")
@@ -60,7 +60,7 @@ public class Review implements Serializable {
         this.reviewId = reviewId;
     }
 
-    public Review(Integer reviewId, String userId, int productId, int companyId, int rank, String comment) {
+    public Review(Integer reviewId, String userId, Long productId, Long companyId, int rank, String comment) {
         this.reviewId = reviewId;
         this.userId = userId;
         this.productId = productId;
@@ -85,19 +85,19 @@ public class Review implements Serializable {
         this.userId = userId;
     }
 
-    public int getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
-    public int getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
