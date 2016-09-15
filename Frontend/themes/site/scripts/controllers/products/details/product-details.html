@@ -235,17 +235,15 @@
                             <div  class="col-sm-12">
                                 <p><b>Write Your Review</b></p>
 
-                                <form action="#">
+                                <form name="comment" id="proCommentFrom">
                                     <span>
                                         <input type="text" placeholder="Your Name"/>
-                                        <input type="email" placeholder="Email Address"/>
+                                        <input type="email" placeholder="Email Address" ng-model="proComment['email']" />
                                     </span>
-                                    <textarea name="" ></textarea>
-                                    <input type="text" value="{{product.product_id}}" ng-model="{{product.product_id}}"/>
-                                        <input type="email" value="1" ng-model="1"/>
-                                        <input type="email" value="3" ng-model="3"/>
+                                    <textarea name="" ng-model="proComment['comment']"></textarea>
+                                    <!--<input type="hidden" value="4" ng-model="proComment.rank"/>-->
                                     <b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
-                                    <button type="button" class="btn btn-default pull-right">
+                                    <button type="button" class="btn btn-default pull-right" ng-click="insertComment()">
                                         Submit
                                     </button>
                                 </form>
