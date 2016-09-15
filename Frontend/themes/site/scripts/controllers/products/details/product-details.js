@@ -2,7 +2,7 @@
 
 angular.module('marketplace.products.details', [])
 
-<<<<<<< HEAD
+
 .controller('ProductDetailsCtrl', [ '$scope', 'util', '$', '$timeout', '$stateParams', function( $scope, util, $, $timeout, $stateParams) {
         
     // Data model biding
