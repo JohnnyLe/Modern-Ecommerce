@@ -3,6 +3,7 @@
 // Declare app level module which depends on views, and controllers
 angular.module('marketplace', [
   'ngSanitize',
+  'ngCookies',
   'ui.router',
   'ui.bootstrap',
   'jm.i18next',

@@ -423,4 +423,58 @@ angular.module('marketplace.directive', [ 'components' ])
             }
         }]
     };        
+}])
+
+.directive('shoppingCart', [function() {
+    return {
+        restrict: 'EA',
+        replace: true,
+        templateUrl: 'template/shopping_cart.html',
+        scope: {
+            'showPayment': '=?'
+        },
+        controller: ['$scope', 'ShoppingCart', function( $scope, cart ) {
+            if (angular.isDefined($scope.minPrice)) {
+                $scope.showPayment = false;
+            }
+            
+            $scope.items = [];
+            
+            $scope.loadData = function () {
+                cart.getItems().then(function (items) {
+                    $scope.items = items;
+                });
+            };
+            
+            $scope.loadData();
+            
+            $scope.increaseQuantity = function( index ) {
+                var item = $scope.items[index];
+                
+                if ( item ) {
+                    item.quantity += 1;
+                    // update cookie store
+                    cart.addItem( item, item.quantity );
+                }
+            };
+            
+            $scope.decreaseQuantity = function( index ) {
+                var item = $scope.items[index];
+                
+                if ( item && item.quantity > 1 ) {
+                    item.quantity -= 1;
+                    // update cookie store
+                    cart.addItem( item, item.quantity );
+                }
+            };
+            
+            $scope.removeItem = function( index ) {
+                var itemId = $scope.items[index].product_id;
+                // remove in list
+                $scope.items.splice( index, 1 );
+                // update cookie store
+                cart.removeItem( itemId );
+            };
+        }]
+    };        
 }]);

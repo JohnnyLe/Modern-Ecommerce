@@ -21,6 +21,7 @@ public class APIName {
     public static final String PRODUCTS = VERSION + "/products";
     public static final String PRODUCTS_BY_CATEGORY = "/category";
     public static final String PRODUCT_BY_ID = "/{productId}";
+    public static final String PRODUCT_BY_IDS = "/list";
     public static final String PRODUCTS_FILTER_LIST = "/filter";
     public static final String PRODUCT_DETAILS = VERSION + "/productdetails/{product_id}";
     public static final String PRODUCT_ATTRIBUTES = VERSION + "/productattributes";

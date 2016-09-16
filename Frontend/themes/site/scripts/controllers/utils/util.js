@@ -150,7 +150,7 @@ angular.module( 'marketplace' )
         
         isInt: function (value) {
             return !isNaN(value) &&
-                    parseInt(Number(value)) == value &&
+                    parseInt(Number(value)) === value &&
                     !isNaN(parseInt(value, 10));
         }
         
@@ -158,34 +158,121 @@ angular.module( 'marketplace' )
     };
 }])
 
-.factory( 'ShoppingCart', [ 'util',  function ( util ) {
-    var items = [];
-
+.factory( 'ShoppingCart', [ 'util', '$cookies', '$q',  function ( util, $cookies, $q ) {
+    
+    // update an item is gotten from server and update quantity for it            
+    function getStoredQuantity( items, itemId ) {
+        for ( var i = 0; i < items.length; i++ ) {
+            if ( items[i].product_id === itemId ) {
+                return items[i].quantity;
+            }
+        }
+        
+        // default quantity is 1
+        return 1;
+    }
+    
     return {
+        // add a product into shopping cart
         addItem: function( p, quantity ) {
             // just add product if 'p' parameter is object
             if ( angular.isObject( p ) ) {
                 // check product already exists in cart
                 if ( p.product_id ) {
-                    for (var i = 0; i < items.length; i++) {
-                        if ( items[i].product_id === p.product_id ) {
-                            // if there are quantity parameter then update quantity for product
-                            if ( util.isInt( quantity ) ) {
-                                items[i].quantity = quantity;
+                    var items = $cookies.getObject( 'cartItems' );
+                    
+                    if ( items && angular.isArray( items ) ) {
+                        for (var i = 0; i < items.length; i++) {
+                            if ( items[i].product_id === p.product_id ) {
+                                // if there are quantity parameter then update quantity for product
+                                if ( util.isInt( quantity ) ) {
+                                    items[i].quantity = quantity;
+                                    // update cookie
+                                    $cookies.putObject( 'cartItems', items );
+                                }
+                                return;
                             }
-                            return true;
                         }
+                    } else {
+                        // empty cart, create new item list
+                        items = [];
                     }
                     
                     // add product with quantity into item list
-                    p.quantity = util.isInt( quantity ) ? quantity : 1;
-                    items.push( p );
+                    var item = {
+                        product_id: p.product_id,
+                        quantity: util.isInt( quantity ) ? quantity : 1
+                    };
+                    items.push( item );
                     // save into cookie
+                    $cookies.putObject( 'cartItems', items );
                 }
             }
         },
-        getItems: function() {
-            return items;
+        
+        // remove item
+        removeItem: function( itemId ) {
+            var items = $cookies.getObject( 'cartItems' ), index = -1;
+            
+            if ( items && angular.isArray( items ) ) {
+                for ( var i = 0; i < items.length; i++ ) {
+                    if ( items[i].product_id === itemId ) {
+                        index = i;
+                        break;
+                    }
+                }
+            }
+            
+            if ( index !== -1 ) {
+                console.debug('remove item', index);
+                // remove the item outside array
+                items.splice( index , 1 );
+                // restore item list
+                $cookies.remove( 'cartItem' );
+                $cookies.putObject( 'cartItems', items );
+            }
+        },
+        
+        // load product ids from cookies and get full information of product by list id
+        getItems: function() {  
+            
+            var defer = $q.defer();
+            
+            // get items are stored in cookies
+            var items = $cookies.getObject( 'cartItems' );
+            
+            // check cookies is exists and must be an array
+            if ( items && angular.isArray( items ) ) {
+                //general list product id
+                var ids = [];
+                
+                for ( var i = 0; i < items.length; i++ ) {
+                    ids.push( items[i].product_id );
+                }
+                
+                if ( ids.length > 0 ) {
+                    // get product list by ids
+                    util.callRequest( 'products/list', 'POST', ids ).then( function ( data ) {
+                        var cartItems = [], result = data.result, tmp;
+                        
+                        if ( result ) {
+                            for ( var i = 0; i < result.length; i++ ) {
+                                tmp = result[i];
+                                // update quantity for item
+                                tmp.quantity = getStoredQuantity( items, tmp.product_id );
+                                cartItems.push( tmp );
+                            }
+                        }
+                        
+                        defer.resolve( cartItems );
+                    });
+                }
+            } else {
+                items = [];
+                defer.resolve( items );
+            }
+            
+            return defer.promise;
         }
     };
 }]);

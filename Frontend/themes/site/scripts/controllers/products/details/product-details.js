@@ -4,6 +4,7 @@ angular.module('marketplace.products.details', [])
 
 .controller('ProductDetailsCtrl', ['$scope', 'util', '$', '$timeout', '$stateParams', 'ShoppingCart', '$http', function ($scope, util, $, $timeout, $stateParams, cart, $http) {
 
+
     $scope.proComment = {};
          
     // Data model biding
