@@ -38,7 +38,7 @@ public class ReviewAPI extends APIUtil {
     UserTokenService userTokenService;
 
     @RequestMapping(value = APIName.REVIEWS_BY_PRODUCT_ID, method = RequestMethod.GET, produces = APIName.CHARSET)
-    public String getReviewByProductId(@PathVariable(value = "id") int productId, @RequestParam(value = "pagenumber", defaultValue = Constant.DEFAULT_PAGE_NUMBER,
+    public String getReviewByProductId(@PathVariable(value = "id") Long productId, @RequestParam(value = "pagenumber", defaultValue = Constant.DEFAULT_PAGE_NUMBER,
             required = false) int pageNumber, @RequestParam(value = "pagesize", defaultValue = Constant.DEFAULT_PAGE_SIZE, required = false) int pageSize) {
 
         Page<Review> reviews = reviewService.findByProductId(productId, pageNumber, pageSize);

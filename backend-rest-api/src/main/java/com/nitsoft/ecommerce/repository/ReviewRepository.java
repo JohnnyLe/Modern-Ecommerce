@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 public interface ReviewRepository extends PagingAndSortingRepository<Review, Integer> {
 
     @Query("SELECT r FROM Review r WHERE r.productId = :productId")
-    Page<Review> findByProductId(@Param("productId") int productId, Pageable pageable);
+    Page<Review> findByProductId(@Param("productId") long productId, Pageable pageable);
 
 }

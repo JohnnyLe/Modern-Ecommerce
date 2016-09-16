@@ -12,6 +12,7 @@ angular.module('marketplace', [
   'marketplace.home',
   'marketplace.products.details',
   'marketplace.products.filter',
+  'marketplace.products.search',
   'marketplace.cart'
 ]).
 
@@ -23,6 +24,7 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
     $stateProvider
             .state('master', {
                 templateUrl: 'pages/master.template.html',
+                controller: 'SearchCtrl',
                 abstract: true
             })
             .state('index', {
