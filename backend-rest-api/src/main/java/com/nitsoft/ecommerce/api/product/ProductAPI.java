@@ -11,11 +11,14 @@ import com.nitsoft.ecommerce.service.ProductService;
 import com.nitsoft.util.Constant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,19 +41,20 @@ public class ProductAPI extends APIUtil {
             @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_NUMBER) Integer pageNumber,
             @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_SIZE) Integer pageSize) {
 
-        Page<Product> products = productService.findByCompanyId(companyId, pageNumber, pageSize);
+        Page<Product> products = productService.getByCompanyId(companyId, pageNumber, pageSize);
         statusResponse = new StatusResponse(APIStatus.OK.getCode(), products.getContent(), products.getTotalElements());
 
         return writeObjectToJson(statusResponse);
     }
 
+    @ApiOperation(value = "get products by product id", notes = "")
     @RequestMapping(path = APIName.PRODUCT_BY_ID, method = RequestMethod.GET, produces = APIName.CHARSET)
     public String getProductById(
             @PathVariable Long companyId,
             @PathVariable Long productId) {
 
         // get product
-        Product p = productService.findProductById(companyId, productId);
+        Product p = productService.getProductById(companyId, productId);
         // get all attributes of product
         ProductAttributeDetail pad = productAttributeService.findByProductIdAndAttributeId(productId, Constant.PRODUCT_ATTRIBUTE.DETAIL_IMAGES.getId());
 
@@ -58,6 +62,26 @@ public class ProductAPI extends APIUtil {
         result.put("product", p);
         result.put("attributes", pad);
         statusResponse = new StatusResponse(APIStatus.OK.getCode(), result);
+
+        return writeObjectToJson(statusResponse);
+    }
+
+    @ApiOperation(value = "get list product by product ids", notes = "")
+    @RequestMapping(path = APIName.PRODUCT_BY_IDS, method = RequestMethod.POST, produces = APIName.CHARSET)
+    public String getListProductByIds(
+            @PathVariable Long companyId,
+            @RequestBody List<Long> productIds) {
+
+        if (productIds != null && !productIds.isEmpty()) {
+            List<Product> products = (List<Product>) productService.getProductsById(companyId, productIds);
+            if (products != null) {
+                statusResponse = new StatusResponse(APIStatus.OK.getCode(), products, products.size());
+            } else {
+                statusResponse = new StatusResponse(APIStatus.OK.getCode(), products);
+            }
+        } else {
+            statusResponse = new StatusResponse(APIStatus.INVALID_PARAMETER);
+        }
 
         return writeObjectToJson(statusResponse);
     }
@@ -70,7 +94,7 @@ public class ProductAPI extends APIUtil {
             @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_NUMBER) Integer pageNumber,
             @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_SIZE) Integer pageSize) {
 
-        Page<Product> products = productService.findByCompanyIdAndCategoryId(companyId, categoryId, pageNumber, pageSize);
+        Page<Product> products = productService.getByCompanyIdAndCategoryId(companyId, categoryId, pageNumber, pageSize);
         return writeObjectToJson(new StatusResponse(APIStatus.OK.getCode(), products.getContent(), products.getTotalElements()));
 
     }
