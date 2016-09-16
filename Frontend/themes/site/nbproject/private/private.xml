@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/E:/nit-software/Modern-Ecommerce/Frontend/themes/site/scripts/controllers/login/login_ctrl.js</file>
+            <file>file:/E:/nit-software/Modern-Ecommerce/Frontend/themes/site/pages/login.html</file>
+            <file>file:/E:/nit-software/Modern-Ecommerce/Frontend/themes/site/scripts/controllers/login/login_test.js</file>
+            <file>file:/E:/nit-software/Modern-Ecommerce/Frontend/themes/site/scripts/controllers/home/home_ctrl.js</file>
+            <file>file:/E:/nit-software/Modern-Ecommerce/Frontend/themes/site/scripts/controllers/login/login_tmpl.html</file>
+        </group>
     </open-files>
 </project-private>
