@@ -6,9 +6,11 @@ import com.nitsoft.ecommerce.api.response.APIStatus;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Orders;
 import com.nitsoft.ecommerce.database.model.User;
+import com.nitsoft.ecommerce.database.model.UserToken;
 import com.nitsoft.ecommerce.exception.ApplicationException;
 import com.nitsoft.ecommerce.service.UserService;
 import com.nitsoft.ecommerce.service.OrdersService;
+import com.nitsoft.ecommerce.service.UserTokenService;
 import com.nitsoft.util.Constant;
 import com.nitsoft.util.UniqueID;
 import io.swagger.annotations.Api;
@@ -39,10 +41,13 @@ public class OrdersAPI extends APIUtil {
     OrdersService ordersService;
     @Autowired
     UserService customerService;
+    @Autowired
+    UserTokenService userTokenService;
 
     @RequestMapping(method = RequestMethod.POST, produces = APIName.CHARSET)
     @ResponseBody
-    public String addOrders(@RequestParam(name = "user_id", required = false) String userId,
+    public String addOrders(
+            @RequestParam(name = "user_id", required = false) String token,
             @RequestParam(name = "email", required = false) @Email String email,
             @RequestParam(name = "company_id", required = true) Long companyId,
             @RequestParam(name = "is_active", required = false) Short isActive,
@@ -83,9 +88,20 @@ public class OrdersAPI extends APIUtil {
 //        }
         Orders orders = new Orders();
         User users = new User();
-
-        // validate user id
-        if (userId == null || userId.equals("")) {
+        
+        if (token != null && !token.isEmpty()) {
+            // case: user login
+            // validate token expiration time
+            Date now = new Date();
+            
+            UserToken usertoken = new UserToken();
+            if(usertoken.getExpirationDate().getTime() - now.getTime() > 0){
+                statusResponse = new StatusResponse(APIStatus.OK.getCode(), "User Expirated");
+                return writeObjectToJson(statusResponse);
+            }
+        } else {
+            // case: have not login, order by email
+            // create new user by email address
             // validate email
             if (email != null) {
                 // create anonymous user
@@ -102,8 +118,6 @@ public class OrdersAPI extends APIUtil {
             } else {
                 throw new ApplicationException(APIStatus.INVALID_PARAMETER, new IllegalArgumentException("Email address is null"));
             }
-        } else {
-
         }
 
         orders.setUserId(users.getUserId());// get userId v?a m?i t?o v� g?n v�o order

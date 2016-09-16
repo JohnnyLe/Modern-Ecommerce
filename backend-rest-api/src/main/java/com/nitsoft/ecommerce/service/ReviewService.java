@@ -13,7 +13,7 @@ public class ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    public Page<Review> findByProductId(int productId, int pageNumber, int pageSize) {
+    public Page<Review> findByProductId(long productId, int pageNumber, int pageSize) {
         return reviewRepository.findByProductId(productId, new PageRequest(pageNumber, pageSize));
     }
 

@@ -8,7 +8,9 @@ public enum APIStatus {
     USER_ALREADY_EXIST(112, "Email already exist"),
     USER_PENDING_STATUS(113, "User have not activated"),
     INVALID_PARAMETER(200, "Invalid request parameter"),
-    INVALID_TOKEN(201, "Invalid token"),
+    TOKEN_EXPIRIED(202, "Token expiried"),
+    REQUIRED_LOGIN(203, "Required login"),
+    INVALID_TOKEN(204, "Invalid token"),
     // Common status
     OK(200, null);
 

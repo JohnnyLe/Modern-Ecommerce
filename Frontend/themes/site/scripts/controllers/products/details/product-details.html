@@ -222,24 +222,28 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade active in" id="reviews" >
-                            <div class="col-sm-12">
+                        <div class="tab-pane fade active in" id="reviews">
+                            <div class="col-sm-12" ng-repeat="r in reviews">
                                 <ul>
-                                    <li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
+                                    <li><a href=""><i class="fa fa-user"></i>{{r.user_id}}</a></li>
                                     <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
                                     <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
                                 </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                <p>{{r.comment}}.</p>
+                                <hr/>
+                            </div>
+                            <div  class="col-sm-12">
                                 <p><b>Write Your Review</b></p>
 
-                                <form action="#">
+                                <form name="comment" id="proCommentFrom">
                                     <span>
                                         <input type="text" placeholder="Your Name"/>
-                                        <input type="email" placeholder="Email Address"/>
+                                        <input type="email" placeholder="Email Address" ng-model="proComment['email']" />
                                     </span>
-                                    <textarea name="" ></textarea>
+                                    <textarea name="" ng-model="proComment['comment']"></textarea>
+                                    <!--<input type="hidden" value="4" ng-model="proComment.rank"/>-->
                                     <b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
-                                    <button type="button" class="btn btn-default pull-right">
+                                    <button type="button" class="btn btn-default pull-right" ng-click="insertComment()">
                                         Submit
                                     </button>
                                 </form>

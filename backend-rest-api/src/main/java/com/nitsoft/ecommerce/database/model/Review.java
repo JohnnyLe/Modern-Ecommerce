@@ -1,6 +1,7 @@
 package com.nitsoft.ecommerce.database.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,21 +27,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Review implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "review_id")
     private Integer reviewId;
-    
+
     @Basic(optional = false)
     @Column(name = "user_id")
     private String userId;
-    
+
     @Basic(optional = false)
     @Column(name = "product_id")
     private Long productId;
-    
+
     @Basic(optional = false)
     @Column(name = "company_id")
     private Long companyId;
@@ -48,10 +49,14 @@ public class Review implements Serializable {
     @Basic(optional = false)
     @Column(name = "rank")
     private int rank;
-    
+
     @Basic(optional = false)
     @Column(name = "comment")
     private String comment;
+
+    @Basic(optional = false)
+    @Column(name = "create_date")
+    private Date createDate;
 
     public Review() {
     }
@@ -67,6 +72,7 @@ public class Review implements Serializable {
         this.companyId = companyId;
         this.rank = rank;
         this.comment = comment;
+        this.createDate = createDate;
     }
 
     public Integer getReviewId() {
@@ -117,6 +123,14 @@ public class Review implements Serializable {
         this.comment = comment;
     }
 
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -141,5 +155,5 @@ public class Review implements Serializable {
     public String toString() {
         return "com.nitsoft.ecommerce.model.Review[ reviewId=" + reviewId + " ]";
     }
-    
+
 }
