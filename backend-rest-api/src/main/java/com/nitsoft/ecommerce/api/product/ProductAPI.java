@@ -5,10 +5,14 @@ import com.nitsoft.ecommerce.api.APIUtil;
 import com.nitsoft.ecommerce.api.response.APIStatus;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Product;
+import com.nitsoft.ecommerce.database.model.ProductAttributeDetail;
+import com.nitsoft.ecommerce.service.ProductAttributeDetailService;
 import com.nitsoft.ecommerce.service.ProductService;
 import com.nitsoft.util.Constant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,14 +28,15 @@ public class ProductAPI extends APIUtil {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ProductAttributeDetailService productAttributeService;
 
     @ApiOperation(value = "get product by company id", notes = "")
     @RequestMapping(method = RequestMethod.GET, produces = APIName.CHARSET)
     public String getAllProducts(
             @PathVariable("companyId") Long companyId,
             @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_NUMBER) Integer pageNumber,
-            @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_SIZE) Integer pageSize
-    ) {
+            @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_SIZE) Integer pageSize) {
 
         Page<Product> products = productService.findByCompanyId(companyId, pageNumber, pageSize);
         statusResponse = new StatusResponse(APIStatus.OK.getCode(), products.getContent(), products.getTotalElements());
@@ -44,8 +49,15 @@ public class ProductAPI extends APIUtil {
             @PathVariable Long companyId,
             @PathVariable Long productId) {
 
+        // get product
         Product p = productService.findProductById(companyId, productId);
-        statusResponse = new StatusResponse(APIStatus.OK.getCode(), p);
+        // get all attributes of product
+        ProductAttributeDetail pad = productAttributeService.findByProductIdAndAttributeId(productId, Constant.PRODUCT_ATTRIBUTE.DETAIL_IMAGES.getId());
+
+        Map<String, Object> result = new HashMap();
+        result.put("product", p);
+        result.put("attributes", pad);
+        statusResponse = new StatusResponse(APIStatus.OK.getCode(), result);
 
         return writeObjectToJson(statusResponse);
     }
@@ -56,8 +68,7 @@ public class ProductAPI extends APIUtil {
             @PathVariable("companyId") Long companyId,
             @RequestParam Long categoryId,
             @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_NUMBER) Integer pageNumber,
-            @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_SIZE) Integer pageSize
-    ) {
+            @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_SIZE) Integer pageSize) {
 
         Page<Product> products = productService.findByCompanyIdAndCategoryId(companyId, categoryId, pageNumber, pageSize);
         return writeObjectToJson(new StatusResponse(APIStatus.OK.getCode(), products.getContent(), products.getTotalElements()));
@@ -78,8 +89,7 @@ public class ProductAPI extends APIUtil {
             @RequestParam(required = false, defaultValue = "-1") Integer sortCase,
             @RequestParam(required = false, defaultValue = "1") Boolean ascSort,
             @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_NUMBER) Integer pageNumber,
-            @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_SIZE) Integer pageSize
-    ) {
+            @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_SIZE) Integer pageSize) {
 
         Page<Product> products = productService.doFilterSearchSortPagingProduct(companyId, categoryId, attributeId, searchKey, minPrice, maxPrice, minRank, maxRank, sortCase, ascSort, pageSize, pageNumber);
         return writeObjectToJson(new StatusResponse(APIStatus.OK.getCode(), products.getContent(), products.getTotalElements()));

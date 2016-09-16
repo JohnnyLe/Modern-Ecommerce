@@ -1,6 +1,7 @@
 package com.nitsoft.ecommerce.database.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,32 +27,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Review implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "review_id")
     private Integer reviewId;
-    
+
     @Basic(optional = false)
     @Column(name = "user_id")
     private String userId;
-    
+
     @Basic(optional = false)
     @Column(name = "product_id")
-    private int productId;
-    
+    private Long productId;
+
     @Basic(optional = false)
     @Column(name = "company_id")
-    private int companyId;
+    private Long companyId;
     
     @Basic(optional = false)
     @Column(name = "rank")
     private int rank;
-    
+
     @Basic(optional = false)
     @Column(name = "comment")
     private String comment;
+
+    @Basic(optional = false)
+    @Column(name = "create_date")
+    private Date createDate;
 
     public Review() {
     }
@@ -60,13 +65,14 @@ public class Review implements Serializable {
         this.reviewId = reviewId;
     }
 
-    public Review(Integer reviewId, String userId, int productId, int companyId, int rank, String comment) {
+    public Review(Integer reviewId, String userId, Long productId, Long companyId, int rank, String comment) {
         this.reviewId = reviewId;
         this.userId = userId;
         this.productId = productId;
         this.companyId = companyId;
         this.rank = rank;
         this.comment = comment;
+        this.createDate = createDate;
     }
 
     public Integer getReviewId() {
@@ -85,19 +91,19 @@ public class Review implements Serializable {
         this.userId = userId;
     }
 
-    public int getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
-    public int getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
@@ -115,6 +121,14 @@ public class Review implements Serializable {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     @Override
@@ -141,5 +155,5 @@ public class Review implements Serializable {
     public String toString() {
         return "com.nitsoft.ecommerce.model.Review[ reviewId=" + reviewId + " ]";
     }
-    
+
 }

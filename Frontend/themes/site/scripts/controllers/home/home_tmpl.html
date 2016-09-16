@@ -15,13 +15,16 @@
                             <div class="single-products">
                                 <div class="productinfo text-center">
                                     <img ng-src="{{p.default_image}}" alt="" />
-                                    <h2>{{'$'+p.list_price}}</h2>
+                                    <h2>{{'$' + p.list_price}}</h2>
                                     <p>{{p.name}}</p>
-                                    <a href="#" class="btn btn-default add-to-cart">
+                                    <button ng-click="addToCart(p)" class="btn btn-default add-to-cart">
                                         <i class="fa fa-shopping-cart"></i>Add to cart
+                                    </button>
+                                    <a ui-sref="product-details({productId: p.product_id})" class="btn btn-default add-to-cart">
+                                        <i class="fa fa-plus-square"></i>View detail
                                     </a>
                                 </div>
-                                <div class="product-overlay">
+                                <!--<div class="product-overlay">
                                     <div class="overlay-content">
                                         <h2>{{'$'+p.list_price}}</h2>
                                         <p>{{p.name}}</p>
@@ -32,7 +35,7 @@
                                             <i class="fa fa-plus-square"></i>View detail
                                         </a>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="choose">
                                 <ul class="nav nav-pills nav-justified">
@@ -69,8 +72,8 @@
                                     </div>
                                 </div>
                             </div>
-                           
-                 
+
+
                         </div>
 
                         <div class="tab-pane fade" id="blazers" >
@@ -87,8 +90,8 @@
                                     </div>
                                 </div>
                             </div>
-                       
-                      
+
+
                         </div>
 
                         <div class="tab-pane fade" id="sunglass" >
@@ -141,6 +144,15 @@
                     </div>
                 </div><!--/category-tab-->
 
+                <div paging
+                     page="1" 
+                     page-size="pageSize" 
+                     total="totalPage"
+                     show-prev-next="true"
+                     show-first-last="true"
+                     paging-action="loadPage(page)">
+                </div>
+
                 <div class="recommended_items"><!--recommended_items-->
                     <h2 class="title text-center">recommended items</h2>
 
@@ -160,7 +172,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="item">	
                                 <div class="col-sm-4" ng-repeat="item in product_recommand">
