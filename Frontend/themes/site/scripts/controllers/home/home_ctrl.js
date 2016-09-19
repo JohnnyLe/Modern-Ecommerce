@@ -21,11 +21,28 @@ angular.module('marketplace.home', ['bw.paging'])
 
     $scope.loadData(0, $scope.pageSize);
     
+    // angular event listener for event of search box directive
     $scope.$on( 'searchResult', function( event, data ) {
         console.debug( data );
         // binding search data into product list
         $scope.products = data.result;
         $scope.totalPage = data.total_records;
     });
+                
+    // jquery slider event listener
+    $(document).on('slideStop', function ( event ) {
+        // it work incorrect, may be we will change to angular directive
+        var minPrice = event.value[0],
+            maxPrice = event.value[1];
+            
+        // *********Todo implement*************    
+        // call API and set data response into 'result' variable
+        // util.callRequest(...)
+        
+        // $scope.products = data.result;
+        // $scope.totalPage = data.total_records;
+        console.debug( minPrice, maxPrice );
+    });
+    
 }]);
 
