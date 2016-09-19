@@ -1,0 +1,33 @@
+<section id="form"><!--form-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="signup-form"><!--sign up form-->
+                    <form ng-submit="submit()">
+                        <div class="col-sm-12">                    
+                            <h2>New User Signup!</h2>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="First Name" ng-model="firstName" />
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" placeholder="Last Name" ng-model="lastName" />
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="email" placeholder="Email Address" ng-model="email" />
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="password" placeholder="Password" ng-model="password" />
+                        </div>
+                        <div class="col-sm-12">
+                            <input type="password" placeholder="Confirm Password" ng-model="confirmPassword" />
+                        </div>
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-default pull-right">Signup</button>
+                        </div>
+                    </form>
+                </div><!--/sign up form-->
+            </div>
+        </div>
+    </div>
+</section><!--/form-->

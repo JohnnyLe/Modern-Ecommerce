@@ -1,5 +1,6 @@
 package com.nitsoft.ecommerce.database.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -50,18 +51,17 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
     
+    @JsonIgnore
     @Basic(optional = false)
     @Column(name = "password_hash")
     private String passwordHash;
     
-    @Basic(optional = false)
     @Column(name = "first_name")
     private String firstName;
     
     @Column(name = "middle_name")
     private String middleName;
     
-    @Basic(optional = false)
     @Column(name = "last_name")
     private String lastName;
     
@@ -69,11 +69,13 @@ public class User implements Serializable {
     @Column(name = "status")
     private int status;
     
+    @JsonIgnore
     @Basic(optional = false)
     @Column(name = "create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
     
+    @JsonIgnore
     @Basic(optional = false)
     @Column(name = "salt")
     private String salt;

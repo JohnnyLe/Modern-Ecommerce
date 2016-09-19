@@ -10,6 +10,7 @@ angular.module('marketplace', [
   'marketplace.directive',
   'marketplace.authen',
   'marketplace.login',
+  'marketplace.register',
   'marketplace.home',
   'marketplace.products.details',
   'marketplace.products.filter',
@@ -23,7 +24,7 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
     // Will be implement in near function
     $stateProvider
             .state('master', {
-                templateUrl: 'pages/master.template.html',
+                templateUrl: 'pages/master_tmpl.html',
                 abstract: true
             })
             .state('index', {
@@ -63,7 +64,14 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
             .state('login', {
                 url: '/login',
                 parent: 'master',
-                templateUrl: 'pages/login.html'
+                templateUrl: 'scripts/controllers/login/login.html',
+                controller: 'LoginCtrl'
+            })
+            .state('register', {
+                url: '/register',
+                parent: 'master',
+                templateUrl: 'scripts/controllers/register/register.html',
+                controller: 'RegisterCtrl'
             })
             .state('blog', {
                 url: '/blog',

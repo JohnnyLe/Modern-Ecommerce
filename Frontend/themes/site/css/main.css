@@ -1458,7 +1458,7 @@ h2.title {
 #form {
     display: block;
     margin-bottom: 185px;
-    margin-top: 185px;
+    margin-top: 65px;
     overflow: hidden;
 }
 
@@ -1479,7 +1479,7 @@ h2.title {
 }
 
 
-.login-form form input, .signup-form form input {
+.login-form form input:not([type="checkbox"]), .signup-form form input:not([type="checkbox"]) {
     background: #F0F0E9;
     border: medium none;
     color: #696763;
@@ -1505,9 +1505,9 @@ h2.title {
     margin-right: 5px;
 }
 
-.login-form form button {
+/*.login-form form button {
     margin-top: 23px;
-}
+}*/
 
 .login-form form button, .signup-form form button {
     background: #FE980F;
@@ -1524,7 +1524,7 @@ h2.title {
 }
 
 
-.login-form label input {
+.login-form label input:not([type="checkbox"]) {
     border: medium none;
     display: inline-block;
     height: 0;

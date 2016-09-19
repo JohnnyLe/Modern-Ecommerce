@@ -16,10 +16,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.hibernate.validator.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,65 +37,54 @@ public class UserAPI extends APIUtil {
     @RequestMapping(path = APIName.USERS_REGISTER, method = RequestMethod.POST, produces = APIName.CHARSET)
     public String register(
             @PathVariable Long companyId,
-            @RequestParam @Email String email,
-            @RequestParam String firstName,
-            @RequestParam String lastName,
-            @RequestParam(required = false) String middleName,
-            @RequestParam String password
+            @RequestBody User user
     ) {
 
         // check user already exists
-        User existed = userService.getUserByEmail(email, companyId);
+        User existed = userService.getUserByEmail(user.getEmail(), companyId);
         if (existed == null) {
             // email is valid to create user
-            if (!email.equals("") && !firstName.equals("") && !lastName.equals("") && !password.equals("")) {
-                
-                
-                StringBuilder regex = new StringBuilder();
-                regex.append("^");
-                regex.append("[_a-z0-9-]+(\\.[_a-z0-9-]+)*@([a-z0-9]+\\.com)");
-                regex.append("$");
-                Pattern pattern = Pattern.compile(regex.toString());
-                Matcher matcher = pattern.matcher(email);
-                boolean valid = matcher.matches();
-                if (valid == false) {
-                    statusResponse = new StatusResponse(APIStatus.ERR_INVALID_DATA);
-                    return writeObjectToJson(statusResponse);
-                }
+            String email = user.getEmail(),
+                    password = user.getPasswordHash();
             
-                if(password.length() < 6){
+            if (email != null && !email.equals("") && password != null && !password.equals("")) {
+
+                Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+                Matcher matcher = pattern.matcher(email);
+
+                System.out.println(matcher.matches());
+                if (!matcher.matches() || password.length() < 6) {
                     statusResponse = new StatusResponse(APIStatus.ERR_INVALID_DATA);
                     return writeObjectToJson(statusResponse);
                 }
-                
-                User user = new User();
-                user.setUserId(UniqueID.getUUID());
-                user.setCompanyId(companyId);
-                user.setCreateDate(new Date());
-                user.setEmail(email);
-                user.setFirstName(firstName);
-                user.setLastName(lastName);
-                user.setMiddleName(middleName);
-                user.setSalt(UniqueID.getUUID());
+
+                User userSignUp = new User();
+                userSignUp.setUserId(UniqueID.getUUID());
+                userSignUp.setCompanyId(companyId);
+                userSignUp.setCreateDate(new Date());
+                userSignUp.setEmail(email);
+                userSignUp.setFirstName(user.getFirstName());
+                userSignUp.setLastName(user.getLastName());
+                userSignUp.setMiddleName(user.getMiddleName());
+                userSignUp.setSalt(UniqueID.getUUID());
 
                 try {
-                    user.setPasswordHash(MD5Hash.MD5Encrypt(password + user.getSalt()));
+                    userSignUp.setPasswordHash(MD5Hash.MD5Encrypt(password + userSignUp.getSalt()));
                 } catch (NoSuchAlgorithmException ex) {
                     throw new RuntimeException("Encrypt user password error", ex);
                 }
 
-                user.setRoleId(Constant.USER_ROLE.REGISTED_USER.getRoleId());
-                user.setStatus(Constant.USER_STATUS.ACTIVE.getStatus());
+                userSignUp.setRoleId(Constant.USER_ROLE.REGISTED_USER.getRoleId());
+                userSignUp.setStatus(Constant.USER_STATUS.ACTIVE.getStatus());
 
-                userService.save(user);
+                userService.save(userSignUp);
                 // do send mail notify...
-                statusResponse = new StatusResponse(APIStatus.OK.getCode(), user);
+                statusResponse = new StatusResponse(APIStatus.OK.getCode(), userSignUp);
             } else {
                 statusResponse = new StatusResponse(APIStatus.ERR_INVALID_DATA);
                 return writeObjectToJson(statusResponse);
             }
-            
-            
+
         } else {
             // notify user already exists
             statusResponse = new StatusResponse(APIStatus.USER_ALREADY_EXIST);
@@ -107,16 +96,16 @@ public class UserAPI extends APIUtil {
     @RequestMapping(value = APIName.USERS_LOGIN, method = RequestMethod.POST, produces = APIName.CHARSET)
     public String login(
             @PathVariable Long companyId,
-            @RequestParam String emailAddress,
+            @RequestParam String email,
             @RequestParam String password,
             @RequestParam Boolean keepMeLogin
     ) {
 
-        if ("".equals(emailAddress) || "".equals(password)) {
+        if ("".equals(email) || "".equals(password)) {
             // invalid paramaters
             statusResponse = new StatusResponse(APIStatus.INVALID_PARAMETER);
         } else {
-            User userLogin = userService.getUserByEmail(emailAddress, companyId);
+            User userLogin = userService.getUserByEmail(email, companyId);
 
             if (userLogin != null) {
                 String passwordHash = null;

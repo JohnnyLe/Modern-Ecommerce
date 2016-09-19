@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('marketplace.login', [])
+angular.module('marketplace.register', [])
 
-.controller('LoginCtrl', ['$scope', 'user', function ($scope, user) {
+.controller('RegisterCtrl', ['$scope', 'user', function ($scope, user) {
     // Alert array
     $scope.alerts = [], $scope.submitting = false;
 
@@ -18,7 +18,7 @@ angular.module('marketplace.login', [])
         if ($scope.submitting)
             return;
 
-        if ($scope.email === undefined || $scope.password === undefined) {
+        if ($scope.email === undefined || $scope.password === undefined || $scope.firstName === undefined || $scope.lastName === undefined) {
 
             $scope.alerts = [{
                     type: 'danger',
@@ -31,11 +31,12 @@ angular.module('marketplace.login', [])
         $scope.submitting = true;
 
         // Do login
-        user.login({
+        user.register({
             
             email: $scope.email,
-            password: $scope.password,
-            keepMeLogin: $scope.keepMeLogin
+            passwordHash: $scope.password,
+            lastName: $scope.lastName,
+            firstName: $scope.firstName
 
         }, function (err) {
 
@@ -48,7 +49,6 @@ angular.module('marketplace.login', [])
                 }];
 
         });
-
     };
 
 }]);
