@@ -28,20 +28,10 @@ angular.module('marketplace.home', ['bw.paging'])
         $scope.products = data.result;
         $scope.totalPage = data.total_records;
     });
-                
-    // jquery slider event listener
-    $(document).on('slideStop', function ( event ) {
-        // it work incorrect, may be we will change to angular directive
-        var minPrice = event.value[0],
-            maxPrice = event.value[1];
-            
-        // *********Todo implement*************    
-        // call API and set data response into 'result' variable
-        // util.callRequest(...)
-        
-        // $scope.products = data.result;
-        // $scope.totalPage = data.total_records;
-        console.debug( minPrice, maxPrice );
+    
+    $scope.$on("priceRangeResult", function (event, data) {
+        // user finished sliding a handle
+        console.debug( data );
     });
     
 }]);
