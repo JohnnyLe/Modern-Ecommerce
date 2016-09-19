@@ -309,6 +309,7 @@ angular.module('marketplace.directive', [ 'components' ])
     };
 }])
 
+// auto hide menu when menu item is clicked
 .directive('menu', ['$', function( $ ) {
     return {
         restrict: 'A',
@@ -474,6 +475,24 @@ angular.module('marketplace.directive', [ 'components' ])
                 $scope.items.splice( index, 1 );
                 // update cookie store
                 cart.removeItem( itemId );
+            };
+        }]
+    };        
+}])
+
+.directive('searchBox', ['util', function( util ) {
+    return {
+        restrict: 'EA',
+        replace: true,
+        template: '<input type="text" placeholder="Search" ng-model="searchKey" ng-keypress="doSearch($event)"/>',
+        controller: ['$scope', function( $scope ) {
+                
+            $scope.doSearch = function( event ) {
+                // call API and set data response into 'result' variable
+                var result = 'test result';
+                // util.callRequest(...)
+                $scope.$broadcast( 'searchResult', result );
+                console.debug( 'Todo' );
             };
         }]
     };        

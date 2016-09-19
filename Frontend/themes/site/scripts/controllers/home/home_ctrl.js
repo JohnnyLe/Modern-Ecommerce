@@ -1,25 +1,9 @@
 'use strict';
 
-angular.module('marketplace.home', [ 'bw.paging' ])
+angular.module('marketplace.home', ['bw.paging'])
 
-        .controller('HomeCtrl', ['$scope', 'util', 'ShoppingCart', '$timeout', function ($scope, util, cart, $timeout) {
-                // Data model biding
-                $scope.loadData = function () {
-                    util.callRequest('products', "GET").then(function (data) {
-                        $scope.products = data.result;
-                    });
-                };
-
-                $scope.addToCart = function (product) {
-                    cart.addItem(product);
-                    console.debug($scope.products);
-                };
-
-                
-                $scope.loadData();
-            }]);
-        
-    // Data model biding
+.controller('HomeCtrl', ['$scope', 'util', 'ShoppingCart', function ($scope, util, cart) {
+    // Data model binding
     $scope.loadData = function (pNumber, pSize) {
         util.callRequest('products', "GET", {pageNumber: pNumber, pageSize: pSize}).then(function (data) {
             $scope.products = data.result;
@@ -37,5 +21,11 @@ angular.module('marketplace.home', [ 'bw.paging' ])
 
     $scope.loadData(0, $scope.pageSize);
     
+    $scope.$on( 'searchResult', function( event, data ) {
+        console.debug( data );
+        // binding search data into product list
+        $scope.products = data.result;
+        $scope.totalPage = data.total_records;
+    });
 }]);
 
