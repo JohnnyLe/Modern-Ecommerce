@@ -64,6 +64,7 @@
                             <li><a ui-sref="checkout" ng-class="{ active: menu == 'checkout' }"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a ui-sref="cart" ng-class="{ active: menu == 'cart' }"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                             <li><a ui-sref="login" ng-class="{ active: menu == 'login' }"><i class="fa fa-lock"></i> Login</a></li>
+                            <li><a ui-sref="register" ng-class="{ active: menu == 'register' }"><i class="fa fa-lock"></i> Sign Up</a></li>
                         </ul>
                     </div>
                 </div>
@@ -108,7 +109,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="search_box pull-right">
-                        <input type="text" placeholder="Search"/>
+                        <div search-box></div>
                     </div>
                 </div>
             </div>

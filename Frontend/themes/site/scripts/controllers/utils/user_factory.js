@@ -169,34 +169,54 @@ angular.module( 'marketplace.authen', ['ngCookies'] )
 //          });
        },
        
-       // Do login
-       login: function ( credential, callback ) {          
-           var that = this;
+        // Do register
+        register: function (credential, callback) {
+            var that = this;
             // Call login
-//            util.callRequest(api.LOGIN.name, api.LOGIN.type, {
-//                username: credential.id,
-//                password: credential.pass
-//            }).then(function (result) {
-//                // Check result returned
-//                if ('authInfor' in result) {
-//                    // Get user info
-//                    angular.extend(user.info, result.authInfor);
-//                    // Set token
-//                    service.token(result.authInfor.userTokens);
-//                    // Invoke success authen
-//                    that.authenticationSuccessHandler();
-//                } else
-//                    callback && callback(result);
-//
-//            }, function (err1) {
-//
-//                callback && callback(err1);
-//            });
+            util.callRequest(api.REGISTER.name, api.REGISTER.type, credential).then(function (result) {
+                // Check result returned
+                if ('authInfor' in result) {
+                    // Get user info
+                    angular.extend(user.info, result.authInfor);
+                    // Set token
+                    service.token(result.authInfor.userTokens);
+                    // Invoke success authen
+                    that.authenticationSuccessHandler();
+                } else
+                    callback && callback(result);
 
-              // Create MOCK Lgin => will be update when implement authen function
-                service.token("authen_token_xxx");
-                // Invoke success authen
-                that.authenticationSuccessHandler();
+            }, function (err) {
+
+                callback && callback(err);
+            });
+        },
+       
+        // Do login
+        login: function (credential, callback) {
+            var that = this;
+            // Call login
+            util.callRequest(api.LOGIN.name, api.LOGIN.type, {
+                
+                email: credential.email,
+                password: credential.password,
+                keepMelogin: credential.keepMeLogin
+                
+            }).then(function (result) {
+                // Check result returned
+                if ('authInfor' in result) {
+                    // Get user info
+                    angular.extend(user.info, result.authInfor);
+                    // Set token
+                    service.token(result.authInfor.userTokens);
+                    // Invoke success authen
+                    that.authenticationSuccessHandler();
+                } else
+                    callback && callback(result);
+
+            }, function (err) {
+
+                callback && callback(err);
+            });
         },
        
        // Do logout

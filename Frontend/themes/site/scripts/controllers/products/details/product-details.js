@@ -36,4 +36,4 @@ angular.module('marketplace.products.details', [])
     });
 }]);
 
-   
+

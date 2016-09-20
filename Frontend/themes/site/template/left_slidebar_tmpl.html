@@ -33,8 +33,10 @@
     <div class="price-range"><!--price-range-->
         <h2>Price Range</h2>
         <div class="well text-center">
-            <input type="text" class="span2" value="" data-slider-min="{{ minPrice}}" data-slider-max="{{ maxPrice}}" data-slider-step="5" data-slider-value="[{{ minSliderValue}},{{ maxSliderValue}}]" id="sl2" ><br />
-            <b class="pull-left">${{ minPrice}}</b> <b class="pull-right">${{ maxPrice}}</b>
+            <rzslider
+                rz-slider-model="slider.min"
+                rz-slider-high="slider.max"
+                rz-slider-options="slider.options"></rzslider>
         </div>
     </div><!--/price-range-->
 

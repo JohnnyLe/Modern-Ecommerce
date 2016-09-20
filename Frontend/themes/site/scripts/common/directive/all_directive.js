@@ -5,7 +5,7 @@
  */
 'use strict';
 
-angular.module('marketplace.directive', [ 'components' ])
+angular.module('marketplace.directive', [ 'components', 'rzModule' ])
 
 // Using for list using datatable
 .directive( 'datatable', [ '$', 'checkbox', 'app', '_', function ( $, checkbox, app, _ ) {
@@ -309,6 +309,7 @@ angular.module('marketplace.directive', [ 'components' ])
     };
 }])
 
+// auto hide menu when menu item is clicked
 .directive('menu', ['$', function( $ ) {
     return {
         restrict: 'A',
@@ -361,7 +362,7 @@ angular.module('marketplace.directive', [ 'components' ])
 }])
 
 // left slidebar
-.directive('leftSlidebar', [function() {
+.directive('leftSlidebar', ['util', function( util ) {
     return {
         restrict: 'EA',
         replace: true,
@@ -373,10 +374,32 @@ angular.module('marketplace.directive', [ 'components' ])
             maxSliderValue: '=?'
         },
         controller: ['$scope', 'util', '$timeout', '$', 'AppConstant', function( $scope, util, $timeout, $, AppConstant ) {
-            $scope.minPrice = angular.isDefined($scope.minPrice) ? $scope.minPrice : AppConstant.DEFAULT_MIN_PRICE_RANGE;
-            $scope.maxPrice = angular.isDefined($scope.maxPrice) ? $scope.maxPrice : AppConstant.DEFAULT_MAX_PRICE_RANGE;
-            $scope.minSliderValue = angular.isDefined($scope.minSliderValue) ? $scope.minSliderValue : $scope.minPrice;
-            $scope.maxSliderValue = angular.isDefined($scope.maxSliderValue) ? $scope.maxSliderValue : $scope.maxPrice;
+            var minPrice = angular.isDefined($scope.minPrice) ? $scope.minPrice : AppConstant.DEFAULT_MIN_PRICE_RANGE,
+                maxPrice = angular.isDefined($scope.maxPrice) ? $scope.maxPrice : AppConstant.DEFAULT_MAX_PRICE_RANGE,
+                minSliderValue = angular.isDefined($scope.minSliderValue) ? $scope.minSliderValue : $scope.minPrice,
+                maxSliderValue = angular.isDefined($scope.maxSliderValue) ? $scope.maxSliderValue : $scope.maxPrice;
+            
+            
+            $scope.slider = {
+                min: minSliderValue,
+                max: maxSliderValue,
+                options: {
+                    hideLimitLabels: true,
+                    floor: minPrice,
+                    ceil: maxPrice,
+                    translate: function(value) {
+                        return '$' + value;
+                    },
+                    onEnd: function () {
+                        // call API and set data response into 'result' variable
+                        var result = 'test result';
+                        // util.callRequest(...)
+                        $scope.$emit( 'priceRangeResult', result );
+                        console.debug( 'todo' );
+                    }
+                }
+            };
+            
             $scope.categories = [];
             $scope.brands = [];
             
@@ -474,6 +497,24 @@ angular.module('marketplace.directive', [ 'components' ])
                 $scope.items.splice( index, 1 );
                 // update cookie store
                 cart.removeItem( itemId );
+            };
+        }]
+    };        
+}])
+
+.directive('searchBox', ['util', function( util ) {
+    return {
+        restrict: 'EA',
+        replace: true,
+        template: '<input type="text" placeholder="Search" ng-model="searchKey" ng-keypress="doSearch($event)"/>',
+        controller: ['$scope', function( $scope ) {
+                
+            $scope.doSearch = function( event ) {
+                // call API and set data response into 'result' variable
+                var result = 'test result';
+                // util.callRequest(...)
+                $scope.$broadcast( 'searchResult', result );
+                console.debug( 'Todo' );
             };
         }]
     };        

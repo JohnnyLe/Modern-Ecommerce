@@ -1,12 +1,9 @@
 'use strict';
 
-angular.module('marketplace.home', [ 'bw.paging' ])
+angular.module('marketplace.home', ['bw.paging'])
 
-.controller('HomeCtrl', [ '$scope', 'util', 'ShoppingCart', '$location', function( $scope, util, cart, $location) {
-    console.debug($location.search().pSize);
-    $scope.pageSize = $location.search().pSize ;
-    
-    // Data model biding
+.controller('HomeCtrl', ['$scope', 'util', 'ShoppingCart', function ($scope, util, cart) {
+    // Data model binding
     $scope.loadData = function (pNumber, pSize) {
         util.callRequest('products', "GET", {pageNumber: pNumber, pageSize: pSize}).then(function (data) {
             $scope.products = data.result;
@@ -23,6 +20,19 @@ angular.module('marketplace.home', [ 'bw.paging' ])
     };
 
     $scope.loadData(0, $scope.pageSize);
+    
+    // angular event listener for event of search box directive
+    $scope.$on( 'searchResult', function( event, data ) {
+        console.debug( data );
+        // binding search data into product list
+        $scope.products = data.result;
+        $scope.totalPage = data.total_records;
+    });
+    
+    $scope.$on("priceRangeResult", function (event, data) {
+        // user finished sliding a handle
+        console.debug( data );
+    });
     
 }]);
 

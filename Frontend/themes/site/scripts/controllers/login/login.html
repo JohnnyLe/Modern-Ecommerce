@@ -1,0 +1,19 @@
+<section id="form"><!--form-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <div class="login-form"><!--login form-->
+                    <h2>Login to your account</h2>
+                    <form ng-submit="submit()">
+                        <input type="email" placeholder="Email Address" ng-model="email" />
+                        <input type="password" placeholder="Password" ng-model="password" />
+                        <div class="checkbox">
+                            <label><input type="checkbox" ng-model="keepMeLogin">Keep me signed in</label>
+                        </div>
+                        <button type="submit" class="btn btn-default pull-right">Login</button>
+                    </form>
+                </div><!--/login form-->
+            </div>
+        </div>
+    </div>
+</section><!--/form-->
