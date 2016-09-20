@@ -52,7 +52,6 @@ public class UserAPI extends APIUtil {
                 Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
                 Matcher matcher = pattern.matcher(email);
 
-                System.out.println(matcher.matches());
                 if (!matcher.matches() || password.length() < 6) {
                     statusResponse = new StatusResponse(APIStatus.ERR_INVALID_DATA);
                     return writeObjectToJson(statusResponse);

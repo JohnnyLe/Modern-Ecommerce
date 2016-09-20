@@ -1,6 +1,7 @@
 package com.nitsoft.ecommerce.database.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -51,7 +52,7 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
     
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Basic(optional = false)
     @Column(name = "password_hash")
     private String passwordHash;
