@@ -511,9 +511,13 @@ angular.module('marketplace.directive', [ 'components', 'rzModule' ])
                 
             $scope.doSearch = function( event ) {
                 // call API and set data response into 'result' variable
-                var result = 'test result';
+                 util.callRequest('products/filter', "GET", {searchKey:$scope.searchKey}).then(function (data) {
+                    var result = data;
+                    $scope.$broadcast( 'searchResult', result );
+                 });
+               
                 // util.callRequest(...)
-                $scope.$broadcast( 'searchResult', result );
+               
                 console.debug( 'Todo' );
             };
         }]
