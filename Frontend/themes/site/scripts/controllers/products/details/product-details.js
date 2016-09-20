@@ -10,7 +10,7 @@ angular.module('marketplace.products.details', [])
     // Data model biding
     $scope.loadData = function () {
         util.callRequest('products/' + $stateParams.productId, "GET").then(function (data) {
-            $scope.product = data.result;
+            $scope.product = data.result.product;
         });
         
         util.callRequest('reviews/' + $stateParams.productId, "GET").then(function (data) {

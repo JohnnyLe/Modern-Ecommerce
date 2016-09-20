@@ -2,9 +2,11 @@
 
 angular.module('marketplace.register', [])
 
-.controller('RegisterCtrl', ['$scope', 'user', function ($scope, user) {
+.controller('RegisterCtrl', ['$scope', 'user', 'app', 'util', function ($scope, user, app, util) {
     // Alert array
-    $scope.alerts = [], $scope.submitting = false;
+    $scope.alerts = [];
+    $scope.submitting = false;
+    $scope.emailRegex = app.EMAIL_REGEX;
 
     // Close alert
     $scope.closeAlert = function (index) {
@@ -18,7 +20,7 @@ angular.module('marketplace.register', [])
         if ($scope.submitting)
             return;
 
-        if ($scope.email === undefined || $scope.password === undefined || $scope.firstName === undefined || $scope.lastName === undefined) {
+        if ($scope.email === undefined || $scope.password === undefined) {
 
             $scope.alerts = [{
                     type: 'danger',
@@ -49,6 +51,14 @@ angular.module('marketplace.register', [])
                 }];
 
         });
+    };
+    
+    $scope.open = function() {
+        util.openModal();
+    };
+    
+    $scope.checkPasswordMatch = function() {
+        return $scope.password === $scope.retypePassword;
     };
 
 }]);

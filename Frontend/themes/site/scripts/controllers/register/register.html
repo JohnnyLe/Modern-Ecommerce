@@ -3,30 +3,36 @@
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
                 <div class="signup-form"><!--sign up form-->
-                    <form ng-submit="submit()">
+                    <form name="form" ng-submit="submit()">
                         <div class="col-sm-12">                    
                             <h2>New User Signup!</h2>
                         </div>
-                        <div class="col-sm-6">
-                            <input type="text" placeholder="First Name" ng-model="firstName" />
-                        </div>
-                        <div class="col-sm-6">
-                            <input type="text" placeholder="Last Name" ng-model="lastName" />
+                        <div class="col-sm-12">
+                            <input name="email" type="email" placeholder="Email Address" ng-model="email" ng-pattern="emailRegex" ng-model-options="{updateOn: 'blur'}" required="required" />
+                            <div ng-show="form.$submitted || (form.email.$dirty && form.email.$invalid)" class="text-error">
+                                <span class="help-block" ng-show="form.email.$error.required">Email address is required</span>
+                                <span class="help-block" ng-show="form.email.$error.pattern">Email address is invalid</span>
+                            </div>
                         </div>
                         <div class="col-sm-12">
-                            <input type="email" placeholder="Email Address" ng-model="email" />
+                            <input name="password" type="password" placeholder="Password" ng-model="password" ng-minlength="6" ng-model-options="{updateOn: 'blur'}" required="required" />
+                            <div ng-show="form.$submitted || (form.password.$dirty && form.password.$invalid)" class="text-error">
+                                <span class="help-block" ng-show="form.password.$error.required">Password is required</span>
+                                <span class="help-block" ng-show="form.password.$error.minlength">Password must greater than 6 characters</span>
+                            </div>
                         </div>
                         <div class="col-sm-12">
-                            <input type="password" placeholder="Password" ng-model="password" />
+                            <input name="retypePassword" type="password" placeholder="Retype Password" ng-model="retypePassword" />
+                            <div ng-show="form.$submitted || form.retypePassword.$dirty" class="text-error">
+                                <span class="help-block" ng-show="!checkPasswordMatch()">Password not match</span>
+                            </div>
                         </div>
                         <div class="col-sm-12">
-                            <input type="password" placeholder="Confirm Password" ng-model="confirmPassword" />
-                        </div>
-                        <div class="col-sm-12">
-                            <button type="submit" class="btn btn-default pull-right">Signup</button>
+                            <button type="submit" class="btn btn-default pull-right" ng-click="open()">Signup</button>
                         </div>
                     </form>
                 </div><!--/sign up form-->
+                <button type="button" class="btn btn-default pull-right" ng-click="open()">Signup</button>
             </div>
         </div>
     </div>
