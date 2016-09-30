@@ -34,6 +34,11 @@ angular.module('marketplace.products.details', [])
             interval: 5000
         });
     });
+
+    $scope.addToCart = function (product) {
+        cart.addItem(product);
+    };
+    
 }]);
 
 

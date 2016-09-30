@@ -3,6 +3,9 @@
 angular.module('marketplace.home', ['bw.paging'])
 
 .controller('HomeCtrl', ['$scope', 'util', 'ShoppingCart', function ($scope, util, cart) {
+        
+    $scope.pageSize = 10;
+    
     // Data model binding
     $scope.loadData = function (pNumber, pSize) {
         util.callRequest('products', "GET", {pageNumber: pNumber, pageSize: pSize}).then(function (data) {

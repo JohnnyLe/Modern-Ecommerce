@@ -30,7 +30,7 @@
                     </div>
                 </td>
                 <td class="cart_total">
-                    <p class="cart_total_price">${{item.quantity * item.sale_price}}</p>
+                    <p class="cart_total_price">${{(item.quantity * item.sale_price).toFixed(2)}}</p>
                 </td>
                 <td class="cart_delete">
                     <a class="cart_quantity_delete" ng-click="removeItem($index)"><i class="fa fa-times"></i></a>

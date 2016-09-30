@@ -17,7 +17,7 @@
                                     <img ng-src="{{p.default_image}}" alt="" />
                                     <h2>${{p.sale_price}}</h2>
                                     <p>{{p.name}}</p>
-                                    <a class="btn btn-default add-to-cart">
+                                    <a ng-click="addToCart(p)" class="btn btn-default add-to-cart">
                                         <i class="fa fa-shopping-cart"></i>
                                         Add to cart
                                     </a>
