@@ -45,3 +45,6 @@ Modern-Ecommerce is designed from the ground-up with extensibility in mind.
 
 ### Release
 N/A (On developing)
+
+### New themes
+![screencapture-localhost-8383-jvoidtheme-1472701866449](https://cloud.githubusercontent.com/assets/1794584/18154950/2c02b126-7033-11e6-9158-cd0daca7b0aa.png)
