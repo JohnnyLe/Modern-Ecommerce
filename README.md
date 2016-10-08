@@ -2,6 +2,9 @@
 
 Modern-Ecommerce is enterprise open-source extensible ecommerce architecture. With Core backend using JAVA Spring (Spring boot) REST APIs & Frontend using Bootstrap/AngularUI AngularJS fro frontend. Fully support AWS inflashstructure (EC2, Database RDS, Mail service SES, etc) to run system on the cloud inflashstructure.
 
+## System Architect
+![image](https://cloud.githubusercontent.com/assets/1794584/19210143/abb815fe-8d44-11e6-8041-e7addf44c8bd.png)
+
 
 ## Key Features and Technologies  
 
