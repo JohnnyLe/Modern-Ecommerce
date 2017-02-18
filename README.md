@@ -1,3 +1,7 @@
+## Current Project Status
+Hi all, sorry for taking a while. We're quite busy now so the project is ON-HOLD for now. We will resume the project later soon.
+Just keep followup and contribute with us if you can.
+
 ## Introduction 
 
 Modern-Ecommerce is enterprise open-source extensible ecommerce architecture. With Core backend using JAVA Spring (Spring boot) REST APIs & Frontend using Bootstrap/AngularUI AngularJS fro frontend. Fully support AWS inflashstructure (EC2, Database RDS, Mail service SES, etc) to run system on the cloud inflashstructure.
