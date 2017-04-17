@@ -40,7 +40,7 @@ Support Paypal, Stripe integration
 
 ### Search
 Flexible domain search capabilities in Modern-Ecommerce are provided through integration
-with Solr.
+with elasticsearch https://www.elastic.co/
 
 ### Task Scheduling
 Scheduling of repetitive tasks are offered through the spring scheduler service
