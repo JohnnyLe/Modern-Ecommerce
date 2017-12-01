@@ -1,7 +1,6 @@
 ## Current Project Status
 
-Hi all, we have moved to offical project in new repository https://github.com/NIT-Software/Modern-Ecommerce
-So please follow and update in latest Repo. We're looking for all developer to contribute to make a great modern Open Source E-comerce Platform. If any question please drop me an email to john@nit-software.com. Thank you all! 
+Hi all, we have moved to official project in new repository https://github.com/NIT-Software/Modern-Ecommerce to have better support & development plan. So please follow and update in latest Repo. We're looking for all developer to contribute to make a great modern Open Source E-comerce Platform. If any question please drop me an email to john@nit-software.com or open ticket in Issue List. Thank you all! 
 
 
 ## Introduction 
