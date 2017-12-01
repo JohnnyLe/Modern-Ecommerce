@@ -1,6 +1,8 @@
 ## Current Project Status
-Hi all, sorry for taking a while. We're quite busy now so the project is ON-HOLD for now. We will resume the project later soon.
-Just keep followup and contribute with us if you can.
+
+Hi all, we have moved to offical project in new repository https://github.com/NIT-Software/Modern-Ecommerce
+So please follow and update in latest Repo. We're looking for all developer to contribute to make a great modern Open Source E-comerce Platform. If any question please drop me an email to john@nit-software.com. Thank you all! 
+
 
 ## Introduction 
 
