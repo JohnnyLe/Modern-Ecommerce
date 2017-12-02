@@ -1,7 +1,7 @@
 package com.nitsoft.ecommerce.api.review;
 
 import com.nitsoft.ecommerce.api.APIName;
-import com.nitsoft.ecommerce.api.APIUtil;
+import com.nitsoft.ecommerce.api.AbstractBaseAPI;
 import com.nitsoft.ecommerce.api.response.APIStatus;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Review;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(APIName.REVIEWS)
-public class ReviewAPI extends APIUtil {
+public class ReviewAPI extends AbstractBaseAPI {
 
     @Autowired
     private ReviewService reviewService;

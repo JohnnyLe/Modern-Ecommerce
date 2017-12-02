@@ -1,7 +1,7 @@
 /*
  */
 
-package com.nitsoft.ecommerce.api;
+package com.nitsoft.util;
 
 import com.nitsoft.util.EmailUtil;
 import com.nitsoft.util.FileUtil;

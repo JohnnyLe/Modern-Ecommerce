@@ -6,7 +6,7 @@
 package com.nitsoft.ecommerce.api.product;
 
 import com.nitsoft.ecommerce.api.APIName;
-import com.nitsoft.ecommerce.api.APIUtil;
+import com.nitsoft.ecommerce.api.AbstractBaseAPI;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.ProductAttribute;
 import com.nitsoft.ecommerce.service.ProductAttributeService;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Api(value = "Productattribute API")
-public class ProductAttributeAPI extends APIUtil {
+public class ProductAttributeAPI extends AbstractBaseAPI {
 
     @Autowired
     ProductAttributeService productAttributeService;

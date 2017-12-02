@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Setting up some stuff using for all API
  *
  */
-public abstract class APIUtil {
+public abstract class AbstractBaseAPI {
 
     //
     // Build setting for Gson class accept NULL value

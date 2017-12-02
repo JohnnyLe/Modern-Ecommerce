@@ -1,7 +1,7 @@
 package com.nitsoft.ecommerce.api.user;
 
 import com.nitsoft.ecommerce.api.APIName;
-import com.nitsoft.ecommerce.api.APIUtil;
+import com.nitsoft.ecommerce.api.AbstractBaseAPI;
 import com.nitsoft.ecommerce.api.response.APIStatus;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.User;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(APIName.USERS)
-public class UserAPI extends APIUtil {
+public class UserAPI extends AbstractBaseAPI {
 
     @Autowired
     private UserService userService;

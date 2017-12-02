@@ -2,7 +2,6 @@
  */
 package com.nitsoft.util;
 
-import com.nitsoft.ecommerce.api.StringUtil;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

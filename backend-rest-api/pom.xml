@@ -214,6 +214,13 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+        
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId><!--$NO-MVN-MAN-VER$ -->
+            <version>1.16.18</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>

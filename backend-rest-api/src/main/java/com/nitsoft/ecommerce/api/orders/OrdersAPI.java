@@ -1,7 +1,7 @@
 package com.nitsoft.ecommerce.api.orders;
 
 import com.nitsoft.ecommerce.api.APIName;
-import com.nitsoft.ecommerce.api.APIUtil;
+import com.nitsoft.ecommerce.api.AbstractBaseAPI;
 import com.nitsoft.ecommerce.api.response.APIStatus;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Orders;
@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Api(value = "create orders API")
 @RequestMapping(value = APIName.ORDERS)
-public class OrdersAPI extends APIUtil {
+public class OrdersAPI extends AbstractBaseAPI {
 
     @Autowired
     OrdersService ordersService;
