@@ -2,3 +2,6 @@
 /backend-resi-api/target/
 /backend-rest-api/target
 /Frontend/themes/site/nbproject/private/private.xml
+/frontend-admin-site/nbproject/private/
+/frontend-admin-site/public_html/vendors
+/frontend-admin-site/nbproject

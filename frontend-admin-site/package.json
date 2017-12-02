@@ -1,0 +1,16 @@
+{
+  "name": "SSO_Frontend",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "NIT",
+  "contributors": [],
+  "dependencies": {
+    "moment": "^2.18.1"
+  }
+}

@@ -1,0 +1,90 @@
+{
+    "app": {
+        "name": "Mordern E-commerce Admin Site"
+    },
+    "navi": {
+        "categories": "Branches",
+        "cars" : "Cars",
+        "booking": "Booking"
+    },
+    "page_title": {
+        
+    },
+    "button": {
+        "login": "Login",
+        "register": "Register",
+        "cancel": "Cancel",
+        "ok": "OK",
+        "back": "BACK",
+        "save": "SAVE",
+        "add": "ADD",
+        "delete": "DELETE",
+        "export": "EXPORT",
+        "yes": "Yes",
+        "no": "No",
+        "detail": "DETAIL",
+        "upload": "UPLOAD"
+    },
+    "table": {
+        "header": {
+            
+        },
+        "body": {
+            
+        }
+    },
+    "label": {
+        "remember_me": "Remember me",
+        "register_account": "Don't have an account?",
+        "register": "Register",
+        "login_account": "Have an account?",
+        "login": "Login",
+        "forgot_password": "Forgot you password?",
+        "first_name": "First name",
+        "last_name": "Last name",
+        "username_or_email": "Username or Email",
+        "password": "Password",
+        "confirm_password": "Confirm password",
+        "phone_number": "Phone number"
+    },
+    "validation": {
+        "first_name": {
+            "invalid_pattern": "First name is invalid",
+            "required": "First name is required"
+        },
+        "last_name": {
+            "invalid_pattern": "Last name is invalid",
+            "required": "Last name is required"
+        },
+        "username": {
+            "invalid_pattern": "Username is invalid",
+            "required": "Username is required"
+        },
+        "email": {
+            "invalid_pattern": "Email is invalid",
+            "required": "Email is required"
+        },
+        "password": {
+            "invalid_pattern": "Password is invalid",
+            "required": "Password is required"
+        },
+        "confirm_password": {
+            "required": "Confirm password is required",
+            "not_match": "Confirm password doesn't match"
+        },
+        "phone_number": {
+            "invalid_pattern": "Phone number is invalid",
+            "required": "Phone number is required"
+        }
+    },
+    "message": {
+        
+    },
+    "api": {
+        "unknown_error": "There is an error occurred",
+        "status": {
+            "701": "User not found",
+            "702": "Password doesn't match"
+        }
+    }
+}
