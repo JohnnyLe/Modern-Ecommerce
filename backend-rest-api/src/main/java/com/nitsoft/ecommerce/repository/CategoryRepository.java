@@ -1,8 +1,6 @@
 package com.nitsoft.ecommerce.repository;
 
 import com.nitsoft.ecommerce.database.model.Category;
-import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 

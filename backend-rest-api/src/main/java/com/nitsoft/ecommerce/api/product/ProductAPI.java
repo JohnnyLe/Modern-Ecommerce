@@ -11,7 +11,6 @@ import com.nitsoft.ecommerce.service.ProductService;
 import com.nitsoft.util.Constant;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

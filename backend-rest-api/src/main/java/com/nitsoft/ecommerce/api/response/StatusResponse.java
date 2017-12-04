@@ -28,6 +28,12 @@ public class StatusResponse<T> {
         this.statusCode = status.getCode();
         this.description = status.getDescription();
     }
+    
+    public StatusResponse(APIStatus status, T result) {
+        this.statusCode = status.getCode();
+        this.description = status.getDescription();
+        this.result = result;
+    }
 
     public StatusResponse(int status, T result) {
         this.statusCode = status;

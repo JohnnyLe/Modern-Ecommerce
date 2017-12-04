@@ -108,7 +108,7 @@ public class OrdersAPI extends AbstractBaseAPI {
                 users.setUserId(UniqueID.getUUID());
                 users.setCompanyId(companyId);
                 users.setCreateDate(createDate);
-                users.setRoleId(Constant.USER_ROLE.ANONYMOUS_USER.getRoleId());
+                users.setRoleId(Constant.USER_ROLE.GUEST.getRoleId());
                 users.setPasswordHash(UniqueID.getUUID());
                 users.setFirstName("");
                 users.setLastName("");

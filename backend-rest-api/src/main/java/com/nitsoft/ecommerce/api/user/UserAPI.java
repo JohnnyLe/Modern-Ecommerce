@@ -73,7 +73,7 @@ public class UserAPI extends AbstractBaseAPI {
                     throw new RuntimeException("Encrypt user password error", ex);
                 }
 
-                userSignUp.setRoleId(Constant.USER_ROLE.REGISTED_USER.getRoleId());
+                userSignUp.setRoleId(Constant.USER_ROLE.NORMAL_USER.getRoleId());
                 userSignUp.setStatus(Constant.USER_STATUS.ACTIVE.getStatus());
 
                 userService.save(userSignUp);
@@ -156,7 +156,7 @@ public class UserAPI extends AbstractBaseAPI {
             userTokenService.invalidateToken(userToken);
             statusResponse = new StatusResponse(APIStatus.OK);
         } else {
-            statusResponse = new StatusResponse(APIStatus.INVALID_TOKEN);
+            statusResponse = new StatusResponse(APIStatus.ERR_UNAUTHORIZED);
         }
 
         return writeObjectToJson(statusResponse);

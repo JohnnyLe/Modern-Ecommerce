@@ -8,11 +8,12 @@ public enum APIStatus {
     USER_ALREADY_EXIST(112, "Email already exist"),
     USER_PENDING_STATUS(113, "User have not activated"),
     INVALID_PARAMETER(200, "Invalid request parameter"),
-    TOKEN_EXPIRIED(202, "Token expiried"),
-    REQUIRED_LOGIN(203, "Required login"),
-    INVALID_TOKEN(204, "Invalid token"),
+    ERR_UNAUTHORIZED(401, "Unauthorized or Access Token is expired"),
+    ERR_PERMISSION_DENIED (402, "Access Permission denied"),
     // Common status
-    OK(200, null);
+    OK(200, null),
+    SQL_ERROR(500, "SQL Error"),
+    ERR_BAD_REQUEST(400, "Bad request"),;
 
     private final int code;
     private final String description;

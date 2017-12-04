@@ -59,9 +59,9 @@ public class ReviewAPI extends AbstractBaseAPI {
             UserToken usertoken = userTokenService.getTokenById(token); // get user token form database
 
             if (usertoken == null) {
-                statusResponse = new StatusResponse(APIStatus.INVALID_TOKEN);
+                statusResponse = new StatusResponse(APIStatus.ERR_UNAUTHORIZED);
             } else if (usertoken.getExpirationDate().getTime() - now.getTime() > 0) {
-                statusResponse = new StatusResponse(APIStatus.TOKEN_EXPIRIED);
+                statusResponse = new StatusResponse(APIStatus.ERR_UNAUTHORIZED);
             } else {
                 // find user by token id
                 User user = userService.getUserById(usertoken.getUserId());

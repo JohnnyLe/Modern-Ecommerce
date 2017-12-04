@@ -3,7 +3,7 @@ package com.nitsoft.ecommerce.api;
 public class APIName {
 
     // version
-    public static final String VERSION = "api/v1/{companyId}";
+    public static final String VERSION = "api/v1/{company_id}";
 
     // charset
     public static final String CHARSET = "application/json;charset=utf-8";
@@ -48,4 +48,8 @@ public class APIName {
     //Orders
     public static final String ORDERS = VERSION + "orders";
     public static final String ORDERS_BY_COMPANY = "/{id}";
+    
+    // auth APIs
+    public static final String AUTH_API = VERSION + "/auth";
+    public static final String ADMIN_LOGIN_API = "/admin/login";
 }

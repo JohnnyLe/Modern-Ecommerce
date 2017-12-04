@@ -1,6 +1,5 @@
 package com.nitsoft.ecommerce.api.rest;
 
-import com.nitsoft.ecommerce.api.response.UtilsResponse;
 import com.nitsoft.ecommerce.exception.ApplicationException;
 import com.nitsoft.ecommerce.model.RestErrorInfo;
 import com.nitsoft.ecommerce.exception.DataFormatException;
@@ -9,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import java.text.SimpleDateFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * This class is meant to be extended by all REST resource "controllers".
@@ -30,8 +27,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 //@ControllerAdvice?
 public abstract class AbstractRestHandler implements ApplicationEventPublisherAware {
 
-    @Autowired
-    public UtilsResponse utilsResponse;
     
     protected final Logger log = LoggerFactory.getLogger(this.getClass());
     protected ApplicationEventPublisher eventPublisher;
