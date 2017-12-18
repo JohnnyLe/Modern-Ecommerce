@@ -12,8 +12,11 @@ public enum APIStatus {
     ERR_PERMISSION_DENIED (402, "Access Permission denied"),
     // Common status
     OK(200, null),
-    SQL_ERROR(500, "SQL Error"),
-    ERR_BAD_REQUEST(400, "Bad request"),;
+    ERR_INTERNAL_SERVER(500, "SQL Error"),
+    SQL_ERROR(501, "SQL Error"),
+    ERR_BAD_REQUEST(400, "Bad request"),
+    ERR_SESSION_DATA_INVALID (603, "Session data invalid"),
+    ERR_SESSION_NOT_FOUND(604, "Session not found");
 
     private final int code;
     private final String description;

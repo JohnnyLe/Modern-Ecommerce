@@ -1,49 +1,42 @@
 package com.nitsoft.ecommerce.exception;
 
 import com.nitsoft.ecommerce.api.response.APIStatus;
+import com.nitsoft.util.Constant;
+import java.util.List;
 
 
 // Unchecked exception
 public class ApplicationException extends RuntimeException {
 
-    private int errorCode = 0;
-    private String desctiption;
+    private APIStatus apiStatus;
+    private List<Constant.ParamError> data;
 
     public ApplicationException(APIStatus apiStatus) {
-        super(apiStatus.getDescription());
-        setAPIStatus(apiStatus);
+        this.apiStatus = apiStatus;
+    }
+
+    /**
+     * This constructor is builded only for handling BAD REQUEST exception
+     * Careful when use it with other purpose ;)
+     *
+     * @param apiStatus
+     * @param data
+     */
+    public ApplicationException(APIStatus apiStatus, List<Constant.ParamError> data) {
+        this(apiStatus);
+        this.data = data;
     }
 
     public ApplicationException(Throwable cause) {
         super(cause);
     }
 
-    public ApplicationException(APIStatus apiStatus, String message) {
-        super(message);
-        setAPIStatus(apiStatus);
+    public APIStatus getApiStatus() {
+        return apiStatus;
     }
 
-    public ApplicationException(APIStatus apiStatus, Throwable cause) {
-        super(apiStatus.getDescription(), cause);
-        setAPIStatus(apiStatus);
-    }
-
-    public ApplicationException(APIStatus apiStatus, String message, Throwable cause) {
-        super(message, cause);
-        setAPIStatus(apiStatus);
-    }
-
-    public int getErrorCode() {
-        return errorCode;
-    }
-
-    public String getDescription() {
-        return desctiption;
-    }
-
-    private void setAPIStatus(APIStatus apiStatus) {
-        this.errorCode = apiStatus.getCode();
-        this.desctiption = apiStatus.getDescription();
+    public List<Constant.ParamError> getData() {
+        return data;
     }
 
 }

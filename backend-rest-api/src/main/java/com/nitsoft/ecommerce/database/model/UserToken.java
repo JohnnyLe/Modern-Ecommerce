@@ -56,4 +56,8 @@ public class UserToken implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date expirationDate;
     
+    @Basic(optional = false)
+    @Column(name = "session_data")
+    private String sessionData;
+    
 }

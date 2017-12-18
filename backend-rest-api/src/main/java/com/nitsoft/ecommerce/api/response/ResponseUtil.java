@@ -19,20 +19,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResponseUtil {
 
-    private StatusResponse _createSSOResponse(APIStatus apiStatus, Object data) {
-        return new StatusResponse(apiStatus, data);
+    private APIResponse _createSSOResponse(APIStatus apiStatus, Object data) {
+        return new APIResponse(apiStatus, data);
     }
 
     // base method
-    public ResponseEntity<StatusResponse> buildResponse(APIStatus apiStatus, Object data, HttpStatus httpStatus) {
+    public ResponseEntity<APIResponse> buildResponse(APIStatus apiStatus, Object data, HttpStatus httpStatus) {
         return new ResponseEntity(_createSSOResponse(apiStatus, data), httpStatus);
     }
 
-    public ResponseEntity<StatusResponse> successResponse(Object data) {
+    public ResponseEntity<APIResponse> successResponse(Object data) {
         return buildResponse(APIStatus.OK, data, HttpStatus.OK);
     }
 
-    public ResponseEntity<StatusResponse> badRequestResponse(List<Constant.ParamError> errors) {
+    public ResponseEntity<APIResponse> badRequestResponse(List<Constant.ParamError> errors) {
 
         Map<String, String> errMap = null;
 

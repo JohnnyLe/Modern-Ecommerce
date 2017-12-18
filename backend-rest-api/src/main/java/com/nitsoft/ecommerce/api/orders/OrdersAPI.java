@@ -116,7 +116,7 @@ public class OrdersAPI extends AbstractBaseAPI {
                 users.setSalt(UniqueID.getUUID());
                 customerService.save(users);
             } else {
-                throw new ApplicationException(APIStatus.INVALID_PARAMETER, new IllegalArgumentException("Email address is null"));
+                throw new ApplicationException(APIStatus.INVALID_PARAMETER);
             }
         }
 

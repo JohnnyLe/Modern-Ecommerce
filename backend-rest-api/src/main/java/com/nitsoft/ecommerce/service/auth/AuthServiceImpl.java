@@ -8,8 +8,11 @@
 package com.nitsoft.ecommerce.service.auth;
 
 import com.nitsoft.ecommerce.api.request.AuthRequestModel;
+import com.nitsoft.ecommerce.api.response.APIResponse;
 import com.nitsoft.ecommerce.api.response.APIStatus;
 import com.nitsoft.ecommerce.api.response.StatusResponse;
+import com.nitsoft.ecommerce.auth.AuthUser;
+import com.nitsoft.ecommerce.auth.AuthUserFactory;
 import com.nitsoft.ecommerce.database.model.User;
 import com.nitsoft.ecommerce.database.model.UserToken;
 import com.nitsoft.ecommerce.exception.ApplicationException;
@@ -24,6 +27,9 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -39,8 +45,11 @@ public class AuthServiceImpl extends AbstractBaseService implements AuthService{
     @Autowired
     private UserTokenRepository userTokenRepository;
     
+    @Autowired
+    AuthUserFactory authUserFactory;
+    
     @Override
-    public ResponseEntity<StatusResponse> adminLogin(Long companyId, AuthRequestModel authRequestModel) {
+    public ResponseEntity<APIResponse> adminLogin(Long companyId, AuthRequestModel authRequestModel) {
         if (authRequestModel == null || "".equals(authRequestModel.getUsername()) || "".equals(authRequestModel.getPassword())){
             throw  new ApplicationException(APIStatus.INVALID_PARAMETER);
         }else{
@@ -59,11 +68,18 @@ public class AuthServiceImpl extends AbstractBaseService implements AuthService{
                     // Check role
                     if (adminUser.getRoleId() == Constant.USER_ROLE.SYS_ADMIN.getRoleId()
                             || adminUser.getRoleId() == Constant.USER_ROLE.STORE_MANAGER.getRoleId()
-                            || adminUser.getRoleId() == Constant.USER_ROLE.STORE_MANAGER.getRoleId()){
+                            || adminUser.getRoleId() == Constant.USER_ROLE.STORE_ADMIN.getRoleId()){
                         
                         // TODO login
                         UserToken userToken = createUserToken(adminUser, authRequestModel.isKeepMeLogin());
-                        
+                        // Create Auth User -> Set to filter config
+                        // Perform the security
+                        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                                adminUser.getEmail(),
+                                adminUser.getPasswordHash()
+                        );
+                        //final Authentication authentication = authenticationManager.authenticate();
+                        SecurityContextHolder.getContext().setAuthentication(authentication);
                         return responseUtil.successResponse(userToken);
                     }else{
                         throw  new ApplicationException(APIStatus.ERR_PERMISSION_DENIED);
@@ -86,11 +102,44 @@ public class AuthServiceImpl extends AbstractBaseService implements AuthService{
             userToken.setLoginDate(DateUtil.convertToUTC(currentDate));
             Date expirationDate = keepMeLogin ? new Date(currentDate.getTime() + Constant.DEFAULT_REMEMBER_LOGIN_MILISECONDS) : new Date(currentDate.getTime() + Constant.DEFAULT_SESSION_TIME_OUT);
             userToken.setExpirationDate(DateUtil.convertToUTC(expirationDate));
-
+            AuthUser authUser = authUserFactory.createAuthUser(userLogin);
+            // Set authUser to session data...
+            userToken.setSessionData(gson.toJson(authUser));
             userTokenRepository.save(userToken);
             return userToken;
         } catch (Exception e) {
             throw new ApplicationException(APIStatus.SQL_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<APIResponse> getUserData(Long companyId, String userId) {
+        
+        if (userId != null && !"".equals(userId)){
+            User user = userRepository.findByUserIdAndCompanyIdAndStatus(userId ,companyId, Constant.USER_STATUS.ACTIVE.getStatus());
+            if(user != null){
+                return responseUtil.successResponse(user);
+            }else{
+                throw new ApplicationException(APIStatus.ERR_USER_NOT_EXIST);
+            }
+        }else{
+            throw new ApplicationException(APIStatus.INVALID_PARAMETER);
+        }
+    }
+
+    @Override
+    public ResponseEntity<APIResponse> logout(String tokenId) {
+        
+        if (tokenId != null && !"".equals(tokenId)){
+            UserToken userToken = userTokenRepository.findOne(tokenId);
+            if (userToken != null){
+                userTokenRepository.delete(userToken);
+                return responseUtil.successResponse("OK");
+            }else{
+                throw new ApplicationException(APIStatus.ERR_SESSION_NOT_FOUND);
+            }
+        }else{
+            throw new ApplicationException(APIStatus.INVALID_PARAMETER);
         }
     }
     

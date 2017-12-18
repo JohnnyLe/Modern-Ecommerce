@@ -80,11 +80,11 @@ public class Constant {
     }
 
     public static enum USER_ROLE {
-        SYS_ADMIN(0, "System Admin"),
-        STORE_ADMIN(1, "Store Admin"),
-        STORE_MANAGER(2, "Store Manager"),
-        NORMAL_USER(3, "Normal User"),
-        GUEST(4, "Guest");
+        SYS_ADMIN(1, "System Admin"),
+        STORE_ADMIN(2, "Store Admin"),
+        STORE_MANAGER(3, "Store Manager"),
+        NORMAL_USER(4, "Normal User"),
+        GUEST(5, "Guest");
         
 
         private final int roleId;

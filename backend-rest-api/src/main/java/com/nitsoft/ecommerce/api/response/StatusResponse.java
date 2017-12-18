@@ -11,10 +11,11 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 /**
  * Response object
  *
+ * @author Admin
  */
 @JsonInclude(value = Include.NON_NULL)
 public class StatusResponse<T> {
-
+    
     private T result;
     private String description;
     private int statusCode;
@@ -22,7 +23,7 @@ public class StatusResponse<T> {
     private Long serverTime;
 
     public StatusResponse() {
-    }
+}
 
     public StatusResponse(APIStatus status) {
         this.statusCode = status.getCode();

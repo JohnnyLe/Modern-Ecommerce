@@ -8,7 +8,7 @@
 package com.nitsoft.ecommerce.service.auth;
 
 import com.nitsoft.ecommerce.api.request.AuthRequestModel;
-import com.nitsoft.ecommerce.api.response.StatusResponse;
+import com.nitsoft.ecommerce.api.response.APIResponse;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -17,5 +17,11 @@ import org.springframework.http.ResponseEntity;
  */
 public interface AuthService {
     // Admin log
-    ResponseEntity<StatusResponse> adminLogin(Long companyId, AuthRequestModel authRequestModel);
+    ResponseEntity<APIResponse> adminLogin(Long companyId, AuthRequestModel authRequestModel);
+    
+    // Get authen user info (session data)
+    ResponseEntity<APIResponse> getUserData (Long companyId, String userId);
+    
+    // User Logout
+    ResponseEntity<APIResponse> logout (String tokenId);
 }
