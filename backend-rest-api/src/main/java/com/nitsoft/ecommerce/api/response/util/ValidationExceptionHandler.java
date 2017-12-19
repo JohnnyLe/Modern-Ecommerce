@@ -1,5 +1,6 @@
-package com.nitsoft.ecommerce.api.response;
+package com.nitsoft.ecommerce.api.response.util;
 
+import com.nitsoft.ecommerce.api.response.model.APIResponse;
 import com.nitsoft.ecommerce.exception.ApplicationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

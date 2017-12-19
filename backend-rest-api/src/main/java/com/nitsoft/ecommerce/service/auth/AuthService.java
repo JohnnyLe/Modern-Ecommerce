@@ -7,8 +7,8 @@
  */
 package com.nitsoft.ecommerce.service.auth;
 
-import com.nitsoft.ecommerce.api.request.AuthRequestModel;
-import com.nitsoft.ecommerce.api.response.APIResponse;
+import com.nitsoft.ecommerce.api.request.model.AuthRequestModel;
+import com.nitsoft.ecommerce.api.response.model.APIResponse;
 import org.springframework.http.ResponseEntity;
 
 /**

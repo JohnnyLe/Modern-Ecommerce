@@ -2,8 +2,8 @@ package com.nitsoft.ecommerce.api.product;
 
 import com.nitsoft.ecommerce.api.APIName;
 import com.nitsoft.ecommerce.api.AbstractBaseAPI;
-import com.nitsoft.ecommerce.api.response.APIStatus;
-import com.nitsoft.ecommerce.api.response.StatusResponse;
+import com.nitsoft.ecommerce.api.response.util.APIStatus;
+import com.nitsoft.ecommerce.api.response.model.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Product;
 import com.nitsoft.ecommerce.database.model.ProductAttributeDetail;
 import com.nitsoft.ecommerce.service.ProductAttributeDetailService;

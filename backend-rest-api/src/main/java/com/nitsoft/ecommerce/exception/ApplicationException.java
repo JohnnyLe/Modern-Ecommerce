@@ -1,6 +1,6 @@
 package com.nitsoft.ecommerce.exception;
 
-import com.nitsoft.ecommerce.api.response.APIStatus;
+import com.nitsoft.ecommerce.api.response.util.APIStatus;
 import com.nitsoft.util.Constant;
 import java.util.List;
 

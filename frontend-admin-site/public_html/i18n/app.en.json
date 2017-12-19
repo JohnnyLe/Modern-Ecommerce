@@ -1,11 +1,9 @@
 {
     "app": {
-        "name": "Mordern E-commerce Admin Site"
+        "name": "MEC Admin"
     },
     "navi": {
-        "categories": "Branches",
-        "cars" : "Cars",
-        "booking": "Booking"
+        "categories": "Categories"
     },
     "page_title": {
         

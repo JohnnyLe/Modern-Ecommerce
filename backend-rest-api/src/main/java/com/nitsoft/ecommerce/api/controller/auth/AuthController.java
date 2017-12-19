@@ -5,12 +5,12 @@
  * You shall not disclose such Confidential Information and shall use it only in accordance
  * with the terms of the license agreement you entered into with NIT-Software.
  */
-package com.nitsoft.ecommerce.api.controller;
+package com.nitsoft.ecommerce.api.controller.auth;
 
 import com.nitsoft.ecommerce.api.APIName;
-import com.nitsoft.ecommerce.api.AbstractBaseAPI;
-import com.nitsoft.ecommerce.api.request.AuthRequestModel;
-import com.nitsoft.ecommerce.api.response.APIResponse;
+import com.nitsoft.ecommerce.api.request.model.AuthRequestModel;
+import com.nitsoft.ecommerce.api.response.model.APIResponse;
+import com.nitsoft.ecommerce.api.controller.AbstractBaseController;
 import com.nitsoft.ecommerce.service.auth.AuthService;
 import com.nitsoft.util.Constant;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(APIName.AUTH_API)
-public class AuthController extends AbstractBaseAPI{
+public class AuthController extends AbstractBaseController{
     @Autowired
     AuthService authService;
     

@@ -7,7 +7,7 @@ package com.nitsoft.ecommerce.api.product;
 
 import com.nitsoft.ecommerce.api.APIName;
 import com.nitsoft.ecommerce.api.AbstractBaseAPI;
-import com.nitsoft.ecommerce.api.response.StatusResponse;
+import com.nitsoft.ecommerce.api.response.model.StatusResponse;
 import com.nitsoft.ecommerce.database.model.ProductAttribute;
 import com.nitsoft.ecommerce.service.ProductAttributeService;
 import io.swagger.annotations.Api;

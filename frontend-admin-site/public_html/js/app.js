@@ -30,6 +30,15 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 'js/common/directives/icheck.js',
                                 'js/components/login/login.js'
                             ]
+                        },
+                        {
+                            name: 'categoriesListModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/components/categories/list/categories_list_ctrl.js'
+                            ]
                         }
                     ];
 
@@ -101,101 +110,10 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 name: 'categories.list',
                                 url: '/list',
                                 templateUrl: 'js/components/categories/list/categories_list_tmpl.html',
-                                controller: 'ListCarBranchCtrl',
+                                controller: 'ListCategoriesCtrl',
                                 resolve: {
                                     loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
-                                            return $ocLazyLoad.load('carBranchListModule');
-                                        }]
-                                }
-                            })
-                            .state({
-                                name: 'categories.create',
-                                url: '/create',
-                                templateUrl: 'js/components/categories/create/categories_create.html',
-                                controller: 'CarBranchCreateCtrl',
-                                resolve: {
-                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
-                                            return $ocLazyLoad.load('carBranchCreateModule');
-                                        }]
-                                }
-                            })
-                            .state({
-                                name: 'categories.edit',
-                                url: '/{id}',
-                                templateUrl: 'js/components/categories/edit/categories_edit.html',
-                                controller: 'CarBranchEditCtrl',
-                                resolve: {
-                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
-                                            return $ocLazyLoad.load('carBranchEditModule');
-                                        }]
-                                }
-                            })
-                            .state({
-                                name: 'cars',
-                                parent: 'authorized',
-                                abstract: true,
-                                url: '/cars',
-                                template: '<div ui-view></div>'
-                            })
-                            .state({
-                                name: 'cars.list',
-                                url: '/list',
-                                templateUrl: 'js/components/cars/list/cars_list.html',
-                                controller: 'ListCarCtrl',
-                                resolve: {
-                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
-                                            return $ocLazyLoad.load('carListModule');
-                                        }]
-                                }
-                            })
-                            .state({
-                                name: 'cars.edit',
-                                url: '/detail/{id}',
-                                templateUrl: 'js/components/cars/edit/car_edit.html',
-                                controller: 'EditCarCtrl',
-                                resolve: {
-                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
-                                            return $ocLazyLoad.load('carEditModule');
-                                        }]
-                                }
-                            })
-                            .state({
-                                name: 'cars.create',
-                                url: '/create',
-                                templateUrl: 'js/components/cars/create_car/create_car.html',
-                                controller: 'CreateCarCtrl',
-                                resolve: {
-                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
-                                            return $ocLazyLoad.load('createCarModule');
-                                        }]
-                                }
-                            })
-                            .state({
-                                name: 'booking',
-                                parent: 'authorized',
-                                abstract: true,
-                                url: '/booking',
-                                template: '<div ui-view></div>'
-                            })
-                            .state({
-                                name: 'booking.list',
-                                url: '/list',
-                                templateUrl: 'js/components/booking/list_booking/list_booking.html',
-                                controller: 'ListBookingCtrl',
-                                resolve: {
-                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
-                                            return $ocLazyLoad.load('carListBookingModule');
-                                        }]
-                                }
-                            })
-                            .state({
-                                name: 'booking.edit',
-                                url: '/detail/{id}',
-                                templateUrl: 'js/components/booking/edit/booking_edit.html',
-                                controller: 'BookingDetailCtrl',
-                                resolve: {
-                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
-                                            return $ocLazyLoad.load('bookingEditModule');
+                                            return $ocLazyLoad.load('categoriesListModule');
                                         }]
                                 }
                             })

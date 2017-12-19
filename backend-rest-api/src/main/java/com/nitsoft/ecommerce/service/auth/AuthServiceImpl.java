@@ -7,10 +7,9 @@
  */
 package com.nitsoft.ecommerce.service.auth;
 
-import com.nitsoft.ecommerce.api.request.AuthRequestModel;
-import com.nitsoft.ecommerce.api.response.APIResponse;
-import com.nitsoft.ecommerce.api.response.APIStatus;
-import com.nitsoft.ecommerce.api.response.StatusResponse;
+import com.nitsoft.ecommerce.api.request.model.AuthRequestModel;
+import com.nitsoft.ecommerce.api.response.model.APIResponse;
+import com.nitsoft.ecommerce.api.response.util.APIStatus;
 import com.nitsoft.ecommerce.auth.AuthUser;
 import com.nitsoft.ecommerce.auth.AuthUserFactory;
 import com.nitsoft.ecommerce.database.model.User;
@@ -80,7 +79,7 @@ public class AuthServiceImpl extends AbstractBaseService implements AuthService{
                         );
                         //final Authentication authentication = authenticationManager.authenticate();
                         SecurityContextHolder.getContext().setAuthentication(authentication);
-                        return responseUtil.successResponse(userToken);
+                        return responseUtil.successResponse(userToken.getToken());
                     }else{
                         throw  new ApplicationException(APIStatus.ERR_PERMISSION_DENIED);
                     }

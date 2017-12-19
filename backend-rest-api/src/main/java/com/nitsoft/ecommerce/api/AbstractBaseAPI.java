@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.nitsoft.ecommerce.api.response.StatusResponse;
+import com.nitsoft.ecommerce.api.response.model.StatusResponse;
 import com.nitsoft.ecommerce.auth.AuthUser;
 import com.nitsoft.ecommerce.auth.service.CustomUserAuthService;
 import com.nitsoft.ecommerce.configs.AppConfig;

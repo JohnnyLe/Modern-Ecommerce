@@ -31,8 +31,8 @@ angular.module('ec-admin.auth', [])
 
             $scope.submitting = true;
             Session.consoleLogin({
-                userName: $scope.user.username,
-                passwordHash: Util.MD5($scope.user.password)
+                username: $scope.user.username,
+                password: Util.MD5($scope.user.password)
             }, function (response) {
 
                 var status = response.status;

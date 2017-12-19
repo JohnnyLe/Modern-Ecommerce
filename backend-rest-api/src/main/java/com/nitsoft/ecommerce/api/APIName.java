@@ -54,4 +54,7 @@ public class APIName {
     public static final String SESSION_DATA = "/session/data";
     public static final String USER_LOGOUT = "/logout";
     public static final String ADMIN_LOGIN_API = "/admin/login";
+    
+    // Categories APIs
+    public static final String CATEGORIES_API = VERSION + "/categories";
 }

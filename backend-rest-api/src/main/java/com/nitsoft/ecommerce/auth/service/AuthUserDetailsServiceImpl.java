@@ -8,7 +8,7 @@
 package com.nitsoft.ecommerce.auth.service;
 
 import com.google.gson.Gson;
-import com.nitsoft.ecommerce.api.response.APIStatus;
+import com.nitsoft.ecommerce.api.response.util.APIStatus;
 import com.nitsoft.ecommerce.auth.AuthUser;
 import com.nitsoft.ecommerce.database.model.UserToken;
 import com.nitsoft.ecommerce.exception.ApplicationException;

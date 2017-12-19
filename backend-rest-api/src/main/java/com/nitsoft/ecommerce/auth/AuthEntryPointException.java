@@ -8,8 +8,8 @@
 package com.nitsoft.ecommerce.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.nitsoft.ecommerce.api.response.APIStatus;
-import com.nitsoft.ecommerce.api.response.StatusResponse;
+import com.nitsoft.ecommerce.api.response.util.APIStatus;
+import com.nitsoft.ecommerce.api.response.model.StatusResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;

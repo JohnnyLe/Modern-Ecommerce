@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nitsoft.ecommerce.api.response;
+package com.nitsoft.ecommerce.api.response.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.nitsoft.ecommerce.api.response.util.APIStatus;
 
 /**
  * Response object

@@ -5,8 +5,9 @@
  * You shall not disclose such Confidential Information and shall use it only in accordance
  * with the terms of the license agreement you entered into with NIT-Software.
  */
-package com.nitsoft.ecommerce.api.response;
+package com.nitsoft.ecommerce.api.response.util;
 
+import com.nitsoft.ecommerce.api.response.model.APIResponse;
 import com.nitsoft.util.Constant;
 import java.util.HashMap;
 import java.util.List;

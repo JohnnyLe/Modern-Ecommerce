@@ -5,7 +5,7 @@
  * You shall not disclose such Confidential Information and shall use it only in accordance
  * with the terms of the license agreement you entered into with NIT-Software.
  */
-package com.nitsoft.ecommerce.api.request;
+package com.nitsoft.ecommerce.api.request.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

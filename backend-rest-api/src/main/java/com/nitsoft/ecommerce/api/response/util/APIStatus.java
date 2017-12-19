@@ -1,4 +1,4 @@
-package com.nitsoft.ecommerce.api.response;
+package com.nitsoft.ecommerce.api.response.util;
 
 public enum APIStatus {
 
