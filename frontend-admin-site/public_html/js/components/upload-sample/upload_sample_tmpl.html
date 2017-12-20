@@ -1,0 +1,20 @@
+<div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="file-upload">
+                <label for="upload-1" class="btn-input">Upload</label>
+                <input class="hide-choose-file" type="file" accept="image/*" id="upload-1" ng-file-model="fileMedia" multiple>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix20"></div>
+    <div class="row panel-body">
+        <div class="col-xs-3 text-center well" ng-repeat="image in multipleImage" style="margin-bottom: 0">
+            <span>
+                <img ng-class="{'image-opacity' : uploading}" class="img-responsive image-border-custom" ng-src="{{image.url}}" style="width: 150%; height: 150px">
+                <i class="glyphicon glyphicon-remove add-icon-remove" ng-click="removeImage(image)"></i>
+            </span>
+        </div>
+
+    </div>
+</div>

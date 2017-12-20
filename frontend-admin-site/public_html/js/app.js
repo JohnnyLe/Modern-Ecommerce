@@ -39,6 +39,16 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 'js/common/directives/icheck.js',
                                 'js/components/categories/list/categories_list_ctrl.js'
                             ]
+                        },
+                        // This is just sample upload page, I will remove later (Quy)
+                        {
+                            name: 'uploadSampleModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/components/upload-sample/upload_sample_ctrl.js'
+                            ]
                         }
                     ];
 
@@ -114,6 +124,25 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 resolve: {
                                     loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                                             return $ocLazyLoad.load('categoriesListModule');
+                                        }]
+                                }
+                            })
+                            // This is just for sample upload I will remove later (Quy)
+                            .state({
+                                name: 'upload',
+                                parent: 'authorized',
+                                abstract: true,
+                                url: '/upload',
+                                template: '<div ui-view></div>'
+                            })
+                            .state({
+                                name: 'upload.sample',
+                                url: '/sample',
+                                templateUrl: 'js/components/upload-sample/upload_sample_tmpl.html',
+                                controller: 'UploadSampleCtrl',
+                                resolve: {
+                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                            return $ocLazyLoad.load('uploadSampleModule');
                                         }]
                                 }
                             })

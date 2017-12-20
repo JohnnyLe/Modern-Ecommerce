@@ -404,6 +404,7 @@ var utils = angular.module('ec-admin.utils', [])
 
                                             var status = response.data.status;
                                             if (status === 200) {
+                                                console.log(response, item);
                                                 $rootScope.loading = false;
 //                                                console.log(response.data.data.name);
                                                 var value = {
@@ -412,11 +413,11 @@ var utils = angular.module('ec-admin.utils', [])
                                                     //type
                                                     typeVideo: item.type.split("/")[0] === "video" ? true : false,
                                                     // File Name 
-                                                    url: item.type.split("/")[0] === "video" ? "img/video.jpg" : AppConfig.PATH_FILE + response.data.data.name,
+                                                    url: item.type.split("/")[0] === "video" ? "img/video.jpg" : AppConfig.PATH_FILE + response.data.data,
                                                     //File Size 
                                                     size: item.size,
                                                     //File URL to view 
-                                                    name: response.data.data.name,
+                                                    name: "sample image",
                                                     // File Input Value 
                                                     _file: item
                                                 };

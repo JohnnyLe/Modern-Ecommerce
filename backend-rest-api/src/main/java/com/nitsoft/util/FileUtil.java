@@ -3,6 +3,7 @@ package com.nitsoft.util;
 
 import com.nitsoft.ecommerce.tracelogged.EventLogManager;
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +26,8 @@ import org.apache.commons.io.FilenameUtils;
 /**
  */
 public class FileUtil {
+    
+    public static final int BUFFER_SIZE = 100 * 1024;
 
     private String parentName = null;
     private File dir = null;
@@ -264,6 +268,43 @@ public class FileUtil {
             }
         } catch (Exception ex) {
             EventLogManager.getInstance().info("doDownload file error" + ex.getMessage());
+        }
+    }
+    
+    /**
+     * Append new input stream into specific file
+     *
+     * @param in
+     * @param destFile
+     */
+    public static void appendFile(InputStream in, File destFile) {
+        OutputStream out = null;
+        try {
+            if (destFile.exists()) {
+                out = new BufferedOutputStream(new FileOutputStream(destFile, true), BUFFER_SIZE);
+            } else {
+                out = new BufferedOutputStream(new FileOutputStream(destFile), BUFFER_SIZE);
+            }
+            in = new BufferedInputStream(in, BUFFER_SIZE);
+
+            int len = 0;
+            byte[] buffer = new byte[BUFFER_SIZE];
+            while ((len = in.read(buffer)) > 0) {
+                out.write(buffer, 0, len);
+            }
+        } catch (IOException e) {
+            EventLogManager.getInstance().error(e.getMessage());
+        } finally {
+            try {
+                if (null != in) {
+                    in.close();
+                }
+                if (null != out) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                EventLogManager.getInstance().error(e.getMessage());
+            }
         }
     }
 }
