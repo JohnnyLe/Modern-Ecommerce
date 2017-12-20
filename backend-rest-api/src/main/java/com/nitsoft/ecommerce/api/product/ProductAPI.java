@@ -2,6 +2,7 @@ package com.nitsoft.ecommerce.api.product;
 
 import com.nitsoft.ecommerce.api.APIName;
 import com.nitsoft.ecommerce.api.AbstractBaseAPI;
+import com.nitsoft.ecommerce.api.request.model.ListProductModel;
 import com.nitsoft.ecommerce.api.response.util.APIStatus;
 import com.nitsoft.ecommerce.api.response.model.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Product;
@@ -14,8 +15,10 @@ import io.swagger.annotations.ApiOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -100,22 +103,9 @@ public class ProductAPI extends AbstractBaseAPI {
 
     @ApiOperation(value = "filter product list", notes = "")
     @RequestMapping(value = APIName.PRODUCTS_FILTER_LIST, method = RequestMethod.GET, produces = APIName.CHARSET)
-    public String getProductFilterList(
-            @PathVariable("companyId") Long companyId,
-            @RequestParam(required = false, defaultValue = "-1") Long categoryId,
-            @RequestParam(required = false, defaultValue = "-1") Long attributeId,
-            @RequestParam(required = false) String searchKey,
-            @RequestParam(required = false, defaultValue = "0") Double minPrice,
-            @RequestParam(required = false, defaultValue = "-1") Double maxPrice,
-            @RequestParam(required = false, defaultValue = "0") Integer minRank,
-            @RequestParam(required = false, defaultValue = "-1") Integer maxRank,
-            @RequestParam(required = false, defaultValue = "-1") Integer sortCase,
-            @RequestParam(required = false, defaultValue = "1") Boolean ascSort,
-            @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_NUMBER) Integer pageNumber,
-            @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_SIZE) Integer pageSize) {
-
-        Page<Product> products = productService.doFilterSearchSortPagingProduct(companyId, categoryId, attributeId, searchKey, minPrice, maxPrice, minRank, maxRank, sortCase, ascSort, pageSize, pageNumber);
-        return writeObjectToJson(new StatusResponse(APIStatus.OK.getCode(), products.getContent(), products.getTotalElements()));
-
+    public ResponseEntity<PPointerResponse> getProductFilterList(HttpServletRequest request,
+            @RequestBody ListProductModel listProductModel) {
+        Page<Product> products = productService.doFilterSearchSortPagingProduct(listProductModel.getCompanyId(), listProductModel.getCategoryId(), listProductModel.getAttributeId(), listProductModel.getSearchKey(), listProductModel.getMinPrice(), listProductModel.getMaxPrice(), listProductModel.getMinRank(), listProductModel.getMaxRank(), listProductModel.getSortCase(), listProductModel.getAscSort(), listProductModel.getPageSize(), listProductModel.getPageNumber());
+        return null;
     }
 }
