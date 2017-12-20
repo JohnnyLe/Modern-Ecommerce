@@ -9,7 +9,7 @@ angular.module( 'ec-admin.constant', [] )
     OCLAZY_CACHE_MODULE: true, // Should use "true" when deploy to server
     
     API_PATH: 'http://localhost:8080/ecommerce-rest-api/api/v1/1',
-    PATH_FILE: "http://localhost:8080/upload/",
+    PATH_FILE: "http://localhost:8080/ecommerce-rest-api/upload/",
     SESSION_COOKIES: 'AccessToken'
      
 })

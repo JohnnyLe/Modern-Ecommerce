@@ -8,10 +8,8 @@
 package com.nitsoft.ecommerce.service;
 
 import com.google.gson.Gson;
-import com.nitsoft.ecommerce.api.response.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -21,7 +19,4 @@ public abstract class AbstractBaseService {
     protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
     
     protected final Gson gson = new Gson();
-    
-    @Autowired
-    protected ResponseUtil responseUtil;
 }

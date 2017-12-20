@@ -7,7 +7,6 @@
  */
 package com.nitsoft.ecommerce.service.auth;
 
-import com.nitsoft.ecommerce.api.request.model.AuthRequestModel;
 import com.nitsoft.ecommerce.api.response.model.APIResponse;
 import com.nitsoft.ecommerce.api.response.util.APIStatus;
 import com.nitsoft.ecommerce.auth.AuthUser;
@@ -20,15 +19,10 @@ import com.nitsoft.ecommerce.repository.UserTokenRepository;
 import com.nitsoft.ecommerce.service.AbstractBaseService;
 import com.nitsoft.util.Constant;
 import com.nitsoft.util.DateUtil;
-import com.nitsoft.util.MD5Hash;
 import com.nitsoft.util.UniqueID;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -48,50 +42,7 @@ public class AuthServiceImpl extends AbstractBaseService implements AuthService{
     AuthUserFactory authUserFactory;
     
     @Override
-    public ResponseEntity<APIResponse> adminLogin(Long companyId, AuthRequestModel authRequestModel) {
-        if (authRequestModel == null || "".equals(authRequestModel.getUsername()) || "".equals(authRequestModel.getPassword())){
-            throw  new ApplicationException(APIStatus.INVALID_PARAMETER);
-        }else{
-            User adminUser = userRepository.findByEmailAndCompanyIdAndStatus(authRequestModel.getUsername(), companyId, Constant.USER_STATUS.ACTIVE.getStatus());
-            if (adminUser == null){
-                throw new ApplicationException(APIStatus.ERR_USER_NOT_EXIST);
-            }else{
-                String passwordHash = null;
-                try {
-                    passwordHash = MD5Hash.MD5Encrypt(authRequestModel.password + adminUser.getSalt());
-                } catch (NoSuchAlgorithmException ex) {
-                    throw new RuntimeException("User login encrypt password error", ex);
-                }
-                
-                if (passwordHash.equals(adminUser.getPasswordHash())) {
-                    // Check role
-                    if (adminUser.getRoleId() == Constant.USER_ROLE.SYS_ADMIN.getRoleId()
-                            || adminUser.getRoleId() == Constant.USER_ROLE.STORE_MANAGER.getRoleId()
-                            || adminUser.getRoleId() == Constant.USER_ROLE.STORE_ADMIN.getRoleId()){
-                        
-                        // TODO login
-                        UserToken userToken = createUserToken(adminUser, authRequestModel.isKeepMeLogin());
-                        // Create Auth User -> Set to filter config
-                        // Perform the security
-                        Authentication authentication = new UsernamePasswordAuthenticationToken(
-                                adminUser.getEmail(),
-                                adminUser.getPasswordHash()
-                        );
-                        //final Authentication authentication = authenticationManager.authenticate();
-                        SecurityContextHolder.getContext().setAuthentication(authentication);
-                        return responseUtil.successResponse(userToken.getToken());
-                    }else{
-                        throw  new ApplicationException(APIStatus.ERR_PERMISSION_DENIED);
-                    }
-                }else{
-                    throw new ApplicationException(APIStatus.ERR_USER_NOT_VALID);
-                }
-                
-            }
-        }
-    }
-    
-    private UserToken createUserToken (User userLogin, boolean keepMeLogin){
+    public UserToken createUserToken (User userLogin, boolean keepMeLogin){
         try {
             UserToken userToken = new UserToken();
             userToken.setToken(UniqueID.getUUID());
@@ -107,39 +58,29 @@ public class AuthServiceImpl extends AbstractBaseService implements AuthService{
             userTokenRepository.save(userToken);
             return userToken;
         } catch (Exception e) {
+            LOGGER.error("Error create User token ", e);
             throw new ApplicationException(APIStatus.SQL_ERROR);
         }
     }
 
     @Override
-    public ResponseEntity<APIResponse> getUserData(Long companyId, String userId) {
-        
-        if (userId != null && !"".equals(userId)){
-            User user = userRepository.findByUserIdAndCompanyIdAndStatus(userId ,companyId, Constant.USER_STATUS.ACTIVE.getStatus());
-            if(user != null){
-                return responseUtil.successResponse(user);
-            }else{
-                throw new ApplicationException(APIStatus.ERR_USER_NOT_EXIST);
-            }
-        }else{
-            throw new ApplicationException(APIStatus.INVALID_PARAMETER);
-        }
+    public User getUserByEmailAndCompanyIdAndStatus(String email, Long companyId, int status) {
+        return userRepository.findByEmailAndCompanyIdAndStatus(email, companyId, Constant.USER_STATUS.ACTIVE.getStatus());
     }
 
     @Override
-    public ResponseEntity<APIResponse> logout(String tokenId) {
-        
-        if (tokenId != null && !"".equals(tokenId)){
-            UserToken userToken = userTokenRepository.findOne(tokenId);
-            if (userToken != null){
-                userTokenRepository.delete(userToken);
-                return responseUtil.successResponse("OK");
-            }else{
-                throw new ApplicationException(APIStatus.ERR_SESSION_NOT_FOUND);
-            }
-        }else{
-            throw new ApplicationException(APIStatus.INVALID_PARAMETER);
-        }
+    public User getUserByUserIdAndCompanyIdAndStatus(String userId, Long companyId, int status) {
+        return userRepository.findByUserIdAndCompanyIdAndStatus(userId ,companyId, Constant.USER_STATUS.ACTIVE.getStatus());
+    }
+
+    @Override
+    public UserToken getUserTokenById(String id) {
+        return userTokenRepository.findOne(id);
+    }
+
+    @Override
+    public void deleteUserToken(UserToken userToken) {
+        userTokenRepository.delete(userToken);
     }
     
 }

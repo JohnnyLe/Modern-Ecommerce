@@ -57,4 +57,9 @@ public class APIName {
     
     // Categories APIs
     public static final String CATEGORIES_API = VERSION + "/categories";
+    
+    
+    // Upload file API
+    public static final String UPLOAD_API = VERSION + "/upload";
+    public static final String UPLOAD_FILE = "/file";
 }
