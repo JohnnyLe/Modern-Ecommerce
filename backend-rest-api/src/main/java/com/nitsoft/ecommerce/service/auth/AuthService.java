@@ -7,21 +7,22 @@
  */
 package com.nitsoft.ecommerce.service.auth;
 
-import com.nitsoft.ecommerce.api.request.model.AuthRequestModel;
-import com.nitsoft.ecommerce.api.response.model.APIResponse;
-import org.springframework.http.ResponseEntity;
+import com.nitsoft.ecommerce.database.model.User;
+import com.nitsoft.ecommerce.database.model.UserToken;
 
 /**
  *
  * @author Quy Duong
  */
 public interface AuthService {
-    // Admin log
-    ResponseEntity<APIResponse> adminLogin(Long companyId, AuthRequestModel authRequestModel);
     
-    // Get authen user info (session data)
-    ResponseEntity<APIResponse> getUserData (Long companyId, String userId);
+    public User getUserByEmailAndCompanyIdAndStatus (String email, Long companyId, int status);
+
+    public UserToken createUserToken(User adminUser, boolean keepMeLogin);
     
-    // User Logout
-    ResponseEntity<APIResponse> logout (String tokenId);
+    public User getUserByUserIdAndCompanyIdAndStatus (String userId, Long companyId, int status);
+    
+    public UserToken getUserTokenById (String id);
+    
+    public void deleteUserToken (UserToken userToken);
 }
