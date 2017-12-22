@@ -18,17 +18,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ListProductModel {
-    private long categoryId;
-    private long attributeId;
-    private long companyId;
-    private String searchKey;
-    private Double minPrice;
-    private Double maxPrice;
-    private int minRank;
-    private int maxRank;
-    private int sortCase;
-    private Boolean ascSort;
-    private int pageNumber;
-    private int pageSize;
+public class ProductCompanyModel {
+    private Long productId;
+    private Long companyId;
 }

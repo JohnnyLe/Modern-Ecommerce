@@ -37,7 +37,8 @@ angular.module( 'ec-admin.constant', [] )
     LOGOUT: { path: '/auth/logout' },
     CONSOLE_LOGIN: { path: '/auth/admin/login' },
     CONSOLE_REGISTER: { path: '/users/console/register' },
-    GET_USER_PROFILE: { path: '/auth/session/data', method: 'GET' }
+    GET_USER_PROFILE: { path: '/auth/session/data', method: 'GET' },
+    GET_LIST_PRODUCT: { path: '/products/filter', method: 'POST' }
 })
 
 // API status

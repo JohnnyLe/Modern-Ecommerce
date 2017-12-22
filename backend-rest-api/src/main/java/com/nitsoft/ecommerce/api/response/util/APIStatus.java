@@ -19,7 +19,14 @@ public enum APIStatus {
     ERR_SESSION_NOT_FOUND(604, "Session not found"),
     
     // File upload error
-    ERR_UPLOAD_FILE(900, "Upload file error.");
+    ERR_UPLOAD_FILE(900, "Upload file error."),
+    
+    //Product status
+    CREATE_PRODUCT_ERROR(700, "Create product error"),
+    DELETE_PRODUCT_ERROR(701, "Delete product error"),
+    GET_PRODUCT_ERROR(702, "Can't get product detail"),
+    UPDATE_PRODUCT_ERROR(703, "Update product error"),
+    GET_LIST_PRODUCT_ERROR(704, "Get list product error");
 
     private final int code;
     private final String description;

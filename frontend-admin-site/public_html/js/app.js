@@ -49,6 +49,33 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 'js/common/directives/icheck.js',
                                 'js/components/upload-sample/upload_sample_ctrl.js'
                             ]
+                        },
+                        {
+                            name: 'productsListModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/components/products/list/product_list.js'
+                            ]
+                        },
+                        {
+                            name: 'productsCreateModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/components/products/list/product_create.js'
+                            ]
+                        },
+                        {
+                            name: 'productsDetailModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/components/products/list/product_detail.js'
+                            ]
                         }
                     ];
 
@@ -143,6 +170,46 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 resolve: {
                                     loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                                             return $ocLazyLoad.load('uploadSampleModule');
+                                        }]
+                                }
+                            })
+                            .state({
+                                name: 'products',
+                                parent: 'authorized',
+                                abstract: true,
+                                url: '/products',
+                                template: '<div ui-view></div>'
+                            })
+                            .state({
+                                name: 'products.list',
+                                url: '/list',
+                                templateUrl: 'js/components/products/list/product_list.html',
+                                controller: 'ProductsListCtrl',
+                                resolve: {
+                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                            return $ocLazyLoad.load('productsListModule');
+                                        }]
+                                }
+                            })
+                            .state({
+                                name: 'products.create',
+                                url: '/create',
+                                templateUrl: 'js/components/products/create/product_create.html',
+                                controller: 'ProductsCreateCtrl',
+                                resolve: {
+                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                            return $ocLazyLoad.load('productsCreateModule');
+                                        }]
+                                }
+                            })
+                            .state({
+                                name: 'products.detail',
+                                url: '/detail',
+                                templateUrl: 'js/components/products/detail/product_detail.html',
+                                controller: 'ProductsDetailCtrl',
+                                resolve: {
+                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                            return $ocLazyLoad.load('productsDetailModule');
                                         }]
                                 }
                             })

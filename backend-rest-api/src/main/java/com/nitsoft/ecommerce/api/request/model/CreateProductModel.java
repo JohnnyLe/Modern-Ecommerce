@@ -5,6 +5,7 @@
  */
 package com.nitsoft.ecommerce.api.request.model;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,17 +19,19 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ListProductModel {
-    private long categoryId;
-    private long attributeId;
+public class CreateProductModel {
+    private long productId;
     private long companyId;
-    private String searchKey;
-    private Double minPrice;
-    private Double maxPrice;
-    private int minRank;
-    private int maxRank;
-    private int sortCase;
-    private Boolean ascSort;
-    private int pageNumber;
-    private int pageSize;
+    private List<Long> listCategoriesId;
+    private String name;
+    private String browsingName;
+    private double salePrice;
+    private double listPrice;
+    private String defaultImage;
+    private String overview;
+    private int quantity;
+    private Boolean isStockControlled;
+    private String description;
+    private int rank;
+    private String sku;
 }

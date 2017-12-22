@@ -1,6 +1,7 @@
 package com.nitsoft.ecommerce.repository;
 
 import com.nitsoft.ecommerce.database.model.Product;
+import com.nitsoft.ecommerce.database.model.ProductCategory;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,5 +19,14 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, L
 
     @Query("SELECT p FROM Product p WHERE p.companyId = :companyId AND p.productId IN (:productIds)")
     Iterable<Product> findByProductIds(@Param("companyId") long companyId, @Param("productIds") List<Long> productIds);
+    
+//    @Query("SELECT p FROM ProductCategory p WHERE p.productId = :productId")
+//    Iterable<ProductCategory> findByProductId(@Param("productId") long productId);
+//    
+//    @Query("DELETE FROM ProductCategory p WHERE p.productId = :productId")
+//    void deleteProductCategory(@Param("productId") long productId);
+//    
+//    @Query(value = "INSERT INTO product_categories VALUES (productId, categoryId)", nativeQuery = true)
+//    void saveProductCategory(@Param("productId") long productId, @Param("categoryId") long categoryId);
 
 }

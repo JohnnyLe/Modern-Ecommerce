@@ -76,7 +76,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/manage/**").permitAll()
                 // allow CORS option calls
                 .antMatchers(HttpMethod.OPTIONS, "/api/v1/**").permitAll()
-                .antMatchers("/api/v1/{company_id}/auth/admin/login").permitAll()
+                .antMatchers("/api/v1/{company_id}/auth/admin/login",
+                        "/api/v1/4/products/**").permitAll()
                 //.antMatchers("/api/v1/auth/logout").permitAll()
                 //.antMatchers("/v1/test/**").permitAll()
                 //.antMatchers("/**").permitAll()

@@ -3,10 +3,13 @@
         "name": "MEC Admin"
     },
     "navi": {
-        "categories": "Categories"
+        "categories": "Categories",
+        "products": "Products"
     },
     "page_title": {
-        
+        "product": {
+            "product_list" : "List Product"
+        }
     },
     "button": {
         "login": "Login",
@@ -25,7 +28,17 @@
     },
     "table": {
         "header": {
-            
+            "cate_name": "Category Name",
+            "price_from": "Price From",
+            "price_to": "Price To",
+            "search": "Search",
+            "create_date": "Create Date",
+            "detail": "Detail",
+            "product":{
+                "name": "Product Name",
+                "price": "Price",
+                "image": "Image"
+            }
         },
         "body": {
             
