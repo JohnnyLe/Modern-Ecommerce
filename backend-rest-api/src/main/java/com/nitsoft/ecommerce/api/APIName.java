@@ -57,6 +57,11 @@ public class APIName {
     
     // Categories APIs
     public static final String CATEGORIES_API = VERSION + "/categories";
+    public static final String CATEGORIES_ADD = "/add";
+    public static final String CATEGORIES_UPDATE = "/update";
+    public static final String CATEGORIES_DELETE = "/delete";
+    public static final String CATEGORIES_DETAIL = "/detail";
+    public static final String CATEGORIES_LIST = "/list";
     
     
     // Upload file API
