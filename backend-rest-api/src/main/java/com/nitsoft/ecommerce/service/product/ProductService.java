@@ -7,6 +7,7 @@ package com.nitsoft.ecommerce.service.product;
 
 import com.nitsoft.ecommerce.database.model.Product;
 import com.nitsoft.ecommerce.database.model.ProductCategory;
+import com.nitsoft.ecommerce.database.model.ProductCategoryId;
 import java.util.List;
 import org.springframework.data.domain.Page;
 
@@ -20,7 +21,7 @@ public interface ProductService {
     //get product by id
     Product getProductById(long companyId, long productId);
     //get product by id
-    Iterable<ProductCategory> getProductById(long productId);
+//    List<Object[]> getProductById(long productId);
     // get by company id
     Page<Product> getByCompanyId(long companyId, int pageNumber, int pageSize);
     //get by company id category id

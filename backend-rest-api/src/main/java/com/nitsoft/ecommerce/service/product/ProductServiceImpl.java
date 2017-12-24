@@ -2,6 +2,7 @@ package com.nitsoft.ecommerce.service.product;
 
 import com.nitsoft.ecommerce.database.model.Product;
 import com.nitsoft.ecommerce.database.model.ProductCategory;
+import com.nitsoft.ecommerce.database.model.ProductCategoryId;
 import com.nitsoft.ecommerce.repository.ProductRepository;
 import com.nitsoft.ecommerce.repository.specification.ProductSpecification;
 import java.util.List;
@@ -27,11 +28,11 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findOne(productId);
     }
 
-    @Override
-    public Iterable<ProductCategory> getProductById(long productId) {
-//        return productRepository.findByProductId(productId);
-        return null;
-    }
+//    @Override
+//    public List<Object[]> getProductById(long productId) {
+////        return productRepository.findByProductId(productId);
+//        return null;
+//    }
 
     @Override
     public Page<Product> getByCompanyId(long companyId, int pageNumber, int pageSize) {
@@ -40,7 +41,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> getByCompanyIdAndCategoryId(long companyId, long categoryId, int pageNumber, int pageSize) {
-        return productRepository.findByCategoryId(companyId, categoryId, new PageRequest(pageNumber, pageSize));
+        return null;
+//        return productRepository.findByCategoryId(companyId, categoryId, new PageRequest(pageNumber, pageSize));
     }
 
     @Override

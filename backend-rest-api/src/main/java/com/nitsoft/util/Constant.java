@@ -170,7 +170,9 @@ public class Constant {
 
     // define sort key value
     public static final int SORT_BY_PRODUCT_NAME = 1;
-    public static final int SORT_BY_PRODUCT_PRICE = 2;
+    public static final int SORT_BY_PRODUCT_PRICE= 2;
+    public static final int SORT_BY_PRODUCT_QUANTITY = 3;
+    public static final int SORT_BY_PRODUCT_CRETAE_DATE = 4;
     
     // Custom token header
     public static final String HEADER_TOKEN = "X-Access-Token";

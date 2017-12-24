@@ -31,7 +31,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                         minPrice: 0,
                         maxPrice: -1,
                         sortCase: -1,
-                        ascSort: 1,
+                        ascSort: 0,
                         pageNumber: 1,
                         pageSize: 10
                         
@@ -46,7 +46,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                     // press Enter key
                     if (keyEvent.which === 13) {
                         if($scope.max_price > 0 & $scope.max_price < $scope.min_price){
-                            Util.showErrorToast("message.err_price");
+                            Util.showErrorToast("message.product.err_price");
                         }else{
                             $scope.loadListProduct();
                         }
@@ -107,12 +107,12 @@ angular.module('ec-admin.app', ['ec-admin'])
                     });
                 };
                 
-                $scope.confirmDeleteOrders = function (productId) {
+                $scope.confirmDeleteProduct = function (productId) {
                     var listId = [];
                     // show model confirm delete orders
                     Util.showConfirmModal({
-                        title: Util.translate('message.cancel_orders'),
-                        message: Util.translate('message.cancel_orders_mgs')
+                        title: Util.translate('message.product.delete'),
+                        message: Util.translate('message.product.delete_mgs')
                     }, function () {
                         var productIds = _.map($scope.selected, 'productId');
                         if (productId) {
@@ -122,19 +122,17 @@ angular.module('ec-admin.app', ['ec-admin'])
                         }
                         console.log(listId);
                         // cal API cancel orders
-                        Util.createRequest(API.DELETE_ORDERS, listId, function (response) {
+                        Util.createRequest(API.DELETE_PRODUCT, listId, function (response) {
 
                             var status = response.status;
                             if (status === 200) {
                                 $scope.selected = [];
                                 // show message delete successfully
-                                Util.showSuccessToast('message.cancel_orders_success');
+                                Util.showSuccessToast('message.delete_success');
                                 // reload list
                                 $scope.loadListProduct();
-                            } else if (status === 260) {
-                                Util.showErrorToast('message.permission.not_access');
                             } else {
-                                Util.showErrorAPI(status);
+                                Util.showErrorToast('message.delete_error');
                             }
                         });
                     });

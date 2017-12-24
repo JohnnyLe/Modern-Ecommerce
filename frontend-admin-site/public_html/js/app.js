@@ -15,7 +15,8 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
         'ui.bootstrap',
         'ec-admin.utils',
         'ec-admin.constant',
-        'ec-admin.session'
+        'ec-admin.session',
+        'ngTagsInput'
     ])
 
             // Config ocLazy loading
@@ -65,7 +66,7 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 'vendors/iCheck/skins/flat/blue.css',
                                 'vendors/iCheck/icheck.min.js',
                                 'js/common/directives/icheck.js',
-                                'js/components/products/list/product_create.js'
+                                'js/components/products/create/product_create.js'
                             ]
                         },
                         {
@@ -74,7 +75,7 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 'vendors/iCheck/skins/flat/blue.css',
                                 'vendors/iCheck/icheck.min.js',
                                 'js/common/directives/icheck.js',
-                                'js/components/products/list/product_detail.js'
+                                'js/components/products/detail/product_detail.js'
                             ]
                         }
                     ];
@@ -204,7 +205,7 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                             })
                             .state({
                                 name: 'products.detail',
-                                url: '/detail',
+                                url: '/detail/{id}',
                                 templateUrl: 'js/components/products/detail/product_detail.html',
                                 controller: 'ProductsDetailCtrl',
                                 resolve: {

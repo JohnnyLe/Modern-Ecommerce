@@ -8,7 +8,7 @@
                         <button ui-sref="products.create" class="btn btn-primary btn-custom" ng-i18next="button.add"></button>
                     </li>
                     <li>
-                        <button ng-click="confirmDeleteCar()" class="btn btn-danger" ng-i18next="button.delete" ng-disabled="selected.length === 0"></button>
+                        <button ng-click="confirmDeleteProduct()" class="btn btn-danger" ng-i18next="button.delete" ng-disabled="selected.length === 0"></button>
                     </li>
                 </ul>
             </div>
@@ -69,12 +69,12 @@
                                 <span ng-i18next="table.header.product.name" ng-click="doSort(1)" style="cursor: pointer"></span>
                             </div>
                             <div class="col-xs-2 text-left">
-                                <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(3)" style="cursor: pointer"></i>
-                                <span ng-i18next="table.header.cate_name" ng-click="doSort(3)" style="cursor: pointer"></span>
-                            </div>
-                            <div class="col-xs-2 text-left">
                                 <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(2)" style="cursor: pointer"></i>
                                 <span ng-i18next="table.header.product.price" ng-click="doSort(2)" style="cursor: pointer"></span>
+                            </div>
+                            <div class="col-xs-2 text-left">
+                                <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(3)" style="cursor: pointer"></i>
+                                <span ng-i18next="table.header.product.quantity" ng-click="doSort(3)" style="cursor: pointer"></span>
                             </div>
                             <div class="col-xs-2 text-left">
                                 <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(4)" style="cursor: pointer"></i>
@@ -91,13 +91,13 @@
                             <div class="col-xs-1 text-left"><input icheck ng-click="$event.stopPropagation()" ng-change="toggleSelected(pro)" ng-model="pro._selected" type="checkbox"/></div>
                             <div class="col-xs-2 text-left">
                                 <span>
-                                    <img ng-class="{'image-opacity' : uploading}" class="img-responsive image-border-custom" ng-src="{{pro.defaultImage}}" style="width: 70px; height: 50px">
+                                    <img ng-class="{'image-opacity' : uploading}" class="img-responsive image-border-custom" ng-src="{{pathFile + pro.defaultImage}}" style="width: 70px; height: 50px">
                                     <!--<img ng-show="uploading" src="img/ajax-loader.gif" style="position: relative; top: -115px; left: 100px">-->
                                 </span>
                             </div>
                             <div class="col-xs-2 text-left overload-name"><span ng-bind="pro.name"></span></div>
-                            <div class="col-xs-2 text-left"><span ng-bind="pro.browsingName"></span></div>
                             <div class="col-xs-2 text-left"><span ng-bind="pro.salePrice + ' $'"></span></div>
+                            <div class="col-xs-2 text-left"><span ng-bind="pro.quantity"></span></div>
                             <div class="col-xs-2 text-left"><span ng-bind="pro.createdOn | date: 'MMM dd, yyyy'"></span></div>
                             <div class="col-xs-1 text-left row">
                                 <div class="col-md-6">

@@ -42,7 +42,8 @@ public class ProductSpecification implements Specification<Product> {
     @Override
     public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
         List<Predicate> predicates = new LinkedList<>();
-
+        //filter by sattus
+        predicates.add(cb.equal(root.get("status"), Constant.STATUS.ACTIVE_STATUS.getValue()));
         // filter by company id
         if (companyId != -1) {
             predicates.add(cb.equal(root.get("companyId"), companyId));
@@ -97,11 +98,20 @@ public class ProductSpecification implements Specification<Product> {
         // sort
         Path orderClause;
         switch (sortCase) {
+            case Constant.SORT_BY_PRODUCT_NAME:
+                orderClause = root.get("name");
+                break;
             case Constant.SORT_BY_PRODUCT_PRICE:
                 orderClause = root.get("salePrice");
                 break;
+            case Constant.SORT_BY_PRODUCT_QUANTITY:
+                orderClause = root.get("quantity");
+                break;
+            case Constant.SORT_BY_PRODUCT_CRETAE_DATE:
+                orderClause = root.get("createdOn");
+                break;
             default: // sort by product name
-                orderClause = root.get("name");
+                orderClause = root.get("createdOn");
         }
 
         if (isAscSort) {

@@ -417,7 +417,7 @@ var utils = angular.module('ec-admin.utils', [])
                                                     //File Size 
                                                     size: item.size,
                                                     //File URL to view 
-                                                    name: "sample image",
+                                                    name: response.data.data,
                                                     // File Input Value 
                                                     _file: item
                                                 };

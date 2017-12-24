@@ -324,3 +324,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .label-booking-detail {
     font-size: 15px;
 }
+.tags-input-css {
+    height: 44px;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+.tags{
+    padding-top: 5px !important;
+    padding-left: 6px !important;
+    border-radius: 0px !important;
+}
+.button-add-cate {
+    height: 44px;
+    width: 44px;
+    top: 5px;
+    right: 30px;
+}

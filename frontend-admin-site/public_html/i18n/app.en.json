@@ -8,7 +8,9 @@
     },
     "page_title": {
         "product": {
-            "product_list" : "List Product"
+            "product_list" : "List Products",
+            "product_create": "Create Products",
+            "product_detail": "Detail Products"
         }
     },
     "button": {
@@ -36,8 +38,13 @@
             "detail": "Detail",
             "product":{
                 "name": "Product Name",
-                "price": "Price",
-                "image": "Image"
+                "price": "Sell Price",
+                "image": "Image",
+                "description": "Description",
+                "overview": "Overview",
+                "sku": "Stock Keeping Unit",
+                "browsing_name": "Browsing Name",
+                "quantity": "Quantity"
             }
         },
         "body": {
@@ -86,10 +93,52 @@
         "phone_number": {
             "invalid_pattern": "Phone number is invalid",
             "required": "Phone number is required"
+        },
+        "category": {
+            "invalid_pattern": "Category is invalid",
+            "required": "Category is required"
+        },
+        "name": {
+            "invalid_pattern": "Name is invalid",
+            "required": "Name is required"
+        },
+        "price": {
+            "invalid_pattern": "Price is invalid",
+            "required": "Price is required"
+        },
+        "browsing_name": {
+            "invalid_pattern": "Browsing name is invalid",
+            "required": "Browsing name is required"
+        },
+        "quantity": {
+            "invalid_pattern": "Quantity is invalid",
+            "required": "Quantity is required"
+        },
+        "overview": {
+            "invalid_pattern": "Overview is invalid",
+            "required": "Overview is required"
+        },
+        "sku": {
+            "invalid_pattern": "Stock Keeping Unit is invalid",
+            "required": "Stock Keeping Unit is required"
+        },
+        "description": {
+            "invalid_pattern": "Description is invalid",
+            "required": "Description is required"
         }
     },
     "message": {
-        
+        "product": {
+            "create_product_success": "Create product success",
+            "create_product_error": "Create product error",
+            "update_product_success": "Update product success",
+            "update_product_error": "Update product error",
+            "err_price": "Min price must be smaller than max price",
+            "delete": "Detele Product",
+            "delete_mgs": "Do you want to detele Product",
+            "delete_success": "Delete Product success",
+            "delete_error": "Delete Product error"
+        }
     },
     "api": {
         "unknown_error": "There is an error occurred",
