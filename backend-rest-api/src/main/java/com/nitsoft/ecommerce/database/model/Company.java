@@ -39,7 +39,7 @@ public class Company implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "company_id")
-    private Integer companyId;
+    private long companyId;
     
     @Basic(optional = false)
     @Column(name = "name")
