@@ -3,10 +3,11 @@
         "name": "MEC Admin"
     },
     "navi": {
-        "categories": "Categories"
+        "categories": "Categories",
+        "orders" : "Order"
     },
     "page_title": {
-        
+        "list_orders" : "List Orders"
     },
     "button": {
         "login": "Login",
@@ -25,7 +26,18 @@
     },
     "table": {
         "header": {
-            
+            "search" : "Search",
+            "detail" : "Detail",
+            "no_data" : "No Data",
+            "order":{
+                "customer_name" : "Customer Name",
+                "quantity" : " Quantity",
+                "created_at" : "Created At",
+                "updated_at" : "Update At",
+                "status" : "Status",
+                "grand_total" : "Grand Total",
+                "filter_status" : "Status Order"
+            }
         },
         "body": {
             

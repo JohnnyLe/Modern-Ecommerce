@@ -35,11 +35,11 @@ public class OrdersSpecification implements Specification<Orders> {
         List<Predicate> predicates = new LinkedList<>();
 
 //         filter by status
-        predicates.add(cb.equal(root.get("status"), Constant.STATUS.ACTIVE_STATUS.getValue()));
+        if(status>=0){
+            predicates.add(cb.equal(root.get("status"), status));
+        }
         // filter by search key
         if (searchKey != null && !searchKey.trim().isEmpty()) {
-            predicates.add(cb.like(root.<String>get("ordersCode"), "%" + searchKey.trim() + "%"));
-            
             String wrapSearch = "%" + searchKey.trim() + "%";
             Predicate customerFirstname = cb.like(root.<String>get("customerFirstname"), wrapSearch);
             Predicate customerMiddlename = cb.like(root.<String>get("customerMiddlename"), wrapSearch);

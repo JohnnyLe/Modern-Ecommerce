@@ -40,6 +40,17 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 'js/components/categories/list/categories_list_ctrl.js'
                             ]
                         },
+                        
+                        {
+                            name: 'orderListModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/components/orders/list/orders_list_ctrl.js'
+                            ]
+                        },
+                        
                         // This is just sample upload page, I will remove later (Quy)
                         {
                             name: 'uploadSampleModule',
@@ -127,6 +138,26 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                         }]
                                 }
                             })
+                            
+                            .state({
+                                name: 'orders',
+                                parent: 'authorized',
+                                abstract: true,
+                                url: '/orders',
+                                template: '<div ui-view></div>'
+                            })
+                            .state({
+                                name: 'orders.list',
+                                url: '/list',
+                                templateUrl: 'js/components/orders/list/orders_list_tmpl.html',
+                                controller: 'ListOrderCtrl',
+                                resolve: {
+                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                            return $ocLazyLoad.load('orderListModule');
+                                        }]
+                                }
+                            })
+                            
                             // This is just for sample upload I will remove later (Quy)
                             .state({
                                 name: 'upload',

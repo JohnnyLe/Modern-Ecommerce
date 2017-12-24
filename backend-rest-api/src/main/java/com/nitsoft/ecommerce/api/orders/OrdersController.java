@@ -83,8 +83,8 @@ public class OrdersController extends AbstractBaseController {
      * @param orders
      * @return
      */
-    @RequestMapping(path = APIName.DELETE_ORDERS_BY_COMPANY, method = RequestMethod.DELETE)
-    public ResponseEntity<APIResponse> deleteOrders(
+    @RequestMapping(path = APIName.CHANGE_STATUS_ORDERS_BY_COMPANY, method = RequestMethod.PUT)
+    public ResponseEntity<APIResponse> changeOrders(
             @PathVariable("company_id") Long companyId,
             @RequestBody List<Orders> orders
     ) {
@@ -97,15 +97,15 @@ public class OrdersController extends AbstractBaseController {
                         // check valid orderId
                         Orders order = orderService.getOrderByOrderIdAndCompanyID(id.getId(), companyId, Constant.STATUS.ACTIVE_STATUS.getValue());
                         if (order != null) {
-                            // Delete order (update status = Inactive)
-                            order.setStatus(Constant.STATUS.DELETED_STATUS.getValue());
+                            // Update status order (update status = completed)
+                            order.setStatus(Constant.ORDER_STATUS.COMPLETED.getStatus());
                             orderService.updateStatusOrder(order);
 
                         } else {
                             throw new ApplicationException(APIStatus.ERR_ORDER_ID_NOT_FOUND);
                         }
                     }
-                    return responseUtil.successResponse("Delete order succesfully");
+                    return responseUtil.successResponse("Change status order succesfully");
                 } else {
                     throw new ApplicationException(APIStatus.ERR_ORDER_ID_EMPTY);
                 }

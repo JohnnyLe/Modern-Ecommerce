@@ -8,7 +8,7 @@ angular.module( 'ec-admin.constant', [] )
     // Cache module using ocLazyLoad
     OCLAZY_CACHE_MODULE: true, // Should use "true" when deploy to server
     
-    API_PATH: 'http://localhost:8080/api/v1/1',
+    API_PATH: 'http://localhost:8080/ecommerce-rest-api/api/v1/1',
     PATH_FILE: "http://localhost:8080/upload/",
     SESSION_COOKIES: 'AccessToken'
      
@@ -37,7 +37,10 @@ angular.module( 'ec-admin.constant', [] )
     LOGOUT: { path: '/auth/logout' },
     CONSOLE_LOGIN: { path: '/auth/admin/login' },
     CONSOLE_REGISTER: { path: '/users/console/register' },
-    GET_USER_PROFILE: { path: '/auth/session/data', method: 'GET' }
+    GET_USER_PROFILE: { path: '/auth/session/data', method: 'GET' },
+    
+    //orders
+    GET_ORDER_BY_COMPANY :{path : '/orders/listOrder', method : 'POST'}
 })
 
 // API status
