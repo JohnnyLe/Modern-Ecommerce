@@ -5,10 +5,26 @@
  */
 package com.nitsoft.ecommerce.service.categories;
 
+import com.nitsoft.ecommerce.database.model.Category;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
+
 /**
- *
- * @author Quy Duong
+ * @author tungn
  */
 public interface CategoriesService {
-    // TODO 
+
+    Category saveOrUpdate(Category category);
+
+    void delete(Category category);
+
+    void delete(List<Category> categories);
+
+    Category getActiveById(long categoryId);
+
+    List<Category> getAllActiveByIdsAndCompanyId(List<Long> categoryIds, long companyId);
+
+    Page<Category> getAllActiveWithFilterSearchSort(long companyId, String keyword, int pageNumber, int pageSize, int sortKey);
+
 }

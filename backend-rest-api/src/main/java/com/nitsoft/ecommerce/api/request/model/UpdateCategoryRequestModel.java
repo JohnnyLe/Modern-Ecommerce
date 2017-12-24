@@ -8,7 +8,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class CreateCategoryRequestModel {
+public class UpdateCategoryRequestModel {
+
+    private long id;
 
     private Long parentId;
 
