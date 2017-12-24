@@ -8,6 +8,7 @@ package com.nitsoft.ecommerce.service.categories;
 import com.nitsoft.ecommerce.api.request.model.CreateCategoryRequestModel;
 import com.nitsoft.ecommerce.api.response.model.APIResponse;
 import com.nitsoft.ecommerce.api.response.util.APIStatus;
+import com.nitsoft.ecommerce.api.response.util.ResponseUtil;
 import com.nitsoft.ecommerce.database.model.Category;
 import com.nitsoft.ecommerce.database.model.Company;
 import com.nitsoft.ecommerce.exception.ApplicationException;
@@ -55,7 +56,8 @@ public class CategoriesServiceImpl extends AbstractBaseService implements Catego
 
         categoryRepository.save(category);
 
-        return responseUtil.successResponse(category);
+//        return ResponseUtil.successResponse(category);
+        return null;
     }
 
 
