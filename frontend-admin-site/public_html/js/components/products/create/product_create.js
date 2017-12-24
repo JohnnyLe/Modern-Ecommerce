@@ -119,29 +119,6 @@ angular.module('ec-admin.app', ['ec-admin'])
                                     }
                                 });
 
-                                $scope.checkId = function (position, listCate) {
-                                    $scope.showButtonChoose = true;
-                                    angular.forEach(listCate, function (cate, index) {
-                                        if (position !== index)
-                                            cate.selected = false;
-                                    });
-
-                                    angular.forEach(listCate, function (cate) {
-                                        if (cate.selected)
-                                            $scope.showButtonChoose = false;
-                                    });
-                                };
-                                $scope.checkDbClick = function (position, listCus) {
-                                    angular.forEach(listCus, function (cus, index) {
-                                        if (position !== index) {
-                                            cus.selected = false;
-                                        } else {
-                                            cus.selected = true;
-                                        }
-                                    });
-                                    $scope.onAccept();
-                                };
-
                                 $scope.loadListSearch = function () {
                                     paramCategory.searchKey = $scope.searchString;
                                     Util.createRequest(API.GET_LIST_CUS, paramCategory, function (response) {

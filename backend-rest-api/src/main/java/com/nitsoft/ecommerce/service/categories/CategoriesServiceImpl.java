@@ -54,8 +54,8 @@ public class CategoriesServiceImpl extends AbstractBaseService implements Catego
         category.setDescription(categoryModel.getDescription());
 
         categoryRepository.save(category);
-
-        return responseUtil.successResponse(category);
+//        return responseUtil.successResponse(category);
+        return null;
     }
 
 
