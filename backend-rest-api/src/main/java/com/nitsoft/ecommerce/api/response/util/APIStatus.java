@@ -27,8 +27,8 @@ public enum APIStatus {
     DELETE_PRODUCT_ERROR(701, "Delete product error"),
     GET_PRODUCT_ERROR(702, "Can't get product detail"),
     UPDATE_PRODUCT_ERROR(703, "Update product error"),
-    GET_LIST_PRODUCT_ERROR(704, "Get list product error");
-    ERR_UPLOAD_FILE(900, "Upload file error."),
+    GET_LIST_PRODUCT_ERROR(704, "Get list product error"),
+//    ERR_UPLOAD_FILE(900, "Upload file error."),
     // order 
     ERR_GET_LIST_ORDERS(800, "Can not get list orders"),
     ERR_GET_DETAIL_ORDERS(801, "Can not get detail orders"),

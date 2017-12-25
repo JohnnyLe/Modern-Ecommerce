@@ -4,8 +4,7 @@
     },
     "navi": {
         "categories": "Categories",
-        "products": "Products"
-        "categories": "Categories",
+        "products": "Products",
         "orders" : "Order"
     },
     "page_title": {
@@ -13,7 +12,7 @@
             "product_list" : "List Products",
             "product_create": "Create Products",
             "product_detail": "Detail Products"
-        }
+        },
         "list_orders" : "List Orders"
     },
     "button": {
@@ -54,7 +53,7 @@
                 "cate_name": "Category Name",
                 "des": "Description",
                 "list_cate" : "List Category"
-            }
+            },
             "search" : "Search",
             "detail" : "Detail",
             "no_data" : "No Data",
