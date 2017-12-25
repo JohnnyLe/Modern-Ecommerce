@@ -15,7 +15,8 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
         'ui.bootstrap',
         'ec-admin.utils',
         'ec-admin.constant',
-        'ec-admin.session'
+        'ec-admin.session',
+        'ngTagsInput'
     ])
 
             // Config ocLazy loading
@@ -40,6 +41,17 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 'js/components/categories/list/categories_list_ctrl.js'
                             ]
                         },
+                        
+                        {
+                            name: 'orderListModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/components/orders/list/orders_list_ctrl.js'
+                            ]
+                        },
+                        
                         // This is just sample upload page, I will remove later (Quy)
                         {
                             name: 'uploadSampleModule',
@@ -48,6 +60,33 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 'vendors/iCheck/icheck.min.js',
                                 'js/common/directives/icheck.js',
                                 'js/components/upload-sample/upload_sample_ctrl.js'
+                            ]
+                        },
+                        {
+                            name: 'productsListModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/components/products/list/product_list.js'
+                            ]
+                        },
+                        {
+                            name: 'productsCreateModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/components/products/create/product_create.js'
+                            ]
+                        },
+                        {
+                            name: 'productsDetailModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/components/products/detail/product_detail.js'
                             ]
                         }
                     ];
@@ -127,6 +166,26 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                         }]
                                 }
                             })
+                            
+                            .state({
+                                name: 'orders',
+                                parent: 'authorized',
+                                abstract: true,
+                                url: '/orders',
+                                template: '<div ui-view></div>'
+                            })
+                            .state({
+                                name: 'orders.list',
+                                url: '/list',
+                                templateUrl: 'js/components/orders/list/orders_list_tmpl.html',
+                                controller: 'ListOrderCtrl',
+                                resolve: {
+                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                            return $ocLazyLoad.load('orderListModule');
+                                        }]
+                                }
+                            })
+                            
                             // This is just for sample upload I will remove later (Quy)
                             .state({
                                 name: 'upload',
@@ -143,6 +202,46 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 resolve: {
                                     loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                                             return $ocLazyLoad.load('uploadSampleModule');
+                                        }]
+                                }
+                            })
+                            .state({
+                                name: 'products',
+                                parent: 'authorized',
+                                abstract: true,
+                                url: '/products',
+                                template: '<div ui-view></div>'
+                            })
+                            .state({
+                                name: 'products.list',
+                                url: '/list',
+                                templateUrl: 'js/components/products/list/product_list.html',
+                                controller: 'ProductsListCtrl',
+                                resolve: {
+                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                            return $ocLazyLoad.load('productsListModule');
+                                        }]
+                                }
+                            })
+                            .state({
+                                name: 'products.create',
+                                url: '/create',
+                                templateUrl: 'js/components/products/create/product_create.html',
+                                controller: 'ProductsCreateCtrl',
+                                resolve: {
+                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                            return $ocLazyLoad.load('productsCreateModule');
+                                        }]
+                                }
+                            })
+                            .state({
+                                name: 'products.detail',
+                                url: '/detail/{id}',
+                                templateUrl: 'js/components/products/detail/product_detail.html',
+                                controller: 'ProductsDetailCtrl',
+                                resolve: {
+                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                            return $ocLazyLoad.load('productsDetailModule');
                                         }]
                                 }
                             })

@@ -16,7 +16,7 @@ require.config({
 
         i18next: 'libs/i18next-1.9.0.min',
         ng_i18next: 'libs/ng-i18next',
-        
+        angular_tags_input: 'libs/ng-tags-input.min',
         ng_datepicker: 'libs/ngDatepicker.min',
         angular_date_picker: 'libs/ui-bootstrap-tpls-2.5.0.min',
 
@@ -51,6 +51,7 @@ require.config({
         'angular_route': ['angular'],
         'angular_cookie': ['angular'],
         'angular_sanitize': ['angular'],
+        'angular_tags_input': ['angular'],
         'ng_datepicker': ['angular'],
         'angular_date_picker': ['angular'],
         'angular_animate': ['angular'],
@@ -78,7 +79,7 @@ require.config({
         'utils': ['angular', 'constant', 'angular_bootstrap'],
         'session': ['utils', 'angular_cookie'],
         // Main module
-        'app': ['angular_route', 'angular_sanitize', 'angular_cookie', 'ng_datepicker', 'angular_date_picker', 'angular_animate', 'ui_router', 'ui_select', 'ng_i18next', 'oc_lazyload', 'theme', 'toastr', 'lodash', 'session', 'angular_bootstrap']
+        'app': ['angular_route', 'angular_sanitize', 'angular_tags_input', 'angular_cookie', 'ng_datepicker', 'angular_date_picker', 'angular_animate', 'ui_router', 'ui_select', 'ng_i18next', 'oc_lazyload', 'theme', 'toastr', 'lodash', 'session', 'angular_bootstrap']
     },
     priority: [
         'jquery', 'angular'

@@ -20,11 +20,14 @@ public class APIName {
     // product api links
     public static final String PRODUCTS = VERSION + "/products";
     public static final String PRODUCTS_BY_CATEGORY = "/category";
-    public static final String PRODUCT_BY_ID = "/{productId}";
+    public static final String PRODUCT_BY_ID = "/detail/{product_id}";
     public static final String PRODUCT_BY_IDS = "/list";
     public static final String PRODUCTS_FILTER_LIST = "/filter";
-    public static final String PRODUCT_DETAILS = VERSION + "/productdetails/{product_id}";
+    public static final String PRODUCT_DETAILS = "/productdetails/{product_id}";
     public static final String PRODUCT_ATTRIBUTES = VERSION + "/productattributes";
+    public static final String PRODUCT_CREATE = "/create";
+    public static final String PRODUCTS_DELETE = "/delete";
+    public static final String PRODUCTS_UPDATE = "/update";
 
     // category api links
     public static final String CATEGORIES = VERSION + "/categories";
@@ -46,8 +49,10 @@ public class APIName {
     public static final String REVIEWS_ADD = "/add";
 
     //Orders
-    public static final String ORDERS = VERSION + "orders";
-    public static final String ORDERS_BY_COMPANY = "/{id}";
+    public static final String ORDERS = VERSION + "/orders";
+    public static final String ORDERS_BY_COMPANY = "/listOrder";
+    public static final String ORDERS_DETAIL_BY_COMPANY = "/{id}";
+    public static final String CHANGE_STATUS_ORDERS_BY_COMPANY = "/delete";
     
     // auth APIs
     public static final String AUTH_API = VERSION + "/auth";

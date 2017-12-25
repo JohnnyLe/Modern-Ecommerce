@@ -3,6 +3,7 @@ package com.nitsoft.ecommerce.database.model;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Id;
@@ -26,18 +27,19 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @DynamicUpdate
 @Table(name = "product_categories")
 @XmlRootElement
-public class ProductCategory implements Serializable {
+public class ProductCategory {
+    
+    @EmbeddedId
+    private ProductCategoryId id;
 
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @Basic(optional = false)
-    @Column(name = "product_id")
-    private Long productId;
-
-    @Id
-    @Basic(optional = false)
-    @Column(name = "category_id")
-    private Long categoryId;
+//    @Id
+//    @Basic(optional = false)
+//    @Column(name = "product_id")
+//    private Long productId;
+//
+//    @Id
+//    @Basic(optional = false)
+//    @Column(name = "category_id")
+//    private Long categoryId;
 
 }

@@ -1,0 +1,122 @@
+<div>
+    <div class="page-title">
+        <div class="title">
+            <h3 ng-i18next="page_title.product.product_list"></h3>
+            <div class="">
+                <ul class="list list-inline">
+                    <li>
+                        <button ui-sref="products.create" class="btn btn-primary btn-custom" ng-i18next="button.add"></button>
+                    </li>
+                    <li>
+                        <button ng-click="confirmDeleteProduct()" class="btn btn-danger" ng-i18next="button.delete" ng-disabled="selected.length === 0"></button>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix1"></div>
+            <div class="row">
+                <div class="col-md-3">
+<!--                    <div>
+                        <label ng-i18next="table.header.cate_name"></label>
+                    </div>
+                    <div class="">
+                        <select class="form-control" ng-model="car.cateId" id="sel1" name="category_id" required="required" ng-change="doSearchCateName(car.cateId)">
+                            <option ng-repeat="carBranch in listCarBranch" value="{{carBranch.id}}">{{carBranch.name}}</option>
+                        </select>
+                    </div>-->
+                </div>
+                <div class="col-md-2 row"></div>
+                <div class="col-md-2">
+                    <div>
+                        <label ng-i18next="table.header.price_from"></label>
+                    </div>
+                    <div>
+                        <input ng-model="min_price" ng-keypress="doSearch($event)"  type="number" value="" class="form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div>
+                        <label ng-i18next="table.header.price_to"></label>
+                    </div>
+                    <div>
+                        <input ng-model="max_price" ng-keypress="doSearch($event)" type="number" value="" class="form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div>
+                        <label ng-i18next="table.header.search"></label>
+                    </div>
+                    <div class="">
+                        <input ng-model="searchString" ng-keyup="loadListProduct()" style="" type="text" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix20"></div>
+
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <div class="x-table">
+                        <!--table header-->
+                        <div class="row x-table-header">
+                            <div class="col-xs-1 text-left"><input icheck ng-change="toggleSelectAll(selectedAll)" ng-model="selectedAll" type="checkbox"/></div>
+                            <div class="col-xs-2 text-left"><span ng-i18next="table.header.product.image"></span></div>
+                            <div class="col-xs-2 text-left">
+                                <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(1)" style="cursor: pointer"></i>
+                                <span ng-i18next="table.header.product.name" ng-click="doSort(1)" style="cursor: pointer"></span>
+                            </div>
+                            <div class="col-xs-2 text-left">
+                                <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(2)" style="cursor: pointer"></i>
+                                <span ng-i18next="table.header.product.price" ng-click="doSort(2)" style="cursor: pointer"></span>
+                            </div>
+                            <div class="col-xs-2 text-left">
+                                <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(3)" style="cursor: pointer"></i>
+                                <span ng-i18next="table.header.product.quantity" ng-click="doSort(3)" style="cursor: pointer"></span>
+                            </div>
+                            <div class="col-xs-2 text-left">
+                                <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(4)" style="cursor: pointer"></i>
+                                <span ng-i18next="table.header.create_date" ng-click="doSort(4)" style="cursor: pointer"></span>
+                            </div>
+                            <div class="col-xs-1 text-left"><span ng-i18next="table.header.detail"></span></div>
+                        </div>
+
+                        <!--table content-->
+                        <div class="col-xs-12 text-center" ng-show="listProduct.length === 0" style="top: 5px"> 
+                            <span ng-i18next="table.header.no_data"></span>
+                        </div>
+                        <div class="row x-table-row" ng-repeat="pro in listProduct" ng-click="toggleSelected(pro)" ng-dblclick="loadDetailCar(pro.productId)">
+                            <div class="col-xs-1 text-left"><input icheck ng-click="$event.stopPropagation()" ng-change="toggleSelected(pro)" ng-model="pro._selected" type="checkbox"/></div>
+                            <div class="col-xs-2 text-left">
+                                <span>
+                                    <img ng-if="(pro.defaultImage !== 'img/no-image-available.png')" ng-class="{'image-opacity' : uploading}" class="img-responsive image-border-custom" ng-src="{{pathFile + pro.defaultImage}}" style="width: 70px; height: 50px">
+                                    <img ng-if="(pro.defaultImage === 'img/no-image-available.png')" ng-class="{'image-opacity' : uploading}" class="img-responsive image-border-custom" ng-src="{{pro.defaultImage}}" style="width: 70px; height: 50px">
+                                </span>
+                            </div>
+                            <div class="col-xs-2 text-left overload-name"><span ng-bind="pro.name"></span></div>
+                            <div class="col-xs-2 text-left"><span ng-bind="pro.salePrice + ' $'"></span></div>
+                            <div class="col-xs-2 text-left"><span ng-bind="pro.quantity"></span></div>
+                            <div class="col-xs-2 text-left"><span ng-bind="pro.createdOn | date: 'MMM dd, yyyy'"></span></div>
+                            <div class="col-xs-1 text-left row">
+                                <div class="col-md-6">
+                                    <span ng-click="loadProductDetail(pro.productId)" class="glyphicon glyphicon-info-sign zoom-btn"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <span ng-click="confirmDeleteProduct(pro.productId)" class="glyphicon glyphicon-trash" style="color: red"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--table footer-->
+                        <div class="row x-table-footer text-right">
+                            <ul ng-show="listProduct.length > 0" uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" num-pages="totalPages" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" boundary-links="true"
+                                items-per-page="pageSize" ></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
