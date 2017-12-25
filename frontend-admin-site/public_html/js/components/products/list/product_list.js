@@ -67,12 +67,15 @@ angular.module('ec-admin.app', ['ec-admin'])
                         param.ascSort = $scope.isSort;
                         param.sortCase = sortCase;
                     }
-
-                    if ($scope.min_price !== "") {
+                    if ($scope.min_price !== null && $scope.min_price !== "") {
                         param.minPrice = $scope.min_price;
+                    } else {
+                        param.minPrice = 0;
                     }
-                    if ($scope.max_price !== "") {
+                    if ($scope.max_price !== null && $scope.max_price !== "") {
                         param.maxPrice = $scope.max_price;
+                    } else {
+                        param.maxPrice = -1;
                     }
                     // reset state
                     $scope.listProduct = [];
@@ -168,7 +171,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                 $scope.toggleSelected = function (obj) {
 
                     if (angular.isObject(obj) && obj.productId) {
-                        console.log("$scope.selected",$scope.selected);
+                        console.log("$scope.selected", $scope.selected);
                         var index = _.findIndex($scope.selected, {productId: obj.productId});
                         if (index > -1) {
                             $scope.selected.splice(index, 1);
