@@ -1,0 +1,115 @@
+<div class="page-title">
+    <div class="title">
+        <h3 ng-i18next="">USER DETAILS</h3>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <form name="editUserForm" ng-submit="">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <!--First Name-->
+                            <div class="form-group" ng-class="{'has-error' : editUserForm.firstname.$touched && editUserForm.firstname.$invalid}">
+                                <label for="firstname" ng-i18next="">First Name</label>
+                                <div>
+                                    <input ng-model="firstName" name="firstname" id="firstname"
+                                           type="text" class="form-control" required="required" maxlength="64"/>
+
+                                    <div ng-show="editUserForm.firstname.$touched">
+                                        <span class="help-block" ng-show="editUserForm.firstname.$error.required" ng-i18next="validation.name.required"></span>
+                                        <span class="help-block" ng-show="editUserForm.firstname.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})">Max Length</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Middle Name-->
+                            <div class="form-group" ng-class="{'has-error' : editUserForm.middlename.$touched && editUserForm.middlename.$invalid}">
+                                <label for="middlename" ng-i18next="">Middle Name</label>
+                                <div>
+                                    <input ng-model="middleName" name="middlename" id="middlename"
+                                           type="text" class="form-control" maxlength="64"/>
+
+                                    <div ng-show="editUserForm.middlename.$touched">
+                                        <span class="help-block" ng-show="editUserForm.middlename.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})">Max Length</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Last Name-->
+                            <div class="form-group" ng-class="{'has-error' : editUserForm.lastname.$touched && editUserForm.lastname.$invalid}">
+                                <label for="lastname" ng-i18next="">Last Name</label>
+                                <div>
+                                    <input ng-model="lastName" name="lastname" id="lastname" 
+                                           type="text" class="form-control" required="required" maxlength="64"/>
+
+                                    <div ng-show="editUserForm.lastname.$touched">
+                                        <span class="help-block" ng-show="editUserForm.lastname.$error.required" ng-i18next="validation.name.required"></span>
+                                        <span class="help-block" ng-show="editUserForm.lastname.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})">Max Length</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Email Address-->
+                            <div class="form-group" ng-class="{'has-error' : editUserForm.email.$touched && editUserForm.lastname.$invalid}">
+                                <label for="email" ng-i18next="">Email Address</label>
+                                <div>
+                                    <input type="text" name="mail_address" id="mail-address" class="signup form-control" 
+                                           ng-i18next="[placeholder]label.user.mail_address" ng-model="newCompany.mail_address"
+                                           ng-required="true" ng-pattern="emailPattern" ng-maxlength="64" />
+
+                                    <div class="errors" ng-show="editUserForm.email.$touched">
+                                        <span class="help-block" ng-show="editUserForm.email.$error.required" ng-i18next="validation.name.required"></span>
+                                        <span class="help-block" ng-show="editUserForm.email.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})">Max Length</span>
+                                        <span class="help-block" ng-show="editUserForm.email.$error.pattern" ng-i18next="">Wrong Mail Format</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Phone Number-->
+                            <div class="form-group" ng-class="{'has-error' : editUserForm.phone.$touched && createUserForm.phone.$invalid}">
+                                <label for="phone" ng-i18next="">Phone Number</label>
+                                <div>
+                                    <input ng-model="phone" name="phone" id="phone" 
+                                           type="text" class="form-control" required="required" maxlength="64"/>
+
+                                    <div ng-show="editUserForm.phone.$touched">
+                                        <span class="help-block" ng-show="editUserForm.phone.$error.required" ng-i18next="validation.name.required"></span>
+                                        <span class="help-block" ng-show="editUserForm.phone.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})">Max Length</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Fax-->
+                            <div class="form-group" ng-class="{'has-error' : editUserForm.phone.$touched && createUserForm.phone.$invalid}">
+                                <label for="fax" ng-i18next="">Fax</label>
+                                <div>
+                                    <input ng-model="fax" name="fax" id="fax" 
+                                           type="text" class="form-control" maxlength="64"/>
+
+                                    <div ng-show="editUserForm.fax.$touched">
+                                        <span class="help-block" ng-show="editUserForm.fax.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})">Max Length</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Address-->
+                            <div class="form-group" ng-class="{'has-error' : editUserForm.phone.$touched && createUserForm.phone.$invalid}">
+                                <label for="address" ng-i18next="">Address</label>
+                                <div>
+                                    <textarea ng-model="address" placeholder="Enter your address"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-bar text-right">
+                        <a ui-sref="users.list" class="btn btn-warning" ng-i18next="button.back">Back</a>
+                        <button ng-disabled="!editUserForm.$valid || submitting" class="btn btn-primary" ng-i18next="button.save" type="submit" ></button>
+                        <button ng-show="submitting" disabled class="btn btn-primary" ng-i18next="">Saving</button>
+                    </div>  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
