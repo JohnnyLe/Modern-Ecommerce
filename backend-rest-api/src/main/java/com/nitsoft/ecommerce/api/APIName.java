@@ -39,9 +39,13 @@ public class APIName {
 
     //user api link
     public static final String USERS = VERSION + "/users";
-    public static final String USERS_REGISTER = "/register";
+    public static final String USER_REGISTER = "/register";
+    public static final String USER_LIST = "/list";
     public static final String USERS_LOGIN = "/login";
     public static final String USERS_LOGOUT = "/logout";
+    public static final String USER_DETAILS = "/{userId}";
+    public static final String UPDATE_USER = "/update/{userId}";
+    public static final String DELETE_USER = "/delete";
 
     //review api link
     public static final String REVIEWS = VERSION + "/reviews";

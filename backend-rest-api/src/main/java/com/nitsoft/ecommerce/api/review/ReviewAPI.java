@@ -64,7 +64,7 @@ public class ReviewAPI extends AbstractBaseAPI {
                 statusResponse = new StatusResponse(APIStatus.ERR_UNAUTHORIZED);
             } else {
                 // find user by token id
-                User user = userService.getUserById(usertoken.getUserId());
+                User user = userService.getUserByUserIdAndComIdAndStatus(usertoken.getUserId(), companyId, Constant.USER_STATUS.ACTIVE.getStatus());
 
                 // validate user
                 if (user != null && user.getUserId() != null && !user.getUserId().isEmpty()) {

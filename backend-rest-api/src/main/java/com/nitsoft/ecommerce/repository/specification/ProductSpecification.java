@@ -107,7 +107,7 @@ public class ProductSpecification implements Specification<Product> {
             case Constant.SORT_BY_PRODUCT_QUANTITY:
                 orderClause = root.get("quantity");
                 break;
-            case Constant.SORT_BY_PRODUCT_CRETAE_DATE:
+            case Constant.SORT_BY_PRODUCT_CREATE_DATE:
                 orderClause = root.get("createdOn");
                 break;
             default: // sort by product name

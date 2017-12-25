@@ -172,7 +172,11 @@ public class Constant {
     public static final int SORT_BY_PRODUCT_NAME = 1;
     public static final int SORT_BY_PRODUCT_PRICE= 2;
     public static final int SORT_BY_PRODUCT_QUANTITY = 3;
-    public static final int SORT_BY_PRODUCT_CRETAE_DATE = 4;
+    public static final int SORT_BY_PRODUCT_CREATE_DATE = 4;
+    public static final int SORT_BY_FIRST_NAME = 1;
+    public static final int SORT_BY_LAST_NAME = 2;
+    public static final int SORT_BY_EMAIL_ADDRESS = 3;
+    public static final int SORT_BY_CREATE_DATE = 4;
     
     // define sort key value
     public static final int SORT_BY_ITEMS_QUANTITY = 4;

@@ -61,5 +61,8 @@ public class UserAddress implements Serializable {
     @Basic(optional = false)
     @Column(name = "country")
     private String country;
-
+    
+    @Basic(optional = false)
+    @Column(name = "status")
+    private int status;
 }
