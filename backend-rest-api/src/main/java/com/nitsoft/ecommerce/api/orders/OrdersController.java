@@ -2,15 +2,19 @@ package com.nitsoft.ecommerce.api.orders;
 
 import com.nitsoft.ecommerce.api.APIName;
 import com.nitsoft.ecommerce.api.controller.AbstractBaseController;
-import com.nitsoft.ecommerce.api.request.model.AuthRequestModel;
 import com.nitsoft.ecommerce.api.request.model.OrdersRequestModel;
 import com.nitsoft.ecommerce.api.response.model.APIResponse;
 import com.nitsoft.ecommerce.api.response.util.APIStatus;
+import com.nitsoft.ecommerce.database.model.OrderAddress;
+import com.nitsoft.ecommerce.database.model.OrderDetail;
+import com.nitsoft.ecommerce.database.model.OrderPayment;
 import com.nitsoft.ecommerce.database.model.Orders;
 import com.nitsoft.ecommerce.exception.ApplicationException;
+import com.nitsoft.ecommerce.service.orders.OrderAddressService;
+import com.nitsoft.ecommerce.service.orders.OrderDetailService;
+//import com.nitsoft.ecommerce.service.orders.OrderPaymentService;
 import com.nitsoft.ecommerce.service.orders.OrderService;
 import com.nitsoft.util.Constant;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +37,15 @@ public class OrdersController extends AbstractBaseController {
 
     @Autowired
     OrderService orderService;
+    
+    @Autowired
+    OrderDetailService orderDetailService;
+    
+    @Autowired
+    OrderAddressService orderAddresslService;
+    
+//    @Autowired
+//    OrderPaymentService orderPaymentService;
 
     /**
      * Get list orders by company have paging, search, sort and filter
@@ -68,7 +81,25 @@ public class OrdersController extends AbstractBaseController {
     ) {
         Map<String, Object> resultOrders = new HashMap<String, Object>();
         try {
-            //
+            //get order by id
+            Orders order = orderService.getOrderByOrderIdAndCompanyID(orderId, companyId);
+            if(order!=null){
+                resultOrders.put("orders", order);
+                
+                // get list order detail by order id
+                List<OrderDetail> orderDetailByOrderId = orderDetailService.getListOrderDetail(orderId);
+                if(orderDetailByOrderId!=null){
+                    resultOrders.put("ordersDetail", orderDetailByOrderId);
+                }
+                
+                // get order address by order id
+                OrderAddress orderAddress = orderAddresslService.getOrderAddressByOrderId(orderId);
+                resultOrders.put("orderAddress", orderAddress);
+                
+                // get list order payment by order id
+//                List<OrderPayment> listOrderPayment = orderPaymentService.getOrderPaymentByOrderId(orderId);
+//                resultOrders.put("orderPayment", listOrderPayment);
+            }
 
             return responseUtil.successResponse(resultOrders);
         } catch (Exception e) {
@@ -95,7 +126,7 @@ public class OrdersController extends AbstractBaseController {
                     for (Orders id : orders) {
                         // get order id by company id and status active
                         // check valid orderId
-                        Orders order = orderService.getOrderByOrderIdAndCompanyID(id.getId(), companyId, Constant.STATUS.ACTIVE_STATUS.getValue());
+                        Orders order = orderService.getOrderByOrderIdAndCompanyID(id.getId(), companyId);
                         if (order != null) {
                             // Update status order (update status = completed)
                             order.setStatus(Constant.ORDER_STATUS.COMPLETED.getStatus());
