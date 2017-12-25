@@ -174,6 +174,9 @@ public class Constant {
     public static final int SORT_BY_PRODUCT_QUANTITY = 3;
     public static final int SORT_BY_PRODUCT_CRETAE_DATE = 4;
     
+    // define sort key value
+    public static final int SORT_BY_ITEMS_QUANTITY = 4;
+    
     // Custom token header
     public static final String HEADER_TOKEN = "X-Access-Token";
     

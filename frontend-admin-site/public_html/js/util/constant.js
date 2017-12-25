@@ -10,6 +10,8 @@ angular.module( 'ec-admin.constant', [] )
     
     API_PATH: 'http://localhost:8080/ecommerce-rest-api/api/v1/1',
     PATH_FILE: "http://localhost:8080/ecommerce-rest-api/upload/",
+    API_PATH: 'http://localhost:8080/ecommerce-rest-api/api/v1/1',
+    PATH_FILE: "http://localhost:8080/upload/",
     SESSION_COOKIES: 'AccessToken'
      
 })
@@ -44,6 +46,10 @@ angular.module( 'ec-admin.constant', [] )
     DETAIL_PRODUCT: { path: '/products/detail/', method: 'POST' },
     DELETE_PRODUCT: { path: '/products/delete/', method: 'POST' },
     LIST_CATE: { path: '/categories/list', method: 'GET' }
+    GET_USER_PROFILE: { path: '/auth/session/data', method: 'GET' },
+    
+    //orders
+    GET_ORDER_BY_COMPANY :{path : '/orders/listOrder', method : 'POST'}
 })
 
 // API status
