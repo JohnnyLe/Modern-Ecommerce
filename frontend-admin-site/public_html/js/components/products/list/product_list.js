@@ -127,11 +127,11 @@ angular.module('ec-admin.app', ['ec-admin'])
                             if (status === 200) {
                                 $scope.selected = [];
                                 // show message delete successfully
-                                Util.showSuccessToast('message.delete_success');
+                                Util.showSuccessToast('message.product.delete_success');
                                 // reload list
                                 $scope.loadListProduct();
                             } else {
-                                Util.showErrorToast('message.delete_error');
+                                Util.showErrorToast('message.product.delete_error');
                             }
                         });
                     });
