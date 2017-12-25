@@ -8,11 +8,13 @@ import com.nitsoft.ecommerce.api.request.model.ProductCompanyModel;
 import com.nitsoft.ecommerce.api.response.model.APIResponse;
 import com.nitsoft.ecommerce.api.response.model.PagingResponseModel;
 import com.nitsoft.ecommerce.api.response.util.APIStatus;
+import com.nitsoft.ecommerce.database.model.Category;
 import com.nitsoft.ecommerce.database.model.Product;
 import com.nitsoft.ecommerce.database.model.ProductAttributeDetail;
 import com.nitsoft.ecommerce.database.model.ProductCategory;
 import com.nitsoft.ecommerce.database.model.ProductCategoryId;
 import com.nitsoft.ecommerce.exception.ApplicationException;
+import com.nitsoft.ecommerce.repository.CategoryRepository;
 import com.nitsoft.ecommerce.repository.ProductCategoryRepository;
 import com.nitsoft.ecommerce.service.ProductAttributeDetailService;
 import com.nitsoft.ecommerce.service.product.ProductServiceImpl;
@@ -39,28 +41,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(APIName.PRODUCTS)
 public class ProductAPI extends AbstractBaseController {
-    
+
     @Autowired
     private ProductServiceImpl productService;
     @Autowired
     private ProductAttributeDetailService productAttributeService;
-    
+
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
-    
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @ApiOperation(value = "get product by company id", notes = "")
     @RequestMapping(method = RequestMethod.GET, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> getAllProducts(
             @PathVariable("companyId") Long companyId,
             @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_NUMBER) Integer pageNumber,
             @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_SIZE) Integer pageSize) {
-        
+
         Page<Product> products = productService.getByCompanyId(companyId, pageNumber, pageSize);
 //        statusResponse = new StatusResponse(APIStatus.OK.getCode(), products.getContent(), products.getTotalElements());
 
         return responseUtil.successResponse(products.getContent());
     }
-    
+
     @ApiOperation(value = "get products by product id", notes = "")
     @RequestMapping(path = APIName.PRODUCT_BY_ID, method = RequestMethod.GET, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> getProductById(HttpServletRequest request,
@@ -73,29 +78,34 @@ public class ProductAPI extends AbstractBaseController {
             // get all attributes of product
 //        ProductAttributeDetail pad = productAttributeService.findByProductIdAndAttributeId(product_Id, Constant.PRODUCT_ATTRIBUTE.DETAIL_IMAGES.getId());
             List<ProductCategory> listProductCate = productCategoryRepository.getProCateByProductId(product_id);
-            List<String> listCateName = new ArrayList<String>();
+            List<Map<String, Object>> listCate = new ArrayList<Map<String, Object>>();
             for (ProductCategory result : listProductCate) {
+                Map<String, Object> category = new HashMap();
                 //find category name with categoryId
-
+                Category cate = categoryRepository.findByCategoryId(result.getId().getCategoryId());
+                if (cate != null) {
+                    category.put("text", cate.getName());
+                    category.put("id", cate.getCategoryId());
+                }
                 //add category name to list String
-                listCateName.add("");
+                listCate.add(category);
             }
             Map<String, Object> result = new HashMap();
             result.put("product", p);
-            result.put("list_category", listCateName);
-            
+            result.put("list_category", listCate);
+
             return responseUtil.successResponse(result);
         } else {
             throw new ApplicationException(APIStatus.GET_PRODUCT_ERROR);
         }
     }
-    
+
     @ApiOperation(value = "get list product by product ids", notes = "")
     @RequestMapping(path = APIName.PRODUCT_BY_IDS, method = RequestMethod.POST, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> getListProductByIds(
             @PathVariable Long companyId,
             @RequestBody List<Long> productIds) {
-        
+
         if (productIds != null && !productIds.isEmpty()) {
             List<Product> products = (List<Product>) productService.getProductsById(companyId, productIds);
             if (products != null) {
@@ -110,7 +120,7 @@ public class ProductAPI extends AbstractBaseController {
 
 //        return writeObjectToJson(statusResponse);
     }
-    
+
     @ApiOperation(value = "get products by category id", notes = "")
     @RequestMapping(value = APIName.PRODUCTS_BY_CATEGORY, method = RequestMethod.GET, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> getProductByCategoryId(
@@ -118,12 +128,12 @@ public class ProductAPI extends AbstractBaseController {
             @RequestParam Long categoryId,
             @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_NUMBER) Integer pageNumber,
             @RequestParam(required = false, defaultValue = Constant.DEFAULT_PAGE_SIZE) Integer pageSize) {
-        
+
         Page<Product> products = productService.getByCompanyIdAndCategoryId(companyId, categoryId, pageNumber, pageSize);
 //        return writeObjectToJson(new StatusResponse(APIStatus.OK.getCode(), products.getContent(), products.getTotalElements()));
         return responseUtil.successResponse(products.getContent());
     }
-    
+
     @ApiOperation(value = "filter product list", notes = "")
     @RequestMapping(value = APIName.PRODUCTS_FILTER_LIST, method = RequestMethod.POST, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> getProductFilterList(HttpServletRequest request,
@@ -136,7 +146,7 @@ public class ProductAPI extends AbstractBaseController {
             throw new ApplicationException(APIStatus.GET_LIST_PRODUCT_ERROR);
         }
     }
-    
+
     @ApiOperation(value = "create product", notes = "")
     @RequestMapping(value = APIName.PRODUCT_CREATE, method = RequestMethod.POST, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> createProduct(HttpServletRequest request,
@@ -176,7 +186,7 @@ public class ProductAPI extends AbstractBaseController {
             throw new ApplicationException(APIStatus.CREATE_PRODUCT_ERROR);
         }
     }
-    
+
     @ApiOperation(value = "delete product list", notes = "")
     @RequestMapping(value = APIName.PRODUCTS_DELETE, method = RequestMethod.POST, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> deleteProduct(HttpServletRequest request,
@@ -201,7 +211,7 @@ public class ProductAPI extends AbstractBaseController {
             throw new ApplicationException(APIStatus.DELETE_PRODUCT_ERROR);
         }
     }
-    
+
     @ApiOperation(value = "update product", notes = "")
     @RequestMapping(value = APIName.PRODUCTS_UPDATE, method = RequestMethod.POST, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> updateProduct(HttpServletRequest request,
@@ -236,13 +246,13 @@ public class ProductAPI extends AbstractBaseController {
                     productCategoryId.setProductId(product.getProductId());
                     ProductCategory productCategory = new ProductCategory();
                     productCategory.setId(productCategoryId);
-                    productService.saveProductCategory(productCategory);
+                    productCategoryRepository.save(productCategory);
                 }
                 return responseUtil.successResponse(product);
             } else {
                 throw new ApplicationException(APIStatus.GET_PRODUCT_ERROR);
             }
-            
+
         } catch (Exception ex) {
             throw new ApplicationException(APIStatus.UPDATE_PRODUCT_ERROR);
         }

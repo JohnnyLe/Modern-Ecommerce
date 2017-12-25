@@ -30,6 +30,7 @@
     },
     "table": {
         "header": {
+            "no_data": "No Data",
             "cate_name": "Category Name",
             "price_from": "Price From",
             "price_to": "Price To",
@@ -45,6 +46,11 @@
                 "sku": "Stock Keeping Unit",
                 "browsing_name": "Browsing Name",
                 "quantity": "Quantity"
+            },
+            "pop_up": {
+                "cate_name": "Category Name",
+                "des": "Description",
+                "list_cate" : "List Category"
             }
         },
         "body": {

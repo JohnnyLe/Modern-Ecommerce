@@ -339,4 +339,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 44px;
     top: 5px;
     right: 30px;
+    padding-top: 11px;
+}
+.scroll-table-cate{
+    height: 270px;
+    overflow: scroll;
+    overflow-x: hidden;
 }

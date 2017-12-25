@@ -10,11 +10,15 @@ angular.module('ec-admin.app', ['ec-admin'])
             'AppConfig',
             '$http',
             '$uibModal',
+            '$rootScope',
 
-            function ($scope, Util, API, $state, AppConfig, $http, $uibModal) {
+            function ($scope, Util, API, $state, AppConfig, $http, $uibModal, $rootScope) {
                 $scope.showBntSave = true;
                 $scope.submitting = false;
+                $scope.tags = [];
                 $scope.image = 'img/no-image-available.png';
+                $scope.origin = true;
+                $rootScope.checkTags = [];
                 $scope.files = [];
 //                $scope.fileMedia = [];
 //                $scope.multipleImage = [];
@@ -29,7 +33,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                     browsingName: "",
                     defaultImage: "",
                     salePrice: 0,
-                    listCategoriesId: [1, 2],
+                    listCategoriesId: [],
                     listPrice: "",
                     overview: "",
                     quantity: 0,
@@ -57,6 +61,9 @@ angular.module('ec-admin.app', ['ec-admin'])
                     } else {
                         $scope.product.defaultImage = $scope.image;
                     }
+                    $scope.tags.forEach(function(result){
+                        $scope.product.listCategoriesId.push(result.id);
+                    });
                     Util.createRequest(API.CREATE_PRODUCT, $scope.product, function (response) {
                         var status = response.status;
                         if (status === 200) {
@@ -71,23 +78,18 @@ angular.module('ec-admin.app', ['ec-admin'])
                     });
 
                 };
-                $scope.tags = ['abc', 'def'];
-                $scope.loadTags = function (query) {
-                    return $http.get('/tags?query=' + query);
-                };
 
                 // Pop-up
-                $scope.addCustomer = function () {
+                $scope.addCategory = function () {
                     var modalInstance = $uibModal.open({
                         templateUrl: 'js/components/template/confirm_category_modal.html',
                         windowClass: 'large-Modal',
                         controller: ['$scope', '$uibModalInstance', 'Util', '$rootScope', function ($scope, $uibModalInstance, Util, $rootScope) {
                                 $scope.searchString = "";
-                                $scope.title = Util.translate('page_title.cus.list');
+                                $scope.title = Util.translate('table.header.pop_up.list_cate');
                                 $scope.message = "";
                                 $scope.listCategory = [];
                                 $scope.curentSelected = [];
-                                $scope.showButtonChoose = true;
                                 $scope.pagination = {};
                                 $scope.opts = {
                                     lblAccept: Util.translate('button.add'),
@@ -99,44 +101,60 @@ angular.module('ec-admin.app', ['ec-admin'])
                                 $scope.pageChanged = function () {
                                     $scope.loadListSearch();
                                 };
-                                var paramCategory = {
-                                    searchKey: "",
-                                    sortCase: -1,
-                                    ascSort: 1,
-                                    pageNumber: 0,
-                                    pageSize: 10
+                                var params = {
+                                    company_id: 1,
+                                    filter_search: "",
+                                    sort_key: 1,
+                                    page_size: 100,
+                                    page_number: 1
                                 };
 
-                                Util.createRequest(API.GET_LIST_CUS, paramCategory, function (response) {
-
+                                Util.createRequest(API.LIST_CATE, params, function (response) {
+//                                    console.log($scope.product.listCategoriesId);
                                     var status = response.status;
                                     if (status === 200) {
                                         $scope.listCategory = response.data.content;
-                                        $scope.totalItems = response.data.totalResult;
-                                        $scope.totalPage = response.data.totalPage;
+                                        $scope.listCategory.forEach(function (result) {
+                                            result.selected = false;
+                                            $rootScope.checkTags.forEach(function(check){
+                                                if(check.id === result.categoryId){
+                                                    $scope.curentSelected.push(result);
+                                                }
+                                            });
+                                        });
+                                        $scope.removeSelected($scope.curentSelected);
+                                        var originCar = angular.copy($scope.listCategory);
+                                        $scope.$watch('listCategory', function () {
+                                            $scope.origin = angular.equals($scope.listCategory, originCar);
+                                        }, true);
+//                                        $scope.totalItems = response.data.totalResult;
+//                                        $scope.totalPage = response.data.totalPage;
                                     } else {
                                         Util.showErrorAPI(status);
                                     }
                                 });
 
                                 $scope.loadListSearch = function () {
-                                    paramCategory.searchKey = $scope.searchString;
-                                    Util.createRequest(API.GET_LIST_CUS, paramCategory, function (response) {
+                                    params.searchKey = $scope.searchString;
+                                    Util.createRequest(API.LIST_CATE, params, function (response) {
 
                                         var status = response.status;
                                         if (status === 200) {
                                             $scope.listCategory = response.data.content;
-                                            $scope.pagination = {
-                                                first: response.data.first,
-                                                last: response.data.last,
-                                                currentPage: response.data.number,
-                                                totalPages: response.data.totalPages,
-                                                pageObj: new Array(response.data.totalPages)
-                                            };
+                                            $scope.listCategory.forEach(function (result) {
+                                                result.selected = false;
+                                            });
                                         } else {
                                             Util.showErrorAPI(status);
                                         }
                                     });
+                                };
+                                $scope.removeSelected = function (list) {
+                                    list.forEach(function (item) {
+                                        var index = $scope.listCategory.indexOf(item);
+                                        $scope.listCategory.splice(index, 1);
+                                    });
+                                    $scope.curentSelected = [];
                                 };
                                 $scope.onClose = function () {
                                     $uibModalInstance.close();
@@ -147,11 +165,13 @@ angular.module('ec-admin.app', ['ec-admin'])
                                 };
 
                                 $scope.onAccept = function () {
+                                    var chooseCate = [];
                                     $scope.listCategory.forEach(function (result) {
                                         if (result.selected) {
-                                            $rootScope.$broadcast('greeting', {any: result});
+                                            chooseCate.push(result);
                                         }
                                     });
+                                    $rootScope.$broadcast('greeting', {any: chooseCate});
                                     $uibModalInstance.close();
 
                                 };
@@ -162,8 +182,29 @@ angular.module('ec-admin.app', ['ec-admin'])
 
                 $scope.$on('greeting', listenGreeting);
 
-                function listenGreeting($event, message) {
+                function listenGreeting($event, response) {
+                    if (response.any.length > 0) {
+                        response.any.forEach(function (result) {
+                            var text = {
+                                text: result.name,
+                                id: result.categoryId
+                            };
+                            $scope.tags.push(text);
+                        });
+                    }
                 }
+                $scope.$watch('tags', function () {
+                    $rootScope.checkTags = $scope.tags;
+                    if($scope.tags.length < 1){
+                        $scope.origin = true;
+                    }else{
+                        $scope.origin = false;
+                    }
+                    console.log($scope.origin);
+                }, true);
+                $scope.loadTags = function (query) {
+                    return $http.get('/tags?query=' + query);
+                };
 
                 $scope.openPopUp = function () {
                     $scope.addCustomer();

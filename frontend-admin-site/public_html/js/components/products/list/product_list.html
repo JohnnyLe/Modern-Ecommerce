@@ -91,8 +91,8 @@
                             <div class="col-xs-1 text-left"><input icheck ng-click="$event.stopPropagation()" ng-change="toggleSelected(pro)" ng-model="pro._selected" type="checkbox"/></div>
                             <div class="col-xs-2 text-left">
                                 <span>
-                                    <img ng-class="{'image-opacity' : uploading}" class="img-responsive image-border-custom" ng-src="{{pathFile + pro.defaultImage}}" style="width: 70px; height: 50px">
-                                    <!--<img ng-show="uploading" src="img/ajax-loader.gif" style="position: relative; top: -115px; left: 100px">-->
+                                    <img ng-if="(pro.defaultImage !== 'img/no-image-available.png')" ng-class="{'image-opacity' : uploading}" class="img-responsive image-border-custom" ng-src="{{pathFile + pro.defaultImage}}" style="width: 70px; height: 50px">
+                                    <img ng-if="(pro.defaultImage === 'img/no-image-available.png')" ng-class="{'image-opacity' : uploading}" class="img-responsive image-border-custom" ng-src="{{pro.defaultImage}}" style="width: 70px; height: 50px">
                                 </span>
                             </div>
                             <div class="col-xs-2 text-left overload-name"><span ng-bind="pro.name"></span></div>
@@ -104,7 +104,7 @@
                                     <span ng-click="loadProductDetail(pro.productId)" class="glyphicon glyphicon-info-sign zoom-btn"></span>
                                 </div>
                                 <div class="col-md-6">
-                                    <span ng-click="confirmDeleteCar(pro.productId)" class="glyphicon glyphicon-trash" style="color: red"></span>
+                                    <span ng-click="confirmDeleteProduct(pro.productId)" class="glyphicon glyphicon-trash" style="color: red"></span>
                                 </div>
                             </div>
                         </div>

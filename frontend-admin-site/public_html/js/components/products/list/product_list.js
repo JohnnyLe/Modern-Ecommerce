@@ -22,32 +22,32 @@ angular.module('ec-admin.app', ['ec-admin'])
                 $scope.columnChange = "Name";
                 $scope.image = 'img/no-image-available.png';
                 var param = {
-                        categoryId: -1,
-                        attributeId: -1,
-                        companyId: 1,
-                        searchKey: "",
-                        minRank: -1,
-                        maxRank: -1,
-                        minPrice: 0,
-                        maxPrice: -1,
-                        sortCase: -1,
-                        ascSort: 0,
-                        pageNumber: 1,
-                        pageSize: 10
-                        
-                    };
-                    
+                    categoryId: -1,
+                    attributeId: -1,
+                    companyId: 1,
+                    searchKey: "",
+                    minRank: -1,
+                    maxRank: -1,
+                    minPrice: 0,
+                    maxPrice: -1,
+                    sortCase: -1,
+                    ascSort: 0,
+                    pageNumber: 1,
+                    pageSize: 10
+
+                };
+
                 $scope.doSort = function (sortCase) {
                     $scope.loadListProduct(sortCase);
                 };
-                
+
                 $scope.doSearch = function (keyEvent) {
 
                     // press Enter key
                     if (keyEvent.which === 13) {
-                        if($scope.max_price > 0 & $scope.max_price < $scope.min_price){
+                        if ($scope.max_price > 0 & $scope.max_price < $scope.min_price) {
                             Util.showErrorToast("message.product.err_price");
-                        }else{
+                        } else {
                             $scope.loadListProduct();
                         }
                     }
@@ -83,7 +83,6 @@ angular.module('ec-admin.app', ['ec-admin'])
                     Util.createRequest(API.GET_LIST_PRODUCT, param, function (response) {
                         var status = response.status;
                         if (status === 200) {
-
                             $scope.listProduct = response.data.data;
                             $scope.totalItems = response.data.totalResult;
                             $scope.totalPage = response.data.totalPage;
@@ -106,7 +105,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                         }
                     });
                 };
-                
+
                 $scope.confirmDeleteProduct = function (productId) {
                     var listId = [];
                     // show model confirm delete orders
@@ -206,7 +205,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                 $scope.loadProductDetail = function (productId) {
                     $state.go('products.detail', {id: productId});
                 };
-                
+
                 $scope.loadListProduct();
             }
         ]);
