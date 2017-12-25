@@ -46,10 +46,10 @@ angular.module( 'ec-admin.constant', [] )
     DETAIL_PRODUCT: { path: '/products/detail/', method: 'POST' },
     DELETE_PRODUCT: { path: '/products/delete/', method: 'POST' },
     LIST_CATE: { path: '/categories/list', method: 'GET' },
-//    GET_USER_PROFILE: { path: '/auth/session/data', method: 'GET' },
-    
-    //orders
-    GET_ORDER_BY_COMPANY :{path : '/orders/listOrder', method : 'POST'}
+    GET_ORDER_BY_COMPANY :{path : '/orders/listOrder', method : 'POST'},
+    REGISTER_USER: { path: '/users/register', method: 'POST'},
+    GET_USER_LIST: { path: '/users/list', method: 'POST'},
+    DELETE_USER: { path: '/users/delete', method: 'POST'}
 })
 
 // API status

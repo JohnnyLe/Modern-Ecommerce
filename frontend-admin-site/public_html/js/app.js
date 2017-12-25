@@ -88,6 +88,33 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 'js/common/directives/icheck.js',
                                 'js/components/products/detail/product_detail.js'
                             ]
+                        },
+                        {
+                            name: 'ListUsersModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/components/users/list/users_list_ctrl.js'
+                            ]
+                        },
+                        {
+                            name: 'UserCreateModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/components/users/create/users_create_ctrl.js'
+                            ]
+                        },
+                        {
+                            name: 'UserEditModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/components/users/edit/users_edit_ctrl.js'
+                            ]
                         }
                     ];
 
@@ -242,6 +269,46 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 resolve: {
                                     loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                                             return $ocLazyLoad.load('productsDetailModule');
+                                        }]
+                                }
+                            })
+                            .state({
+                                name: 'users',
+                                parent: 'authorized',
+                                abstract: true,
+                                url: '/users',
+                                template: '<div ui-view></div>'
+                            })
+                            .state({
+                                name: 'users.list',
+                                url: '/list',
+                                templateUrl: 'js/components/users/list/users_list_tmpl.html',
+                                controller: 'ListUsersCtrl',
+                                resolve: {
+                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                            return $ocLazyLoad.load('ListUsersModule');
+                                        }]
+                                }
+                            })
+                            .state({
+                                name: 'users.create',
+                                url: '/create',
+                                templateUrl: 'js/components/users/create/users_create.html',
+                                controller: 'UserCreateCtrl',
+                                resolve: {
+                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                            return $ocLazyLoad.load('UserCreateModule');
+                                        }]
+                                }
+                            })
+                            .state({
+                                name: 'users.detail',
+                                url: '/{id}',
+                                templateUrl: 'js/components/users/edit/users_edit.html',
+                                controller: 'UserEditCtrl',
+                                resolve: {
+                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                            return $ocLazyLoad.load('UserEditModule');
                                         }]
                                 }
                             })

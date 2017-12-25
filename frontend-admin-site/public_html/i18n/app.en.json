@@ -5,7 +5,8 @@
     "navi": {
         "categories": "Categories",
         "products": "Products",
-        "orders" : "Order"
+        "orders" : "Order",
+        "users": "Users"
     },
     "page_title": {
         "product": {
@@ -158,6 +159,16 @@
             "delete_mgs": "Do you want to detele Product",
             "delete_success": "Delete Product success",
             "delete_error": "Delete Product error"
+        },
+        "user": {
+            "create_user_success": "Create User successfully",
+            "create_user_error": "Create User error",
+            "update_user_success": "Update User success",
+            "update_user_error": "Update User error",
+            "delete": "Detele User",
+            "delete_mgs": "Do you want to detele User",
+            "delete_success": "Delete User success",
+            "delete_error": "Delete User error"
         }
     },
     "api": {

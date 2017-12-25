@@ -168,6 +168,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                 $scope.toggleSelected = function (obj) {
 
                     if (angular.isObject(obj) && obj.productId) {
+                        console.log("$scope.selected",$scope.selected);
                         var index = _.findIndex($scope.selected, {productId: obj.productId});
                         if (index > -1) {
                             $scope.selected.splice(index, 1);
