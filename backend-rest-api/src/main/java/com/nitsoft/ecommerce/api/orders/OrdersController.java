@@ -12,7 +12,7 @@ import com.nitsoft.ecommerce.database.model.Orders;
 import com.nitsoft.ecommerce.exception.ApplicationException;
 import com.nitsoft.ecommerce.service.orders.OrderAddressService;
 import com.nitsoft.ecommerce.service.orders.OrderDetailService;
-//import com.nitsoft.ecommerce.service.orders.OrderPaymentService;
+import com.nitsoft.ecommerce.service.orders.OrderPaymentService;
 import com.nitsoft.ecommerce.service.orders.OrderService;
 import com.nitsoft.util.Constant;
 import java.util.HashMap;
@@ -44,8 +44,8 @@ public class OrdersController extends AbstractBaseController {
     @Autowired
     OrderAddressService orderAddresslService;
     
-//    @Autowired
-//    OrderPaymentService orderPaymentService;
+    @Autowired
+    OrderPaymentService orderPaymentService;
 
     /**
      * Get list orders by company have paging, search, sort and filter
@@ -97,8 +97,8 @@ public class OrdersController extends AbstractBaseController {
                 resultOrders.put("orderAddress", orderAddress);
                 
                 // get list order payment by order id
-//                List<OrderPayment> listOrderPayment = orderPaymentService.getOrderPaymentByOrderId(orderId);
-//                resultOrders.put("orderPayment", listOrderPayment);
+                List<OrderPayment> listOrderPayment = orderPaymentService.getOrderPaymentByOrderId(orderId);
+                resultOrders.put("orderPayment", listOrderPayment);
             }
 
             return responseUtil.successResponse(resultOrders);
