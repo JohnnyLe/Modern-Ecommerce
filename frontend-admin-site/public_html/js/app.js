@@ -52,6 +52,16 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                             ]
                         },
 
+                        {
+                            name: 'orderDetailModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/components/orders/detail/order_detail_ctrl.js'
+                            ]
+                        },
+                        
                         // This is just sample upload page, I will remove later (Quy)
                         {
                             name: 'uploadSampleModule',
@@ -222,7 +232,18 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                         }]
                                 }
                             })
-
+                            .state({
+                                name: 'orders.detail',
+                                url: '/detail',
+                                templateUrl: 'js/components/orders/detail/order_detail_tmpl.html',
+                                controller: 'OrderDetailCtrl',
+                                resolve: {
+                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                            return $ocLazyLoad.load('orderDetailModule');
+                                        }]
+                                }
+                            })
+                            
                             // This is just for sample upload I will remove later (Quy)
                             .state({
                                 name: 'upload',

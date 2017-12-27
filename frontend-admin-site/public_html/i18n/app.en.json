@@ -14,7 +14,11 @@
             "product_create": "Create Products",
             "product_detail": "Detail Products"
         },
-        "list_orders" : "List Orders"
+        "order":{
+            "list_orders" : "List Orders",
+            "order_detail" : "Order Detail"
+        }
+        
     },
     "button": {
         "login": "Login",
