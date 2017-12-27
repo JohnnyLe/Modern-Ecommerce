@@ -39,9 +39,14 @@ public class APIName {
 
     //user api link
     public static final String USERS = VERSION + "/users";
-    public static final String USERS_REGISTER = "/register";
+    public static final String USER_REGISTER = "/register";
+    public static final String USER_LIST = "/list";
     public static final String USERS_LOGIN = "/login";
     public static final String USERS_LOGOUT = "/logout";
+    public static final String USER_DETAILS = "/detail/{userId}";
+    public static final String UPDATE_USER = "/update";
+    public static final String DELETE_USER = "/delete";
+    public static final String CHANGE_PASSWORD_USER = "/changePassword";
 
     //review api link
     public static final String REVIEWS = VERSION + "/reviews";
@@ -62,10 +67,10 @@ public class APIName {
     
     // Categories APIs
     public static final String CATEGORIES_API = VERSION + "/categories";
-    public static final String CATEGORIES_ADD = "/add";
+    public static final String CATEGORIES_ADD = "/create";
     public static final String CATEGORIES_UPDATE = "/update";
     public static final String CATEGORIES_DELETE = "/delete";
-    public static final String CATEGORIES_DETAIL = "/detail";
+    public static final String CATEGORIES_DETAIL = "/detail/{category_id}";
     public static final String CATEGORIES_LIST = "/list";
     
     

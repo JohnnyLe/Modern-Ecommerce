@@ -17,14 +17,12 @@ public interface CategoriesService {
 
     Category saveOrUpdate(Category category);
 
-    void delete(Category category);
-
-    void delete(List<Category> categories);
+    List<Category> saveOrUpdate(List<Category> categories);
 
     Category getActiveById(long categoryId);
 
     List<Category> getAllActiveByIdsAndCompanyId(List<Long> categoryIds, long companyId);
 
-    Page<Category> getAllActiveWithFilterSearchSort(long companyId, String keyword, int pageNumber, int pageSize, int sortKey);
+    Page<Category> getAllActiveWithFilterSearchSort(long companyId, String keyword, int pageNumber, int pageSize, int sortCase, boolean ascSort);
 
 }

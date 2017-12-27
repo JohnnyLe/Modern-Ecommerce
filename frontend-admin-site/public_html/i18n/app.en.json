@@ -5,15 +5,24 @@
     "navi": {
         "categories": "Categories",
         "products": "Products",
-        "orders" : "Order"
+        "orders": "Order",
+        "users": "Users"
     },
     "page_title": {
         "product": {
-            "product_list" : "List Products",
+            "product_list": "List Products",
             "product_create": "Create Products",
             "product_detail": "Detail Products"
         },
-        "list_orders" : "List Orders"
+        "order": {
+            "list_orders": "List Orders",
+            "order_detail": "Order Detail"
+        },
+        "category": {
+            "category_list": "List Categories",
+            "category_create": "Create Category",
+            "category_detail": "Detail category"
+        }
     },
     "button": {
         "login": "Login",
@@ -39,7 +48,7 @@
             "search": "Search",
             "create_date": "Create Date",
             "detail": "Detail",
-            "product":{
+            "product": {
                 "name": "Product Name",
                 "price": "Sell Price",
                 "image": "Image",
@@ -52,23 +61,28 @@
             "pop_up": {
                 "cate_name": "Category Name",
                 "des": "Description",
-                "list_cate" : "List Category"
+                "list_cate": "List Category"
             },
-            "search" : "Search",
-            "detail" : "Detail",
-            "no_data" : "No Data",
-            "order":{
-                "customer_name" : "Customer Name",
-                "quantity" : " Quantity",
-                "created_at" : "Created At",
-                "updated_at" : "Update At",
-                "status" : "Status",
-                "grand_total" : "Grand Total",
-                "filter_status" : "Status Order"
+            "search": "Search",
+            "detail": "Detail",
+            "no_data": "No Data",
+            "order": {
+                "customer_name": "Customer Name",
+                "quantity": " Quantity",
+                "created_at": "Created At",
+                "updated_at": "Update At",
+                "status": "Status",
+                "grand_total": "Grand Total",
+                "filter_status": "Status Order"
+            },
+            "category": {
+                "name": "Category Name",
+                "description": "Description",
+                "position": "Position",
+                "category_parent": "Category Parent"
             }
         },
         "body": {
-            
         }
     },
     "label": {
@@ -83,7 +97,10 @@
         "username_or_email": "Username or Email",
         "password": "Password",
         "confirm_password": "Confirm password",
-        "phone_number": "Phone number"
+        "phone_number": "Phone number",
+        "current_password": "Current Password",
+        "new_password": "New Password",
+        "comfirm_password": "Confirmed Password"
     },
     "validation": {
         "first_name": {
@@ -145,6 +162,14 @@
         "description": {
             "invalid_pattern": "Description is invalid",
             "required": "Description is required"
+        },
+        "chars": {
+            "limit_chars": "Max length is %s characters",
+            "min_chars": "Min length is %s characters"
+        },
+        "numbers": {
+            "max": "Maximum value is %s",
+            "min": "Minimum value is %s"
         }
     },
     "message": {
@@ -158,6 +183,26 @@
             "delete_mgs": "Do you want to detele Product",
             "delete_success": "Delete Product success",
             "delete_error": "Delete Product error"
+        },
+        "user": {
+            "create_user_success": "Create User successfully",
+            "create_user_error": "Create User error",
+            "update_user_success": "Update User success",
+            "update_user_error": "Update User error",
+            "delete": "Detele User",
+            "delete_mgs": "Do you want to detele User",
+            "delete_success": "Delete User success",
+            "delete_error": "Delete User error"
+        },
+        "category": {
+            "create_category_success": "Create category success",
+            "create_category_error": "Create category error",
+            "update_category_success": "Update category success",
+            "update_category_error": "Update category error",
+            "delete": "Delete Category",
+            "delete_mgs": "Do you want to delete Category",
+            "delete_success": "Delete Category success",
+            "delete_error": "Delete Category error"
         }
     },
     "api": {

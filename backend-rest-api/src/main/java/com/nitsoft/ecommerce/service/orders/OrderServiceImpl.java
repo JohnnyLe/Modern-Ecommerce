@@ -31,8 +31,8 @@ public class OrderServiceImpl extends AbstractBaseService implements OrderServic
     }
 
     @Override
-    public Orders getOrderByOrderIdAndCompanyID(Long orderId, Long companyId, int status) {
-        return ordersRepository.findOneByIdAndCompanyIdAndStatus(orderId, companyId, status);
+    public Orders getOrderByOrderIdAndCompanyID(Long orderId, Long companyId) {
+        return ordersRepository.findOneByIdAndCompanyId(orderId, companyId);
     }
 
     @Override

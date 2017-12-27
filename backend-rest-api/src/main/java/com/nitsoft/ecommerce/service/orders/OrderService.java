@@ -12,7 +12,7 @@ public interface OrderService {
 
     public Page<Orders> doPagingOrders(OrdersRequestModel ordersRequestModel, Long companyId);
 
-    public Orders getOrderByOrderIdAndCompanyID(Long orderId, Long companyId, int status);
+    public Orders getOrderByOrderIdAndCompanyID(Long orderId, Long companyId);
 
     public void updateStatusOrder(Orders order);
 }

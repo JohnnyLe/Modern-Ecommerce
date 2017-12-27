@@ -22,6 +22,6 @@ public interface OrdersRepository extends PagingAndSortingRepository<Orders, Lon
     @Query("SELECT pad FROM Orders pad WHERE pad.companyId = :companyId")
     Page<Orders> findAllByCompanyId(@Param("companyId") long companyId, Pageable pageable);
     
-    Orders findOneByIdAndCompanyIdAndStatus(Long orderId, Long companyId, int status);
+    Orders findOneByIdAndCompanyId(Long orderId, Long companyId);
     
 }

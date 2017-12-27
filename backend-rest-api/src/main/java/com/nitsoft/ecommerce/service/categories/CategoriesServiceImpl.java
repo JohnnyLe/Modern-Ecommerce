@@ -14,83 +14,65 @@ import com.nitsoft.ecommerce.database.model.Company;
 import com.nitsoft.ecommerce.exception.ApplicationException;
 import com.nitsoft.ecommerce.repository.CategoryRepository;
 import com.nitsoft.ecommerce.repository.CompanyRepository;
+import com.nitsoft.ecommerce.repository.specification.CategorySpecifications;
 import com.nitsoft.ecommerce.service.AbstractBaseService;
+
 import java.util.List;
+
+import com.nitsoft.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import javax.xml.ws.Response;
+
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
 /**
- * @author Quy Duong
+ * @author tungn
  */
-@Component
+@Service
 public class CategoriesServiceImpl extends AbstractBaseService implements CategoriesService {
 
     @Autowired
     CategoryRepository categoryRepository;
 
     @Autowired
-    CompanyRepository companyRepository;
+    private CategorySpecifications categorySpecifications;
 
-    public ResponseEntity<APIResponse> addCategory(CreateCategoryRequestModel categoryModel) {
-
-        if (categoryModel == null) {
-            throw new ApplicationException(APIStatus.INVALID_PARAMETER);
-        }
-//        int companyId = (int) categoryModel.getCompanyId();
-//
-//        Company company = companyRepository.findByCompanyId(companyId);
-//
-//        if (company == null) {
-//            throw new ApplicationException(APIStatus.INVALID_PARAMETER);
-//        }
-
-        Category category = new Category();
-//        category.setCompanyId(categoryModel.getCompanyId());
-        category.setParentId(categoryModel.getParentId());
-        category.setName(categoryModel.getName());
-        category.setStatus(categoryModel.getStatus());
-        category.setPosition(categoryModel.getPosition());
-        category.setDescription(categoryModel.getDescription());
-
-        categoryRepository.save(category);
-
-//        return ResponseUtil.successResponse(category);
-        return null;
-    }
 
     @Override
     public Category saveOrUpdate(Category category) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return categoryRepository.save(category);
     }
 
     @Override
-    public void delete(Category category) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void delete(List<Category> categories) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Category> saveOrUpdate(List<Category> categories) {
+        return (List<Category>) categoryRepository.save(categories);
     }
 
     @Override
     public Category getActiveById(long categoryId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return categoryRepository.findByCategoryIdAndStatus(categoryId, 1);
     }
 
     @Override
     public List<Category> getAllActiveByIdsAndCompanyId(List<Long> categoryIds, long companyId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return categoryRepository.findAllByCategoryIdInAndCompanyIdAndStatus(categoryIds, companyId, 1);
     }
 
     @Override
-    public Page<Category> getAllActiveWithFilterSearchSort(long companyId, String keyword, int pageNumber, int pageSize, int sortKey) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    @SuppressWarnings("unchecked")
+    public Page<Category> getAllActiveWithFilterSearchSort(long companyId, String keyword, int pageNumber, int pageSize, int sortCase, boolean ascSort) {
+        Pageable pageable = new PageRequest(pageNumber - 1, pageSize);
 
+        // create specification
+        Specification spec = categorySpecifications.doFilterSearchSort(companyId, keyword, sortCase, ascSort);
+        return categoryRepository.findAll(spec, pageable);
+    }
 
 }

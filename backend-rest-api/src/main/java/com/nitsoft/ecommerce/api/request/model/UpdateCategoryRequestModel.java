@@ -18,11 +18,7 @@ public class UpdateCategoryRequestModel {
     @NotBlank
     private String name;
 
-    @Min(0)
-    @Max(1)
-    private int status;
-
-    private int position;
+    private Integer position;
 
     private String description;
 }

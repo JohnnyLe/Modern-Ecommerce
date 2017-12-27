@@ -41,12 +41,7 @@ require.config({
         utils: 'util/util',
         session: 'util/session',
 
-        directives: "common/directives/directives",
-        icheck_directive: 'common/directives/icheck',
-
-        // datatable
-        datatable: '../vendors/datatables/media/js/jquery.dataTables',
-        dt_bootstrap: '../vendors/datatables/media/js/dataTables.bootstrap'
+        icheck_directive: 'common/directives/icheck'
     },
     // Define dependency for each object
     // If we do this, we dont have to use define
@@ -81,9 +76,6 @@ require.config({
         'moment': ['jquery'],
         'theme': ['jquery', 'bootstrap', 'nprocess'],
         'constant': ['angular', 'moment'],
-        "datatable": ["jquery"],
-        "dt_bootstrap": ["datatable"],
-        "directives": ["app", "dt_bootstrap"],
         'utils': ['angular', 'constant', 'angular_bootstrap'],
         'session': ['utils', 'angular_cookie'],
         // Main module
@@ -97,7 +89,7 @@ require.config({
 // Bootstrap the app
 // All modules have to be available here
 // It hard to understand with jqLite
-require(['app', 'directives'], function () {
+require(['app'], function () {
     angular.element().ready(function () {
         // bootstrap the app manually
         angular.bootstrap(document, ['ec-admin']);

@@ -16,12 +16,18 @@ public enum APIStatus {
     OK(200, null),
     ERR_INTERNAL_SERVER(500, "Internal Error"),
     SQL_ERROR(501, "SQL Error"),
-    ERR_BAD_REQUEST(400, "Bad request"),
+    ERR_BAD_REQUEST(400, "Bad request"),    
     ERR_SESSION_DATA_INVALID(603, "Session data invalid"),
     ERR_SESSION_NOT_FOUND(604, "Session not found"),
     // File upload error
     ERR_UPLOAD_FILE(900, "Upload file error."),
     
+    //User status
+    ERR_USER_NOT_FOUND(404, "User Not Found"),
+    ERR_USER_ADDRESS_NOT_FOUND(405, "User Address Not Found"),
+    ERR_GET_LIST_USERS(406, "Get list user error"),
+    ERR_MISSING_PASSWORD(407, "Missing new password"),
+    ERR_UNCORRECT_PASSWORD(408, "Your old password is uncorrect"),
     //Product status
     CREATE_PRODUCT_ERROR(700, "Create product error"),
     DELETE_PRODUCT_ERROR(701, "Delete product error"),
