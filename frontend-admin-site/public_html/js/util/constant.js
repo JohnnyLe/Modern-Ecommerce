@@ -49,7 +49,10 @@ angular.module( 'ec-admin.constant', [] )
     GET_ORDER_BY_COMPANY :{path : '/orders/listOrder', method : 'POST'},
     REGISTER_USER: { path: '/users/register', method: 'POST'},
     GET_USER_LIST: { path: '/users/list', method: 'POST'},
-    DELETE_USER: { path: '/users/delete', method: 'POST'}
+    DELETE_USER: { path: '/users/delete', method: 'POST'},
+    GET_USER_INFO: { path: '/users/detail/', method: 'POST'},
+    EDIT_USER: { path: '/users/update', method: 'POST'},
+    CHANGE_PASSWORD: { path: '/users/changePassword', method: 'POST'}
 })
 
 // API status

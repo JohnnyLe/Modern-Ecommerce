@@ -46,7 +46,9 @@ public class UserSpecification implements Specification<User> {
             Predicate search = cb.or(firstName, lastName, email);
             predicates.add(search);
         }
-
+        
+        predicates.add(cb.equal(root.get("status"), Constant.USER_STATUS.ACTIVE.getStatus()));
+        
         // sort
         Path orderClause;
         switch (sortCase) {

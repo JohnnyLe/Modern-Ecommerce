@@ -84,7 +84,10 @@
         "username_or_email": "Username or Email",
         "password": "Password",
         "confirm_password": "Confirm password",
-        "phone_number": "Phone number"
+        "phone_number": "Phone number",
+        "current_password":"Current Password",
+        "new_password":"New Password",
+        "comfirm_password":"Confirmed Password"
     },
     "validation": {
         "first_name": {
@@ -146,6 +149,10 @@
         "description": {
             "invalid_pattern": "Description is invalid",
             "required": "Description is required"
+        },
+        "chars": {
+            "limit_chars": "Max length is %s characters",
+            "min_chars": "Min length is %s characters"
         }
     },
     "message": {

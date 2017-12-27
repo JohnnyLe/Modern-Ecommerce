@@ -77,7 +77,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                     });
                 };
 
-                $scope.confirmDeleteProduct = function (userId) {
+                $scope.confirmDeleteUser = function (userId) {
                     var listId = [];
                     // show model confirm delete orders
                     Util.showConfirmModal({
@@ -136,7 +136,6 @@ angular.module('ec-admin.app', ['ec-admin'])
                 };
 
                 $scope.toggleSelected = function (obj) {
-                    console.log(obj);
                     if (angular.isObject(obj) && obj.userId) {
                         var index = _.findIndex($scope.selected, {'userId': obj.userId});
                         if (index > -1) {
@@ -173,7 +172,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                 };
 
                 $scope.loadUserDetail = function (userId) {
-                    $state.go('users.detail', {id: userId});
+                    $state.go('users.edit', {id: userId});
                 };
 
                 $scope.loadListUsers();

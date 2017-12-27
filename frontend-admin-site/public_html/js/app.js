@@ -41,7 +41,7 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 'js/components/categories/list/categories_list_ctrl.js'
                             ]
                         },
-                        
+
                         {
                             name: 'orderListModule',
                             files: [
@@ -51,7 +51,7 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 'js/components/orders/list/orders_list_ctrl.js'
                             ]
                         },
-                        
+
                         // This is just sample upload page, I will remove later (Quy)
                         {
                             name: 'uploadSampleModule',
@@ -114,6 +114,16 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 'vendors/iCheck/icheck.min.js',
                                 'js/common/directives/icheck.js',
                                 'js/components/users/edit/users_edit_ctrl.js'
+                            ]
+                        },
+                        {
+                            name: 'UserChangePasswordModule',
+                            files: [
+                                'vendors/iCheck/skins/flat/blue.css',
+                                'vendors/iCheck/icheck.min.js',
+                                'js/common/directives/icheck.js',
+                                'js/common/directives/directives.js',
+                                'js/components/users/change_password/change_password_ctrl.js'
                             ]
                         }
                     ];
@@ -193,7 +203,7 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                         }]
                                 }
                             })
-                            
+
                             .state({
                                 name: 'orders',
                                 parent: 'authorized',
@@ -212,7 +222,7 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                         }]
                                 }
                             })
-                            
+
                             // This is just for sample upload I will remove later (Quy)
                             .state({
                                 name: 'upload',
@@ -302,13 +312,24 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 }
                             })
                             .state({
-                                name: 'users.detail',
+                                name: 'users.edit',
                                 url: '/{id}',
                                 templateUrl: 'js/components/users/edit/users_edit.html',
                                 controller: 'UserEditCtrl',
                                 resolve: {
                                     loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
                                             return $ocLazyLoad.load('UserEditModule');
+                                        }]
+                                }
+                            })
+                            .state({
+                                name: 'users.changePassword',
+                                url: '/{id}',
+                                templateUrl: 'js/components/users/change_password/change_password.html',
+                                controller: 'ChangePasswordCtrl',
+                                resolve: {
+                                    loadModule: ['$ocLazyLoad', function ($ocLazyLoad) {
+                                            return $ocLazyLoad.load('UserChangePasswordModule');
                                         }]
                                 }
                             })

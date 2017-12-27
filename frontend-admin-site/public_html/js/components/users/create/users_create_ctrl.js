@@ -37,7 +37,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                             // goto car branch list
                             $state.go('users.list');
                         } else {
-                            Util.showErrorAPI("An error occur");
+                            Util.showErrorToast("An error occur");
                             $scope.submitting = false;
                         }
                     });

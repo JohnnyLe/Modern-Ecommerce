@@ -8,16 +8,13 @@ var utils = angular.module('ec-admin.utils', [])
                     createRequest: function (api, data, callback, errorCb, notLoading) {
                         if (!notLoading)
                             $rootScope.loading = true;
-                        
                         if (!api) {
 //                            console.error('Invalid API');
                             return;
                         }
-
+                       
                         var link = api, method = 'GET', params = data, cb = callback, errCb = errorCb;
-
                         if (angular.isObject(api)) {
-
                             method = api.method || 'POST';
                             link = api.path;
                         }

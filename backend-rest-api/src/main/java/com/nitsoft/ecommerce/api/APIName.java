@@ -43,9 +43,10 @@ public class APIName {
     public static final String USER_LIST = "/list";
     public static final String USERS_LOGIN = "/login";
     public static final String USERS_LOGOUT = "/logout";
-    public static final String USER_DETAILS = "/{userId}";
-    public static final String UPDATE_USER = "/update/{userId}";
+    public static final String USER_DETAILS = "/detail/{userId}";
+    public static final String UPDATE_USER = "/update";
     public static final String DELETE_USER = "/delete";
+    public static final String CHANGE_PASSWORD_USER = "/changePassword";
 
     //review api link
     public static final String REVIEWS = VERSION + "/reviews";

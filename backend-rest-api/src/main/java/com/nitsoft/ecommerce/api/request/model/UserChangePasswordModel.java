@@ -20,16 +20,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRequestModel {
+public class UserChangePasswordModel {
     public String userId;
-    public String firstName;
-    public String lastName;
-    public String middleName;
-    public String email;
-    public String phone;
-    public String fax;
-    public String address;
-    public String city;
-    public String country;
-    
+    public String oldPassword;
+    public String newPassword;
 }

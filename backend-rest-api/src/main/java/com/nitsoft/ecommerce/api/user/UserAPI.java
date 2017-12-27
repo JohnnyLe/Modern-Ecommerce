@@ -2,10 +2,12 @@ package com.nitsoft.ecommerce.api.user;
 
 import com.nitsoft.ecommerce.api.APIName;
 import com.nitsoft.ecommerce.api.controller.AbstractBaseController;
+import com.nitsoft.ecommerce.api.request.model.UserChangePasswordModel;
 import com.nitsoft.ecommerce.api.request.model.UserListRequestModel;
 import com.nitsoft.ecommerce.api.request.model.UserRequestModel;
 import com.nitsoft.ecommerce.api.response.model.APIResponse;
 import com.nitsoft.ecommerce.api.response.model.PagingResponseModel;
+import com.nitsoft.ecommerce.api.response.model.UserDetailResponseModel;
 import com.nitsoft.ecommerce.api.response.util.APIStatus;
 import com.nitsoft.ecommerce.database.model.User;
 import com.nitsoft.ecommerce.database.model.UserAddress;
@@ -23,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -110,7 +113,7 @@ public class UserAPI extends AbstractBaseController {
         }
 
     }
-    
+
     @RequestMapping(path = APIName.USER_REGISTER, method = RequestMethod.POST, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> register(
             @PathVariable Long company_id,
@@ -120,15 +123,14 @@ public class UserAPI extends AbstractBaseController {
         User existedUser = userService.getUserByEmail(user.getEmail(), company_id, Constant.STATUS.ACTIVE_STATUS.getValue());
         if (existedUser == null) {
             // email is valid to create user
-            String email = user.getEmail(),
-                    password = user.getPasswordHash();
+            String email = user.getEmail();
 
-            if (email != null && !email.equals("") && password != null && !password.equals("")) {
+            if (email != null && !email.equals("")) {
 
                 Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
                 Matcher matcher = pattern.matcher(email);
 
-                if (!matcher.matches() || password.length() < 6) {
+                if (!matcher.matches()) {
                     throw new ApplicationException(APIStatus.ERR_INVALID_DATA);
                 }
 
@@ -143,6 +145,9 @@ public class UserAPI extends AbstractBaseController {
                 userSignUp.setSalt(UniqueID.getUUID());
                 userSignUp.setRoleId(Constant.USER_ROLE.NORMAL_USER.getRoleId());
                 try {
+//                    String generatedString = RandomStringUtils.randomAlphabetic(6);
+                    String generatedString = "123456";
+                    String password = MD5Hash.MD5Encrypt(generatedString);
                     userSignUp.setPasswordHash(MD5Hash.MD5Encrypt(password + userSignUp.getSalt()));
                 } catch (NoSuchAlgorithmException ex) {
                     throw new RuntimeException("Encrypt user password error", ex);
@@ -152,7 +157,7 @@ public class UserAPI extends AbstractBaseController {
                 userSignUp.setStatus(Constant.USER_STATUS.ACTIVE.getStatus());
 
                 userService.save(userSignUp);
-                
+
                 UserAddress userAddress = new UserAddress();
                 userAddress.setUserId(userSignUp.getUserId());
                 userAddress.setAdress(user.getAddress());
@@ -174,7 +179,7 @@ public class UserAPI extends AbstractBaseController {
         }
 
     }
-    
+
     @RequestMapping(value = APIName.USER_LIST, method = RequestMethod.POST, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> getUserList(
             @PathVariable Long company_id,
@@ -189,7 +194,7 @@ public class UserAPI extends AbstractBaseController {
         }
 
     }
-    
+
     @RequestMapping(path = APIName.USER_DETAILS, method = RequestMethod.GET, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> getUserDetails(
             @PathVariable Long company_id,
@@ -199,22 +204,43 @@ public class UserAPI extends AbstractBaseController {
         // check user already exists
         User existedUser = userService.getUserByUserIdAndComIdAndStatus(userId, company_id, Constant.USER_STATUS.ACTIVE.getStatus());
         if (existedUser != null) {
-                return responseUtil.successResponse(existedUser);
+            UserAddress userAddress = userAddressService.getAddressByUserIdAndStatus(userId, Constant.STATUS.ACTIVE_STATUS.getValue());
+            if (userAddress != null) {
+                UserDetailResponseModel response = new UserDetailResponseModel();
+                response.setUserId(userId);
+                response.setCompanyId(existedUser.getCompanyId());
+                response.setRoleId(existedUser.getRoleId());
+                response.setFirstName(existedUser.getFirstName());
+                response.setLastName(existedUser.getLastName());
+                response.setMiddleName(existedUser.getMiddleName());
+                response.setEmail(existedUser.getEmail());
+                response.setCreateDate(existedUser.getCreateDate());
+                response.setSalt(existedUser.getSalt());
+                response.setPhone(userAddress.getPhone());
+                response.setFax(userAddress.getFax());
+                response.setAddress(userAddress.getAdress());
+                response.setCity(userAddress.getCity());
+                response.setCountry(userAddress.getCountry());
+                return responseUtil.successResponse(response);
+            } else {
+                // notify user already exists
+                throw new ApplicationException(APIStatus.ERR_USER_NOT_FOUND);
+            }
+
         } else {
             // notify user already exists
             throw new ApplicationException(APIStatus.ERR_USER_NOT_FOUND);
         }
     }
 
-    @RequestMapping(path = APIName.UPDATE_USER, method = RequestMethod.PUT, produces = APIName.CHARSET)
+    @RequestMapping(path = APIName.UPDATE_USER, method = RequestMethod.POST, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> updateUser(
             @PathVariable Long company_id,
-            @PathVariable String userId,
             @RequestBody UserRequestModel user
     ) {
 
         // check user already exists
-        User existedUser = userService.getUserByUserIdAndComIdAndStatus(userId, company_id, Constant.USER_STATUS.ACTIVE.getStatus());
+        User existedUser = userService.getUserByUserIdAndComIdAndStatus(user.getUserId(), company_id, Constant.USER_STATUS.ACTIVE.getStatus());
         if (existedUser != null) {
             existedUser.setFirstName(user.getFirstName());
             existedUser.setLastName(user.getLastName());
@@ -222,15 +248,15 @@ public class UserAPI extends AbstractBaseController {
                 existedUser.setMiddleName(user.getMiddleName());
             }
             userService.save(existedUser);
-            UserAddress userAddress = userAddressService.getAddressByUserIdAndStatus(userId, Constant.STATUS.ACTIVE_STATUS.getValue());
-            if(userAddress != null){
+            UserAddress userAddress = userAddressService.getAddressByUserIdAndStatus(user.getUserId(), Constant.STATUS.ACTIVE_STATUS.getValue());
+            if (userAddress != null) {
                 userAddress.setAdress(user.getAddress());
                 userAddress.setCity(user.getCity());
                 userAddress.setCountry(user.getCountry());
                 userAddress.setFax(user.getFax());
                 userAddress.setPhone(user.getPhone());
                 userAddressService.save(userAddress);
-            }else{
+            } else {
                 throw new ApplicationException(APIStatus.ERR_USER_ADDRESS_NOT_FOUND);
             }
             return responseUtil.successResponse(existedUser);
@@ -252,9 +278,9 @@ public class UserAPI extends AbstractBaseController {
                 if (user != null) {
                     user.setStatus(Constant.USER_STATUS.INACTIVE.getStatus());
                     userService.save(user);
-                    
+
                     UserAddress userAddress = userAddressService.getAddressByUserIdAndStatus(userId, Constant.STATUS.ACTIVE_STATUS.getValue());
-                    if(userAddress != null){
+                    if (userAddress != null) {
                         userAddress.setStatus(Constant.STATUS.DELETED_STATUS.getValue());
                         userAddressService.save(userAddress);
                     }
@@ -265,5 +291,33 @@ public class UserAPI extends AbstractBaseController {
             throw new ApplicationException(APIStatus.ERR_BAD_REQUEST);
         }
 
+    }
+
+    @RequestMapping(path = APIName.CHANGE_PASSWORD_USER, method = RequestMethod.POST, produces = APIName.CHARSET)
+    public ResponseEntity<APIResponse> changePasswordUser(
+            @PathVariable Long company_id,
+            @RequestBody UserChangePasswordModel user
+    ) throws NoSuchAlgorithmException {
+
+        // check user already exists
+        User existedUser = userService.getUserByUserIdAndComIdAndStatus(user.getUserId(), company_id, Constant.USER_STATUS.ACTIVE.getStatus());
+        if (existedUser != null) {
+            String oldHashPassword = MD5Hash.MD5Encrypt(user.getOldPassword() + existedUser.getSalt());
+            if (oldHashPassword.equals(existedUser.getPasswordHash())) {
+                if (user.getNewPassword() != null || !user.getNewPassword().isEmpty()) {
+                    existedUser.setPasswordHash(MD5Hash.MD5Encrypt(user.getNewPassword() + existedUser.getSalt()));
+                    userService.save(existedUser);
+                    return responseUtil.successResponse(existedUser);
+                } else {
+                    throw new ApplicationException(APIStatus.ERR_MISSING_PASSWORD);
+                }
+            }else{
+                throw new ApplicationException(APIStatus.ERR_UNCORRECT_PASSWORD);
+            }
+
+        } else {
+            // notify user already exists
+            throw new ApplicationException(APIStatus.ERR_USER_NOT_FOUND);
+        }
     }
 }

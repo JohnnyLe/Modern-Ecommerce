@@ -25,7 +25,9 @@ public enum APIStatus {
     //User status
     ERR_USER_NOT_FOUND(404, "User Not Found"),
     ERR_USER_ADDRESS_NOT_FOUND(405, "User Address Not Found"),
-    ERR_GET_LIST_USERS(405, "Get list user error"),
+    ERR_GET_LIST_USERS(406, "Get list user error"),
+    ERR_MISSING_PASSWORD(407, "Missing new password"),
+    ERR_UNCORRECT_PASSWORD(408, "Your old password is uncorrect"),
     //Product status
     CREATE_PRODUCT_ERROR(700, "Create product error"),
     DELETE_PRODUCT_ERROR(701, "Delete product error"),
