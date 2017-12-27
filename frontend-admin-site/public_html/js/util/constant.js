@@ -8,10 +8,10 @@ angular.module( 'ec-admin.constant', [] )
     // Cache module using ocLazyLoad
     OCLAZY_CACHE_MODULE: true, // Should use "true" when deploy to server
     
-    API_PATH: 'http://localhost:8080/ecommerce-rest-api/api/v1/1',
-    PATH_FILE: "http://localhost:8080/ecommerce-rest-api/upload/",
-//    API_PATH: 'http://localhost:8080/ecommerce-rest-api/api/v1/1',
-//    PATH_FILE: "http://localhost:8080/upload/",
+    // API_PATH: 'http://localhost:8080/ecommerce-rest-api/api/v1/1',
+    // PATH_FILE: "http://localhost:8080/ecommerce-rest-api/upload/",
+   API_PATH: 'http://localhost:8080/api/v1/1',
+   PATH_FILE: "http://localhost:8080/upload/",
     SESSION_COOKIES: 'AccessToken'
      
 })
@@ -45,7 +45,7 @@ angular.module( 'ec-admin.constant', [] )
     UPDATE_PRODUCT: { path: '/products/update', method: 'POST' },
     DETAIL_PRODUCT: { path: '/products/detail/', method: 'POST' },
     DELETE_PRODUCT: { path: '/products/delete/', method: 'POST' },
-    LIST_CATE: { path: '/categories/list', method: 'GET' },
+    LIST_CATEGORY: { path: '/categories/list', method: 'GET' },
 //    GET_USER_PROFILE: { path: '/auth/session/data', method: 'GET' },
     
     //orders

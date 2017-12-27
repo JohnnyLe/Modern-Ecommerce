@@ -1,32 +1,33 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-<head>
-    <title>TODO supply a title</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th class="text-center">
-                    <input type="checkbox" class="icheckbox icheckbox_flat" role="parent-checkbox"/>
-                </th>
-                <th class="text-center">name</th>
-                <th class="text-center">2</th>
-                <th class="text-center">3</th>
-            </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div class="page-title">
+            <div class="title">
+                <h3 ng-i18next="page_title.product.product_list"></h3>
+                <div class="">
+                    <button ui-sref="products.create" class="btn btn-primary btn-custom"
+                            ng-i18next="button.add"></button>
+                    <button ng-click="confirmDeleteProduct()" class="btn btn-danger" ng-i18next="button.delete"
+                            ng-disabled="selected.length === 0"></button>
+                </div>
+                <div class="clearfix1"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <table datatable="categoryTable" datatable-opts="opts" class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th class="text-center">
+                                    <input icheckTable type="checkbox" class="icheckbox" role="parent-checkbox"/>
+                                </th>
+                                <th class="text-center">name</th>
+                                <th class="text-center">2</th>
+                                <th class="text-center">3</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-</body>
-</html>
