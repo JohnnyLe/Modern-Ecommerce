@@ -9,6 +9,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  *
  * @author Louis Duong
  */
-public interface OrderPaymentRepository extends PagingAndSortingRepository<OrderPayment,Integer> {
+public interface OrderPaymentRepository extends PagingAndSortingRepository<OrderPayment, Long> {
     List<OrderPayment> findOneByOrderId(Long orderId);
 }

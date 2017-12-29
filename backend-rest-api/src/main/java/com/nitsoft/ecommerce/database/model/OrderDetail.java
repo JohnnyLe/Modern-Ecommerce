@@ -40,18 +40,18 @@ public class OrderDetail implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "parent_id")
-    private Integer parentId;
+    private Long parentId;
 
     @Basic(optional = false)
     @Column(name = "order_id")
-    private int orderId;
+    private Long orderId;
 
     @Basic(optional = false)
     @Column(name = "product_id")
-    private int productId;
+    private Long productId;
 
     @Basic(optional = false)
     @Column(name = "created_at")

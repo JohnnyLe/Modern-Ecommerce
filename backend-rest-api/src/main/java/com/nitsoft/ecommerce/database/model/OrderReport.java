@@ -36,11 +36,11 @@ public class OrderReport implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "report_id")
-    private Integer reportId;
+    private Long reportId;
     
     @Basic(optional = false)
     @Column(name = "order_id")
-    private int orderId;
+    private Long orderId;
     
     @Basic(optional = false)
     @Column(name = "status")

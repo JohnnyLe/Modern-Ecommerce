@@ -37,13 +37,13 @@ public class OrdersController extends AbstractBaseController {
 
     @Autowired
     OrderService orderService;
-    
+
     @Autowired
     OrderDetailService orderDetailService;
-    
+
     @Autowired
     OrderAddressService orderAddresslService;
-    
+
     @Autowired
     OrderPaymentService orderPaymentService;
 
@@ -60,7 +60,7 @@ public class OrdersController extends AbstractBaseController {
             @RequestBody OrdersRequestModel ordersRequestModel
     ) {
         try {
-            Page<Orders> listOrders = orderService.doPagingOrders(ordersRequestModel,companyId);
+            Page<Orders> listOrders = orderService.doPagingOrders(ordersRequestModel, companyId);
             return responseUtil.successResponse(listOrders);
         } catch (Exception ex) {
             throw new ApplicationException(APIStatus.ERR_GET_LIST_ORDERS);
@@ -83,19 +83,19 @@ public class OrdersController extends AbstractBaseController {
         try {
             //get order by id
             Orders order = orderService.getOrderByOrderIdAndCompanyID(orderId, companyId);
-            if(order!=null){
+            if (order != null) {
                 resultOrders.put("orders", order);
-                
+
                 // get list order detail by order id
                 List<OrderDetail> orderDetailByOrderId = orderDetailService.getListOrderDetail(orderId);
-                if(orderDetailByOrderId!=null){
+                if (orderDetailByOrderId != null) {
                     resultOrders.put("ordersDetail", orderDetailByOrderId);
                 }
-                
+
                 // get order address by order id
                 OrderAddress orderAddress = orderAddresslService.getOrderAddressByOrderId(orderId);
                 resultOrders.put("orderAddress", orderAddress);
-                
+
                 // get list order payment by order id
                 List<OrderPayment> listOrderPayment = orderPaymentService.getOrderPaymentByOrderId(orderId);
                 resultOrders.put("orderPayment", listOrderPayment);
@@ -111,30 +111,29 @@ public class OrdersController extends AbstractBaseController {
      * Delete order by company
      *
      * @param companyId
+     * @param orderId
      * @param orders
      * @return
      */
     @RequestMapping(path = APIName.CHANGE_STATUS_ORDERS_BY_COMPANY, method = RequestMethod.PUT)
     public ResponseEntity<APIResponse> changeOrders(
             @PathVariable("company_id") Long companyId,
-            @RequestBody List<Orders> orders
+            @PathVariable("order_id") Long orderId
     ) {
         try {
             // check param company , order
             if (companyId != null) {
-                if (orders != null && !"".equals(orders)) {
-                    for (Orders id : orders) {
-                        // get order id by company id and status active
-                        // check valid orderId
-                        Orders order = orderService.getOrderByOrderIdAndCompanyID(id.getId(), companyId);
-                        if (order != null) {
-                            // Update status order (update status = completed)
-                            order.setStatus(Constant.ORDER_STATUS.COMPLETED.getStatus());
-                            orderService.updateStatusOrder(order);
+                if (orderId != null) {
+                    // get order id by company id and status active
+                    // check valid orderId
+                    Orders order = orderService.getOrderByOrderIdAndCompanyID(orderId, companyId);
+                    if (order != null) {
+                        // Update status order (update status = completed)
+                        order.setStatus(Constant.ORDER_STATUS.COMPLETED.getStatus());
+                        orderService.updateStatusOrder(order);
 
-                        } else {
-                            throw new ApplicationException(APIStatus.ERR_ORDER_ID_NOT_FOUND);
-                        }
+                    } else {
+                        throw new ApplicationException(APIStatus.ERR_ORDER_ID_NOT_FOUND);
                     }
                     return responseUtil.successResponse("Change status order succesfully");
                 } else {
