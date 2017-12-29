@@ -13,7 +13,8 @@ angular.module('ec-admin.app', ['ec-admin'])
                     sortCase: -1,
                     ascSort: 0,
                     pageNumber: 1,
-                    pageSize: 10
+                    pageSize: 10,
+                    status:-1
                 };
                 // Paging config max size show
                 $scope.maxSize = 5;
@@ -28,7 +29,12 @@ angular.module('ec-admin.app', ['ec-admin'])
                 };
                 $scope.doFilter = function () {
                     console.log("$scope.statusOrder :",$scope.statusOrder);
-                    param.status = $scope.statusOrder;
+                    if($scope.statusOrder){
+                         param.status = $scope.statusOrder;
+                    }else{
+                        param.status=-1;
+                    }
+                   
                     $scope.loadListOrders();
                 };
 
@@ -57,6 +63,8 @@ angular.module('ec-admin.app', ['ec-admin'])
                                 item.fullname = item.customerFirstname + item.customerLastname;
                                 if(item.status===0){
                                     item.statusOrder = "PENDING";
+                                }else{
+                                    item.statusOrder = "COMPLETE";
                                 }
                                 
                             });
