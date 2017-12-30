@@ -58,7 +58,7 @@ public class CatetoriesController extends AbstractBaseController {
         category.setCompanyId(companyId);
         category.setParentId(categoryModel.getParentId());
         category.setName(categoryModel.getName());
-        category.setStatus(categoryModel.getStatus());
+        category.setStatus(1);
         category.setPosition(categoryModel.getPosition());
         category.setDescription(categoryModel.getDescription());
 
@@ -67,7 +67,7 @@ public class CatetoriesController extends AbstractBaseController {
         return responseUtil.successResponse(category);
     }
 
-    @RequestMapping(path = APIName.CATEGORIES_UPDATE, method = RequestMethod.PUT)
+    @RequestMapping(path = APIName.CATEGORIES_UPDATE, method = RequestMethod.POST)
     public ResponseEntity<APIResponse> updateCategory(
             @PathVariable(value = "company_id") long companyId,
             @RequestBody @Valid UpdateCategoryRequestModel categoryModel
@@ -81,7 +81,7 @@ public class CatetoriesController extends AbstractBaseController {
 
         Category category = categoriesService.getActiveById(categoryModel.getId());
 
-        if (companyId == category.getCompanyId()) {
+        if (category == null || companyId != category.getCompanyId()) {
             throw new ApplicationException(APIStatus.INVALID_PARAMETER);
         }
 
@@ -95,7 +95,6 @@ public class CatetoriesController extends AbstractBaseController {
         }
 
         category.setName(categoryModel.getName());
-        category.setStatus(categoryModel.getStatus());
         category.setPosition(categoryModel.getPosition());
         category.setDescription(categoryModel.getDescription());
 
@@ -104,21 +103,27 @@ public class CatetoriesController extends AbstractBaseController {
         return responseUtil.successResponse(category);
     }
 
-    @RequestMapping(value = APIName.CATEGORIES_DELETE, method = RequestMethod.DELETE, produces = APIName.CHARSET)
+    @RequestMapping(value = APIName.CATEGORIES_DELETE, method = RequestMethod.POST, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> deleteCategory(
             @PathVariable(value = "company_id") long companyId,
-            @RequestParam(value = "ids") long[] categoryIds
+            @RequestBody List<Long> categoryIds
     ) {
 
-        List<Long> categoryIdList = Arrays.asList(ArrayUtils.toObject(categoryIds));
+        Company company = companyService.findByCompanyId(companyId);
 
-        List<Category> categoryList = categoriesService.getAllActiveByIdsAndCompanyId(categoryIdList, companyId);
+        if (company == null) {
+            throw new ApplicationException(APIStatus.INVALID_PARAMETER);
+        }
+
+        List<Category> categoryList = categoriesService.getAllActiveByIdsAndCompanyId(categoryIds, companyId);
 
         if (categoryList.isEmpty()) {
             throw new ApplicationException(APIStatus.INVALID_PARAMETER);
         }
 
-        categoriesService.delete(categoryList);
+        categoryList.forEach(category -> category.setStatus(0));
+
+        categoriesService.saveOrUpdate(categoryList);
 
         return responseUtil.successResponse(null);
 
@@ -127,15 +132,39 @@ public class CatetoriesController extends AbstractBaseController {
     @RequestMapping(value = APIName.CATEGORIES_LIST, method = RequestMethod.GET, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> getCategories(
             @PathVariable(value = "company_id") long companyId,
-            @RequestParam(value = "filter_search", required = false) String search,
-            @RequestParam(value = "sort_key") Integer sortKey,
+            @RequestParam(value = "search_key", required = false) String search,
+            @RequestParam(value = "sort_case", defaultValue = "1", required = false) int sortCase,
+            @RequestParam(value = "asc_sort", defaultValue = "true", required = false) boolean ascSort,
             @RequestParam(value = "page_size", defaultValue = "10", required = false) int pageSize,
             @RequestParam(value = "page_number", defaultValue = "1", required = false) int pageNumber
     ) {
+        System.out.println("companyId = [" + companyId + "], search = [" + search + "], sortCase = [" + sortCase + "], ascSort = [" + ascSort + "], pageSize = [" + pageSize + "], pageNumber = [" + pageNumber + "]");
 
-        Page<Category> categoryPage = categoriesService.getAllActiveWithFilterSearchSort(companyId, search, pageNumber, pageSize, sortKey);
+        Page<Category> categoryPage = categoriesService.getAllActiveWithFilterSearchSort(companyId, search, pageNumber, pageSize, sortCase, ascSort);
 
         return responseUtil.successResponse(categoryPage);
+
+    }
+
+    @RequestMapping(value = APIName.CATEGORIES_DETAIL, method = RequestMethod.GET, produces = APIName.CHARSET)
+    public ResponseEntity<APIResponse> deleteCategory(
+            @PathVariable(value = "company_id") long companyId,
+            @PathVariable(value = "category_id") long categoryId
+    ) {
+
+        Company company = companyService.findByCompanyId(companyId);
+
+        if (company == null) {
+            throw new ApplicationException(APIStatus.INVALID_PARAMETER);
+        }
+
+        Category category = categoriesService.getActiveById(categoryId);
+
+        if (category == null || category.getCompanyId() != companyId) {
+            throw new ApplicationException(APIStatus.INVALID_PARAMETER);
+        }
+
+        return responseUtil.successResponse(category);
 
     }
 

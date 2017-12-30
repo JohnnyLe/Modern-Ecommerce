@@ -36,7 +36,7 @@ public class UserAddress implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "adress_id")
-    private Integer adressId;
+    private Long adressId;
     
     @Basic(optional = false)
     @Column(name = "user_id")

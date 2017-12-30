@@ -16,7 +16,14 @@
         },
         "order": {
             "list_orders": "List Orders",
-            "order_detail": "Order Detail"
+            "order_detail": "Order Detail",
+            "cus_info": "Customer Info",
+            "product_info": "Products Info"
+        },
+        "category": {
+            "category_list": "List Categories",
+            "category_create": "Create Category",
+            "category_detail": "Detail category"
         }
     },
     "button": {
@@ -68,11 +75,23 @@
                 "updated_at": "Update At",
                 "status": "Status",
                 "grand_total": "Grand Total",
-                "filter_status": "Status Order"
+                "filter_status": "Status Order",
+                "mail_address" : "Mail Address",
+                "phone": "Phone Number",
+                "address": "Address",
+                "gender": "Gender",
+                "payment": "Payment",
+                "status": "Orders Status :",
+                "total_all" : "Total Price"
+            },
+            "category": {
+                "name": "Category Name",
+                "description": "Description",
+                "position": "Position",
+                "category_parent": "Category Parent"
             }
         },
         "body": {
-
         }
     },
     "label": {
@@ -167,6 +186,10 @@
             "limit_chars": "Max length is %s characters",
             "min_chars": "Min length is %s characters"
         },
+        "numbers": {
+            "max": "Maximum value is %s",
+            "min": "Minimum value is %s"
+        },
         "address": {
             "placeholder": "Enter your address"
         },
@@ -201,6 +224,22 @@
             "delete_mgs": "Do you want to detele User",
             "delete_success": "Delete User success",
             "delete_error": "Delete User error"
+        },
+        "category": {
+            "create_category_success": "Create category success",
+            "create_category_error": "Create category error",
+            "update_category_success": "Update category success",
+            "update_category_error": "Update category error",
+            "delete": "Delete Category",
+            "delete_mgs": "Do you want to delete Category",
+            "delete_success": "Delete Category success",
+            "delete_error": "Delete Category error"
+        },
+        "order": {
+            "change_status_success" : "Change status orders success",
+            "change_status_error" : "Change status orders error",
+            "change_status" : "Change Status Orders",
+            "change_status_msg" : "Do you want to Change Status Orders"
         }
     },
     "api": {

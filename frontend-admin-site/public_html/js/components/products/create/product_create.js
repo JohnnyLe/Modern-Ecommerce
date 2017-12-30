@@ -109,7 +109,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                                     page_number: 1
                                 };
 
-                                Util.createRequest(API.LIST_CATE, params, function (response) {
+                                Util.createRequest(API.LIST_CATEGORY, params, function (response) {
 //                                    console.log($scope.product.listCategoriesId);
                                     var status = response.status;
                                     if (status === 200) {
@@ -136,7 +136,7 @@ angular.module('ec-admin.app', ['ec-admin'])
 
                                 $scope.loadListSearch = function () {
                                     params.searchKey = $scope.searchString;
-                                    Util.createRequest(API.LIST_CATE, params, function (response) {
+                                    Util.createRequest(API.LIST_CATEGORY, params, function (response) {
 
                                         var status = response.status;
                                         if (status === 200) {

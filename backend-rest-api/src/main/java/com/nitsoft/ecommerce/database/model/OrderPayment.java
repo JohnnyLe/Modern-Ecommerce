@@ -35,16 +35,16 @@ public class OrderPayment implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "order_id")
-    private int orderId;
+    private Long orderId;
 
     @Id
     @Basic(optional = false)
     @Column(name = "payment_id")
-    private int paymentId;
+    private Long paymentId;
 
     @Basic(optional = false)
     @Column(name = "transaction_id")
-    private String transactionId;
+    private Long transactionId;
     
     @Basic(optional = false)
     @Column(name = "status")

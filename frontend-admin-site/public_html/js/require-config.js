@@ -13,7 +13,6 @@ require.config({
         angular_cookie: '../vendors/angular-cookies/angular-cookies.min',
         angular_sanitize: '../vendors/angular-sanitize/angular-sanitize.min',
         angular_animate: '../vendors/angular-animate/angular-animate.min',
-
         i18next: 'libs/i18next-1.9.0.min',
         ng_i18next: 'libs/ng-i18next',
         angular_tags_input: 'libs/ng-tags-input.min',
@@ -23,7 +22,6 @@ require.config({
         ui_router: '../vendors/angular-ui-router/release/angular-ui-router',
         ui_select: '../vendors/angular-ui-select/dist/select.min',
         angular_bootstrap: '../vendors/angular-bootstrap/ui-bootstrap-tpls.min',
-
         jquery: '../vendors/jquery/dist/jquery.min',
         lodash: '../vendors/lodash/dist/lodash.min',
         noty: '../vendors/noty/lib/noty.min',
@@ -40,8 +38,8 @@ require.config({
         constant: 'util/constant',
         utils: 'util/util',
         session: 'util/session',
-        
-        icheck_directive: 'js/common/directives/icheck-directive'
+
+        icheck_directive: 'common/directives/icheck'
     },
     // Define dependency for each object
     // If we do this, we dont have to use define

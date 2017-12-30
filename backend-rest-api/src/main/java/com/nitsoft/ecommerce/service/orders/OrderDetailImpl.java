@@ -20,7 +20,7 @@ public class OrderDetailImpl extends AbstractBaseService implements OrderDetailS
     
     @Override
     public List<OrderDetail> getListOrderDetail(Long orderId) {
-        return orderDetailRepository.findOneByOrderId(orderId);
+        return orderDetailRepository.findAllByOrderId(orderId);
     }
     
 }
