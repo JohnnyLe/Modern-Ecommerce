@@ -11,5 +11,5 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  */
 public interface OrderDetailRepository extends PagingAndSortingRepository<OrderDetail, Long> {
     
-    List<OrderDetail> findByOrderId(Long orderId);
+    List<OrderDetail> findAllByOrderId(Long orderId);
 }

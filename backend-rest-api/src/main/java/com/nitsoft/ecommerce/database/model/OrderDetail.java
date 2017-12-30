@@ -48,6 +48,10 @@ public class OrderDetail implements Serializable {
     @Basic(optional = false)
     @Column(name = "order_id")
     private Long orderId;
+    
+    @Basic(optional = false)
+    @Column(name = "payment_id")
+    private Long paymentId;
 
     @Basic(optional = false)
     @Column(name = "product_id")

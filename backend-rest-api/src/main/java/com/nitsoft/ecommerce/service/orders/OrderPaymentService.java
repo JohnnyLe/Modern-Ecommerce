@@ -9,5 +9,5 @@ import java.util.List;
  * @author Louis Duong
  */
 public interface OrderPaymentService {
-    public List<OrderPayment> getOrderPaymentByOrderId(Long orderId);
+    public OrderPayment getOrderPaymentByOrderId(Long orderId);
 }

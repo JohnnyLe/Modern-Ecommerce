@@ -51,6 +51,8 @@ angular.module('ec-admin.constant', [])
         DETAIL_CATEGORY: {path: '/categories/detail/', method: 'GET'},
         DELETE_CATEGORY: {path: '/categories/delete', method: 'POST'},
         GET_ORDER_BY_COMPANY: {path: '/orders/listOrder', method: 'POST'},
+        DETAIL_ORDERS: {path: '/orders/detail/', method: 'POST'},
+        CHANGE_STATUS_ORDERS: {path: '/orders/delete/', method: 'POST'},
         REGISTER_USER: {path: '/users/register', method: 'POST'},
         GET_USER_LIST: {path: '/users/list', method: 'POST'},
         DELETE_USER: {path: '/users/delete', method: 'POST'},

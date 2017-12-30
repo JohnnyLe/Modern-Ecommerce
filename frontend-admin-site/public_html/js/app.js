@@ -16,7 +16,8 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
         'ec-admin.utils',
         'ec-admin.constant',
         'ec-admin.session',
-        'ngTagsInput'
+        'ngTagsInput',
+        'ui.toggle'
     ])
 
     // Config ocLazy loading
@@ -274,7 +275,7 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                 })
                 .state({
                     name: 'orders.detail',
-                    url: '/detail',
+                    url: '/detail/{id}',
                     templateUrl: 'js/components/orders/detail/order_detail_tmpl.html',
                     controller: 'OrderDetailCtrl',
                     resolve: {

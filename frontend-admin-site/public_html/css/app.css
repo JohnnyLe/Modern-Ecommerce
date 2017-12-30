@@ -346,3 +346,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     overflow: scroll;
     overflow-x: hidden;
 }
+.toggle-off {
+    left: 70px !important;
+}

@@ -9,12 +9,19 @@ import com.nitsoft.ecommerce.database.model.OrderAddress;
 import com.nitsoft.ecommerce.database.model.OrderDetail;
 import com.nitsoft.ecommerce.database.model.OrderPayment;
 import com.nitsoft.ecommerce.database.model.Orders;
+import com.nitsoft.ecommerce.database.model.Payment;
+import com.nitsoft.ecommerce.database.model.Product;
+import com.nitsoft.ecommerce.database.model.UserAddress;
 import com.nitsoft.ecommerce.exception.ApplicationException;
+import com.nitsoft.ecommerce.repository.PaymentRepository;
+import com.nitsoft.ecommerce.repository.UserAddressRepository;
 import com.nitsoft.ecommerce.service.orders.OrderAddressService;
 import com.nitsoft.ecommerce.service.orders.OrderDetailService;
 import com.nitsoft.ecommerce.service.orders.OrderPaymentService;
 import com.nitsoft.ecommerce.service.orders.OrderService;
+import com.nitsoft.ecommerce.service.product.ProductService;
 import com.nitsoft.util.Constant;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +54,15 @@ public class OrdersController extends AbstractBaseController {
     @Autowired
     OrderPaymentService orderPaymentService;
 
+    @Autowired
+    ProductService productService;
+
+    @Autowired
+    UserAddressRepository userAddressRepository;
+
+    @Autowired
+    PaymentRepository paymentRepository;
+
     /**
      * Get list orders by company have paging, search, sort and filter
      *
@@ -74,7 +90,7 @@ public class OrdersController extends AbstractBaseController {
      * @param orderId
      * @return
      */
-    @RequestMapping(path = APIName.ORDERS_DETAIL_BY_COMPANY, method = RequestMethod.POST)
+    @RequestMapping(path = APIName.ORDERS_DETAIL_BY_COMPANY, method = RequestMethod.GET)
     public ResponseEntity<APIResponse> getDetailOrders(
             @PathVariable("company_id") Long companyId,
             @PathVariable("order_id") Long orderId
@@ -88,21 +104,43 @@ public class OrdersController extends AbstractBaseController {
 
                 // get list order detail by order id
                 List<OrderDetail> orderDetailByOrderId = orderDetailService.getListOrderDetail(orderId);
-                if (orderDetailByOrderId != null) {
-                    resultOrders.put("ordersDetail", orderDetailByOrderId);
+                List<Map<String, Object>> listOrdersDetail = new ArrayList<Map<String, Object>>();
+                if (orderDetailByOrderId != null && !orderDetailByOrderId.isEmpty()) {
+                    for (OrderDetail orderDetail : orderDetailByOrderId) {
+                        Map<String, Object> detail = new HashMap<String, Object>();
+                        //find product by proId
+                        Product product = productService.getProductById(companyId, orderDetail.getProductId());
+                        Payment payment = paymentRepository.findByPaymentId(orderDetail.getPaymentId());
+                        if (product != null && payment != null) {
+                            detail.put("product", product);
+                            detail.put("payment", payment);
+                            detail.put("ordersDetail", orderDetail);
+                            listOrdersDetail.add(detail);
+                        }
+                    }
+                    resultOrders.put("listOrdersDetail", listOrdersDetail);
                 }
 
                 // get order address by order id
                 OrderAddress orderAddress = orderAddresslService.getOrderAddressByOrderId(orderId);
-                resultOrders.put("orderAddress", orderAddress);
+                if (orderAddress != null) {
+                    //get user address
+                    UserAddress userAddress = userAddressRepository.findByAdressIdAndStatus(orderAddress.getAdressId(), Constant.STATUS.ACTIVE_STATUS.getValue());
+                    resultOrders.put("orderAddress", userAddress);
+                }
 
                 // get list order payment by order id
-                List<OrderPayment> listOrderPayment = orderPaymentService.getOrderPaymentByOrderId(orderId);
-                resultOrders.put("orderPayment", listOrderPayment);
+//                OrderPayment orderPayment = orderPaymentService.getOrderPaymentByOrderId(orderId);
+//                if (orderPayment != null) {
+//                    System.out.println("error get orders detail 5");
+//                    Payment payMent = paymentRepository.findByPaymentId(orderPayment.getPaymentId());
+//                    resultOrders.put("orderPayment", payMent);
+//                }
             }
 
             return responseUtil.successResponse(resultOrders);
         } catch (Exception e) {
+            System.out.println("error get orders detail" + e.getMessage());
             throw new ApplicationException(APIStatus.ERR_GET_DETAIL_ORDERS);
         }
     }
@@ -112,13 +150,15 @@ public class OrdersController extends AbstractBaseController {
      *
      * @param companyId
      * @param orderId
+     * @param status
      * @param orders
      * @return
      */
-    @RequestMapping(path = APIName.CHANGE_STATUS_ORDERS_BY_COMPANY, method = RequestMethod.PUT)
+    @RequestMapping(path = APIName.CHANGE_STATUS_ORDERS_BY_COMPANY, method = RequestMethod.GET)
     public ResponseEntity<APIResponse> changeOrders(
             @PathVariable("company_id") Long companyId,
-            @PathVariable("order_id") Long orderId
+            @PathVariable("order_id") Long orderId,
+            @PathVariable("status") int status
     ) {
         try {
             // check param company , order
@@ -129,7 +169,11 @@ public class OrdersController extends AbstractBaseController {
                     Orders order = orderService.getOrderByOrderIdAndCompanyID(orderId, companyId);
                     if (order != null) {
                         // Update status order (update status = completed)
-                        order.setStatus(Constant.ORDER_STATUS.COMPLETED.getStatus());
+                        if (status == 0) {
+                            order.setStatus(Constant.ORDER_STATUS.PENDING.getStatus());
+                        } else {
+                            order.setStatus(Constant.ORDER_STATUS.COMPLETED.getStatus());
+                        }
                         orderService.updateStatusOrder(order);
 
                     } else {

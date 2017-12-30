@@ -16,7 +16,9 @@
         },
         "order": {
             "list_orders": "List Orders",
-            "order_detail": "Order Detail"
+            "order_detail": "Order Detail",
+            "cus_info": "Customer Info",
+            "product_info": "Products Info"
         },
         "category": {
             "category_list": "List Categories",
@@ -73,7 +75,14 @@
                 "updated_at": "Update At",
                 "status": "Status",
                 "grand_total": "Grand Total",
-                "filter_status": "Status Order"
+                "filter_status": "Status Order",
+                "mail_address" : "Mail Address",
+                "phone": "Phone Number",
+                "address": "Address",
+                "gender": "Gender",
+                "payment": "Payment",
+                "status": "Orders Status :",
+                "total_all" : "Total Price"
             },
             "category": {
                 "name": "Category Name",
@@ -203,6 +212,10 @@
             "delete_mgs": "Do you want to delete Category",
             "delete_success": "Delete Category success",
             "delete_error": "Delete Category error"
+        },
+        "order": {
+            "change_status_success" : "Change status orders success",
+            "change_status_error" : "Change status orders error"
         }
     },
     "api": {
