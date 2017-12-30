@@ -122,8 +122,8 @@
                                         <div class="row x-table-row" ng-repeat="pro in listProduct">
                                             <div class="col-xs-2 text-left">
                                                 <span>
-                                                    <img ng-if="(pro.defaultImage !== 'img/no-image-available.png')" ng-class="{'image-opacity' : uploading}" class="img-responsive image-border-custom" ng-src="{{pathFile + pro.defaultImage}}" style="width: 70px; height: 50px">
-                                                    <img ng-if="(pro.defaultImage === 'img/no-image-available.png')" ng-class="{'image-opacity' : uploading}" class="img-responsive image-border-custom" ng-src="{{pro.defaultImage}}" style="width: 70px; height: 50px">
+                                                    <img ng-if="(pro.defaultImage !== 'img/no-image-available.png')" ng-class="{'image-opacity' : uploading}" class="img-responsive image-border-custom" ng-src="{{pathFile + pro.image}}" style="width: 70px; height: 50px">
+                                                    <img ng-if="(pro.defaultImage === 'img/no-image-available.png')" ng-class="{'image-opacity' : uploading}" class="img-responsive image-border-custom" ng-src="{{pro.image}}" style="width: 70px; height: 50px">
                                                 </span>
                                             </div>
                                             <div class="col-xs-3 text-center"><span ng-bind="pro.name"></span></div>

@@ -12,6 +12,8 @@ angular.module('ec-admin.app', ['ec-admin'])
                     cusGender : "",
                     cusPayment : ""
                 };
+                $scope.pathFile = AppConfig.PATH_FILE;
+                $scope.image = 'img/no-image-available.png';
                 $scope.ordersStatus = false;
                 $scope.totalPrice = "0 $";
                 $scope.changeStatus = function(){
