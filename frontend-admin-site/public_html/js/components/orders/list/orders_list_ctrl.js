@@ -61,11 +61,20 @@ angular.module('ec-admin.app', ['ec-admin'])
 
                             _.map($scope.listOrders, function (item) {
                                 item.fullname = item.customerFirstname + item.customerLastname;
-                                if(item.status===0){
-                                    item.statusOrder = "PENDING";
-                                }else{
-                                    item.statusOrder = "COMPLETE";
-                                }
+                                switch (item.status) {
+                                        case 0:
+                                            item.status = "Pending";
+                                            break;
+                                        case 1:
+                                            item.status = "Shipping";
+                                            break;
+                                        case 2:
+                                            item.status = "Complete";
+                                            break;
+                                        default:
+                                            item.status = "Pending";
+                                            break;
+                                    }
                                 
                             });
                             console.log("List order : ",$scope.listOrders);

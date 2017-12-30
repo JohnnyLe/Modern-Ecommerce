@@ -21,11 +21,11 @@
                             <div class="col-md-3">
                                 <label>
                                     <!--<div class="col-xs-2"></div>-->
-                                    <div class="col-xs-9 text-right" style="padding-top: 0px">
+                                    <div class="col-xs-6">
                                         <span ng-i18next="table.header.order.status"></span>
                                     </div>
-                                    <div class="col-xs-3" style="left: 30px">
-                                        <select class="form-control" ng-model="ordersStatus">
+                                    <div class="col-xs-6">
+                                        <select class="form-control" ng-model="ordersStatus" style="width: 133px" ng-change="changeStatus()">
                                             <option value="0" ng-click="changeStatus(0)">Pending</option>
                                         <option value="1" ng-click="changeStatus(1)">Shipping</option>
                                         <option value="2" ng-click="changeStatus(2)">Complete</option>

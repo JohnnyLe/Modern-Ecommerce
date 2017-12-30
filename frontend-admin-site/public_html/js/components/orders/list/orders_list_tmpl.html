@@ -55,7 +55,7 @@
                                 <div class="col-xs-3 text-left"><span ng-bind="orders.fullname"></span></div>
                                 <div class="col-xs-2 text-center"><span ng-bind="orders.itemsQuantity"></span></div>
                                 <div class="col-xs-2 text-center"><span ng-bind="orders.createdAt| date:'MM/dd/yyyy'"></span></div>
-                                <div class="col-xs-2 text-center"><span ng-bind="orders.statusOrder"></span></div>
+                                <div class="col-xs-2 text-center"><span class="label label-success" ng-class="{'label-warning': (orders.status === 'Pending'), 'label-info': (orders.status === 'Shipping')}">{{orders.status}}</span></div>
                                 <div class="col-xs-2 text-center"><span ng-bind="orders.grandTotal"></span></div>
                                 <div class="col-xs-1 text-left row">
                                     <div class="col-md-9 text-center">

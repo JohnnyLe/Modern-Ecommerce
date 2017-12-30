@@ -14,14 +14,14 @@ angular.module('ec-admin.app', ['ec-admin'])
                 };
                 $scope.pathFile = AppConfig.PATH_FILE;
                 $scope.image = 'img/no-image-available.png';
-                $scope.ordersStatus = false;
+                $scope.ordersStatus = "0";
                 $scope.totalPrice = "0 $";
-                $scope.changeStatus = function (sataus) {
+                $scope.changeStatus = function () {
                     Util.showConfirmModal({
                         title: Util.translate('message.order.change_status'),
                         message: Util.translate('message.order.change_status_msg')
                     }, function () {
-                        Util.createRequest(API.CHANGE_STATUS_ORDERS.path + $stateParams.id + "/" + sataus, function (response) {
+                        Util.createRequest(API.CHANGE_STATUS_ORDERS.path + $stateParams.id + "/" + parseInt($scope.ordersStatus), function (response) {
                             var status = response.status;
                             if (status === 200) {
                                 $scope.selected = [];
@@ -41,8 +41,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                         var status = response.status;
                         if (status === 200) {
                             //todo
-                            $scope.ordersStatus = (response.data.orders.status === 2) ? true : false;
-                            console.log($scope.ordersStatus);
+                            $scope.ordersStatus = response.data.orders.status.toString();
                             $scope.orderDetail.cusName = response.data.orders.customerFirstname + " " + response.data.orders.customerMiddlename + " " + response.data.orders.customerLastname;
                             $scope.orderDetail.cusEmail = response.data.orders.customerEmail;
                             $scope.orderDetail.cusGender = response.data.orders.customerGender;
