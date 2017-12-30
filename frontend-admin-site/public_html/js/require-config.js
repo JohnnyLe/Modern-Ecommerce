@@ -13,7 +13,6 @@ require.config({
         angular_cookie: '../vendors/angular-cookies/angular-cookies.min',
         angular_sanitize: '../vendors/angular-sanitize/angular-sanitize.min',
         angular_animate: '../vendors/angular-animate/angular-animate.min',
-        bootstrap_toggle : '../vendors/bootstrap-toggle/js/bootstrap-toggle',
         i18next: 'libs/i18next-1.9.0.min',
         ng_i18next: 'libs/ng-i18next',
         angular_tags_input: 'libs/ng-tags-input.min',
@@ -23,7 +22,6 @@ require.config({
         ui_router: '../vendors/angular-ui-router/release/angular-ui-router',
         ui_select: '../vendors/angular-ui-select/dist/select.min',
         angular_bootstrap: '../vendors/angular-bootstrap/ui-bootstrap-tpls.min',
-        angular_bootstrap_toggle: '../vendors/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min',
         jquery: '../vendors/jquery/dist/jquery.min',
         lodash: '../vendors/lodash/dist/lodash.min',
         noty: '../vendors/noty/lib/noty.min',
@@ -51,8 +49,6 @@ require.config({
         'angular_route': ['angular'],
         'angular_cookie': ['angular'],
         'angular_sanitize': ['angular'],
-        'bootstrap_toggle': ['jquery'],
-        'angular_bootstrap_toggle': ['angular', 'bootstrap'],
         'angular_tags_input': ['angular'],
         'ng_datepicker': ['angular'],
         'angular_date_picker': ['angular'],
@@ -81,7 +77,7 @@ require.config({
         'utils': ['angular', 'constant', 'angular_bootstrap'],
         'session': ['utils', 'angular_cookie'],
         // Main module
-        'app': ['angular_route', 'angular_sanitize', 'angular_tags_input', 'angular_cookie', 'bootstrap_toggle', 'angular_bootstrap_toggle', 'ng_datepicker', 'angular_date_picker', 'angular_animate', 'ui_router', 'ui_select', 'ng_i18next', 'oc_lazyload', 'theme', 'toastr', 'lodash', 'session', 'angular_bootstrap']
+        'app': ['angular_route', 'angular_sanitize', 'angular_tags_input', 'angular_cookie', 'ng_datepicker', 'angular_date_picker', 'angular_animate', 'ui_router', 'ui_select', 'ng_i18next', 'oc_lazyload', 'theme', 'toastr', 'lodash', 'session', 'angular_bootstrap']
     },
     priority: [
         'jquery', 'angular'

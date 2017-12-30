@@ -169,10 +169,19 @@ public class OrdersController extends AbstractBaseController {
                     Orders order = orderService.getOrderByOrderIdAndCompanyID(orderId, companyId);
                     if (order != null) {
                         // Update status order (update status = completed)
-                        if (status == 0) {
-                            order.setStatus(Constant.ORDER_STATUS.PENDING.getStatus());
-                        } else {
-                            order.setStatus(Constant.ORDER_STATUS.COMPLETED.getStatus());
+                        switch (status) {
+                            case 0:
+                                order.setStatus(Constant.ORDER_STATUS.PENDING.getStatus());
+                                break;
+                            case 1:
+                                order.setStatus(Constant.ORDER_STATUS.SHIPPING.getStatus());
+                                break;
+                            case 2:
+                                order.setStatus(Constant.ORDER_STATUS.COMPLETED.getStatus());
+                                break;
+                            default:
+                                order.setStatus(Constant.ORDER_STATUS.PENDING.getStatus());
+                                break;
                         }
                         orderService.updateStatusOrder(order);
 
