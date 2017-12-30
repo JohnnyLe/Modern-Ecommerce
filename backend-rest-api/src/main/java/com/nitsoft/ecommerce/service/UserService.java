@@ -40,7 +40,7 @@ public class UserService {
         }
     }
     
-    public Page<User> doFilterSearchSortPagingUser(long companyId, String searchKey, int sortKey, boolean isAscSort, int pSize, int pNumber) {
-        return userRepository.findAll(new UserSpecification(companyId, searchKey, sortKey, isAscSort), new PageRequest(pNumber, pSize));
+    public Page<User> doFilterSearchSortPagingUser(String userId,long companyId, String searchKey, int sortKey, boolean isAscSort, int pSize, int pNumber) {
+        return userRepository.findAll(new UserSpecification(userId, companyId, searchKey, sortKey, isAscSort), new PageRequest(pNumber, pSize));
     }
 }

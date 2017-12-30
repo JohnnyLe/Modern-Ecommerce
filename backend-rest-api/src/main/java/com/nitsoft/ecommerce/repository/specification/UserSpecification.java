@@ -15,17 +15,19 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 
 public class UserSpecification implements Specification<User> {
-
+    
     private final long companyId;
     private final String searchKey;
     private final int sortCase;
     private final boolean isAscSort;
+    private final String userId;
 
-    public UserSpecification(long companyId, String searchKey, int sortCase, boolean isAscSort) {
+    public UserSpecification(String userId, long companyId, String searchKey, int sortCase, boolean isAscSort) {
         this.companyId = companyId;
         this.searchKey = searchKey;
         this.sortCase = sortCase;
         this.isAscSort = isAscSort;
+        this.userId = userId;
     }
 
     @Override
@@ -46,7 +48,7 @@ public class UserSpecification implements Specification<User> {
             Predicate search = cb.or(firstName, lastName, email);
             predicates.add(search);
         }
-        
+        predicates.add(cb.notEqual(root.get("userId"), userId));
         predicates.add(cb.equal(root.get("status"), Constant.USER_STATUS.ACTIVE.getStatus()));
         
         // sort

@@ -345,7 +345,7 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                             })
                             .state({
                                 name: 'users.changePassword',
-                                url: '/{id}',
+                                url: '/changePassword/{id}',
                                 templateUrl: 'js/components/users/change_password/change_password.html',
                                 controller: 'ChangePasswordCtrl',
                                 resolve: {

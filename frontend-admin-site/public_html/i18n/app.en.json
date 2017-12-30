@@ -5,20 +5,19 @@
     "navi": {
         "categories": "Categories",
         "products": "Products",
-        "orders" : "Order",
+        "orders": "Order",
         "users": "Users"
     },
     "page_title": {
         "product": {
-            "product_list" : "List Products",
+            "product_list": "List Products",
             "product_create": "Create Products",
             "product_detail": "Detail Products"
         },
-        "order":{
-            "list_orders" : "List Orders",
-            "order_detail" : "Order Detail"
+        "order": {
+            "list_orders": "List Orders",
+            "order_detail": "Order Detail"
         }
-        
     },
     "button": {
         "login": "Login",
@@ -44,7 +43,7 @@
             "search": "Search",
             "create_date": "Create Date",
             "detail": "Detail",
-            "product":{
+            "product": {
                 "name": "Product Name",
                 "price": "Sell Price",
                 "image": "Image",
@@ -57,23 +56,23 @@
             "pop_up": {
                 "cate_name": "Category Name",
                 "des": "Description",
-                "list_cate" : "List Category"
+                "list_cate": "List Category"
             },
-            "search" : "Search",
-            "detail" : "Detail",
-            "no_data" : "No Data",
-            "order":{
-                "customer_name" : "Customer Name",
-                "quantity" : " Quantity",
-                "created_at" : "Created At",
-                "updated_at" : "Update At",
-                "status" : "Status",
-                "grand_total" : "Grand Total",
-                "filter_status" : "Status Order"
+            "search": "Search",
+            "detail": "Detail",
+            "no_data": "No Data",
+            "order": {
+                "customer_name": "Customer Name",
+                "quantity": " Quantity",
+                "created_at": "Created At",
+                "updated_at": "Update At",
+                "status": "Status",
+                "grand_total": "Grand Total",
+                "filter_status": "Status Order"
             }
         },
         "body": {
-            
+
         }
     },
     "label": {
@@ -89,18 +88,24 @@
         "password": "Password",
         "confirm_password": "Confirm password",
         "phone_number": "Phone number",
-        "current_password":"Current Password",
-        "new_password":"New Password",
-        "comfirm_password":"Confirmed Password"
+        "current_password": "Current Password",
+        "new_password": "New Password",
+        "comfirm_password": "Confirmed Password",
+        "email": "Email Address",
+        "fax": "Fax",
+        "city": "City",
+        "country": "Country"
     },
     "validation": {
         "first_name": {
             "invalid_pattern": "First name is invalid",
-            "required": "First name is required"
+            "required": "First name is required",
+            "placeholder": "Enter your first name"
         },
         "last_name": {
             "invalid_pattern": "Last name is invalid",
-            "required": "Last name is required"
+            "required": "Last name is required",
+            "placeholder": "Enter your last name"
         },
         "username": {
             "invalid_pattern": "Username is invalid",
@@ -108,19 +113,23 @@
         },
         "email": {
             "invalid_pattern": "Email is invalid",
-            "required": "Email is required"
+            "required": "Email is required",
+            "placeholder": "Enter your email address"
         },
         "password": {
             "invalid_pattern": "Password is invalid",
-            "required": "Password is required"
+            "required": "Password is required",
+            "placeholder": "Enter your password"
         },
         "confirm_password": {
             "required": "Confirm password is required",
-            "not_match": "Confirm password doesn't match"
+            "not_match": "Confirm password doesn't match",
+            "placeholder": "Enter your confirmed password"
         },
         "phone_number": {
             "invalid_pattern": "Phone number is invalid",
-            "required": "Phone number is required"
+            "required": "Phone number is required",
+            "placeholder": "Enter your phone number"
         },
         "category": {
             "invalid_pattern": "Category is invalid",
@@ -157,6 +166,18 @@
         "chars": {
             "limit_chars": "Max length is %s characters",
             "min_chars": "Min length is %s characters"
+        },
+        "address": {
+            "placeholder": "Enter your address"
+        },
+        "fax": {
+            "placeholder": "Enter your fax"
+        },
+        "city": {
+            "placeholder": "Enter your city"
+        },
+        "country": {
+            "placeholder": "Enter your country"
         }
     },
     "message": {

@@ -23,92 +23,95 @@
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
-
                             <div class="row">
                                 <!--First Name-->
-                                <div class="col-xs-7">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group" ng-class="{'has-error' : editUserForm.firstname.$touched && editUserForm.firstname.$invalid}">
-                                        <label for="firstname" ng-i18next="">First Name</label>
+                                        <label for="firstname" ng-i18next="label.first_name"></label>
                                         <div>
-                                            <input ng-model="userInfo.firstName" name="firstname" id="firstname"
-                                                   type="text" class="form-control" required="required" maxlength="64"/>
+                                            <input ng-model="userInfo.firstName" name="firstname" id="firstname" ng-i18next="[placeholder]validation.first_name.placeholder"
+                                                   type="text" class="form-control" required="required" ng-maxlength="64"/>
 
                                             <div ng-show="editUserForm.firstname.$touched">
-                                                <span class="help-block" ng-show="editUserForm.firstname.$error.required" ng-i18next="validation.name.required"></span>
-                                                <span class="help-block" ng-show="editUserForm.firstname.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})">Max Length</span>
+                                                <span class="help-block" ng-show="editUserForm.firstname.$error.required" ng-i18next="validation.first_name.required"></span>
+                                                <span class="help-block" ng-show="editUserForm.firstname.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})validation.chars.limit_chars"></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-xs-2">
-                                    <span class="badge" style="background-color: #00b3ee; margin-top: 30px">{{userInfo.email}}</span>
-                                </div>
-                            </div>
-                            <!--Middle Name-->
-                            <div class="row">
-                                <div class="col-xs-7">
-                                    <div class="form-group" ng-class="{'has-error' : editUserForm.middlename.$touched && editUserForm.middlename.$invalid}">
-                                        <label for="middlename" ng-i18next="">Middle Name</label>
-                                        <div>
-                                            <input ng-model="userInfo.middleName" name="middlename" id="middlename"
-                                                   type="text" class="form-control" maxlength="64"/>
-
-                                            <div ng-show="editUserForm.middlename.$touched">
-                                                <span class="help-block" ng-show="editUserForm.middlename.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})">Max Length</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
                                 <!--Last Name-->
-                                <div class="col-xs-7">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group" ng-class="{'has-error' : editUserForm.lastname.$touched && editUserForm.lastname.$invalid}">
-                                        <label for="lastname" ng-i18next="">Last Name</label>
+                                        <label for="lastname" ng-i18next="label.last_name"></label>
                                         <div>
-                                            <input ng-model="userInfo.lastName" name="lastname" id="lastname" 
-                                                   type="text" class="form-control" required="required" maxlength="64"/>
+                                            <input ng-model="userInfo.lastName" name="lastname" id="lastname" ng-i18next="[placeholder]validation.last_name.placeholder"
+                                                   type="text" class="form-control" required="required" ng-maxlength="64"/>
 
                                             <div ng-show="editUserForm.lastname.$touched">
-                                                <span class="help-block" ng-show="editUserForm.lastname.$error.required" ng-i18next="validation.name.required"></span>
-                                                <span class="help-block" ng-show="editUserForm.lastname.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})">Max Length</span>
+                                                <span class="help-block" ng-show="editUserForm.lastname.$error.required" ng-i18next="validation.last_name.required"></span>
+                                                <span class="help-block" ng-show="editUserForm.lastname.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})validation.chars.limit_chars"></span>
                                             </div>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!--Email Address-->
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : editUserForm.mail_address.$touched && editUserForm.mail_address.$invalid}">
+                                        <label for="email" ng-i18next="label.email"></label>
+                                        <div>
+                                            <input type="text" name="mail_address" id="mail_address" class="signup form-control" 
+                                                   ng-model="userInfo.email" disabled="disabled"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Address-->
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : editUserForm.address.$touched && editUserForm.address.$invalid}">
+                                        <label for="address" ng-i18next="">Address</label>
+                                        <div>
+                                            <input type="text" name="address" id="address" class="signup form-control" 
+                                                   ng-i18next="[placeholder]validation.address.placeholder" ng-model="userInfo.address" ng-maxlength="200" />
+
+                                            <div class="errors" ng-show="editUserForm.address.$touched">
+                                                <span class="help-block" ng-show="editUserForm.address.$error.maxlength" ng-i18next="[i18next]({sprintf:['200']})validation.chars.limit_chars"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
                                 <!--Phone Number-->
-                                <div class="col-xs-7">
-                                    <div class="form-group" ng-class="{'has-error' : editUserForm.phone.$touched && createUserForm.phone.$invalid}">
-                                        <label for="phone" ng-i18next="">Phone Number</label>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : editUserForm.phone.$touched && editUserForm.phone.$invalid}">
+                                        <label for="phone" ng-i18next="label.phone_number"></label>
                                         <div>
-                                            <input ng-model="userInfo.phone" name="phone" id="phone" 
-                                                   type="text" class="form-control" required="required" maxlength="64"/>
+                                            <input ng-model="userInfo.phone" name="phone" id="phone"  ng-i18next="[placeholder]validation.phone_number.placeholder"
+                                                   type="text" class="form-control" ng-pattern='phoneNumber' required="required" />
 
                                             <div ng-show="editUserForm.phone.$touched">
-                                                <span class="help-block" ng-show="editUserForm.phone.$error.required" ng-i18next="validation.name.required"></span>
-                                                <span class="help-block" ng-show="editUserForm.phone.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})">Max Length</span>
+                                                <span class="help-block" ng-show="editUserForm.phone.$error.required" ng-i18next="validation.phone_number.required"></span>
+                                                <span class="help-block" ng-show="editUserForm.phone.$error.pattern" ng-i18next="validation.phone_number.invalid_pattern"></span>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
                                 <!--Fax-->
-                                <div class="col-xs-7">
-                                    <div class="form-group" ng-class="{'has-error' : editUserForm.phone.$touched && createUserForm.phone.$invalid}">
-                                        <label for="fax" ng-i18next="">Fax</label>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : editUserForm.fax.$touched && editUserForm.fax.$invalid}">
+                                        <label for="fax" ng-i18next="label.fax"></label>
                                         <div>
-                                            <input ng-model="userInfo.fax" name="fax" id="fax" 
-                                                   type="text" class="form-control" maxlength="64"/>
+                                            <input ng-model="userInfo.fax" name="fax" id="fax" ng-i18next="[placeholder]validation.fax.placeholder"
+                                                   type="text" class="form-control" ng-maxlength="32"/>
 
                                             <div ng-show="editUserForm.fax.$touched">
-                                                <span class="help-block" ng-show="editUserForm.fax.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})">Max Length</span>
+                                                <span class="help-block" ng-show="editUserForm.fax.$error.maxlength" ng-i18next="[i18next]({sprintf:['32']})validation.chars.limit_chars"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -116,18 +119,36 @@
                             </div>
 
                             <div class="row">
-                                <!--Address-->
-                                <div class="col-xs-7">
-                                    <div class="form-group">
-                                        <label for="address" ng-i18next="">Address</label>
+                                <!--City-->
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : editUserForm.city.$touched && editUserForm.city.$invalid}">
+                                        <label for="city" ng-i18next="label.city"></label>
                                         <div>
-                                            <textarea class="col-xs-12" ng-model="userInfo.address" placeholder="Enter your address"></textarea>
+                                            <input ng-model="userInfo.city" name="city" id="city" ng-i18next="[placeholder]validation.city.placeholder"
+                                                   type="text" class="form-control" ng-maxlength="64"/>
+
+                                            <div ng-show="editUserForm.city.$touched">
+                                                <span class="help-block" ng-show="editUserForm.city.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})validation.chars.limit_chars"></span>
+                                            </div>
                                         </div>
-                                    </div> 
+                                    </div>
+                                </div>
+
+                                <!--Country-->
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : editUserForm.country.$touched && editUserForm.country.$invalid}">
+                                        <label for="country" ng-i18next="label.country"></label>
+                                        <div>
+                                            <input ng-model="userInfo.country" name="country" id="country" ng-i18next="[placeholder]validation.country.placeholder"
+                                                   type="text" class="form-control" ng-maxlength="64"/>
+
+                                            <div ng-show="editUserForm.country.$touched">
+                                                <span class="help-block" ng-show="editUserForm.country.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})validation.chars.limit_chars"></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
 

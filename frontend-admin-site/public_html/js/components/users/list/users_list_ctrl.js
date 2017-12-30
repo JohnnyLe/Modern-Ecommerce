@@ -16,10 +16,11 @@ angular.module('ec-admin.app', ['ec-admin'])
                 $scope.pagination = {};
                 $scope.selectedAll = false;
                 $scope.searchString = "";
+                $scope.isSort = true;
                 var param = {
                     searchKey: "",
                     sortCase: -1,
-                    ascSort: 0,
+                    ascSort: 1,
                     pageNumber: 1,
                     pageSize: 10
                 };
@@ -32,10 +33,10 @@ angular.module('ec-admin.app', ['ec-admin'])
 
 
                 $scope.doSort = function (sortCase) {
-                    $scope.loadListProduct(sortCase);
+                    $scope.loadListUsers(sortCase);
                 };
 
-                $scope.loadListUsers = function (page, sortCase) {
+                $scope.loadListUsers = function (sortCase) {
                     param.pageNumber = $scope.currentPage - 1;
                     param.pageSize = $scope.pageSize;
                     if (sortCase) {

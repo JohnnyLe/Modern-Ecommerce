@@ -11,6 +11,9 @@ angular.module('ec-admin.app', ['ec-admin'])
             '$http',
 
             function ($scope, Util, API, $state, Patterns, $http) {
+                
+                $scope.emailPattern = Patterns.EMAIL_PATTERN;
+                $scope.phoneNumber = Patterns.PHONE_PATTERN;
                 $scope.submitting = false;
 
                 $scope.user = {
@@ -18,12 +21,11 @@ angular.module('ec-admin.app', ['ec-admin'])
                     "lastName": "",
                     "middleName": "",
                     "email": "",
-                    "passwordHash": "5252be3f45d410ad6b478429af835ba4",
                     "phone": "",
                     "fax": "",
                     "address": "",
-                    "city": "HCMC",
-                    "country": "VN"
+                    "city": "",
+                    "country": ""
                 };
 
 
@@ -37,7 +39,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                             // goto car branch list
                             $state.go('users.list');
                         } else {
-                            Util.showErrorToast("An error occur");
+                            Util.showErrorToast(response.description);
                             $scope.submitting = false;
                         }
                     });

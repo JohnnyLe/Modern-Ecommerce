@@ -10,9 +10,9 @@ angular.module('ec-admin.app', ['ec-admin'])
             'Patterns',
             '$stateParams',
             'AppConfig',
-
+            'Patterns',
             function ($scope, Util, API, $state, Patterns, $stateParams, AppConfig) {
-
+                $scope.phonePattern = Patterns.PHONE_PATTERN;
                 $scope.submitting = false;
                 $scope.getUserInfo = function (cb) {
                     Util.createRequest(API.GET_USER_INFO.path + $stateParams.id, function (response) {
@@ -37,14 +37,15 @@ angular.module('ec-admin.app', ['ec-admin'])
                     paramUser.phone = $scope.userInfo.phone;
                     paramUser.fax = $scope.userInfo.fax;
                     paramUser.address = $scope.userInfo.address;
-                    paramUser.city = "HCMC";
-                    paramUser.country = "VN";
+                    paramUser.city = $scope.userInfo.city;
+                    paramUser.country = $scope.userInfo.country;
                     $scope.submitting = true;
                     
                     Util.createRequest(API.EDIT_USER, paramUser, function (response) {
                         var status = response.status;
                         if (status === 200) {
                             Util.showSuccessToast('message.user.update_user_success');
+                            $scope.getUserInfo();
                             $scope.submitting = false;
                         } else {
                             Util.showErrorAPI('message.user.update_user_error');

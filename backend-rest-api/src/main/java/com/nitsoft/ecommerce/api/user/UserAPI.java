@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -182,11 +183,13 @@ public class UserAPI extends AbstractBaseController {
 
     @RequestMapping(value = APIName.USER_LIST, method = RequestMethod.POST, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> getUserList(
+            HttpServletRequest httpRequest,
             @PathVariable Long company_id,
             @RequestBody UserListRequestModel request) {
 
         try {
-            Page<User> users = userService.doFilterSearchSortPagingUser(company_id, request.getSearchKey(), request.getSortCase(), request.getAscSort(), request.getPageSize(), request.getPageNumber());
+            String userId = getAuthUserFromSession(httpRequest).getId();
+            Page<User> users = userService.doFilterSearchSortPagingUser(userId, company_id, request.getSearchKey(), request.getSortCase(), request.getAscSort(), request.getPageSize(), request.getPageNumber());
             PagingResponseModel finalRes = new PagingResponseModel(users.getContent(), users.getTotalElements(), users.getTotalPages(), users.getNumber());
             return responseUtil.successResponse(finalRes);
         } catch (Exception ex) {
