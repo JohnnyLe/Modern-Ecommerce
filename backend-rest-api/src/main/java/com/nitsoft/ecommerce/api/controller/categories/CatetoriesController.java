@@ -132,12 +132,13 @@ public class CatetoriesController extends AbstractBaseController {
     @RequestMapping(value = APIName.CATEGORIES_LIST, method = RequestMethod.GET, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> getCategories(
             @PathVariable(value = "company_id") long companyId,
-            @RequestParam(value = "filter_search", required = false) String search,
+            @RequestParam(value = "search_key", required = false) String search,
             @RequestParam(value = "sort_case", defaultValue = "1", required = false) int sortCase,
             @RequestParam(value = "asc_sort", defaultValue = "true", required = false) boolean ascSort,
             @RequestParam(value = "page_size", defaultValue = "10", required = false) int pageSize,
             @RequestParam(value = "page_number", defaultValue = "1", required = false) int pageNumber
     ) {
+        System.out.println("companyId = [" + companyId + "], search = [" + search + "], sortCase = [" + sortCase + "], ascSort = [" + ascSort + "], pageSize = [" + pageSize + "], pageNumber = [" + pageNumber + "]");
 
         Page<Category> categoryPage = categoriesService.getAllActiveWithFilterSearchSort(companyId, search, pageNumber, pageSize, sortCase, ascSort);
 

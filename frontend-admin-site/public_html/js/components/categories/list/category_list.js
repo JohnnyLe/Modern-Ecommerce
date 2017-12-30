@@ -11,11 +11,11 @@ angular.module('ec-admin.app', ['ec-admin'])
             $scope.selectedAll = false;
             $scope.searchString = "";
             var param = {
-                searchKey: "",
-                sortCase: -1,
-                ascSort: 0,
-                pageNumber: 1,
-                pageSize: 10
+                search_key: "",
+                sort_case: 1,
+                asc_sort: 0,
+                page_number: 1,
+                page_size: 10
             };
             $scope.currentPage = 1;
             $scope.pageSize = 10;
@@ -28,20 +28,30 @@ angular.module('ec-admin.app', ['ec-admin'])
                 $scope.loadListCategories(sortCase);
             };
 
+            $scope.doSearch = function (keyEvent) {
+
+                // press Enter key
+                if (keyEvent.which === 13) {
+                    if ($scope.searchString.trim().length > 0) {
+                        $scope.loadListCategories();
+                    }
+                }
+            };
+
             $scope.loadListCategories = function (sortCase) {
-                param.pageNumber = $scope.currentPage - 1;
-                param.pageSize = $scope.pageSize;
+                param.page_number = $scope.currentPage;
+                param.page_size = $scope.pageSize;
                 if (sortCase) {
                     $scope.isSort = !$scope.isSort;
-                    param.ascSort = $scope.isSort;
-                    param.sortCase = sortCase;
+                    param.asc_sort = $scope.isSort;
+                    param.sort_case = sortCase;
                 }
                 // reset state
                 $scope.categories = [];
                 $scope.curentSelected = [];
                 $scope.pagination = {};
                 $scope.selectedAll = false;
-                param.searchKey = $scope.searchString;
+                param.search_key = $scope.searchString;
 
                 Util.createRequest(API.LIST_CATEGORY, param, function (response) {
                     var status = response.status;
@@ -51,14 +61,18 @@ angular.module('ec-admin.app', ['ec-admin'])
                         $scope.categories.forEach(function (item) {
                             if (item.parentId) {
                                 var parent = _.find($scope.categories, {'categoryId': item.parentId});
-                                item.parent_name = parent.name;
+                                if (parent) {
+                                    item.parent_name = parent.name;
+                                } else {
+                                    item.parent_name = null
+                                }
                             } else {
                                 item.parent_name = null
                             }
                         });
 
                         $scope.totalItems = response.data.totalElements;
-                        $scope.totalPage = response.data.totalPage;
+                        $scope.totalPage = response.data.totalPages;
                         if ($scope.selected.length > 0) {
                             var numberCheckAll = 0;
                             $scope.categories.forEach(function (result) {
