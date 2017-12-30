@@ -25,28 +25,24 @@
                         <div class="x-table">
                             <!--table header-->
                             <div class="row x-table-header">
-                                <div class="col-xs-2 text-left">
-                                    <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(1)" style="cursor: pointer"></i>
-                                    <span ng-i18next="table.header.order.customer_name" ng-click="doSort(1)" style="cursor: pointer"></span>
+                                <div class="col-xs-3 text-left">
+                                    <span ng-i18next="table.header.order.customer_name"></span>
                                 </div>
                                 <div class="col-xs-2 text-center">
-                                    <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(2)" style="cursor: pointer"></i>
-                                    <span ng-i18next="table.header.order.quantity" ng-click="doSort(2)" style="cursor: pointer"></span>
+                                    <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(4)" style="cursor: pointer"></i>
+                                    <span ng-i18next="table.header.order.quantity" ng-click="doSort(4)" style="cursor: pointer"></span>
                                 </div>
                                 <div class="col-xs-2 text-center">
                                     <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(3)" style="cursor: pointer"></i>
-                                    <span ng-i18next="table.header.order.created_at" ng-click="doSort(3)"></span></div>
+                                    <span ng-i18next="table.header.order.created_at" ng-click="doSort(3)" style="cursor: pointer"></span></div>
+                               
                                 <div class="col-xs-2 text-center overload-name">
-                                    <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(5)" style="cursor: pointer"></i>
-                                    <span ng-i18next="table.header.order.updated_at" ng-click="doSort(5)" style="cursor: pointer"></span>
-                                </div>
-                                <div class="col-xs-1 text-center overload-name">
                                     <span ng-i18next="table.header.order.status"></span>
                                 </div>
                                 
                                 <div class="col-xs-2 text-center overload-name">
-                                    <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(4)" style="cursor: pointer"></i>
-                                    <span ng-i18next="table.header.order.grand_total" ng-click="doSort(4)" style="cursor: pointer"></span>
+                                    <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(2)" style="cursor: pointer"></i>
+                                    <span ng-i18next="table.header.order.grand_total" ng-click="doSort(2)" style="cursor: pointer"></span>
                                 </div>
                                 <div class="col-xs-1 text-left"><span ng-i18next="table.header.detail"></span></div>
                             </div>
@@ -56,11 +52,10 @@
                                 <span ng-i18next="table.header.no_data"></span>
                             </div>
                             <div class="row x-table-row" ng-repeat="orders in listOrders" ng-click="toggleSelected(orders)" ng-dblclick="loadDetailOrders(orders.id)">
-                                <div class="col-xs-2 text-left"><span ng-bind="orders.fullname"></span></div>
+                                <div class="col-xs-3 text-left"><span ng-bind="orders.fullname"></span></div>
                                 <div class="col-xs-2 text-center"><span ng-bind="orders.itemsQuantity"></span></div>
-                                <div class="col-xs-2 text-center"><span ng-bind="orders.createdAt"></span></div>
-                                <div class="col-xs-2 text-center"><span ng-bind="orders.updatedAt"></span></div>
-                                <div class="col-xs-1 text-center"><span ng-bind="orders.statusOrder"></span></div>
+                                <div class="col-xs-2 text-center"><span ng-bind="orders.createdAt| date:'MM/dd/yyyy'"></span></div>
+                                <div class="col-xs-2 text-center"><span ng-bind="orders.statusOrder"></span></div>
                                 <div class="col-xs-2 text-center"><span ng-bind="orders.grandTotal"></span></div>
                                 <div class="col-xs-1 text-left row">
                                     <div class="col-md-9 text-center">
