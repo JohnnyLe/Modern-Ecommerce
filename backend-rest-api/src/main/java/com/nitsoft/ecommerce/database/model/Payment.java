@@ -36,7 +36,7 @@ public class Payment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "payment_id")
-    private Integer paymentId;
+    private Long paymentId;
 
     @Basic(optional = false)
     @Column(name = "name")

@@ -176,8 +176,9 @@ public class Constant {
     public static final int SORT_BY_EMAIL_ADDRESS = 3;
     public static final int SORT_BY_CREATE_DATE = 4;
     
-    // define sort key value
+    // define sort key value  
     public static final int SORT_BY_ITEMS_QUANTITY = 4;
+    public static final int SORT_BY_GRAND_TOTAL = 2;
     
     // Custom token header
     public static final String HEADER_TOKEN = "X-Access-Token";

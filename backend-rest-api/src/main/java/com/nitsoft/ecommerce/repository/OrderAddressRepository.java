@@ -8,6 +8,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
  *
  * @author Louis Duong
  */
-public interface OrderAddressRepository extends PagingAndSortingRepository<OrderAddress,Integer> {
+public interface OrderAddressRepository extends PagingAndSortingRepository<OrderAddress, Long> {
     OrderAddress findOneByOrderId(Long orderId);
 }

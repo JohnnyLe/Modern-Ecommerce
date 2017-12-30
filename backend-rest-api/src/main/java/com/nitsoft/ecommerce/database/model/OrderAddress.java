@@ -39,15 +39,15 @@ public class OrderAddress implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     
     @Basic(optional = false)
     @Column(name = "order_id")
-    private int orderId;
+    private Long orderId;
     
     @Basic(optional = false)
     @Column(name = "adress_id")
-    private int adressId;
+    private Long adressId;
     
     @Basic(optional = false)
     @Column(name = "created_at")
@@ -59,7 +59,7 @@ public class OrderAddress implements Serializable {
     private Date updatedAt;
     
     @Column(name = "region_id")
-    private Integer regionId;
+    private Long regionId;
     
     @Column(name = "region")
     private String region;
