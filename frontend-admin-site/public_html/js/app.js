@@ -17,7 +17,6 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
         'ec-admin.constant',
         'ec-admin.session',
         'ngTagsInput',
-        'ui.toggle'
     ])
 
     // Config ocLazy loading

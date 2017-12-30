@@ -25,7 +25,11 @@
                                         <span ng-i18next="table.header.order.status"></span>
                                     </div>
                                     <div class="col-xs-3" style="left: 30px">
-                                        <toggle ng-model="ordersStatus" ng-change="changeStatus()" on="Done" off="Pending" onstyle="btn-success" offstyle="btn-warning"></toggle>
+                                        <select class="form-control" ng-model="ordersStatus">
+                                            <option value="0" ng-click="changeStatus(0)">Pending</option>
+                                        <option value="1" ng-click="changeStatus(1)">Shipping</option>
+                                        <option value="2" ng-click="changeStatus(2)">Complete</option>
+                                    </select>
                                     </div>
                                 </label>
                             </div>

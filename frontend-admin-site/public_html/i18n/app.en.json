@@ -215,7 +215,9 @@
         },
         "order": {
             "change_status_success" : "Change status orders success",
-            "change_status_error" : "Change status orders error"
+            "change_status_error" : "Change status orders error",
+            "change_status" : "Change Status Orders",
+            "change_status_msg" : "Do you want to Change Status Orders"
         }
     },
     "api": {

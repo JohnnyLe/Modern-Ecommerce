@@ -5,39 +5,38 @@ angular.module('ec-admin.app', ['ec-admin'])
             '$scope', 'Util', 'API', '$state', 'AppConfig', '$compile', '$stateParams',
             function ($scope, Util, API, $state, AppConfig, $compile, $stateParams) {
                 $scope.orderDetail = {
-                    cusName : "",
-                    cusEmail : "",
-                    cusPhone : "",
-                    cusAddress : "",
-                    cusGender : "",
-                    cusPayment : ""
+                    cusName: "",
+                    cusEmail: "",
+                    cusPhone: "",
+                    cusAddress: "",
+                    cusGender: "",
+                    cusPayment: ""
                 };
                 $scope.pathFile = AppConfig.PATH_FILE;
                 $scope.image = 'img/no-image-available.png';
                 $scope.ordersStatus = false;
                 $scope.totalPrice = "0 $";
-                $scope.changeStatus = function(){
-                    var sataus;
-                    if($scope.ordersStatus){
-                        sataus = 2;
-                    }else{
-                        sataus = 0;
-                    }
-                    Util.createRequest(API.CHANGE_STATUS_ORDERS.path + $stateParams.id + "/" + sataus, function (response) {
-                        var status = response.status;
-                        if (status === 200) {
+                $scope.changeStatus = function (sataus) {
+                    Util.showConfirmModal({
+                        title: Util.translate('message.order.change_status'),
+                        message: Util.translate('message.order.change_status_msg')
+                    }, function () {
+                        Util.createRequest(API.CHANGE_STATUS_ORDERS.path + $stateParams.id + "/" + sataus, function (response) {
+                            var status = response.status;
+                            if (status === 200) {
                                 $scope.selected = [];
                                 // show message delete successfully
                                 Util.showSuccessToast('message.order.change_status_success');
                             } else {
                                 Util.showErrorToast('message.order.change_status_error');
                             }
-                    }).finally(function () {
-                        $scope.submitting = false;
+                        }).finally(function () {
+                            $scope.submitting = false;
+                        });
                     });
                 };
                 $scope.listProduct = [];
-                $scope.getOrderDetail = function(){
+                $scope.getOrderDetail = function () {
                     Util.createRequest(API.DETAIL_ORDERS.path + $stateParams.id, function (response) {
                         var status = response.status;
                         if (status === 200) {
@@ -49,16 +48,16 @@ angular.module('ec-admin.app', ['ec-admin'])
                             $scope.orderDetail.cusGender = response.data.orders.customerGender;
                             $scope.orderDetail.cusAddress = response.data.orderAddress.adress;
                             $scope.orderDetail.cusPhone = response.data.orderAddress.phone;
-                            
+
                             var listOrdersDetail = [];
                             var countPrice = 0;
                             listOrdersDetail = response.data.listOrdersDetail;
-                            listOrdersDetail.forEach(function(result){
+                            listOrdersDetail.forEach(function (result) {
                                 var product = {
-                                    name : "",
-                                    image : "",
-                                    quantity : 0,
-                                    price : 0
+                                    name: "",
+                                    image: "",
+                                    quantity: 0,
+                                    price: 0
                                 };
                                 product.name = result.product.name;
                                 product.image = result.product.defaultImage;
@@ -76,7 +75,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                         $scope.submitting = false;
                     });
                 };
-                
+
                 $scope.getOrderDetail();
             }
         ]);
