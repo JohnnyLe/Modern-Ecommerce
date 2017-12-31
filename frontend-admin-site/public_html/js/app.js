@@ -272,7 +272,7 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                             })
                             .state({
                                 name: 'orders.detail',
-                                url: '/detail',
+                                url: '/detail/{id}',
                                 templateUrl: 'js/components/orders/detail/order_detail_tmpl.html',
                                 controller: 'OrderDetailCtrl',
                                 resolve: {

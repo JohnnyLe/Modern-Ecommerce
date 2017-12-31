@@ -145,7 +145,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                                 };
                                 var params = {
                                     company_id: 1,
-                                    filter_search: "",
+                                    search_key: "",
                                     sort_key: 1,
                                     page_size: 100,
                                     page_number: 1
@@ -177,7 +177,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                                 });
 
                                 $scope.loadListSearch = function () {
-                                    params.searchKey = $scope.searchString;
+                                    params.search_key = $scope.searchString;
                                     Util.createRequest(API.LIST_CATEGORY, params, function (response) {
 
                                         var status = response.status;
