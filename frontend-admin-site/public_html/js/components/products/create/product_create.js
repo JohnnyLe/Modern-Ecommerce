@@ -149,6 +149,9 @@ angular.module('ec-admin.app', ['ec-admin'])
                                         }
                                     });
                                 };
+                                $scope.selectCate = function(index){
+                                    $scope.listCategory[index].selected = !$scope.listCategory[index].selected;
+                                };
                                 $scope.removeSelected = function (list) {
                                     list.forEach(function (item) {
                                         var index = $scope.listCategory.indexOf(item);

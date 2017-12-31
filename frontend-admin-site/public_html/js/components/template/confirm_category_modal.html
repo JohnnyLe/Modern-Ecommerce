@@ -36,7 +36,7 @@
                         <div class="col-xs-12 text-center" ng-show="listCategory.length === 0" style="top: 5px"> 
                             <span ng-i18next="table.header.no_data"></span>
                         </div>
-                        <div class="row x-table-row" ng-repeat="cate in listCategory">
+                        <div class="row x-table-row" ng-repeat="cate in listCategory" ng-click="selectCate($index)">
                             <div class="col-xs-2 text-left"><input icheck ng-model="cate.selected" type="checkbox"/></div>
                             <div class="col-xs-5 text-left overload-name"><span ng-bind="cate.name"></span></div>
                             <div class="col-xs-5 text-left overload-name"><span ng-bind="cate.description"></span></div>
