@@ -14,26 +14,23 @@ angular.module('marketplace.cart', [])
                         price: 130,
                         quantity: 3
                     };
+                    console.log("aaa");
                     cart.addItem(item, item.quantity);
                 };
 
                 $scope.calculateTotal = function () {
                     var itemList = cart.getItems();
                     if (typeof itemList !== 'undefined') {
+                        console.log("a");
                         for (var i = 0; i < itemList.length; i++) {
                             $scope.totalBill += itemList[i].price * itemList[i].quantity;
                         }
                     }
 
                 };
-                
+
                 $scope.calculateTotal();
-                
-                $scope.goCheckOut = function(){
-                    
-                }
-                
-                
+                console.log("$scope.totalBill", $scope.totalBill);
             }]);
 
 

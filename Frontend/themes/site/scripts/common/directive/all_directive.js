@@ -457,6 +457,8 @@ angular.module('marketplace.directive', [ 'components', 'rzModule' ])
             'showPayment': '=?'
         },
         controller: ['$scope', 'ShoppingCart', function( $scope, cart ) {
+                
+                
             if (angular.isDefined($scope.minPrice)) {
                 $scope.showPayment = false;
             }
@@ -464,9 +466,10 @@ angular.module('marketplace.directive', [ 'components', 'rzModule' ])
             $scope.items = [];
             
             $scope.loadData = function () {
-                cart.getItems().then(function (items) {
-                    $scope.items = items;
-                });
+                $scope.items = cart.getItems();
+//                cart.getItems().then(function (items) {
+//                    
+//                });
             };
             
             $scope.loadData();

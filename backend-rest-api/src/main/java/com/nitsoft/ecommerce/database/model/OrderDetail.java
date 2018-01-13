@@ -86,10 +86,10 @@ public class OrderDetail implements Serializable {
     private BigDecimal weight;
 
     @Column(name = "quantity")
-    private BigDecimal quantity;
+    private int quantity;
 
     @Column(name = "price")
-    private BigDecimal price;
+    private double price;
 
     @Column(name = "base_price")
     private BigDecimal basePrice;

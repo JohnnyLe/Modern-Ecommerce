@@ -37,7 +37,7 @@ angular.module('ec-admin.auth', [])
 
                 var status = response.status;
                 if (status === 200) {
-
+                    
                     // redirect page
                     $state.go('categories.list');
                 } else {

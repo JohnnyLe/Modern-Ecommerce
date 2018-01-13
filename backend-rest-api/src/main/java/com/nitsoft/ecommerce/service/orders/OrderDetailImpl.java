@@ -19,8 +19,16 @@ public class OrderDetailImpl extends AbstractBaseService implements OrderDetailS
     OrderDetailRepository orderDetailRepository;
     
     @Override
+    public OrderDetail saveOrUpdate(OrderDetail orderDetail) {
+        return orderDetailRepository.save(orderDetail);
+    }
+    
+    
+    @Override
     public List<OrderDetail> getListOrderDetail(Long orderId) {
         return orderDetailRepository.findAllByOrderId(orderId);
     }
+
+    
     
 }

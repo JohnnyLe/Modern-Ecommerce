@@ -3,24 +3,22 @@
         <thead>
             <tr class="cart_menu">
                 <td class="image">Item</td>
-                <td class="description"></td>
+                <td class="">Name</td>
                 <td class="price">Price</td>
                 <td class="quantity">Quantity</td>
                 <td class="total">Total</td>
                 <td></td>
             </tr>
         </thead>
+
         <tbody>
             <tr ng-repeat="item in items">
                 <td class="cart_product">
                     <a href=""><img ng-src="{{item.default_image}}" alt=""></a>
                 </td>
-                <td class="cart_description">
-                    <h4><a ui-sref="product-details({productId:item.product_id})">{{item.name}}</a></h4>
-                    <p>Web ID: {{item.product_id}}</p>
-                </td>
+                <td>{{item.product_name}}</td>
                 <td class="cart_price">
-                    <p>${{item.sale_price}}</p>
+                    <p>${{item.price}}</p>
                 </td>
                 <td class="cart_quantity">
                     <div class="cart_quantity_button">
@@ -30,36 +28,42 @@
                     </div>
                 </td>
                 <td class="cart_total">
-                    <p class="cart_total_price">${{(item.quantity * item.sale_price).toFixed(2)}}</p>
+                    <p class="cart_total_price">${{(item.quantity * item.price).toFixed(2)}}</p>
                 </td>
                 <td class="cart_delete">
                     <a class="cart_quantity_delete" ng-click="removeItem($index)"><i class="fa fa-times"></i></a>
                 </td>
             </tr>
 
-            <tr ng-if="showPayment">
-                <td colspan="4">&nbsp;</td>
-                <td colspan="2">
-                    <table class="table table-condensed total-result">
-                        <tbody><tr>
-                                <td>Cart Sub Total</td>
-                                <td>$59</td>
-                            </tr>
-                            <tr>
-                                <td>Exo Tax</td>
-                                <td>$2</td>
-                            </tr>
-                            <tr class="shipping-cost">
-                                <td>Shipping Cost</td>
-                                <td>Free</td>										
-                            </tr>
-                            <tr>
-                                <td>Total</td>
-                                <td><span>$61</span></td>
-                            </tr>
-                        </tbody></table>
+            <tr ng-hide="items.length > 0" >
+                <td class="text-center" colspan="4">
+                    Your cart is empty.
                 </td>
             </tr>
+
+            <!--            <tr ng-if="showPayment">
+                            <td colspan="4">&nbsp;</td>
+                            <td colspan="2">
+                                <table class="table table-condensed total-result">
+                                    <tbody><tr>
+                                            <td>Cart Sub Total</td>
+                                            <td>$59</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Exo Tax</td>
+                                            <td>$2</td>
+                                        </tr>
+                                        <tr class="shipping-cost">
+                                            <td>Shipping Cost</td>
+                                            <td>Free</td>										
+                                        </tr>
+                                        <tr>
+                                            <td>Total</td>
+                                            <td><span>$61</span></td>
+                                        </tr>
+                                    </tbody></table>
+                            </td>
+                        </tr>-->
         </tbody>
     </table>
 </div>

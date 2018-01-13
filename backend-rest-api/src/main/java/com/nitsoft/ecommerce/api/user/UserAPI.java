@@ -2,6 +2,7 @@ package com.nitsoft.ecommerce.api.user;
 
 import com.nitsoft.ecommerce.api.APIName;
 import com.nitsoft.ecommerce.api.controller.AbstractBaseController;
+import com.nitsoft.ecommerce.api.request.model.AuthRequestModel;
 import com.nitsoft.ecommerce.api.request.model.UserChangePasswordModel;
 import com.nitsoft.ecommerce.api.request.model.UserListRequestModel;
 import com.nitsoft.ecommerce.api.request.model.UserRequestModel;
@@ -16,6 +17,7 @@ import com.nitsoft.ecommerce.exception.ApplicationException;
 import com.nitsoft.ecommerce.service.UserAddressService;
 import com.nitsoft.ecommerce.service.UserService;
 import com.nitsoft.ecommerce.service.UserTokenService;
+import com.nitsoft.ecommerce.service.auth.AuthService;
 import com.nitsoft.util.Constant;
 import com.nitsoft.util.DateUtil;
 import com.nitsoft.util.MD5Hash;
@@ -30,6 +32,9 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,54 +52,58 @@ public class UserAPI extends AbstractBaseController {
     private UserTokenService userTokenService;
     @Autowired
     private UserAddressService userAddressService;
+    @Autowired
+    private AuthService authService;
 
     @RequestMapping(value = APIName.USERS_LOGIN, method = RequestMethod.POST, produces = APIName.CHARSET)
     public ResponseEntity<APIResponse> login(
-            @PathVariable Long companyId,
-            @RequestParam String email,
-            @RequestParam String password,
-            @RequestParam Boolean keepMeLogin
+            @PathVariable Long company_id,
+            @RequestBody AuthRequestModel authRequestModel
     ) {
 
-        if ("".equals(email) || "".equals(password)) {
+        if ("".equals(authRequestModel.getUsername()) || "".equals(authRequestModel.getPassword())) {
             // invalid paramaters
             throw new ApplicationException(APIStatus.INVALID_PARAMETER);
         } else {
-            User userLogin = userService.getUserByEmail(email, companyId, Constant.STATUS.ACTIVE_STATUS.getValue());
+            User userLogin = userService.getUserByEmail(authRequestModel.getUsername(), company_id, Constant.USER_STATUS.ACTIVE.getStatus());
 
             if (userLogin != null) {
                 String passwordHash = null;
                 try {
-                    passwordHash = MD5Hash.MD5Encrypt(password + userLogin.getSalt());
+                    passwordHash = MD5Hash.MD5Encrypt(authRequestModel.getPassword() + userLogin.getSalt());
                 } catch (NoSuchAlgorithmException ex) {
                     throw new RuntimeException("User login encrypt password error", ex);
                 }
 
-                int userStatus = userLogin.getStatus();
-                if (userStatus == Constant.USER_STATUS.ACTIVE.getStatus()) {
-                    if (passwordHash.equals(userLogin.getPasswordHash())) {
-                        UserToken userToken = new UserToken();
-                        userToken.setToken(UniqueID.getUUID());
-                        userToken.setCompanyId(companyId);
-                        userToken.setUserId(userLogin.getUserId());
-
-                        Date currentDate = new Date();
-                        userToken.setLoginDate(DateUtil.convertToUTC(currentDate));
-
-                        Date expirationDate = keepMeLogin ? new Date(currentDate.getTime() + Constant.DEFAULT_REMEMBER_LOGIN_MILISECONDS) : new Date(currentDate.getTime() + Constant.DEFAULT_SESSION_TIME_OUT);
-                        userToken.setExpirationDate(DateUtil.convertToUTC(expirationDate));
-
-                        userTokenService.save(userToken);
-                        return responseUtil.successResponse(userToken);
-                    } else {
-                        // wrong password
-                        throw new ApplicationException(APIStatus.ERR_USER_NOT_VALID);
-                    }
-                } else if (userStatus == Constant.USER_STATUS.PENDING.getStatus()) {
-                    throw new ApplicationException(APIStatus.USER_PENDING_STATUS);
+                if (passwordHash.equals(userLogin.getPasswordHash())) {
+//                    UserToken userToken = new UserToken();
+//                    userToken.setToken(UniqueID.getUUID());
+//                    userToken.setCompanyId(company_id);
+//                    userToken.setUserId(userLogin.getUserId());
+//
+//                    Date currentDate = new Date();
+//                    userToken.setLoginDate(DateUtil.convertToUTC(currentDate));
+//
+//                    Date expirationDate = authRequestModel.isKeepMeLogin() ? new Date(currentDate.getTime() + Constant.DEFAULT_REMEMBER_LOGIN_MILISECONDS) : new Date(currentDate.getTime() + Constant.DEFAULT_SESSION_TIME_OUT);
+//                    userToken.setExpirationDate(DateUtil.convertToUTC(expirationDate));
+//
+//                    userTokenService.save(userToken);
+//                    return responseUtil.successResponse(userToken);
+                    UserToken userToken = authService.createUserToken(userLogin, authRequestModel.isKeepMeLogin());
+                    // Create Auth User -> Set to filter config
+                    // Perform the security
+                    Authentication authentication = new UsernamePasswordAuthenticationToken(
+                            userLogin.getEmail(),
+                            userLogin.getPasswordHash()
+                    );
+                    //final Authentication authentication = authenticationManager.authenticate();
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                    return responseUtil.successResponse(userToken.getToken());
                 } else {
+                    // wrong password
                     throw new ApplicationException(APIStatus.ERR_USER_NOT_VALID);
                 }
+
             } else {
                 // can't find user by email address in database
                 throw new ApplicationException(APIStatus.ERR_USER_NOT_EXIST);
@@ -314,7 +323,7 @@ public class UserAPI extends AbstractBaseController {
                 } else {
                     throw new ApplicationException(APIStatus.ERR_MISSING_PASSWORD);
                 }
-            }else{
+            } else {
                 throw new ApplicationException(APIStatus.ERR_UNCORRECT_PASSWORD);
             }
 

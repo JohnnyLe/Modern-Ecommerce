@@ -1,0 +1,107 @@
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Check out</li>
+            </ol>
+        </div><!--/breadcrums-->
+
+        <div class="step-one">
+            <h2 class="heading">Step1</h2>
+        </div>
+
+        <div class="register-req">
+            <p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
+        </div><!--/register-req-->
+        <!--Check if user not login customer must fill the info for these form-->
+        <div class="shopper-informations" ng-if="">
+            <div class="row">
+                <div class="col-sm-8 clearfix">
+                    <div class="bill-to">
+                        <p>Bill To</p>
+                        <div class="form-one">
+                            <form name="checkoutForm" ng-submit="">
+                                <div class="form-group" ng-class="{'has-error' : checkoutForm.firstname.$touched && checkoutForm.firstname.$invalid}">
+                                    <input ng-model="user.firstName" name="firstname" id="firstname" placeholder="First Name"
+                                           type="text" class="form-control" required="required" ng-maxlength="64"/>
+
+                                    <div ng-show="checkoutForm.firstname.$touched">
+                                        <span class="help-block" ng-show="checkoutForm.firstname.$error.required">Required</span>
+                                        <span class="help-block" ng-show="checkoutForm.firstname.$error.maxlength">Max length is 64 chars</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error' : checkoutForm.lastName.$touched && checkoutForm.lastName.$invalid}">
+                                    <input ng-model="user.lastName" name="lastName" id="firstname" placeholder="Last Name"
+                                           type="text" class="form-control" required="required" ng-maxlength="64"/>
+
+                                    <div ng-show="checkoutForm.lastName.$touched">
+                                        <span class="help-block" ng-show="checkoutForm.lastName.$error.required">Required</span>
+                                        <span class="help-block" ng-show="checkoutForm.lastName.$error.maxlength">Max length is 64 chars</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error' : checkoutForm.mail_address.$touched && checkoutForm.mail_address.$invalid}">
+                                    <input type="text" name="mail_address" id="mail_address" class="signup form-control" 
+                                           ng-model="user.email" placeholder="Email"
+                                           required="required" ng-pattern='emailPattern' ng-maxlength="64" />
+
+                                    <div class="errors" ng-show="checkoutForm.mail_address.$touched">
+                                        <span class="help-block" ng-show="checkoutForm.mail_address.$error.required">Required</span>
+                                        <span class="help-block" ng-show="checkoutForm.mail_address.$error.pattern">Wrong Email Format</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error' : checkoutForm.phone.$touched && checkoutForm.phone.$invalid}">
+                                    <input ng-model="user.phone" name="phone" id="phone" placeholder="Phone"
+                                           type="text" class="form-control" ng-pattern='phoneNumber' required="required" />
+
+                                    <div ng-show="checkoutForm.phone.$touched">
+                                        <span class="help-block" ng-show="checkoutForm.phone.$error.required">Required</span>
+                                        <span class="help-block" ng-show="checkoutForm.phone.$error.pattern">Wrong Phone Format</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error' : checkoutForm.address.$touched && checkoutForm.address.$invalid}">
+                                    <input type="text" name="address" id="address" class="signup form-control" 
+                                           placeholder="Address" ng-model="user.address" required="true" />
+
+                                    <div class="errors" ng-show="createUserForm.address.$touched">
+                                        <span class="help-block" ng-show="checkoutForm.address.$error.required">Required</span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>					
+            </div>
+        </div>
+        <div class="review-payment">
+            <h2>Review & Payment</h2>
+        </div>
+
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="description"></td>
+                        <td class="quantity">Quantity</td>
+                        <td class="price">Price</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items">
+                        <td>{{item.product_name}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td class="cart_price">
+                            <p>${{item.price}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <button class="btn btn-default check_out" ng-click="">payment</button>
+    </div>
+</section>

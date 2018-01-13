@@ -17,7 +17,15 @@ public class OrderAddressImpl extends AbstractBaseService implements OrderAddres
 
     @Autowired
     OrderAddressRepository orderAddressRepository;
-
+    
+    
+    @Override
+    public OrderAddress saveOrUpdate(OrderAddress orderAddress) {
+        return orderAddressRepository.save(orderAddress);
+    }
+    
+    
+    
     @Override
     public OrderAddress getOrderAddressByOrderId(Long orderId) {
         return orderAddressRepository.findOneByOrderId(orderId);
