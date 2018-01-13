@@ -2555,5 +2555,13 @@ h2.title {
 .contact-info .social-networks ul li a:hover{
     color: #FE980F;
 }
+.clearfix20{
+    clear: both;
+    height: 20px;
+}
+.clearfix10{
+    clear: both;
+    height: 10px;
+}
 
 

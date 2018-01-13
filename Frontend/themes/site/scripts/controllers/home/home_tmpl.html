@@ -10,6 +10,8 @@
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
                     <h2 class="title text-center">Features Items</h2>
+                    <h4 ng-show="showResultFound" style="margin-left: 14px; font-family: sans-serif">{{totalPage}} items found for : "{{searchKeyShow}}"</h4>
+                    <div ng-show="showResultFound" class="clearfix20"></div>
                     <div class="col-sm-4" ng-repeat="p in products">
                         <div class="product-image-wrapper">
                             <div class="single-products">
@@ -153,6 +155,8 @@
                          show-first-last="true"
                          paging-action="loadPage(page)">
                     </div>
+<!--                    <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" num-pages="totalPages" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" boundary-links="true"
+                                items-per-page="pageSize" ></ul>-->
                 </div>
 
                 <div class="recommended_items"><!--recommended_items-->

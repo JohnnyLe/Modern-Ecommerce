@@ -1,3 +1,8 @@
+<script>
+    $(document).ready(function () {
+        $('#native').elevateZoom();
+    });
+</script>
 <section>
     <div class="container">
         <div class="row">
@@ -9,8 +14,9 @@
                 <div class="product-details"><!--product-details-->
                     <div class="col-sm-5">
                         <div class="view-product">
-                            <img ng-src="{{product.defaultImage}}" alt="" />
-                            <h3 ng-click="zoomImage()">ZOOM</h3>
+                            <!--<img ng-elevate-zoom ng-src="{{product.defaultImage}}" zoom-image="images/image11.jpg" />-->
+                            <img ng-elevate-zoom ng-src="{{product.defaultImage}}" zoom-image="images/image11.jpg" />
+                            <!--<h3>ZOOM</h3>-->
                         </div>
                         <div ng-if="productImgs && productImgs.length > 0" id="similar-product" class="carousel slide" data-ride="carousel">
 
@@ -42,7 +48,7 @@
                             <span>
                                 <span>US ${{product.salePrice}}</span>
                                 <label>Quantity:</label>
-                                <input type="text" value="3" />
+                                <input type="text" value="1" />
                                 <button ng-click="addToCart(product)" type="button" class="btn btn-fefault cart">
                                     <i class="fa fa-shopping-cart"></i>
                                     Add to cart
