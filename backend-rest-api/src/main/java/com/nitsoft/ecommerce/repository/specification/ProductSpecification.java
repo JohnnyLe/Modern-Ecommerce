@@ -51,8 +51,8 @@ public class ProductSpecification implements Specification<Product> {
         // filter by category id
         if (categoryId != -1) {
             Root<ProductCategory> proCatRoot = cq.from(ProductCategory.class);
-            predicates.add(cb.equal(proCatRoot.get("categoryId"), categoryId));
-            predicates.add(cb.equal(root.get("productId"), proCatRoot.get("productId")));
+            predicates.add(cb.equal(proCatRoot.get("id").get("categoryId"), categoryId));
+            predicates.add(cb.equal(root.get("productId"), proCatRoot.get("id").get("productId")));
         }
         // filter by product attribute id
         if (attributeId != -1) {
