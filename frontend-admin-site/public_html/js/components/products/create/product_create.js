@@ -22,9 +22,12 @@ angular.module('ec-admin.app', ['ec-admin'])
                 $scope.files = [];
 //                $scope.fileMedia = [];
 //                $scope.multipleImage = [];
-//                $scope.$watch('fileMedia', function () {
-//                    $scope.multipleImage = _.extend($scope.fileMedia, $scope.multipleImage);
-//                });
+                $scope.$watch('files', function () {
+                    console.log("dcm");
+                    if($scope.files.length > 0){
+                        $scope.origin = false;
+                    }
+                });
                 $scope.product = {
                     name: "",
                     productId: 0,

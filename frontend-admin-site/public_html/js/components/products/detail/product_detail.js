@@ -18,14 +18,17 @@ angular.module('ec-admin.app', ['ec-admin'])
                 $scope.submitting = false;
                 $scope.tags = [];
                 $scope.image = 'img/no-image-available.png';
+                $scope.imageUpdate = '';
                 $scope.files = [];
                 $scope.pathFile = AppConfig.PATH_FILE;
                 $rootScope.checkTags = [];
 //                $scope.fileMedia = [];
 //                $scope.multipleImage = [];
-//                $scope.$watch('fileMedia', function () {
-//                    $scope.multipleImage = _.extend($scope.fileMedia, $scope.multipleImage);
-//                });
+                $scope.$watch('files', function () {
+                    if($scope.files.length > 0){
+                        $scope.origin = false;
+                    }
+                });
                 $scope.paramProduct = {
                     name: "",
                     productId: 0,
@@ -63,6 +66,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                                 $rootScope.checkTags = $scope.tags;
                                 $scope.origin = angular.equals($scope.tags, tagsCheck);
                             }, true);
+//                            $scope.imageUpdate = response.data.product.defaultImage;
                             $scope.product = response.data.product;
                             if ($scope.product.defaultImage !== 'img/no-image-available.png') {
                                 $scope.product.defaultImage = $scope.pathFile + $scope.product.defaultImage;
@@ -97,7 +101,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                     $scope.paramProduct.overview = $scope.product.overview;
                     $scope.paramProduct.sku = $scope.product.sku;
                     $scope.paramProduct.salePrice = $scope.product.salePrice;
-                    $scope.paramProduct.defaultImage = $scope.product.defaultImage;
+                    $scope.paramProduct.defaultImage = $scope.imageUpdate;
                     $scope.tags.forEach(function (result) {
                         $scope.paramProduct.listCategoriesId.push(result.id);
                     });
@@ -111,7 +115,7 @@ angular.module('ec-admin.app', ['ec-admin'])
                         if (status === 200) {
                             Util.showSuccessToast('message.product.update_product_success');
                             // goto car branch list
-//                            $state.go('products.list');
+                            $state.go('products.list');
                         } else {
                             Util.showErrorToast('message.product.update_product_error');
                         }

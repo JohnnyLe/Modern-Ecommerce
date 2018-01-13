@@ -14,16 +14,14 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img ng-src="{{p.default_image}}" alt="" />
-                                    <h2>${{p.sale_price}}</h2>
+                                    <img ng-src="{{p.defaultImage}}" alt="" />
+                                    <h2>{{'$' + p.salePrice}}</h2>
                                     <p>{{p.name}}</p>
-                                    <a ng-click="addToCart(p)" class="btn btn-default add-to-cart">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        Add to cart
-                                    </a>
-                                    <a ui-sref="product-details({productId:p.product_id})" class="btn btn-default add-to-cart">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        View details
+                                    <button ng-click="addToCart(p)" class="btn btn-default add-to-cart">
+                                        <i class="fa fa-shopping-cart"></i>Add to cart
+                                    </button>
+                                    <a ui-sref="product-details({productId: p.product_id})" class="btn btn-default add-to-cart">
+                                        <i class="fa fa-plus-square"></i>View detail
                                     </a>
                                 </div>
                             </div>
