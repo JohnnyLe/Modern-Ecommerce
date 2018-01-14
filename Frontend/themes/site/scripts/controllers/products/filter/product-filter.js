@@ -10,6 +10,8 @@ angular.module('marketplace.products.filter', [])
 //                        $scope.products = data.result;
 //                    });
 //                };
+                $scope.pageSize = 12;
+                $scope.currentPage = 1;
                 var param = {
                     categoryId: -1,
                     attributeId: -1,
@@ -22,21 +24,34 @@ angular.module('marketplace.products.filter', [])
                     sortCase: -1,
                     ascSort: 0,
                     pageNumber: 0,
-                    pageSize: 12
+                    pageSize: 3
 
                 };
-                $scope.loadListProduct = function (pNumber, pSize) {
-//                    var number = Number($stateParams.categoryId);
+                $scope.loadListProduct = function (pNumber) {
                     param.categoryId = parseInt($stateParams.categoryId);
+                    param.pageNumber = pNumber - 1;
+                    param.pageSize = $scope.pageSize;
                     util.callRequest('/products/filter', "POST", param).then(function (response) {
                         $scope.products = response.data.data;
-                        $scope.totalPage = response.data.totalPage;
+                        $scope.totalPage = response.data.totalResult;
                     });
                 };
                 $scope.addToCart = function (product) {
                     cart.addItem(product);
                 };
+                
+                $scope.loadPage = function (page) {
+                    $scope.loadListProduct(page);
+                };
+                
+                $scope.$on('priceRangeResult', function (event, data) {
+                    console.log(data);
+                    // user finished sliding a handle
+                    param.minPrice = data.min;
+                    param.maxPrice = data.max;
+                    $scope.loadListProduct();
+                });
 
 //                $scope.loadData();
-                $scope.loadListProduct();
+                $scope.loadListProduct($scope.currentPage);
             }]);

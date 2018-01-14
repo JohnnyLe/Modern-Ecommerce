@@ -6,11 +6,15 @@ angular.module('marketplace.products.details', [])
 
 
                 $scope.proComment = {};
-
+                $scope.pathFile = "http://localhost:8080/ecommerce-rest-api/upload/";
+                $scope.imageName = "https://cdn.tgdd.vn/Products/Images/42/73705/iphone-6s-plus-128gb-400-1-400x450.png";
                 // Data model biding
                 $scope.loadData = function () {
                     util.callRequest('products/detail/' + $stateParams.productId, "GET").then(function (data) {
                         $scope.product = data.data.product;
+//                        if ($scope.product.defaultImage !== 'img/no-image-available.png') {
+//                            $scope.product.defaultImage = $scope.pathFile + $scope.product.defaultImage;
+//                        }
                         $scope.loadListProduct(-1);
                         $scope.loadListProductRecomad(-1);
                     });
@@ -66,17 +70,13 @@ angular.module('marketplace.products.details', [])
                         $scope.products = response.data.data;
                     });
                 };
-                
+
                 $scope.loadListProductRecomad = function (categoryId) {
                     paramRe.categoryId = categoryId;
                     paramRe.pageSize = 3;
                     util.callRequest('/products/filter', "POST", paramRe).then(function (response) {
                         $scope.productRecomands = response.data.data;
                     });
-                };
-                
-                $scope.zoomImage = function(){
-                    $("#zoom_04").ezPlus();
                 };
 
                 $timeout(function () {

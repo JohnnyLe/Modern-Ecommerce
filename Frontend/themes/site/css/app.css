@@ -152,11 +152,11 @@
 
 /* Small devices */
 @media screen and (max-width: 767px) {
-    
+
     .condition-footer {
         margin-top: 15px;
     }
-    
+
     .action-wrapper {
         margin-bottom: 15px;
     }
@@ -164,22 +164,22 @@
 
 /* At least tablet devices */
 @media screen and (min-width: 768px) {
-    
+
     /* Login box */
     .narisup .login-box {
         width: 420px;
     }
-    
+
     .login-box .form-group, .login-box .alert {
         width: 352px;
         margin-left: auto;
         margin-right: auto;
     }
-    
+
     .login-box .form-group:first-child {
         margin-bottom: 9px;
     }
-    
+
     /* Panel on list page */
     .narisup .panel form .row .row > div:first-child {
         width: 124px;
@@ -187,11 +187,11 @@
         margin-right: -15px;
         padding-right: 28px;
     }
-    
+
     .narisup .panel form .row .row div:last-child > input {
         width: 350px;
     }
-    
+
     /* Modal */
     .narisup .modal-dialog {
         width: 660px; /* 570px + 45px x 2 */
@@ -199,39 +199,39 @@
     .narisup .modal-body {
         padding: 20px 45px;
     }
-    
+
     .narisup .modal-footer {
         padding: 20px 45px 20px;
     }
     .narisup .modal-footer .btn {
         width: 120px;
     }
-    
+
     .narisup .modal-footer .btn:not(:last-child):not(:first-child):not(.ng-hide) {
         margin-left: 15px
     }
-    
+
     .modal-body input {
         width: 358px;
     }
-    
+
     .modal-body textarea {
         width: 570px;
         resize: vertical;
     }
-    
+
     .condition-footer .btn:not(:last-child), .action-wrapper .btn:not(:last-child) {
         margin-right: 11px;
     }
-    
+
     .action-wrapper .btn {
         min-width: 86px;
     }
-    
+
     .panel .btn-success, .panel .btn-transparent-success {
         width: 140px;
     }
-    
+
     /* Modal backdrop */
     .modal-backdrop {
         bottom: 0;

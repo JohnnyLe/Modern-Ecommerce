@@ -8,7 +8,7 @@
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
                     <h2 class="title text-center">Category name</h2>
-                    
+
                     <!--product list-->
                     <div ng-repeat="p in products" class="col-sm-4">
                         <div class="product-image-wrapper">
@@ -35,13 +35,17 @@
                     </div>
 
                     <!--paging-->
-                    <div ng-if="products.length > 0" class="col-md-12 text-center">
-                        <ul class="pagination">
-                            <li class="active"><a href="">1</a></li>
-                            <li><a href="">2</a></li>
-                            <li><a href="">3</a></li>
-                            <li><a href="">&raquo;</a></li>
-                        </ul>
+                    <div class="col-md-12 text-center">
+                        <div paging
+                             page="1" 
+                             page-size="pageSize" 
+                             total="totalPage"
+                             show-prev-next="true"
+                             show-first-last="true"
+                             paging-action="loadPage(page)">
+                        </div>
+                        <!--                    <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" num-pages="totalPages" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" boundary-links="true"
+                                                        items-per-page="pageSize" ></ul>-->
                     </div>
                 </div><!--features_items-->
             </div>

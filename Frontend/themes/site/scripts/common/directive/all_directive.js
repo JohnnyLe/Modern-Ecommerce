@@ -382,8 +382,8 @@ angular.module('marketplace.directive', ['components', 'rzModule'])
 
 
                             $scope.slider = {
-                                min: minSliderValue,
-                                max: maxSliderValue,
+                                min: 0,
+                                max: 999,
                                 options: {
                                     hideLimitLabels: true,
                                     floor: minPrice,
@@ -395,10 +395,16 @@ angular.module('marketplace.directive', ['components', 'rzModule'])
                                         // call API and set data response into 'result' variable
                                         var result = 'test result';
                                         // util.callRequest(...)
-                                        $scope.$emit('priceRangeResult', result);
+//                                        $scope.$broadcast('priceRangeResult', result);
                                         console.debug('todo');
                                     }
                                 }
+                            };
+                            $scope.searchWithPrice = function () {
+                                console.log($scope.slider);
+                                $timeout(function () {
+                                    $scope.$emit('priceRangeResult', $scope.slider);
+                                });
                             };
 
                             $scope.categories = [];
@@ -413,7 +419,7 @@ angular.module('marketplace.directive', ['components', 'rzModule'])
                             $scope.loadData = function () {
                                 // load categories                
                                 util.callRequest('categories/list', 'GET', paramCategory).then(function (data) {
-                                    $scope.categories = sortOutAllCategories(data.data.content, null);
+                                    $scope.categories = sortOutAllCategories(data.data.content, 0);
                                 });
 
                                 // load brands
@@ -548,4 +554,26 @@ angular.module('marketplace.directive', ['components', 'rzModule'])
                             };
                         }]
                 };
-            }]);
+            }])
+        .directive('ngElevateZoom', function () {
+            return {
+                restrict: 'A',
+                link: function (scope, element, attrs) {
+                    //Will watch for changes on the attribute
+                    attrs.$observe('zoomImage', function () {
+                        linkElevateZoom();
+                    });
+
+                    function linkElevateZoom() {
+                        //Check if its not empty
+                        if (!attrs.zoomImage)
+                            return;
+                        element.attr('data-zoom-image', attrs.zoomImage);
+                        $(element).elevateZoom();
+                    }
+
+                    linkElevateZoom();
+
+                }
+            };
+        });
