@@ -469,12 +469,17 @@ angular.module('marketplace.directive', ['components', 'rzModule'])
                     scope: {
                         'showPayment': '=?'
                     },
-                    controller: ['$scope', 'ShoppingCart', function ($scope, cart) {
+                    controller: ['$scope', 'ShoppingCart', '$state', function ($scope, cart, $state) {
 
 
                             if (angular.isDefined($scope.minPrice)) {
                                 $scope.showPayment = false;
                             }
+//                            $scope.noQuantity = 1;
+                            $scope.changeCart = function (index){
+                                var quantity = parseInt($scope.items[index].quantity);
+                                cart.addItem($scope.items[index], quantity);
+                            };
 
                             $scope.items = [];
 
@@ -510,6 +515,7 @@ angular.module('marketplace.directive', ['components', 'rzModule'])
                                 $scope.items.splice(index, 1);
                                 // update cookie store
                                 cart.removeItem(itemId);
+                                $state.reload();
                             };
                         }]
                 };

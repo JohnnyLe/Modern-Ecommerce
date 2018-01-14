@@ -2,12 +2,12 @@
 
 angular.module('marketplace.products.details', [])
 
-        .controller('ProductDetailsCtrl', ['$scope', 'util', '$', '$timeout', '$stateParams', 'ShoppingCart', '$http', function ($scope, util, $, $timeout, $stateParams, cart, $http) {
+        .controller('ProductDetailsCtrl', ['$scope', 'util', '$', '$timeout', '$stateParams', 'ShoppingCart', '$http', 'toastr', function ($scope, util, $, $timeout, $stateParams, cart, $http, toastr) {
 
 
                 $scope.proComment = {};
+                $scope.quantity = 1;
                 $scope.pathFile = "http://localhost:8080/ecommerce-rest-api/upload/";
-                $scope.imageName = "https://cdn.tgdd.vn/Products/Images/42/73705/iphone-6s-plus-128gb-400-1-400x450.png";
                 // Data model biding
                 $scope.loadData = function () {
                     util.callRequest('products/detail/' + $stateParams.productId, "GET").then(function (data) {
@@ -87,7 +87,15 @@ angular.module('marketplace.products.details', [])
                 });
 
                 $scope.addToCart = function (product) {
-                    cart.addItem(product);
+                    var item = {
+                        product_id: product.productId,
+                        default_image: product.defaultImage,
+                        product_name: product.name,
+                        price: product.salePrice,
+                        quantity: $scope.quantity
+                    };
+                    cart.addItem(item, item.quantity);
+                    toastr.success("Add product to cart successful");
                 };
 
             }]);

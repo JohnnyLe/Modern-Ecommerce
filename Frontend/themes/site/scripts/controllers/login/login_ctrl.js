@@ -2,53 +2,36 @@
 
 angular.module('marketplace.login', [])
 
-        .controller('LoginCtrl', ['$scope', 'user', "$state", function ($scope, user, $state) {
-                // Alert array
-                $scope.alerts = [];
-                $scope.submitting = false;
+        .controller('LoginCtrl', ['$scope', 'Session', "$state", 'toastr', 'util', function ($scope, Session, $state, toastr, util) {
+                // Checking admin already login
+                if (Session.getAccessToken() && Session.getUser()) {
+                    $state.go('index');
+                    return;
+                }
+                $scope.email = '';
+                $scope.password = '';
 
-                // Close alert
-                $scope.closeAlert = function (index) {
-                    $scope.alerts.splice(index, 1);
-                };
-
-                // Handle submit action
-                $scope.submit = function () {
-                    // Prevent submit multiple time
-                    if ($scope.submitting)
-                        return;
-
-                    if ($scope.email === undefined || $scope.password === undefined) {
-
-                        $scope.alerts = [{
-                                type: 'danger',
-                                msg: "Invalid ID or password"
-                            }];
-
-                        return;
-                    }
-
+                $scope.registerConsoleUser = function () {
                     $scope.submitting = true;
-                    // Do login
-                    user.login({
 
-                        email: $scope.email,
-                        password: $scope.password,
-                        keepMeLogin: $scope.keepMeLogin
-
+                    Session.consoleLogin({
+                        username: $scope.email,
+                        password: util.MD5($scope.password),
+                        keepMeLogin: 1
                     }, function (response) {
                         var status = response.status;
                         if (status === 200) {
-                            console.log("status", response);
+                            // redirect page
+                            $state.go('index');
                         } else {
-                            $scope.alerts = [{
-                                    type: 'danger',
-                                    msg: "Invalid ID or password"
-                                }];
-
+                            util.showErrorToast("Error");
                         }
+                    }).finally(function () {
+                        $scope.submitting = false;
                     });
-
                 };
+
+
+
 
             }]);

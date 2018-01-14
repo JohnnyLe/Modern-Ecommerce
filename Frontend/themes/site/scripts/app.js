@@ -7,6 +7,7 @@ angular.module('marketplace', [
     'ui.router',
     'ui.bootstrap',
     'jm.i18next',
+    'toastr',
     'marketplace.directive',
     'marketplace.authen',
     'marketplace.login',
@@ -23,9 +24,30 @@ angular.module('marketplace', [
                 // For authentication, but for now just Mock demo.
                 // Will be implement in near function
                 $stateProvider
+                        .state('login', {
+                            name: 'login',
+                            url: '/login',
+                            templateUrl: 'scripts/controllers/login/login.html',
+                            controller: 'LoginCtrl'
+                        })
                         .state('master', {
                             templateUrl: 'pages/master_tmpl.html',
-                            abstract: true
+                            abstract: true,
+                            controller: ['$scope', 'Session', '$state', function ($scope, Session, $state) {
+                                    Session.init().then(function () {
+                                        // binding session user
+                                        $scope.user = Session.getUser();
+                                        $scope.isLogin = Session.isLogin();
+                                        $scope.username = $scope.user.firstName + ' ' + $scope.user.lastName;
+
+                                        $scope.logout = function () {
+                                            Session.logout();
+                                            $state.reload();
+                                        };
+                                    }, function () {
+                                        // error handle, show message if necessary
+                                    });
+                                }]
                         })
                         .state('index', {
                             url: '/index?search',
@@ -73,12 +95,7 @@ angular.module('marketplace', [
                             templateUrl: 'scripts/controllers/checkout/checkout.html',
                             controller: 'CheckOutCtrl'
                         })
-                        .state('login', {
-                            url: '/login',
-                            parent: 'master',
-                            templateUrl: 'scripts/controllers/login/login.html',
-                            controller: 'LoginCtrl'
-                        })
+
                         .state('register', {
                             url: '/register',
                             parent: 'master',
@@ -109,7 +126,7 @@ angular.module('marketplace', [
 // We can define intercepor for $http service
         .config(['$httpProvider', function ($httpProvider) {
 
-                $httpProvider.interceptors.push(function ($q, $injector, $location, $timeout) {
+                $httpProvider.interceptors.push(function ($q, $injector, $location, $timeout, $cookies) {
 
                     var api = $injector.get('api'),
                             app = $injector.get('app'),
@@ -143,7 +160,7 @@ angular.module('marketplace', [
                     return {
 
                         request: function (config) {
-
+                            config.headers['X-Access-Token'] = $cookies.get('AccessToken');
                             // Loop to find 
                             angular.forEach(api, function (a) {
 
@@ -231,7 +248,7 @@ angular.module('marketplace', [
             }])
 
 // Init app
-        .run(['$rootScope', 'user', '$', function ($rootScope, user, $) {
+        .run(['$rootScope', '$', function ($rootScope, $) {
 
                 //user.init();
 

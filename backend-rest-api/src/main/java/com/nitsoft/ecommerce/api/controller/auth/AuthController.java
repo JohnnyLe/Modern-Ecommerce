@@ -11,11 +11,14 @@ import com.nitsoft.ecommerce.api.APIName;
 import com.nitsoft.ecommerce.api.request.model.AuthRequestModel;
 import com.nitsoft.ecommerce.api.response.model.APIResponse;
 import com.nitsoft.ecommerce.api.controller.AbstractBaseController;
+import com.nitsoft.ecommerce.api.response.model.UserDetailResponseModel;
 import com.nitsoft.ecommerce.api.response.util.APIStatus;
 import com.nitsoft.ecommerce.auth.AuthUserFactory;
 import com.nitsoft.ecommerce.database.model.User;
+import com.nitsoft.ecommerce.database.model.UserAddress;
 import com.nitsoft.ecommerce.database.model.UserToken;
 import com.nitsoft.ecommerce.exception.ApplicationException;
+import com.nitsoft.ecommerce.service.UserAddressService;
 import com.nitsoft.ecommerce.service.auth.AuthService;
 import com.nitsoft.util.Constant;
 import com.nitsoft.util.MD5Hash;
@@ -39,18 +42,22 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(APIName.AUTH_API)
-public class AuthController extends AbstractBaseController{
+public class AuthController extends AbstractBaseController {
+
     @Autowired
     AuthService authService;
-    
+
     @Autowired
     AuthUserFactory authUserFactory;
-    
+
+    @Autowired
+    UserAddressService userAddressService;
+
     @RequestMapping(path = APIName.ADMIN_LOGIN_API, method = RequestMethod.POST)
-    public ResponseEntity<APIResponse> adminLogin (
+    public ResponseEntity<APIResponse> adminLogin(
             @PathVariable("company_id") Long companyId,
             @RequestBody AuthRequestModel authRequestModel
-    ){
+    ) {
         User adminUser = authService.getUserByEmailAndCompanyIdAndStatus(authRequestModel.getUsername(), companyId, Constant.USER_STATUS.ACTIVE.getStatus());
         if (adminUser == null) {
             throw new ApplicationException(APIStatus.ERR_USER_NOT_EXIST);
@@ -88,38 +95,52 @@ public class AuthController extends AbstractBaseController{
 
         }
     }
-    
+
     @RequestMapping(path = APIName.SESSION_DATA, method = RequestMethod.GET)
     public ResponseEntity<APIResponse> getSessionData(
             HttpServletRequest request,
             @PathVariable("company_id") Long companyId
     ) {
         String userId = getAuthUserFromSession(request).getId();
-        if (userId != null && !"".equals(userId)){
-            User user = authService.getUserByUserIdAndCompanyIdAndStatus(userId ,companyId, Constant.USER_STATUS.ACTIVE.getStatus());
-            if(user != null){
-                return responseUtil.successResponse(user);
-            }else{
+        if (userId != null && !"".equals(userId)) {
+            User user = authService.getUserByUserIdAndCompanyIdAndStatus(userId, companyId, Constant.USER_STATUS.ACTIVE.getStatus());
+            UserAddress userAddress = userAddressService.getAddressByUserIdAndStatus(userId, Constant.STATUS.ACTIVE_STATUS.getValue());
+            if (user != null) {
+                UserDetailResponseModel userResponse = new UserDetailResponseModel();
+                userResponse.setUserId(user.getUserId());
+                userResponse.setCompanyId(user.getCompanyId());
+                userResponse.setEmail(user.getEmail());
+                userResponse.setFirstName(user.getFirstName());
+                userResponse.setLastName(user.getLastName());
+                userResponse.setRoleId(user.getRoleId());
+                if (userAddress != null) {
+                    userResponse.setAddress(userAddress.getAdress());
+                    userResponse.setCity(userAddress.getCity());
+                    userResponse.setCountry(userAddress.getCountry());
+                    userResponse.setPhone(userAddress.getPhone());
+                }
+                return responseUtil.successResponse(userResponse);
+            } else {
                 throw new ApplicationException(APIStatus.ERR_USER_NOT_EXIST);
             }
-        }else{
+        } else {
             throw new ApplicationException(APIStatus.INVALID_PARAMETER);
         }
     }
-    
+
     @RequestMapping(path = APIName.USERS_LOGOUT, method = RequestMethod.POST)
     public ResponseEntity<APIResponse> logout(
             @RequestHeader(value = Constant.HEADER_TOKEN) String tokenId
     ) {
-        if (tokenId != null && !"".equals(tokenId)){
+        if (tokenId != null && !"".equals(tokenId)) {
             UserToken userToken = authService.getUserTokenById(tokenId);
-            if (userToken != null){
+            if (userToken != null) {
                 authService.deleteUserToken(userToken);
                 return responseUtil.successResponse("OK");
-            }else{
+            } else {
                 throw new ApplicationException(APIStatus.ERR_SESSION_NOT_FOUND);
             }
-        }else{
+        } else {
             throw new ApplicationException(APIStatus.INVALID_PARAMETER);
         }
     }

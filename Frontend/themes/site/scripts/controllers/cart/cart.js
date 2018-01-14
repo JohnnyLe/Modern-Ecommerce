@@ -2,21 +2,10 @@
 
 angular.module('marketplace.cart', [])
 
-        .controller('CartCtrl', ['$scope', 'util', '$', '$timeout', '$stateParams', 'ShoppingCart', '$state', function ($scope, util, $, $timeout, $stateParams, cart, $state) {
-
+        .controller('CartCtrl', ['$scope', 'util', '$', '$timeout', '$stateParams', 'ShoppingCart', '$state', 'Session', function ($scope, util, $, $timeout, $stateParams, cart, $state, Session) {
+                
                 $scope.totalBill = 0;
-                $scope.addToCart = function () {
-
-                    var item = {
-                        product_id: "101",
-                        default_image: "../images/p8.jpg",
-                        product_name: "Product 101",
-                        price: 130,
-                        quantity: 3
-                    };
-                    cart.addItem(item, item.quantity);
-                };
-
+                $scope.items = cart.getItems();
                 $scope.calculateTotal = function () {
                     var itemList = cart.getItems();
                     if (typeof itemList !== 'undefined') {
@@ -32,7 +21,6 @@ angular.module('marketplace.cart', [])
                 $scope.goCheckOut = function () {
                     $state.go('checkoutdetails');
                 };
-
 
             }]);
 

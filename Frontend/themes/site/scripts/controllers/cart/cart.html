@@ -6,7 +6,6 @@
                 <li class="active">Shopping Cart</li>
             </ol>
         </div>
-        <button ng-click="addToCart()">Add to cart</button>
         <shopping-cart />
         
     </div>
@@ -25,7 +24,7 @@
                         <li>Shipping Cost <span>Free</span></li>
                         <li>Total <span>${{totalBill}}</span></li>
                     </ul>
-                    <button class="btn btn-default check_out" ng-click="goCheckOut()">Check Out</button>
+                    <button class="btn btn-default check_out" ng-disabled="!(items.length > 0)" ng-click="goCheckOut()">Check Out</button>
                 </div>
             </div>
         </div>

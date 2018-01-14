@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/NIT%20SOFTWARE/Academia/Modern-Ecommerce/Frontend/themes/site/scripts/controllers/utils/util.js</file>
-            <file>file:/D:/NIT%20SOFTWARE/Academia/Modern-Ecommerce/Frontend/themes/site/scripts/common/directive/all_directive.js</file>
-            <file>file:/D:/NIT%20SOFTWARE/Academia/Modern-Ecommerce/Frontend/themes/site/scripts/controllers/checkout/checkout.js</file>
-            <file>file:/D:/NIT%20SOFTWARE/Academia/Modern-Ecommerce/Frontend/themes/site/template/shopping_cart.html</file>
+            <file>file:/D:/NIT%20SOFTWARE/Academia/Modern-Ecommerce/Frontend/themes/site/scripts/controllers/home/home_ctrl.js</file>
+            <file>file:/D:/NIT%20SOFTWARE/Academia/Modern-Ecommerce/Frontend/themes/site/scripts/controllers/utils/user_factory.js</file>
             <file>file:/D:/NIT%20SOFTWARE/Academia/Modern-Ecommerce/Frontend/themes/site/scripts/app.js</file>
-            <file>file:/D:/NIT%20SOFTWARE/Academia/Modern-Ecommerce/Frontend/themes/site/scripts/controllers/checkout/checkout.html</file>
+            <file>file:/D:/NIT%20SOFTWARE/Academia/Modern-Ecommerce/Frontend/themes/site/scripts/controllers/utils/constant.js</file>
         </group>
     </open-files>
 </project-private>

@@ -5,8 +5,10 @@ import com.nitsoft.ecommerce.api.AbstractBaseAPI;
 import com.nitsoft.ecommerce.api.request.model.AuthRequestModel;
 import com.nitsoft.ecommerce.api.request.model.OrderRequestModel;
 import com.nitsoft.ecommerce.api.request.model.ProductInfo;
+import com.nitsoft.ecommerce.api.response.model.APIResponse;
 import com.nitsoft.ecommerce.api.response.util.APIStatus;
 import com.nitsoft.ecommerce.api.response.model.StatusResponse;
+import com.nitsoft.ecommerce.api.response.util.ResponseUtil;
 import com.nitsoft.ecommerce.database.model.OrderAddress;
 import com.nitsoft.ecommerce.database.model.OrderDetail;
 import com.nitsoft.ecommerce.database.model.Orders;
@@ -34,6 +36,7 @@ import org.hibernate.validator.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,10 +67,12 @@ public class OrdersAPI extends AbstractBaseAPI {
     ProductService productService;
     @Autowired
     OrderDetailImpl orderDetailImpl;
+    @Autowired
+    ResponseUtil responseUtil;
 
-    @RequestMapping(value = APIName.ORDER_CREATE,method = RequestMethod.POST, produces = APIName.CHARSET)
+    @RequestMapping(value = APIName.ORDER_CREATE, method = RequestMethod.POST, produces = APIName.CHARSET)
     @ResponseBody
-    public String addOrders(
+    public ResponseEntity<APIResponse> addOrders(
             @PathVariable Long company_id,
             @RequestBody OrderRequestModel orderRequest) {
 
@@ -84,17 +89,22 @@ public class OrdersAPI extends AbstractBaseAPI {
         orders.setCreatedAt(createDate);
         orders.setUpdatedAt(createDate);
         ordersService.save(orders);
-
+        
         //Crerate User address
-        UserAddress userAddress = new UserAddress();
-        userAddress.setUserId(orderRequest.getUser().getUserId());
-        userAddress.setAdress(orderRequest.getUser().getAddress());
-        userAddress.setPhone(orderRequest.getUser().getPhone());
-        userAddress.setFax(orderRequest.getUser().getFax());
-        userAddress.setCity(orderRequest.getUser().getCity());
-        userAddress.setCountry(orderRequest.getUser().getCountry());
-        userAddress.setStatus(Constant.STATUS.ACTIVE_STATUS.getValue());
-        userAddressService.save(userAddress);
+        UserAddress userAddress = null;
+        if (orderRequest.getUser().getUserId() == null || orderRequest.getUser().getUserId().isEmpty()) {
+            userAddress = new UserAddress();
+            userAddress.setUserId(orderRequest.getUser().getUserId());
+            userAddress.setAdress(orderRequest.getUser().getAddress());
+            userAddress.setPhone(orderRequest.getUser().getPhone());
+            userAddress.setFax(orderRequest.getUser().getFax());
+            userAddress.setCity(orderRequest.getUser().getCity());
+            userAddress.setCountry(orderRequest.getUser().getCountry());
+            userAddress.setStatus(Constant.STATUS.ACTIVE_STATUS.getValue());
+            userAddressService.save(userAddress);
+        }else{
+            userAddress = userAddressService.getAddressByUserIdAndStatus(orderRequest.getUser().getUserId(), Constant.STATUS.ACTIVE_STATUS.getValue());
+        }
 
         //Craete Order Address Info
         OrderAddress orderAddress = new OrderAddress();
@@ -102,12 +112,11 @@ public class OrdersAPI extends AbstractBaseAPI {
         orderAddress.setOrderId(orders.getId());
         orderAddress.setCreatedAt(createDate);
         orderAddressImpl.saveOrUpdate(orderAddress);
-        
-        
+
         if (orderRequest.getProductList().size() > 0) {
             for (ProductInfo productInfo : orderRequest.getProductList()) {
                 Product product = productService.getProductById(company_id, productInfo.getProductId());
-                if (product != null) {                   
+                if (product != null) {
                     OrderDetail orderDetail = new OrderDetail();
                     orderDetail.setOrderId(orders.getId());
                     orderDetail.setProductId(product.getProductId());
@@ -120,7 +129,7 @@ public class OrdersAPI extends AbstractBaseAPI {
                 }
             }
         }
-        return writeObjectToJson(new StatusResponse<>(HttpStatus.OK.value(), orders));
+        return responseUtil.successResponse(orders);
     }
 
     @ApiOperation(value = "get orders by company id", notes = "")

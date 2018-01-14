@@ -198,10 +198,9 @@ define(['theme', 'nprocess'], function (theme, NProgress) {
                                 controller: ['$scope', 'Session', function ($scope, Session) {
 
                                         Session.init().then(function () {
-
                                             // binding session user
                                             $scope.user = Session.getUser();
-
+                                            
                                             $scope.username = $scope.user.firstName + ' ' + $scope.user.lastName;
 
                                             $scope.logout = function () {

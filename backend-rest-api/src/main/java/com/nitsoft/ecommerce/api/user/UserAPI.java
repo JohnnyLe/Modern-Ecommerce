@@ -76,19 +76,6 @@ public class UserAPI extends AbstractBaseController {
                 }
 
                 if (passwordHash.equals(userLogin.getPasswordHash())) {
-//                    UserToken userToken = new UserToken();
-//                    userToken.setToken(UniqueID.getUUID());
-//                    userToken.setCompanyId(company_id);
-//                    userToken.setUserId(userLogin.getUserId());
-//
-//                    Date currentDate = new Date();
-//                    userToken.setLoginDate(DateUtil.convertToUTC(currentDate));
-//
-//                    Date expirationDate = authRequestModel.isKeepMeLogin() ? new Date(currentDate.getTime() + Constant.DEFAULT_REMEMBER_LOGIN_MILISECONDS) : new Date(currentDate.getTime() + Constant.DEFAULT_SESSION_TIME_OUT);
-//                    userToken.setExpirationDate(DateUtil.convertToUTC(expirationDate));
-//
-//                    userTokenService.save(userToken);
-//                    return responseUtil.successResponse(userToken);
                     UserToken userToken = authService.createUserToken(userLogin, authRequestModel.isKeepMeLogin());
                     // Create Auth User -> Set to filter config
                     // Perform the security
@@ -112,9 +99,12 @@ public class UserAPI extends AbstractBaseController {
     }
 
     @RequestMapping(value = APIName.USERS_LOGOUT, method = RequestMethod.POST, produces = APIName.CHARSET)
-    public ResponseEntity<APIResponse> logout(@PathVariable Long companyId, @RequestParam String token) {
-
-        UserToken userToken = userTokenService.getTokenById(token);
+    public ResponseEntity<APIResponse> logout(
+            @PathVariable Long company_id,
+            HttpServletRequest request) {
+        
+        String authToken = request.getHeader(Constant.HEADER_TOKEN);
+        UserToken userToken = userTokenService.getTokenById(authToken);
         if (userToken != null) {
             userTokenService.invalidateToken(userToken);
             return responseUtil.successResponse(APIStatus.OK);

@@ -2,7 +2,7 @@
 
 angular.module('marketplace.home', ['bw.paging'])
 
-        .controller('HomeCtrl', ['$scope', 'util', 'ShoppingCart', '$stateParams', function ($scope, util, cart, $stateParams) {
+        .controller('HomeCtrl', ['$scope', 'util', 'ShoppingCart', '$stateParams', 'toastr', function ($scope, util, cart, $stateParams, toastr) {
 
                 $scope.pageSize = 12;
                 $scope.currentPage = 1;
@@ -34,7 +34,7 @@ angular.module('marketplace.home', ['bw.paging'])
                     paramProduct.pageNumber = pNumber - 1;
                     paramProduct.pageSize = $scope.pageSize;
                     paramProduct.searchKey = $stateParams.search;
-                    util.callRequest('/products/filter', "POST", paramProduct).then(function (response) {
+                    util.callRequest('products/filter', "POST", paramProduct).then(function (response) {
                         $scope.products = response.data.data;
                         $scope.totalPage = response.data.totalResult;
                         if ($stateParams.search !== "") {
@@ -67,6 +67,17 @@ angular.module('marketplace.home', ['bw.paging'])
                     paramProduct.maxPrice = data.max;
                     $scope.loadListProduct();
                 });
-
+                
+                $scope.addToCart = function (product) {
+                    var item = {
+                        product_id: product.productId,
+                        default_image: product.defaultImage,
+                        product_name: product.name,
+                        price: product.salePrice,
+                        quantity: $scope.quantity
+                    };
+                    cart.addItem(item, item.quantity);
+                    toastr.success("Add product to cart successful");
+                };
             }]);
 

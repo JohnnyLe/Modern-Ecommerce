@@ -10,13 +10,15 @@ angular.module('marketplace')
 
 .constant('AppConstant', {
     DEFAULT_MIN_PRICE_RANGE: 0,
-    DEFAULT_MAX_PRICE_RANGE: 999
+    DEFAULT_MAX_PRICE_RANGE: 999,
+    SESSION_COOKIES: "AccessToken"
 })
 
 .constant('api', {
     REGISTER: {name: 'users/register', type: 'POST'},
     LOGIN: {name: 'users/login', type: 'POST'},  
-    LOGOUT: {name: 'api/logout', type: 'POST', token: true}
+    LOGOUT: {name: 'api/logout', type: 'POST', token: true},
+    GET_USER_PROFILE: {name: '/auth/session/data', type: 'GET'}
 })
 
 // Define error code

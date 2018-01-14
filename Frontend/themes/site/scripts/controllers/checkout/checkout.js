@@ -1,28 +1,33 @@
 'use strict';
-angular.module('marketplace.checkoutdetails', [])
+angular.module('marketplace.checkoutdetails', ['marketplace.authen'])
 
-        .controller('CheckOutCtrl', ['$scope', 'util', '$', '$timeout', '$stateParams', 'ShoppingCart', function ($scope, util, $, $timeout, $stateParams, cart) {
+        .controller('CheckOutCtrl', ['$scope', 'util', '$', '$timeout', '$stateParams', 'ShoppingCart', 'Session', 'toastr', '$cookies', '$state', function ($scope, util, $, $timeout, $stateParams, cart, Session, toastr, $cookies, $state) {
+                setTimeout(function () {
+                    $scope.$apply(function () {
+                        $scope.currentUser = Session.getUser();
+                        $scope.isLogin = angular.isObject($scope.currentUser);
+                    });
+                }, 2000);
 
-                var isLogin = true;
                 $scope.emailPattern = /^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$/;
                 $scope.phoneNumber = /^\+?[0-9]\d{1,16}$/;
                 $scope.submitting = false;
                 $scope.items = cart.getItems();
                 $scope.user = {
                     "userId": "",
-                    "firstName":"",
+                    "firstName": "",
                     "lastName": "",
                     "middleName": "",
-                    "email":"",
+                    "email": "",
                     "phone": "",
                     "fax": "",
                     "address": "",
-                    "city":"",
+                    "city": "",
                     "country": ""
                 };
 
                 $scope.createOrder = function () {
-                    $scope.submitting = true; 
+                    $scope.submitting = true;
                     var params = {};
                     var products = [];
                     for (var i = 0; i < $scope.items.length; i++) {
@@ -34,12 +39,29 @@ angular.module('marketplace.checkoutdetails', [])
                         product.quantity = $scope.items[i].quantity;
                         products[i] = product;
                     }
-                    params.user = isLogin ? angular.copy($scope.user): null;
+                    
+                    if($scope.isLogin){
+                       $scope.user.userId = $scope.currentUser.userId; 
+                       $scope.user.firstName = $scope.currentUser.firstName; 
+                       $scope.user.lastName = $scope.currentUser.lastName; 
+                       $scope.user.email = $scope.currentUser.email; 
+                       $scope.user.phone = $scope.currentUser.phone; 
+                       $scope.user.address = $scope.currentUser.address; 
+                       $scope.user.city = $scope.currentUser.city; 
+                       $scope.user.country = $scope.currentUser.country; 
+                    }
+                    
+                    params.user = angular.copy($scope.user);
                     params.productList = products;
-                    console.log("param", params);
                     util.callRequest('orders/create', "POST", params).then(function (response) {
-                        console.log("response", response.data);
-                        
+                        var status = response.status;
+                        if(status === 200){
+                           toastr.success("Create Order Success");
+                           cart.emptyCart();
+                           $state.go('index');
+                        }else{
+                           toastr.error("Error when create orders"); 
+                        }
                     });
                     $scope.submitting = false;
                 };

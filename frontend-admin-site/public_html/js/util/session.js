@@ -99,7 +99,7 @@ angular.module('ec-admin.session', ['ngCookies', 'ec-admin.utils', 'ec-admin.con
             init: function () {
                 
                 var defer = $q.defer();
-                
+                console.log("init");
                 // validate session
                 if (service.getAccessToken()) {
                     
