@@ -2,7 +2,7 @@
 
 angular.module('marketplace.cart', [])
 
-        .controller('CartCtrl', ['$scope', 'util', '$', '$timeout', '$stateParams', 'ShoppingCart', function ($scope, util, $, $timeout, $stateParams, cart) {
+        .controller('CartCtrl', ['$scope', 'util', '$', '$timeout', '$stateParams', 'ShoppingCart', '$state', function ($scope, util, $, $timeout, $stateParams, cart, $state) {
 
                 $scope.totalBill = 0;
                 $scope.addToCart = function () {
@@ -26,14 +26,14 @@ angular.module('marketplace.cart', [])
                     }
 
                 };
-                
+
                 $scope.calculateTotal();
-                
-                $scope.goCheckOut = function(){
-                    
-                }
-                
-                
+
+                $scope.goCheckOut = function () {
+                    $state.go('checkoutdetails');
+                };
+
+
             }]);
 
 

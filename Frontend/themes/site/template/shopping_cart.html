@@ -23,7 +23,7 @@
                 <td class="cart_quantity">
                     <div class="cart_quantity_button">
                         <a class="cart_quantity_up" ng-click="increaseQuantity($index)"> + </a>
-                        <input class="cart_quantity_input" type="text" name="quantity" value="{{item.quantity}}" autocomplete="off" size="2">
+                        <input class="cart_quantity_input" type="text" disabled="diabled" name="quantity" value="{{item.quantity}}" autocomplete="off" size="2">
                         <a class="cart_quantity_down" ng-click="decreaseQuantity($index)"> - </a>
                     </div>
                 </td>

@@ -175,7 +175,6 @@ angular.module('marketplace')
                     // add a product into shopping cart
                     addItem: function (product, quantity) {
                         // just add product if 'p' parameter is object
-                        console.log("bb");
                         if (angular.isObject(product)) {
                             // check product already exists in cart
                             if (product.product_id) {

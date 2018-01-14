@@ -14,7 +14,8 @@ angular.module('marketplace', [
     'marketplace.home',
     'marketplace.products.details',
     'marketplace.products.filter',
-    'marketplace.cart'
+    'marketplace.cart',
+    'marketplace.checkoutdetails'
 ]).
 // Define all route of our app
         config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -55,16 +56,22 @@ angular.module('marketplace', [
                             templateUrl: 'scripts/controllers/products/details/product-details.html',
                             controller: 'ProductDetailsCtrl'
                         })
-                        .state('checkout', {
-                            url: '/checkout',
-                            parent: 'master',
-                            templateUrl: 'pages/checkout.html'
-                        })
+//                        .state('checkout', {
+//                            url: '/checkout',
+//                            parent: 'master',
+//                            templateUrl: 'pages/checkout.html'
+//                        })
                         .state('cart', {
                             url: '/cart',
                             parent: 'master',
                             templateUrl: 'scripts/controllers/cart/cart.html',
                             controller: 'CartCtrl'
+                        })
+                        .state('checkoutdetails', {
+                            url: '/checkout',
+                            parent: 'master',
+                            templateUrl: 'scripts/controllers/checkout/checkout.html',
+                            controller: 'CheckOutCtrl'
                         })
                         .state('login', {
                             url: '/login',

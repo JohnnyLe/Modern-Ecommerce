@@ -27,7 +27,9 @@ import com.nitsoft.util.Constant;
 import com.nitsoft.util.UniqueID;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.hibernate.validator.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -45,7 +47,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author NHU LINH
  */
 @RestController
-@Api(value = "create orders API")
 @RequestMapping(value = APIName.ORDERS)
 public class OrdersAPI extends AbstractBaseAPI {
 
@@ -64,7 +65,7 @@ public class OrdersAPI extends AbstractBaseAPI {
     @Autowired
     OrderDetailImpl orderDetailImpl;
 
-    @RequestMapping(method = RequestMethod.POST, produces = APIName.CHARSET)
+    @RequestMapping(value = APIName.ORDER_CREATE,method = RequestMethod.POST, produces = APIName.CHARSET)
     @ResponseBody
     public String addOrders(
             @PathVariable Long company_id,
@@ -101,12 +102,14 @@ public class OrdersAPI extends AbstractBaseAPI {
         orderAddress.setOrderId(orders.getId());
         orderAddress.setCreatedAt(createDate);
         orderAddressImpl.saveOrUpdate(orderAddress);
-
+        
+        
         if (orderRequest.getProductList().size() > 0) {
             for (ProductInfo productInfo : orderRequest.getProductList()) {
                 Product product = productService.getProductById(company_id, productInfo.getProductId());
                 if (product != null) {                   
                     OrderDetail orderDetail = new OrderDetail();
+                    orderDetail.setOrderId(orders.getId());
                     orderDetail.setProductId(product.getProductId());
                     orderDetail.setName(product.getName());
                     orderDetail.setPrice(product.getSalePrice());
