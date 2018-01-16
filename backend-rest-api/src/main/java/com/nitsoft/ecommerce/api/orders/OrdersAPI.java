@@ -77,19 +77,7 @@ public class OrdersAPI extends AbstractBaseAPI {
             @RequestBody OrderRequestModel orderRequest) {
 
         Date createDate = new Date();
-        //Create Order General Info
-        Orders orders = new Orders();
-        orders.setUserId(orderRequest.getUser().getUserId());
-        orders.setCompanyId(company_id);
-        orders.setCustomerEmail(orderRequest.getUser().getEmail());
-        orders.setCustomerFirstname(orderRequest.getUser().getFirstName());
-        orders.setCustomerMiddlename(orderRequest.getUser().getMiddleName());
-        orders.setCustomerLastname(orderRequest.getUser().getLastName());
-        orders.setStatus(Constant.ORDER_STATUS.PENDING.getStatus());
-        orders.setCreatedAt(createDate);
-        orders.setUpdatedAt(createDate);
-        ordersService.save(orders);
-        
+
         //Crerate User address
         UserAddress userAddress = null;
         if (orderRequest.getUser().getUserId() == null || orderRequest.getUser().getUserId().isEmpty()) {
@@ -102,16 +90,23 @@ public class OrdersAPI extends AbstractBaseAPI {
             userAddress.setCountry(orderRequest.getUser().getCountry());
             userAddress.setStatus(Constant.STATUS.ACTIVE_STATUS.getValue());
             userAddressService.save(userAddress);
-        }else{
+        } else {
             userAddress = userAddressService.getAddressByUserIdAndStatus(orderRequest.getUser().getUserId(), Constant.STATUS.ACTIVE_STATUS.getValue());
         }
-
-        //Craete Order Address Info
-        OrderAddress orderAddress = new OrderAddress();
-        orderAddress.setAdressId(userAddress.getAdressId());
-        orderAddress.setOrderId(orders.getId());
-        orderAddress.setCreatedAt(createDate);
-        orderAddressImpl.saveOrUpdate(orderAddress);
+        //Create Order General Info
+        Orders orders = new Orders();
+        orders.setUserId(orderRequest.getUser().getUserId());
+        orders.setCompanyId(company_id);
+        orders.setCustomerEmail(orderRequest.getUser().getEmail());
+        orders.setCustomerFirstname(orderRequest.getUser().getFirstName());
+        orders.setCustomerMiddlename(orderRequest.getUser().getMiddleName());
+        orders.setCustomerLastname(orderRequest.getUser().getLastName());
+        orders.setPaymentId(orderRequest.getPaymentId());
+        orders.setAdressId(userAddress.getAdressId());
+        orders.setStatus(Constant.ORDER_STATUS.PENDING.getStatus());
+        orders.setCreatedAt(createDate);
+        orders.setUpdatedAt(createDate);
+        ordersService.save(orders);
 
         if (orderRequest.getProductList().size() > 0) {
             for (ProductInfo productInfo : orderRequest.getProductList()) {
@@ -123,7 +118,6 @@ public class OrdersAPI extends AbstractBaseAPI {
                     orderDetail.setName(product.getName());
                     orderDetail.setPrice(product.getSalePrice());
                     orderDetail.setQuantity(productInfo.getQuantity());
-//                    orderDetail.setPaymentId(company_id);
                     orderDetail.setCreatedAt(createDate);
                     orderDetailImpl.saveOrUpdate(orderDetail);
                 }

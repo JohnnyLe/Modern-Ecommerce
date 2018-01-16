@@ -53,6 +53,7 @@ angular.module('marketplace.checkoutdetails', ['marketplace.authen'])
                     
                     params.user = angular.copy($scope.user);
                     params.productList = products;
+                    params.paymentId = 1;
                     util.callRequest('orders/create', "POST", params).then(function (response) {
                         var status = response.status;
                         if(status === 200){

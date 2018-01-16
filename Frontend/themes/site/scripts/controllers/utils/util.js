@@ -100,13 +100,13 @@ angular.module('marketplace')
                     showSuccessToast: function (mgs) {
 
                         if (mgs) {
-                            toastr.success(translate(mgs));
+                            toastr.success(mgs);
                         }
                     },
                     showErrorToast: function (mgs) {
 
                         if (mgs) {
-                            toastr.error(translate(mgs));
+                            toastr.error(mgs);
                         }
                     },
 
