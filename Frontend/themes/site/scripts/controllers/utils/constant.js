@@ -11,6 +11,7 @@ angular.module('marketplace')
 .constant('AppConstant', {
     DEFAULT_MIN_PRICE_RANGE: 0,
     DEFAULT_MAX_PRICE_RANGE: 999,
+    pathFile: "",  //"http://localhost:8080/ecommerce-rest-api/upload/",
     SESSION_COOKIES: "AccessToken"
 })
 

@@ -21,7 +21,7 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img ng-src="{{p.defaultImage}}" alt="" />
+                                    <img ng-src="{{pathFile + p.defaultImage}}" alt="" />
                                     <h2>{{'$' + p.salePrice}}</h2>
                                     <p>{{p.name}}</p>
                                     <button ng-click="addToCart(p)" class="btn btn-default add-to-cart">

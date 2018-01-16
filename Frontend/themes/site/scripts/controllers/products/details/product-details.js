@@ -2,13 +2,14 @@
 
 angular.module('marketplace.products.details', [])
 
-        .controller('ProductDetailsCtrl', ['$scope', 'util', '$', '$timeout', '$stateParams', 'ShoppingCart', '$http', 'toastr', function ($scope, util, $, $timeout, $stateParams, cart, $http, toastr) {
+        .controller('ProductDetailsCtrl', ['$scope', 'util', '$', '$timeout', '$stateParams', 'ShoppingCart', '$http', 'toastr', 'AppConstant', function ($scope, util, $, $timeout, $stateParams, cart, $http, toastr, AppConstant) {
 
 
                 $scope.proComment = {};
                 $scope.random = 1;
+                $scope.totalPage = 1;
                 $scope.quantity = 1;
-                $scope.pathFile = "http://localhost:8080/ecommerce-rest-api/upload/";
+                $scope.pathFile = AppConstant.pathFile;
                 // Data model biding
                 $scope.loadData = function () {
                     util.callRequest('products/detail/' + $stateParams.productId, "GET").then(function (data) {
@@ -78,13 +79,16 @@ angular.module('marketplace.products.details', [])
                     paramRe.pageNumber = pNumber;
                     util.callRequest('/products/filter', "POST", paramRe).then(function (response) {
                         $scope.productRecomands = response.data.data;
+                        $scope.totalPage = response.data.totalPage;
                     });
                 };
 
                 $scope.loadPageRe = function (page) {
-                    console.log(page);
                     if (page === 0) {
                         page += 2;
+                    }
+                    if(page === $scope.totalPage){
+                        page -= 2;
                     }
                     if($scope.random < page){
                         $scope.random++;

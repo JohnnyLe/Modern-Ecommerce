@@ -2,7 +2,7 @@
 
 angular.module('marketplace.products.filter', [])
 
-        .controller('ProductFilterCtrl', ['$scope', 'util', '$stateParams', 'ShoppingCart', function ($scope, util, $stateParams, cart) {
+        .controller('ProductFilterCtrl', ['$scope', 'util', '$stateParams', 'ShoppingCart', 'AppConstant', function ($scope, util, $stateParams, cart, AppConstant) {
 
                 // Data model binding
 //                $scope.loadData = function () {
@@ -12,6 +12,7 @@ angular.module('marketplace.products.filter', [])
 //                };
                 $scope.pageSize = 12;
                 $scope.currentPage = 1;
+                $scope.pathFile = AppConstant.pathFile;
                 var param = {
                     categoryId: -1,
                     attributeId: -1,

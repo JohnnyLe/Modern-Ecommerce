@@ -2,12 +2,13 @@
 
 angular.module('marketplace.home', ['bw.paging'])
 
-        .controller('HomeCtrl', ['$scope', 'util', 'ShoppingCart', '$stateParams', 'toastr', function ($scope, util, cart, $stateParams, toastr) {
+        .controller('HomeCtrl', ['$scope', 'util', 'ShoppingCart', '$stateParams', 'toastr', 'AppConstant', function ($scope, util, cart, $stateParams, toastr, AppConstant) {
 
                 $scope.pageSize = 12;
                 $scope.currentPage = 1;
                 $scope.searchKeyShow = "";
                 $scope.showResultFound = false;
+                $scope.pathFile = AppConstant.pathFile;
                 var paramProduct = {
                     categoryId: -1,
                     attributeId: -1,
