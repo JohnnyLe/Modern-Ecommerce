@@ -123,7 +123,7 @@ public class OrdersAPI extends AbstractBaseAPI {
                     orderDetail.setName(product.getName());
                     orderDetail.setPrice(product.getSalePrice());
                     orderDetail.setQuantity(productInfo.getQuantity());
-                    orderDetail.setPaymentId(company_id);
+//                    orderDetail.setPaymentId(company_id);
                     orderDetail.setCreatedAt(createDate);
                     orderDetailImpl.saveOrUpdate(orderDetail);
                 }

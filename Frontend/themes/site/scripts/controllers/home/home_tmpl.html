@@ -1,5 +1,10 @@
+<script>
+    setTimeout(function () {
+        $.removeData($('img'), 'elevateZoom');
+        $('.zoomContainer').remove();
+    }, 500);
+</script>
 <div slider></div>
-
 <section>
     <div class="container">
         <div class="row">
@@ -49,102 +54,102 @@
                     </div>
                 </div><!--features_items-->
 
-<!--                <div class="category-tab">category-tab
-                    <div class="col-sm-12">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
-                            <li><a href="#blazers" data-toggle="tab">Blazers</a></li>
-                            <li><a href="#sunglass" data-toggle="tab">Sunglass</a></li>
-                            <li><a href="#kids" data-toggle="tab">Kids</a></li>
-                            <li><a href="#poloshirt" data-toggle="tab">Polo shirt</a></li>
-                        </ul>
-                    </div>
-                    <div class="tab-content">
-                        <div class="tab-pane fade active in" id="tshirt" >
-                            <div class="col-sm-3" ng-repeat="tshirt in tshirts">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img ng-src="{{tshirt.image}}" alt="" />
-                                            <h2>{{tshirt.price}}</h2>
-                                            <p>{{tshirt.describe}}</p>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                        </div>
-
+                <!--                <div class="category-tab">category-tab
+                                    <div class="col-sm-12">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
+                                            <li><a href="#blazers" data-toggle="tab">Blazers</a></li>
+                                            <li><a href="#sunglass" data-toggle="tab">Sunglass</a></li>
+                                            <li><a href="#kids" data-toggle="tab">Kids</a></li>
+                                            <li><a href="#poloshirt" data-toggle="tab">Polo shirt</a></li>
+                                        </ul>
                                     </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                        <div class="tab-pane fade" id="blazers" >
-                            <div class="col-sm-3" ng-repeat="blazer in blazers">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img ng-src="{{blazer.image}}" alt="" />
-                                            <h2>{{blazer.price}}</h2>
-                                            <p>{{blazer.describe}}</p>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade active in" id="tshirt" >
+                                            <div class="col-sm-3" ng-repeat="tshirt in tshirts">
+                                                <div class="product-image-wrapper">
+                                                    <div class="single-products">
+                                                        <div class="productinfo text-center">
+                                                            <img ng-src="{{tshirt.image}}" alt="" />
+                                                            <h2>{{tshirt.price}}</h2>
+                                                            <p>{{tshirt.describe}}</p>
+                                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                        </div>
+                
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                
                                         </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                        <div class="tab-pane fade" id="sunglass" >
-                            <div class="col-sm-3" ng-repeat="item in product_sunglass">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img ng-src="{{item.image}}" alt="" />
-                                            <h2>{{item.price}}</h2>
-                                            <p>{{item.describe}}</p>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                
+                                        <div class="tab-pane fade" id="blazers" >
+                                            <div class="col-sm-3" ng-repeat="blazer in blazers">
+                                                <div class="product-image-wrapper">
+                                                    <div class="single-products">
+                                                        <div class="productinfo text-center">
+                                                            <img ng-src="{{blazer.image}}" alt="" />
+                                                            <h2>{{blazer.price}}</h2>
+                                                            <p>{{blazer.describe}}</p>
+                                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                        </div>
+                
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                
                                         </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="kids" >
-                            <div class="col-sm-3" ng-repeat="item in product_kids">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img ng-src="{{item.image}}" alt="" />
-                                            <h2>{{item.price}}</h2>
-                                            <p>{{item.describe}}</p>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                
+                                        <div class="tab-pane fade" id="sunglass" >
+                                            <div class="col-sm-3" ng-repeat="item in product_sunglass">
+                                                <div class="product-image-wrapper">
+                                                    <div class="single-products">
+                                                        <div class="productinfo text-center">
+                                                            <img ng-src="{{item.image}}" alt="" />
+                                                            <h2>{{item.price}}</h2>
+                                                            <p>{{item.describe}}</p>
+                                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                        </div>
+                
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="tab-pane fade" id="poloshirt" >
-                            <div class="col-sm-3" ng-repeat="item in product_poloshirts">
-                                <div class="product-image-wrapper">
-                                    <div class="single-products">
-                                        <div class="productinfo text-center">
-                                            <img ng-src="{{item.image}}" alt="" />
-                                            <h2>{{item.price}}</h2>
-                                            <p>{{item.describe}}</p>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                
+                                        <div class="tab-pane fade" id="kids" >
+                                            <div class="col-sm-3" ng-repeat="item in product_kids">
+                                                <div class="product-image-wrapper">
+                                                    <div class="single-products">
+                                                        <div class="productinfo text-center">
+                                                            <img ng-src="{{item.image}}" alt="" />
+                                                            <h2>{{item.price}}</h2>
+                                                            <p>{{item.describe}}</p>
+                                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                        </div>
+                
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-
+                
+                                        <div class="tab-pane fade" id="poloshirt" >
+                                            <div class="col-sm-3" ng-repeat="item in product_poloshirts">
+                                                <div class="product-image-wrapper">
+                                                    <div class="single-products">
+                                                        <div class="productinfo text-center">
+                                                            <img ng-src="{{item.image}}" alt="" />
+                                                            <h2>{{item.price}}</h2>
+                                                            <p>{{item.describe}}</p>
+                                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                        </div>
+                
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>/category-tab-->
+                                </div>/category-tab-->
 
                 <div class="col-md-12 text-center">
                     <div paging
@@ -155,8 +160,8 @@
                          show-first-last="true"
                          paging-action="loadPage(page)">
                     </div>
-<!--                    <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" num-pages="totalPages" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" boundary-links="true"
-                                items-per-page="pageSize" ></ul>-->
+                    <!--                    <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" num-pages="totalPages" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" boundary-links="true"
+                                                    items-per-page="pageSize" ></ul>-->
                 </div>
 
                 <div class="recommended_items"><!--recommended_items-->

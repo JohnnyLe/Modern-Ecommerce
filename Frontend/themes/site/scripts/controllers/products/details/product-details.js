@@ -6,6 +6,7 @@ angular.module('marketplace.products.details', [])
 
 
                 $scope.proComment = {};
+                $scope.random = 1;
                 $scope.quantity = 1;
                 $scope.pathFile = "http://localhost:8080/ecommerce-rest-api/upload/";
                 // Data model biding
@@ -71,12 +72,26 @@ angular.module('marketplace.products.details', [])
                     });
                 };
 
-                $scope.loadListProductRecomad = function (categoryId) {
+                $scope.loadListProductRecomad = function (categoryId, pNumber) {
                     paramRe.categoryId = categoryId;
                     paramRe.pageSize = 3;
+                    paramRe.pageNumber = pNumber;
                     util.callRequest('/products/filter', "POST", paramRe).then(function (response) {
                         $scope.productRecomands = response.data.data;
                     });
+                };
+
+                $scope.loadPageRe = function (page) {
+                    console.log(page);
+                    if (page === 0) {
+                        page += 2;
+                    }
+                    if($scope.random < page){
+                        $scope.random++;
+                    }else{
+                        $scope.random--;
+                    }
+                    $scope.loadListProductRecomad(-1, page);
                 };
 
                 $timeout(function () {

@@ -110,7 +110,7 @@ public class OrdersController extends AbstractBaseController {
                         Map<String, Object> detail = new HashMap<String, Object>();
                         //find product by proId
                         Product product = productService.getProductById(companyId, orderDetail.getProductId());
-                        Payment payment = paymentRepository.findByPaymentId(orderDetail.getPaymentId());
+                        Payment payment = paymentRepository.findByPaymentId(order.getPaymentId());
                         if (product != null && payment != null) {
                             detail.put("product", product);
                             detail.put("payment", payment);
@@ -122,13 +122,12 @@ public class OrdersController extends AbstractBaseController {
                 }
 
                 // get order address by order id
-                OrderAddress orderAddress = orderAddresslService.getOrderAddressByOrderId(orderId);
-                if (orderAddress != null) {
-                    //get user address
-                    UserAddress userAddress = userAddressRepository.findByAdressIdAndStatus(orderAddress.getAdressId(), Constant.STATUS.ACTIVE_STATUS.getValue());
-                    resultOrders.put("orderAddress", userAddress);
-                }
-
+//                OrderAddress orderAddress = orderAddresslService.getOrderAddressByOrderId(orderId);
+//                if (orderAddress != null) {
+                //get user address
+                UserAddress userAddress = userAddressRepository.findByAdressIdAndStatus(order.getAdressId(), Constant.STATUS.ACTIVE_STATUS.getValue());
+                resultOrders.put("orderAddress", userAddress);
+//                }
                 // get list order payment by order id
 //                OrderPayment orderPayment = orderPaymentService.getOrderPaymentByOrderId(orderId);
 //                if (orderPayment != null) {
