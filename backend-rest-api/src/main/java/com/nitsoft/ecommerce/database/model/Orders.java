@@ -47,6 +47,14 @@ public class Orders implements Serializable {
     private String userId;
     
     @Basic(optional = false)
+    @Column(name = "adress_id")
+    private Long adressId;
+    
+    @Basic(optional = false)
+    @Column(name = "payment_id")
+    private Long paymentId;
+    
+    @Basic(optional = false)
     @Column(name = "company_id")
     private Long companyId;
     
