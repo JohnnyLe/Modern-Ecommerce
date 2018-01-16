@@ -469,9 +469,9 @@ angular.module('marketplace.directive', ['components', 'rzModule'])
                     scope: {
                         'showPayment': '=?'
                     },
-                    controller: ['$scope', 'ShoppingCart', '$state', function ($scope, cart, $state) {
+                    controller: ['$scope', 'ShoppingCart', '$state', 'AppConstant', function ($scope, cart, $state, AppConstant) {
 
-
+                            $scope.pathFile = AppConstant.pathFile;
                             if (angular.isDefined($scope.minPrice)) {
                                 $scope.showPayment = false;
                             }
