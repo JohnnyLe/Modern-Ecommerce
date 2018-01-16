@@ -77,7 +77,7 @@ angular.module('marketplace.home', ['bw.paging'])
                         quantity: $scope.quantity
                     };
                     cart.addItem(item, item.quantity);
-                    toastr.success("Add product to cart successful");
+                    util.showSuccessToast("Add to cart successfully");
                 };
             }]);
 

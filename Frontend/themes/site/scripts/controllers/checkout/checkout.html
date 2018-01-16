@@ -162,7 +162,7 @@
                     </div>
 
                     <div class="action-bar text-right" style="margin-bottom: 50px">
-                        <button ng-disabled="!checkoutForm.$valid || submitting" ng-hide="submitting || (items.length > 0)" class="btn btn-primary" type="submit">Order</button>
+                        <button ng-disabled="!checkoutForm.$valid || submitting || !(items.length > 0)" ng-hide="submitting" class="btn btn-primary" type="submit">Order</button>
                         <button ng-show="submitting" disabled class="btn btn-primary">Saving</button>
                     </div> 
                 </form>
@@ -170,27 +170,29 @@
 
         </div>
 
-        <div class="review-payment" ng-show="isLogin">
-            <h2>Customer Info</h2>
-        </div>
-        <section ng-show="isLogin">
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-8">
-                        <div class="register-req">
-                            <p>Full Name: {{currentUser.firstName + currentUser.lastName}}</p>
-                            <p>Email: {{currentUser.email}}</p>
-                            <p>Phone: {{currentUser.phone}}</p>
-                            <p>Address: {{currentUser.address + ", " + currentUser.city + ", " + currentUser.country}}</p>  
+        <div ng-show="isLogin">
+            <div class="review-payment" >
+                <h2>Customer Info</h2>
+            </div>
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="register-req">
+                                <p>Full Name: {{currentUser.firstName + currentUser.lastName}}</p>
+                                <p>Email: {{currentUser.email}}</p>
+                                <p>Phone: {{currentUser.phone}}</p>
+                                <p>Address: {{currentUser.address + ", " + currentUser.city + ", " + currentUser.country}}</p>  
+                            </div>
                         </div>
                     </div>
                 </div>
+            </section><!--/#do_action-->
+            <div class="action-bar text-right" style="margin-bottom: 50px">
+                <button ng-disabled="submitting || !(items.length > 0)" ng-hide="submitting" class="btn btn-primary" ng-click="createOrder()">Order</button>
+                <button ng-show="submitting" disabled class="btn btn-primary">Saving</button>
             </div>
-        </section><!--/#do_action-->
-        <div class="action-bar text-right" style="margin-bottom: 50px">
-            <button ng-disabled="submitting" ng-hide="submitting || !(items.length > 0)" class="btn btn-primary" ng-click="createOrder()">Order</button>
-            <button ng-show="submitting" disabled class="btn btn-primary">Saving</button>
         </div>
+
     </div>
 </section>
