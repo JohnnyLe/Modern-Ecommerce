@@ -154,7 +154,7 @@
 
                     <div class="action-bar text-right">
                         <a ui-sref="users.list" class="btn btn-warning" ng-i18next="button.back">Back</a>
-                        <button ng-disabled="!editUserForm.$valid" ng-hide="submitting" ng-click="updateUser()" class="btn btn-primary" ng-i18next="button.save" type="submit" ></button>
+                        <button ng-disabled="!editUserForm.$valid || submitting || origin" ng-hide="submitting" ng-click="updateUser()" class="btn btn-primary" ng-i18next="button.save" type="submit" ></button>
                         <button ng-show="submitting" disabled class="btn btn-primary" ng-i18next="">Saving</button>
                     </div>  
                 </form>
