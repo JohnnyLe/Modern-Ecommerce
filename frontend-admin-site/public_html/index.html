@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+        <!--<base href="/ec-admin/" />-->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Mordern E-comerce Admin Console</title>
+
+        <link rel="shortcut icon" href="favicon.ico">
+        <!-- Bootstrap -->
+        <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- NProgress -->
+        <link href="vendors/nprogress/nprogress.css" rel="stylesheet">
+        <!--toastr-->
+        <link href="vendors/angular-toastr/dist/angular-toastr.min.css" rel="stylesheet">
+        <!--ui select-->
+        <link href="vendors/angular-ui-select/dist/select.min.css" rel="stylesheet">
+        <!--ng-tag-css-->
+        <link href="css/ng-tags-input.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/ng-tags-input.min.css" rel="stylesheet" type="text/css"/>
+        
+        <link href="css/ngDatepicker.css" rel="stylesheet" type="text/css"/>
+        <!--<link href="js/components/uploader/uploader-directive-css.css" rel="stylesheet" type="text/css"/>-->
+
+        <!-- Custom Theme Style -->
+        <link href="theme/css/theme.css" rel="stylesheet">
+        <link href="css/app.css" rel="stylesheet">
+        
+        <!-- RequireJS -->
+        <script data-main="js/require-config" src="vendors/requirejs/require.js"></script>
+
+        <!--<script src="js/common/directives/directives.js" type="text/javascript"></script>-->
+        <!--<script src="js/common/directives/icheck.js" type="text/javascript"></script>-->
+    </head>
+
+    <body class="nav-md login">
+        <div style="text-align: center; margin-top: 17%; position: fixed; margin-left: 48%; z-index: 900;" ng-show="loading">                                                
+            <img src="img/load_3.gif"/>                                                
+        </div>
+        <div ui-view>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,77 @@
+<div class="page-title">
+    <div class="title">
+        <h3 ng-i18next="">Users List</h3>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <ul class="list list-inline">
+                    <li>
+                        <button ui-sref="users.create" class="btn btn-primary" ng-i18next="">Add</button>
+                    </li>
+                    <li>
+                        <button ng-click="confirmDeleteUser()" class="btn btn-danger" ng-i18next="" ng-disabled="selected.length === 0">Delete</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix1"></div>
+            <div class="row">
+                <div class="col-md-3 pull-right">
+                    <label ng-i18next="table.header.search"></label>
+                    <input ng-model="searchString" ng-keyup="loadListUsers()" type="text" class="form-control"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix20"></div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="x-table">
+                    <!--table header-->
+                    <div class="row x-table-header">
+                        <div class="col-xs-1 text-left"><input icheck ng-change="toggleSelectAll(selectedAll)" ng-model="selectedAll" type="checkbox"/></div>
+                        <div class="col-xs-3 text-left">
+                            <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(1)" style="cursor: pointer"></i>
+                            <span ng-i18next="" ng-click="doSort(1)" style="cursor: pointer">First Name</span>
+                        </div>
+                        <div class="col-xs-3 text-left">
+                            <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(2)" style="cursor: pointer"></i>
+                            <span ng-i18next="" ng-click="doSort(2)">Last Name</span></div>
+                        <div class="col-xs-3 text-left hidden-xs">
+                            <i class="fa fa-sort" aria-hidden="true" ng-click="doSort(3)" style="cursor: pointer"></i>
+                            <span ng-i18next="" ng-click="doSort(3)" style="cursor: pointer">Email Address</span>
+                        </div>
+                        <div class="col-xs-1 text-center"><span ng-i18next="">Status</span></div>
+                        <div class="col-xs-1 text-center"><span ng-i18next="">Detail</span></div>
+                    </div>
+
+                    <!--table content-->
+                    <div class="col-xs-12 text-center" ng-show="users.length === 0" style="top: 5px"> 
+                        <span ng-i18next="table.header.no_data">No Data</span>
+                    </div>
+                    <div class="row x-table-row" ng-repeat="user in users" ng-click="toggleSelected(user)">
+                        <div class="col-xs-1 text-left"><input icheck ng-if="user.userId !== 'store-admin-sample'" ng-click="$event.stopPropagation()" ng-change="toggleSelected(user)" ng-model="user._selected" type="checkbox"/></div>
+                        <div class="col-xs-3 text-left"><span ng-bind="user.firstName"></span></div>
+                        <div class="col-xs-3 text-left"><span ng-bind="user.lastName"></span></div>
+                        <div class="col-xs-3 text-left"><span ng-bind="user.email"></span></div>
+                        <div class="col-xs-1 text-center"><span class="badge" style="background-color: green">Active</span></div>
+                        <div class="col-xs-1 text-center">
+                            <span ng-click="loadUserDetail(user.userId)" class="glyphicon glyphicon-info-sign zoom-btn"></span>
+                            <span ng-click="confirmDeleteUser(user.userId)" class="glyphicon glyphicon-trash" style="color: red"></span>
+                        </div>
+                    </div>
+
+                    <!--table footer-->
+                    <div class="row x-table-footer text-right">
+                        <ul ng-show="users.length > 0" uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" num-pages="totalPages" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" boundary-links="true"
+                            items-per-page="pageSize" ></ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

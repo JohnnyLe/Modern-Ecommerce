@@ -67,7 +67,7 @@
 
 .rzslider .rz-bar.rz-selection {
   z-index: 2;
-  background: #0db9f0;
+  background: #fe980f;
   -webkit-border-radius: 2px;
      -moz-border-radius: 2px;
           border-radius: 2px;
@@ -79,7 +79,7 @@
   width: 32px;
   height: 32px;
   cursor: pointer;
-  background-color: #0db9f0;
+  background-color: #fe980f;
   -webkit-border-radius: 16px;
      -moz-border-radius: 16px;
           border-radius: 16px;

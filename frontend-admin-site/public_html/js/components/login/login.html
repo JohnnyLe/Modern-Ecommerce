@@ -1,0 +1,87 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-4 col-sm-offset-1 col-md-offset-4">
+
+            <form class="login-form" name="loginForm" ng-submit="registerConsoleUser()">
+
+                <h1 ng-i18next="app.name" class="text-center"></h1>
+
+                <!--username field-->
+                <div class="form-group" ng-class="{'has-error':loginForm.username.$touched && loginForm.username.$invalid}">
+                    <!--<label ng-i18next="label.username_or_email" for="txtUsername"></label> ng-pattern="Ctrl.Patterns.EMAIL_PATTERN"-->
+                    <input ng-model="user.username"
+                           ng-i18next="[placeholder]label.username_or_email"
+                           name="username"
+                           id="txtUsername"
+                           aria-describedby="usernameErr"
+                           type="text"
+                           class="form-control"
+                           required="required" />
+
+                    <div id="usernameErr" class="help-block" ng-show="loginForm.username.$touched">
+                        <!--<span ng-show="loginForm.username.$error.pattern" ng-i18next="validation.username.invalid_pattern"></span>-->
+                        <span ng-show="loginForm.username.$error.required" ng-i18next="validation.username.required"></span>
+                    </div>
+                </div>
+
+                <!--password field-->
+                <div class="form-group" ng-class="{'has-error':loginForm.password.$touched && loginForm.password.$invalid}">
+                    <!--<label ng-i18next="label.password" for="txtPassword"></label>-->
+                    <input ng-model="user.password"
+                           ng-pattern="Ctrl.Patterns.PASSWORD_PATTERN"
+                           ng-i18next="[placeholder]label.password"
+                           name="password"
+                           id="txtPassword"
+                           aria-describedby="passwordErr"
+                           type="password"
+                           class="form-control"
+                           required="required" />
+
+                    <div id="passwordErr" class="help-block" ng-show="loginForm.password.$touched">
+                        <span ng-show="loginForm.password.$error.pattern" ng-i18next="validation.password.invalid_pattern"></span>
+                        <span ng-show="loginForm.password.$error.required" ng-i18next="validation.password.required"></span>
+                    </div>
+                </div>
+
+                <!--login button-->
+                <div class="row">
+                    <!--remember check box-->
+                    <div class="col-xs-6 text-left">
+                        <div class="checkbox">
+                            <label>
+                                <input icheck-basic type="checkbox">
+                                <span ng-i18next="label.remember_me"></span>
+                            </label>
+                        </div>
+                    </div>
+<!--                    <div class="md-only col-xs-6 text-right">
+                        <div class="forgot-pass">
+                            <a ng-i18next="label.forgot_password"></a>
+                        </div>
+                    </div>-->
+                    <!--login button-->
+                    <div class="col-xs-12 text-right">
+                        <div class="form-group">
+                            <button ng-disabled="!loginForm.$valid || submitting"
+                                    ng-i18next="button.login"
+                                    class="btn btn-primary btn-block">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+<!--                <div class="row">
+                    register link
+                    <div class="col-xs-12 text-left">
+                        <span ng-i18next="label.register_account"></span>
+                        <a ui-sref="register" ng-i18next="label.register"></a>
+                    </div>
+                </div>-->
+
+                <div class="clearfix"></div>
+            </form>
+
+        </div>
+    </div>
+</div>

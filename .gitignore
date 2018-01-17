@@ -2,3 +2,11 @@
 /backend-resi-api/target/
 /backend-rest-api/target
 /Frontend/themes/site/nbproject/private/private.xml
+/frontend-admin-site/nbproject/private/
+/frontend-admin-site/public_html/vendors
+/frontend-admin-site/nbproject
+/backend-rest-api/.idea
+/backend-rest-api/ecommerce-rest-api.iml
+/frontend-admin-site/.idea
+/frontend-admin-site/node_modules/moment
+/frontend-admin-site/frontend-admin-site.iml

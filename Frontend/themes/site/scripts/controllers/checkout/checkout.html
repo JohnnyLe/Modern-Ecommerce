@@ -1,0 +1,198 @@
+<script>
+    setTimeout(function () {
+        $.removeData($('img'), 'elevateZoom');
+        $('.zoomContainer').remove();
+    }, 500);
+</script>
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Check out</li>
+            </ol>
+        </div><!--/breadcrums-->
+
+        <div class="register-req">
+            <p>Please use Register And Checkout to easily get access to your order history, or use Checkout as Guest</p>
+        </div><!--/register-req-->
+
+        <div class="review-payment">
+            <h2>Review & Payment</h2>
+        </div>
+
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                    <tr class="cart_menu">
+                        <td class="description">Product Name</td>
+                        <td class="quantity text-center">Quantity</td>
+                        <td class="price text-center">Price</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in items">
+                        <td>{{item.product_name}}</td>
+                        <td class="text-center">{{item.quantity}}</td>
+                        <td class="cart_price text-center">
+                            <p>${{item.price}}</p>
+                        </td>
+                    </tr>
+
+                    <tr ng-hide="items.length > 0" >
+                        <td class="text-center" colspan="4">
+                            Your cart is empty.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--Check if user not login customer must fill the info for these form-->
+        <div class="shopper-informations" ng-hide="isLogin">
+            <div class="bill-to">
+                <p>Bill To</p>
+                <form name="checkoutForm" ng-submit="createOrder()">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : checkoutForm.firstname.$touched && checkoutForm.firstname.$invalid}">
+                                        <input ng-model="user.firstName" name="firstname" id="firstname" placeholder="First Name"
+                                               type="text" class="form-control" required="required" ng-maxlength="64"/>
+
+                                        <div ng-show="checkoutForm.firstname.$touched">
+                                            <span class="help-block" ng-show="checkoutForm.firstname.$error.required">Required</span>
+                                            <span class="help-block" ng-show="checkoutForm.firstname.$error.maxlength">Max length is 64 chars</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : checkoutForm.lastName.$touched && checkoutForm.lastName.$invalid}">
+                                        <input ng-model="user.lastName" name="lastName" id="firstname" placeholder="Last Name"
+                                               type="text" class="form-control" required="required" ng-maxlength="64"/>
+
+                                        <div ng-show="checkoutForm.lastName.$touched">
+                                            <span class="help-block" ng-show="checkoutForm.lastName.$error.required">Required</span>
+                                            <span class="help-block" ng-show="checkoutForm.lastName.$error.maxlength">Max length is 64 chars</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : checkoutForm.mail_address.$touched && checkoutForm.mail_address.$invalid}">
+                                        <input type="text" name="mail_address" id="mail_address" class="signup form-control" 
+                                               ng-model="user.email" placeholder="Email"
+                                               required="required" ng-pattern='emailPattern' ng-maxlength="64" />
+
+                                        <div class="errors" ng-show="checkoutForm.mail_address.$touched">
+                                            <span class="help-block" ng-show="checkoutForm.mail_address.$error.required">Required</span>
+                                            <span class="help-block" ng-show="checkoutForm.mail_address.$error.pattern">Wrong Email Format</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : checkoutForm.phone.$touched && checkoutForm.phone.$invalid}">
+                                        <input ng-model="user.phone" name="phone" id="phone" placeholder="Phone"
+                                               type="text" class="form-control" ng-pattern='phoneNumber' required="required" />
+
+                                        <div ng-show="checkoutForm.phone.$touched">
+                                            <span class="help-block" ng-show="checkoutForm.phone.$error.required">Required</span>
+                                            <span class="help-block" ng-show="checkoutForm.phone.$error.pattern">Wrong Phone Format</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : checkoutForm.fax.$touched && checkoutForm.fax.$invalid}">
+                                        <input ng-model="user.fax" name="fax" id="fax" placeholder="Fax"
+                                               type="text" class="form-control" ng-maxlength="32"/>
+
+                                        <div ng-show="checkoutForm.fax.$touched">
+                                            <span class="help-block" ng-show="checkoutForm.fax.$error.maxlength">Max length 32 chars</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : checkoutForm.address.$touched && checkoutForm.address.$invalid}">
+                                        <input ng-model="user.address" name="address" id="address" placeholder="Address"
+                                               type="text" class="form-control" required="required" />
+
+                                        <div ng-show="checkoutForm.address.$touched">
+                                            <span class="help-block" ng-show="checkoutForm.address.$error.required">Required</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : checkoutForm.city.$touched && checkoutForm.city.$invalid}">
+                                        <input ng-model="user.city" name="city" id="city" placeholder="City"
+                                               type="text" class="form-control" ng-maxlength="64" required="required"/>
+
+                                        <div ng-show="checkoutForm.city.$touched">
+                                            <span class="help-block" ng-show="checkoutForm.city.$error.required">Required</span>
+                                            <span class="help-block" ng-show="checkoutForm.city.$error.maxlength">Max length 64 chars</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : checkoutForm.country.$touched && checkoutForm.country.$invalid}">
+                                        <input ng-model="user.country" name="country" id="country" placeholder="Country"
+                                               type="text" class="form-control" ng-maxlength="64" required="required"/>
+
+                                        <div ng-show="checkoutForm.country.$touched">
+                                            <span class="help-block" ng-show="checkoutForm.country.$error.required">Required</span>
+                                            <span class="help-block" ng-show="checkoutForm.country.$error.maxlength">Max length 64 chars</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="action-bar text-right" style="margin-bottom: 50px">
+                        <button ng-disabled="!checkoutForm.$valid || submitting || !(items.length > 0)" ng-hide="submitting" class="btn btn-primary" type="submit">Order</button>
+                        <button ng-show="submitting" disabled class="btn btn-primary">Saving</button>
+                    </div> 
+                </form>
+            </div>
+
+        </div>
+
+        <div ng-show="isLogin">
+            <div class="review-payment" >
+                <h2>Customer Info</h2>
+            </div>
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="register-req">
+                                <p>Full Name: {{currentUser.firstName + currentUser.lastName}}</p>
+                                <p>Email: {{currentUser.email}}</p>
+                                <p>Phone: {{currentUser.phone}}</p>
+                                <p>Address: {{currentUser.address + ", " + currentUser.city + ", " + currentUser.country}}</p>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!--/#do_action-->
+            <div class="action-bar text-right" style="margin-bottom: 50px">
+                <button ng-disabled="submitting || !(items.length > 0)" ng-hide="submitting" class="btn btn-primary" ng-click="createOrder()">Order</button>
+                <button ng-show="submitting" disabled class="btn btn-primary">Saving</button>
+            </div>
+        </div>
+
+    </div>
+</section>

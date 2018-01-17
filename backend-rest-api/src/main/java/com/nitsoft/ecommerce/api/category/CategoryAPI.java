@@ -1,9 +1,9 @@
 package com.nitsoft.ecommerce.api.category;
 
 import com.nitsoft.ecommerce.api.APIName;
-import com.nitsoft.ecommerce.api.APIUtil;
-import com.nitsoft.ecommerce.api.response.APIStatus;
-import com.nitsoft.ecommerce.api.response.StatusResponse;
+import com.nitsoft.ecommerce.api.AbstractBaseAPI;
+import com.nitsoft.ecommerce.api.response.util.APIStatus;
+import com.nitsoft.ecommerce.api.response.model.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Category;
 import com.nitsoft.ecommerce.repository.CategoryRepository;
 import io.swagger.annotations.Api;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Api(value = "category API")
-public class CategoryAPI extends APIUtil {
+public class CategoryAPI extends AbstractBaseAPI {
 
     @Autowired
     CategoryRepository repository;

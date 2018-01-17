@@ -15,7 +15,7 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
-    public Company findByCompanyId(Integer companyId) {  
+    public Company findByCompanyId(long companyId) {
         return companyRepository.findByCompanyId(companyId);
     }
 }

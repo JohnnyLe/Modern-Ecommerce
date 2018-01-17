@@ -5,27 +5,32 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "suppliers")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Supplier.findAll", query = "SELECT s FROM Supplier s"),
-    @NamedQuery(name = "Supplier.findBySupplierId", query = "SELECT s FROM Supplier s WHERE s.supplierId = :supplierId"),
-    @NamedQuery(name = "Supplier.findByCompanyId", query = "SELECT s FROM Supplier s WHERE s.companyId = :companyId"),
-    @NamedQuery(name = "Supplier.findByName", query = "SELECT s FROM Supplier s WHERE s.name = :name"),
-    @NamedQuery(name = "Supplier.findByDescription", query = "SELECT s FROM Supplier s WHERE s.description = :description"),
-    @NamedQuery(name = "Supplier.findByStatus", query = "SELECT s FROM Supplier s WHERE s.status = :status"),
-    @NamedQuery(name = "Supplier.findByCreateDate", query = "SELECT s FROM Supplier s WHERE s.createDate = :createDate")})
 public class Supplier implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,93 +60,5 @@ public class Supplier implements Serializable {
     @Column(name = "create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
-
-    public Supplier() {
-    }
-
-    public Supplier(Integer supplierId) {
-        this.supplierId = supplierId;
-    }
-
-    public Supplier(Integer supplierId, int companyId, String name, int status, Date createDate) {
-        this.supplierId = supplierId;
-        this.companyId = companyId;
-        this.name = name;
-        this.status = status;
-        this.createDate = createDate;
-    }
-
-    public Integer getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(Integer supplierId) {
-        this.supplierId = supplierId;
-    }
-
-    public int getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (supplierId != null ? supplierId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Supplier)) {
-            return false;
-        }
-        Supplier other = (Supplier) object;
-        if ((this.supplierId == null && other.supplierId != null) || (this.supplierId != null && !this.supplierId.equals(other.supplierId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.nitsoft.ecommerce.model.Supplier[ supplierId=" + supplierId + " ]";
-    }
     
 }

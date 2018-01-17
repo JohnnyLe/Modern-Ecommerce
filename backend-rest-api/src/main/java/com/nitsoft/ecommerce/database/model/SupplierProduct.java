@@ -4,19 +4,28 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "supplier_products")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "SupplierProduct.findAll", query = "SELECT s FROM SupplierProduct s"),
-    @NamedQuery(name = "SupplierProduct.findByProductId", query = "SELECT s FROM SupplierProduct s WHERE s.productId = :productId"),
-    @NamedQuery(name = "SupplierProduct.findBySupplierId", query = "SELECT s FROM SupplierProduct s WHERE s.supplierId = :supplierId")})
 public class SupplierProduct implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,30 +39,5 @@ public class SupplierProduct implements Serializable {
     @Basic(optional = false)
     @Column(name = "supplier_id")
     private int supplierId;
-
-    public SupplierProduct() {
-    }
-
-    public SupplierProduct(int productId, int supplierId) {
-        this.productId
-                = productId;
-        this.supplierId = supplierId;
-    }
-
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public int getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(int supplierId) {
-        this.supplierId = supplierId;
-    }
 
 }

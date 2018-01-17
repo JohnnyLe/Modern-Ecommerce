@@ -1,0 +1,60 @@
+<div class="modal-header">
+    <button ng-click="onClose()" type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" ng-bind="title"></h4>
+</div>
+<div class="modal-body row">
+    <div class="">
+        <div class="col-xs-9"></div>
+        <div class="col-xs-3">
+            <div class="">
+                <input ng-model="searchString" ng-keyup="loadListSearch()" placeholder="Search" type="text" class="form-control"/>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix1"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel scroll-table-cate" style="padding-top: 0">
+                <div class="x_content">
+                    <div class="x-table">
+                        <!--table header-->
+                        <div class="row x-table-header">
+                            <div class="col-xs-2 text-left">
+                                <span>&rlm;</span>
+                            </div>
+                            <div class="col-xs-5 text-left">
+                                <!--<i class="fa fa-sort" aria-hidden="true" ng-click="doSort(1)" style="cursor: pointer"></i>-->
+                                <span ng-i18next="table.header.pop_up.cate_name" ng-click="doSort(1)" style="cursor: pointer"></span>
+                            </div>
+                            <div class="col-xs-5 text-left">
+                                <!--<i class="fa fa-sort" aria-hidden="true" ng-click="doSort(2)" style="cursor: pointer"></i>-->
+                                <span ng-i18next="table.header.pop_up.des" ng-click="doSort(2)" style="cursor: pointer"></span>
+                            </div>
+                        </div>
+
+                        <!--table content-->
+                        <div class="col-xs-12 text-center" ng-show="listCategory.length === 0" style="top: 5px"> 
+                            <span ng-i18next="table.header.no_data"></span>
+                        </div>
+                        <div class="row x-table-row" ng-repeat="cate in listCategory" ng-click="selectCate($index)">
+                            <div class="col-xs-2 text-left"><input icheck ng-model="cate.selected" type="checkbox"/></div>
+                            <div class="col-xs-5 text-left overload-name"><span ng-bind="cate.name"></span></div>
+                            <div class="col-xs-5 text-left overload-name"><span ng-bind="cate.description"></span></div>
+                        </div>
+
+                        <!--table footer-->
+<!--                        <div class="row x-table-footer text-right">
+                            <ul ng-show="listCategory.length > 0" uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" num-pages="totalPages" class="pagination-sm" boundary-link-numbers="true" rotate="false" ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" boundary-links="true"
+                                items-per-page="pageSize" ></ul>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button ng-click="onDismiss()" ng-bind="opts.lblDismiss" type="button" class="btn btn-warning btn-custom" data-dismiss="modal"></button>
+    <button ng-click="onAccept()" ng-bind="opts.lblAccept" ng-disabled="origin" type="button" class="btn btn-primary btn-custom"></button>
+</div>

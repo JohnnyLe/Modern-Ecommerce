@@ -15,11 +15,13 @@ import org.springframework.data.repository.query.Param;
 
 /**
  *
- * @author NHU LINH
+ * @author Louis Duong
  */
 public interface OrdersRepository extends PagingAndSortingRepository<Orders, Long>, JpaSpecificationExecutor<Orders> {
 
     @Query("SELECT pad FROM Orders pad WHERE pad.companyId = :companyId")
     Page<Orders> findAllByCompanyId(@Param("companyId") long companyId, Pageable pageable);
+    
+    Orders findOneByIdAndCompanyId(Long orderId, Long companyId);
     
 }

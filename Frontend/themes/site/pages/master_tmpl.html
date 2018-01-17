@@ -59,12 +59,20 @@
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                             <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                            <li><a ui-sref="checkout" ng-class="{ active: menu == 'checkout' }"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a ui-sref="cart" ng-class="{ active: menu == 'cart' }"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                            <li><a ui-sref="login" ng-class="{ active: menu == 'login' }"><i class="fa fa-lock"></i> Login</a></li>
-                            <li><a ui-sref="register" ng-class="{ active: menu == 'register' }"><i class="fa fa-lock"></i> Sign Up</a></li>
+                            <li ng-hide="isLogin"><a ui-sref="login" ng-class="{ active: menu == 'login' }"><i class="fa fa-lock"></i> Login</a></li>
+                            <li ng-hide="isLogin"><a ui-sref="register" ng-class="{ active: menu == 'register' }"><i class="fa fa-lock"></i> Sign Up</a></li>
+                            <li class="" ng-show="isLogin">
+                                <a href="javascript:;"  class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="img/profile.jpg" alt="">
+                                    <span ng-bind="username"></span>
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><a ng-click="logout()"><i class="fa fa-sign-out pull-right"></i>Log Out</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -86,23 +94,23 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a ui-sref="index" ng-class="{ active: menu == 'index' }">Home</a></li>
-                            <li class="dropdown" menu menu-id="subMenuShop" menu-active-class="active" menu-close-query="#subMenuShop>li>a"><a ng-class="{ active: menu == 'shop' }">Shop<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu" id="subMenuShop">
-                                    <li><a ui-sref="shop" ng-class="{ active: menu == 'shop' }">Products</a></li>
-                                    <li><a ui-sref="product-details" ng-class="{ active: menu == 'product-details' }">Product Details</a></li> 
-                                    <li><a ui-sref="checkout" ng-class="{ active: menu == 'checkout' }">Checkout</a></li> 
-                                    <li><a ui-sref="cart" ng-class="{ active: menu == 'cart' }">Cart</a></li> 
-                                    <li><a ui-sref="login" ng-class="{ active: menu == 'login' }">Login</a></li> 
-                                </ul>
-                            </li> 
+                            <li><a href="#index" ng-class="{ active: menu == 'index' }">Home</a></li>
+                            <!--                            <li class="dropdown" menu menu-id="subMenuShop" menu-active-class="active" menu-close-query="#subMenuShop>li>a"><a ng-class="{ active: menu == 'shop' }">Shop<i class="fa fa-angle-down"></i></a>
+                                                            <ul role="menu" class="sub-menu" id="subMenuShop">
+                                                                <li><a ui-sref="shop" ng-class="{ active: menu == 'shop' }">Products</a></li>
+                                                                <li><a ui-sref="product-details" ng-class="{ active: menu == 'product-details' }">Product Details</a></li> 
+                                                                <li><a ui-sref="checkout" ng-class="{ active: menu == 'checkout' }">Checkout</a></li> 
+                                                                <li><a ui-sref="cart" ng-class="{ active: menu == 'cart' }">Cart</a></li> 
+                                                                <li><a ui-sref="login" ng-class="{ active: menu == 'login' }">Login</a></li> 
+                                                            </ul>
+                                                        </li> -->
                             <li class="dropdown" menu menu-id="subMenuBlog" menu-active-class="active" menu-close-query="#subMenuBlog>li>a"><a ng-class="{ active: menu == 'blog' || menu == 'blog-single' }">Blog<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu" id="subMenuBlog">
                                     <li><a ui-sref="blog" ng-class="{ active: menu == 'blog' }">Blog List</a></li>
                                     <li><a ui-sref="blog-single" ng-class="{ active: menu == 'blog-single' }">Blog Single</a></li>
                                 </ul>
                             </li> 
-                            <li><a ui-sref="404">404</a></li>
+                            <!--<li><a ui-sref="404">404</a></li>-->
                             <li><a ui-sref="contact" ng-class="{ active: menu == 'contact' }">Contact</a></li>
                         </ul>
                     </div>

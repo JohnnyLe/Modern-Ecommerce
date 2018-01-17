@@ -3,7 +3,6 @@
  * and open the template in the editor.
  */
 package com.nitsoft.util;
-import com.nitsoft.ecommerce.api.StringUtil;
 import com.nitsoft.ecommerce.tracelogged.EventLogManager;
 import java.io.InputStream;
 import java.util.ArrayList;

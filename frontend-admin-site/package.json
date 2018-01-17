@@ -1,0 +1,22 @@
+{
+  "name": "SSO_Frontend",
+  "version": "1.0.0",
+  "description": "modern-commerce",
+  "license": "MIT",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "NIT",
+  "scripts": {
+    "start": "http-server ./public_html -p 8000"
+  },
+  "contributors": [],
+  "dependencies": {
+    "moment": "^2.18.1"
+  },
+  "repository": {}
+}

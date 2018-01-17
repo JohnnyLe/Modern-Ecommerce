@@ -1,0 +1,351 @@
+.nav-sm .container.body .col-md-3.left_col {
+    z-index: 999;
+}
+
+.dropdown-menu {
+    border-radius: 0;
+}
+
+.btn, .buttons, .modal-footer .btn+.btn, button {
+    border-radius: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
+.btn-custom {
+    min-width: 63px;
+}
+
+.page-title {
+    height: auto;
+    padding: 0;
+}
+
+.list-inline>li {
+    padding-right: 0;
+}
+
+#toast-container .toast {
+    border-radius: 0;
+    opacity: 0.954;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.login-form {
+    margin-top: 140px; 
+}
+
+.login-form .checkbox,
+.login-form .forgot-pass {
+    margin-top: 0;
+}
+
+.checkbox label, .radio label {
+    padding-left: 0;
+}
+
+.checkbox label span,
+.login-form .forgot-pass span {
+    vertical-align: text-top;
+}
+
+.help-block {
+    margin-bottom: 0;
+}
+
+.btn-danger.focus, .btn-danger:focus {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+.btn-default-focus {
+    box-shadow: none;
+    outline: none;
+    outline-offset: initial;
+}
+
+/*custom ui select*/
+.ui-select-match {
+    margin-bottom: 7px;
+}
+
+.ui-select-bootstrap .ui-select-choices-row>span {
+    padding: 7px 15px;
+}
+
+.ui-select-toggle.btn-default:hover {
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.ui-select-match[disabled] .ui-select-toggle.btn-default:hover,
+.ui-select-match[disabled] .ui-select-toggle.btn-default:focus {
+    background-color: #eee;
+}
+
+/*Custom table*/
+.x-table>.x-table-header>div {
+    vertical-align: bottom;
+    border-bottom: 1px solid #ddd;
+    padding: 8px;
+    line-height: 2;
+    font-weight: bold;
+}
+
+.x-table>.x-table-row>div {
+    padding: 8px;
+    line-height: 2;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.x-table>.x-table-row:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+.image-border-custom {
+    border: 2px solid #dee7ee;
+}
+.mask-input{
+    position: relative;
+}
+.mask-input .wrap-input {
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    /*right: 0;*/
+    top: 0;
+    width: 150px;
+}
+.clearfix10{
+    clear: both;
+    height: 38px;
+}
+.clearfix20{
+    clear: both;
+    height: 20px;
+}
+.clearfix1{
+    clear: both;
+    height: 10px;
+}
+.search-field {
+    display: inline-block;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    margin-left: 20px;
+}
+.select_price {
+    display: inline-block;
+    height: 34px;
+    width: 100px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    margin-left: 20px;
+}
+
+.car-detail{
+    padding-top: 10px;
+}
+.text-right{
+    padding-top: 28px;
+}
+.image-media{
+    width: 150px;
+}
+.car-media{
+    padding-top: 30px !important;
+}
+.add-attribute{
+    background: #0e86ae;
+    color: white;
+    border-radius: 15px;
+}
+#file-upload-media,#file-upload-car-detail {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+#upload-media{
+    cursor: pointer;
+}
+
+.btn-input {
+    cursor: pointer;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 20px;
+    background: #3f88b8;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.hide-choose-file {
+    display: none !important;
+}
+
+.image-opacity {
+    opacity: 0.25;
+}
+#upload-car-detail{
+    cursor: pointer;
+    height: 194px;
+    width: 223px;
+}
+.save-attribute,.cancel-attribute{
+    height: 34px;
+}
+
+.car-branch .file-upload img{
+    position: relative;
+    width: 150px;
+    height: 150px;
+    min-height: 150px;
+    min-width: 150px;
+}
+
+.car-branch .do-sort:hover {
+    color: coral;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.wrap-input {
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    /*right: 0;*/
+    top: 0;
+    width: 150px;
+    opacity: 0;
+}
+.wrap-input-image {
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    /*right: 0;*/
+    top: 0;
+    width: 265px;
+    opacity: 0;
+}
+
+.wrap-input-image-detail {
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    /*right: 0;*/
+    top: 0;
+    width: 250px;
+    opacity: 0;
+    cursor: pointer;
+}
+.default-h4{
+    font-size: 20px !important;
+    font-weight: 600 !important;
+}
+
+.car-branch .search {
+    margin-right: 2px;
+    margin-bottom: 5px;
+}
+.add-icon-remove{
+    position: absolute;
+    display: block;
+    right: 0px;
+    cursor: pointer;
+}
+
+#file-upload-car-detail{
+    padding-top: 50px;
+    cursor: pointer;
+}
+
+.clearfix40 {
+    clear: both;
+    height: 40px;
+}
+
+/* Removes the clear button from date inputs */
+input[type="date"]::-webkit-inner-spin-button { 
+    display: none;
+}
+
+/* Removes the spin button */
+input[type="date"]::-webkit-clear-button {
+    display: none;
+}
+
+/* Always display the drop down caret */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: #2c3e50;
+}
+.booking-status-select{
+    height: 33px; 
+    width: 120px; 
+    font-size: 15px;
+}
+.overload-name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.none-padding {
+    padding: 0px;
+}
+
+.booking .mask-input {
+    width: 150px;
+    height: 150px;  
+}
+.label-ontrip {
+    background-color: #f75608;
+}
+
+.label-booking-detail {
+    font-size: 15px;
+}
+.tags-input-css {
+    height: 44px;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+.tags{
+    padding-top: 5px !important;
+    padding-left: 6px !important;
+    border-radius: 0px !important;
+}
+.button-add-cate {
+    height: 44px;
+    width: 44px;
+    top: 5px;
+    right: 30px;
+    padding-top: 11px;
+}
+.scroll-table-cate{
+    height: 270px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.toggle-off {
+    left: 70px !important;
+}

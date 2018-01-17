@@ -1,9 +1,9 @@
 package com.nitsoft.ecommerce.api.review;
 
 import com.nitsoft.ecommerce.api.APIName;
-import com.nitsoft.ecommerce.api.APIUtil;
-import com.nitsoft.ecommerce.api.response.APIStatus;
-import com.nitsoft.ecommerce.api.response.StatusResponse;
+import com.nitsoft.ecommerce.api.AbstractBaseAPI;
+import com.nitsoft.ecommerce.api.response.util.APIStatus;
+import com.nitsoft.ecommerce.api.response.model.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Review;
 import com.nitsoft.ecommerce.database.model.User;
 import com.nitsoft.ecommerce.database.model.UserToken;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(APIName.REVIEWS)
-public class ReviewAPI extends APIUtil {
+public class ReviewAPI extends AbstractBaseAPI {
 
     @Autowired
     private ReviewService reviewService;
@@ -59,12 +59,12 @@ public class ReviewAPI extends APIUtil {
             UserToken usertoken = userTokenService.getTokenById(token); // get user token form database
 
             if (usertoken == null) {
-                statusResponse = new StatusResponse(APIStatus.INVALID_TOKEN);
+                statusResponse = new StatusResponse(APIStatus.ERR_UNAUTHORIZED);
             } else if (usertoken.getExpirationDate().getTime() - now.getTime() > 0) {
-                statusResponse = new StatusResponse(APIStatus.TOKEN_EXPIRIED);
+                statusResponse = new StatusResponse(APIStatus.ERR_UNAUTHORIZED);
             } else {
                 // find user by token id
-                User user = userService.getUserById(usertoken.getUserId());
+                User user = userService.getUserByUserIdAndComIdAndStatus(usertoken.getUserId(), companyId, Constant.USER_STATUS.ACTIVE.getStatus());
 
                 // validate user
                 if (user != null && user.getUserId() != null && !user.getUserId().isEmpty()) {

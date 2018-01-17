@@ -1,19 +1,23 @@
 package com.nitsoft.ecommerce.repository;
 
 import com.nitsoft.ecommerce.database.model.Category;
-import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 
-/*
- * public interface PacketRepository extends CrudRepository<Packet, Long> {}
- */
-public interface CategoryRepository extends CrudRepository<Category, Long> {
-    
-//    @Query("SELECT pad FROM Category pad WHERE pad.companyId = :companyId")
-    public Category findByCategoryId(@Param("categoryId") Long categoryId);
-    
+import java.util.List;
+
+public interface CategoryRepository extends PagingAndSortingRepository<Category, Long>, JpaSpecificationExecutor<Category> {
+
+    Category findByCategoryId(@Param("categoryId") Long categoryId);
+
     Iterable<Category> findByCompanyId(@Param("companyId") Long companyId);
-    
+
+    Category findByCategoryIdAndStatus(long categoryId, int status);
+
+    List<Category> findAllByCategoryIdInAndCompanyIdAndStatus(List<Long> categoryIds, long companyId, int status);
+
 }

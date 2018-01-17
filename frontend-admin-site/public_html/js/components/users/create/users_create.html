@@ -1,0 +1,162 @@
+<div class="page-title">
+    <div class="title">
+        <h3 ng-i18next="">CREATE USER</h3>
+    </div>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <form name="createUserForm" ng-submit="createUser()">
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="row">
+                                <!--First Name-->
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : createUserForm.firstname.$touched && createUserForm.firstname.$invalid}">
+                                        <label for="firstname" ng-i18next="label.first_name"></label>
+                                        <div>
+                                            <input ng-model="user.firstName" name="firstname" id="firstname" ng-i18next="[placeholder]validation.first_name.placeholder"
+                                                   type="text" class="form-control" required="required" ng-maxlength="64"/>
+
+                                            <div ng-show="createUserForm.firstname.$touched">
+                                                <span class="help-block" ng-show="createUserForm.firstname.$error.required" ng-i18next="validation.first_name.required"></span>
+                                                <span class="help-block" ng-show="createUserForm.firstname.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})validation.chars.limit_chars"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Last Name-->
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : createUserForm.lastname.$touched && createUserForm.lastname.$invalid}">
+                                        <label for="lastname" ng-i18next="label.last_name"></label>
+                                        <div>
+                                            <input ng-model="user.lastName" name="lastname" id="lastname" ng-i18next="[placeholder]validation.last_name.placeholder"
+                                                   type="text" class="form-control" required="required" ng-maxlength="64"/>
+
+                                            <div ng-show="createUserForm.lastname.$touched">
+                                                <span class="help-block" ng-show="createUserForm.lastname.$error.required" ng-i18next="validation.last_name.required"></span>
+                                                <span class="help-block" ng-show="createUserForm.lastname.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})validation.chars.limit_chars"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!--Email Address-->
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : createUserForm.mail_address.$touched && createUserForm.mail_address.$invalid}">
+                                        <label for="email" ng-i18next="label.email"></label>
+                                        <div>
+                                            <input type="text" name="mail_address" id="mail_address" class="signup form-control" 
+                                                   ng-model="user.email" ng-i18next="[placeholder]validation.email.placeholder"
+                                                   ng-required="true" ng-pattern='emailPattern' ng-maxlength="64" />
+
+                                            <div class="errors" ng-show="createUserForm.mail_address.$touched">
+                                                <span class="help-block" ng-show="createUserForm.mail_address.$error.required" ng-i18next="validation.email.required"></span>
+                                                <span class="help-block" ng-show="createUserForm.mail_address.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})validation.chars.limit_chars"></span>
+                                                <span class="help-block" ng-show="createUserForm.mail_address.$error.pattern" ng-i18next="validation.email.invalid_pattern"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Address-->
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : createUserForm.address.$touched && createUserForm.address.$invalid}">
+                                        <label for="address" ng-i18next="">Address</label>
+                                        <div>
+                                            <input type="text" name="address" id="address" class="signup form-control" 
+                                                   ng-i18next="[placeholder]validation.address.placeholder" ng-model="user.address" ng-maxlength="200" />
+
+                                            <div class="errors" ng-show="createUserForm.address.$touched">
+                                                <span class="help-block" ng-show="createUserForm.address.$error.maxlength" ng-i18next="[i18next]({sprintf:['200']})validation.chars.limit_chars"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!--Phone Number-->
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : createUserForm.phone.$touched && createUserForm.phone.$invalid}">
+                                        <label for="phone" ng-i18next="label.phone_number"></label>
+                                        <div>
+                                            <input ng-model="user.phone" name="phone" id="phone"  ng-i18next="[placeholder]validation.phone_number.placeholder"
+                                                   type="text" class="form-control" ng-pattern='phoneNumber' required="required" />
+
+                                            <div ng-show="createUserForm.phone.$touched">
+                                                <span class="help-block" ng-show="createUserForm.phone.$error.required" ng-i18next="validation.phone_number.required"></span>
+                                                <span class="help-block" ng-show="createUserForm.phone.$error.pattern" ng-i18next="validation.phone_number.invalid_pattern"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Fax-->
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : createUserForm.fax.$touched && createUserForm.fax.$invalid}">
+                                        <label for="fax" ng-i18next="label.fax"></label>
+                                        <div>
+                                            <input ng-model="user.fax" name="fax" id="fax" ng-i18next="[placeholder]validation.fax.placeholder"
+                                                   type="text" class="form-control" ng-maxlength="32"/>
+
+                                            <div ng-show="createUserForm.fax.$touched">
+                                                <span class="help-block" ng-show="createUserForm.fax.$error.maxlength" ng-i18next="[i18next]({sprintf:['32']})validation.chars.limit_chars"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!--City-->
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : createUserForm.city.$touched && createUserForm.city.$invalid}">
+                                        <label for="city" ng-i18next="label.city"></label>
+                                        <div>
+                                            <input ng-model="user.city" name="city" id="city" ng-i18next="[placeholder]validation.city.placeholder"
+                                                   type="text" class="form-control" ng-maxlength="64"/>
+
+                                            <div ng-show="createUserForm.city.$touched">
+                                                <span class="help-block" ng-show="createUserForm.city.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})validation.chars.limit_chars"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Country-->
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group" ng-class="{'has-error' : createUserForm.country.$touched && createUserForm.country.$invalid}">
+                                        <label for="country" ng-i18next="label.country"></label>
+                                        <div>
+                                            <input ng-model="user.country" name="country" id="country" ng-i18next="[placeholder]validation.country.placeholder"
+                                                   type="text" class="form-control" ng-maxlength="64"/>
+
+                                            <div ng-show="createUserForm.country.$touched">
+                                                <span class="help-block" ng-show="createUserForm.country.$error.maxlength" ng-i18next="[i18next]({sprintf:['64']})validation.chars.limit_chars"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-bar text-right">
+                        <a ui-sref="users.list" class="btn btn-warning" ng-i18next="button.back">Back</a>
+                        <button ng-disabled="!createUserForm.$valid || submitting" ng-hide="submitting" class="btn btn-primary" ng-i18next="button.save" type="submit" ></button>
+                        <button ng-show="submitting" disabled class="btn btn-primary" ng-i18next="">Saving</button>
+                    </div>  
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

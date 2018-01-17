@@ -3,7 +3,6 @@
  */
 package com.nitsoft.util;
 
-import com.nitsoft.ecommerce.api.StringUtil;
 import java.util.Date;
 import java.util.Random;
 import java.util.UUID;

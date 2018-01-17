@@ -1,0 +1,252 @@
+{
+    "app": {
+        "name": "MEC Admin"
+    },
+    "navi": {
+        "categories": "Categories",
+        "products": "Products",
+        "orders": "Order",
+        "users": "Users"
+    },
+    "page_title": {
+        "product": {
+            "product_list": "List Products",
+            "product_create": "Create Products",
+            "product_detail": "Detail Products"
+        },
+        "order": {
+            "list_orders": "List Orders",
+            "order_detail": "Order Detail",
+            "cus_info": "Customer Info",
+            "product_info": "Products Info"
+        },
+        "category": {
+            "category_list": "List Categories",
+            "category_create": "Create Category",
+            "category_detail": "Detail category"
+        }
+    },
+    "button": {
+        "login": "Login",
+        "register": "Register",
+        "cancel": "Cancel",
+        "ok": "OK",
+        "back": "BACK",
+        "save": "SAVE",
+        "add": "ADD",
+        "delete": "DELETE",
+        "export": "EXPORT",
+        "yes": "Yes",
+        "no": "No",
+        "detail": "DETAIL",
+        "upload": "UPLOAD"
+    },
+    "table": {
+        "header": {
+            "no_data": "No Data",
+            "cate_name": "Category Name",
+            "price_from": "Price From",
+            "price_to": "Price To",
+            "search": "Search",
+            "create_date": "Create Date",
+            "detail": "Detail",
+            "product": {
+                "name": "Product Name",
+                "price": "Sell Price",
+                "image": "Image",
+                "description": "Description",
+                "overview": "Overview",
+                "sku": "Stock Keeping Unit",
+                "browsing_name": "Browsing Name",
+                "quantity": "Quantity"
+            },
+            "pop_up": {
+                "cate_name": "Category Name",
+                "des": "Description",
+                "list_cate": "List Category"
+            },
+            "search": "Search",
+            "detail": "Detail",
+            "no_data": "No Data",
+            "order": {
+                "customer_name": "Customer Name",
+                "quantity": " Quantity",
+                "created_at": "Created At",
+                "updated_at": "Update At",
+                "status": "Status",
+                "grand_total": "Grand Total",
+                "filter_status": "Status Order",
+                "mail_address" : "Mail Address",
+                "phone": "Phone Number",
+                "address": "Address",
+                "gender": "Gender",
+                "payment": "Payment",
+                "status": "Orders Status :",
+                "total_all" : "Total Price"
+            },
+            "category": {
+                "name": "Category Name",
+                "description": "Description",
+                "position": "Position",
+                "category_parent": "Category Parent"
+            }
+        },
+        "body": {
+        }
+    },
+    "label": {
+        "remember_me": "Remember me",
+        "register_account": "Don't have an account?",
+        "register": "Register",
+        "login_account": "Have an account?",
+        "login": "Login",
+        "forgot_password": "Forgot you password?",
+        "first_name": "First name",
+        "last_name": "Last name",
+        "username_or_email": "Username or Email",
+        "password": "Password",
+        "confirm_password": "Confirm password",
+        "phone_number": "Phone number",
+        "current_password": "Current Password",
+        "new_password": "New Password",
+        "comfirm_password": "Confirmed Password",
+        "email": "Email Address",
+        "fax": "Fax",
+        "city": "City",
+        "country": "Country"
+    },
+    "validation": {
+        "first_name": {
+            "invalid_pattern": "First name is invalid",
+            "required": "First name is required",
+            "placeholder": "Enter your first name"
+        },
+        "last_name": {
+            "invalid_pattern": "Last name is invalid",
+            "required": "Last name is required",
+            "placeholder": "Enter your last name"
+        },
+        "username": {
+            "invalid_pattern": "Username is invalid",
+            "required": "Username is required"
+        },
+        "email": {
+            "invalid_pattern": "Email is invalid",
+            "required": "Email is required",
+            "placeholder": "Enter your email address"
+        },
+        "password": {
+            "invalid_pattern": "Password is invalid",
+            "required": "Password is required",
+            "placeholder": "Enter your password"
+        },
+        "confirm_password": {
+            "required": "Confirm password is required",
+            "not_match": "Confirm password doesn't match",
+            "placeholder": "Enter your confirmed password"
+        },
+        "phone_number": {
+            "invalid_pattern": "Phone number is invalid",
+            "required": "Phone number is required",
+            "placeholder": "Enter your phone number"
+        },
+        "category": {
+            "invalid_pattern": "Category is invalid",
+            "required": "Category is required"
+        },
+        "name": {
+            "invalid_pattern": "Name is invalid",
+            "required": "Name is required"
+        },
+        "price": {
+            "invalid_pattern": "Price is invalid",
+            "required": "Price is required"
+        },
+        "browsing_name": {
+            "invalid_pattern": "Browsing name is invalid",
+            "required": "Browsing name is required"
+        },
+        "quantity": {
+            "invalid_pattern": "Quantity is invalid",
+            "required": "Quantity is required"
+        },
+        "overview": {
+            "invalid_pattern": "Overview is invalid",
+            "required": "Overview is required"
+        },
+        "sku": {
+            "invalid_pattern": "Stock Keeping Unit is invalid",
+            "required": "Stock Keeping Unit is required"
+        },
+        "description": {
+            "invalid_pattern": "Description is invalid",
+            "required": "Description is required"
+        },
+        "chars": {
+            "limit_chars": "Max length is %s characters",
+            "min_chars": "Min length is %s characters"
+        },
+        "numbers": {
+            "max": "Maximum value is %s",
+            "min": "Minimum value is %s"
+        },
+        "address": {
+            "placeholder": "Enter your address"
+        },
+        "fax": {
+            "placeholder": "Enter your fax"
+        },
+        "city": {
+            "placeholder": "Enter your city"
+        },
+        "country": {
+            "placeholder": "Enter your country"
+        }
+    },
+    "message": {
+        "product": {
+            "create_product_success": "Create product success",
+            "create_product_error": "Create product error",
+            "update_product_success": "Update product success",
+            "update_product_error": "Update product error",
+            "err_price": "Min price must be smaller than max price",
+            "delete": "Detele Product",
+            "delete_mgs": "Do you want to detele Product",
+            "delete_success": "Delete Product success",
+            "delete_error": "Delete Product error"
+        },
+        "user": {
+            "create_user_success": "Create User successfully",
+            "create_user_error": "Create User error",
+            "update_user_success": "Update User success",
+            "update_user_error": "Update User error",
+            "delete": "Detele User",
+            "delete_mgs": "Do you want to detele User",
+            "delete_success": "Delete User success",
+            "delete_error": "Delete User error"
+        },
+        "category": {
+            "create_category_success": "Create category success",
+            "create_category_error": "Create category error",
+            "update_category_success": "Update category success",
+            "update_category_error": "Update category error",
+            "delete": "Delete Category",
+            "delete_mgs": "Do you want to delete Category",
+            "delete_success": "Delete Category success",
+            "delete_error": "Delete Category error"
+        },
+        "order": {
+            "change_status_success" : "Change status orders success",
+            "change_status_error" : "Change status orders error",
+            "change_status" : "Change Status Orders",
+            "change_status_msg" : "Do you want to Change Status Orders"
+        }
+    },
+    "api": {
+        "unknown_error": "There is an error occurred",
+        "status": {
+            "701": "User not found",
+            "702": "Password doesn't match"
+        }
+    }
+}

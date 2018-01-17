@@ -1,8 +1,8 @@
 package com.nitsoft.ecommerce.api.company;
 
 import com.nitsoft.ecommerce.api.APIName;
-import com.nitsoft.ecommerce.api.APIUtil;
-import com.nitsoft.ecommerce.api.response.StatusResponse;
+import com.nitsoft.ecommerce.api.AbstractBaseAPI;
+import com.nitsoft.ecommerce.api.response.model.StatusResponse;
 import com.nitsoft.ecommerce.database.model.Company;
 import com.nitsoft.ecommerce.service.CompanyService;
 import java.util.List;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CompanyAPI extends APIUtil {
+public class CompanyAPI extends AbstractBaseAPI {
 
     @Autowired
     private CompanyService companyService;
